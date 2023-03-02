@@ -7,10 +7,21 @@
 }
 
 .sidenav{
-    width: 250px;
+    width: 280px;
     padding: 10px;
 }
 
 .example-spacer {
     flex: 1 1 auto;
 }
+
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+    span{
+        font-size: 17px;    
+    }
+} 
