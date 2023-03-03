@@ -16,12 +16,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataBindingComponent } from './Examples/components/Data-binding/Data-binding.component';
 import { StyleClassBidingComponent } from './Examples/components/StyleClassBiding/StyleClassBiding.component';
 import { EventBidingComponent } from './Examples/components/EventBiding/EventBiding.component';
+import { TwoWayDataBidingComponent } from './Examples/components/TwoWayDataBiding/TwoWayDataBiding.component';
 @NgModule({
   declarations: [
     AppComponent,
     DataBindingComponent,
     StyleClassBidingComponent,
-    EventBidingComponent
+    EventBidingComponent,
+    TwoWayDataBidingComponent
   ],
   imports: [
     BrowserModule,

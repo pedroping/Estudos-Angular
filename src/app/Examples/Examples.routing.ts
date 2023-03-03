@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DataBindingComponent } from './components/Data-binding/Data-binding.component';
 import { EventBidingComponent } from './components/EventBiding/EventBiding.component';
 import { StyleClassBidingComponent } from './components/StyleClassBiding/StyleClassBiding.component';
+import { TwoWayDataBidingComponent } from './components/TwoWayDataBiding/TwoWayDataBiding.component';
 import { ExamplesComponent } from './Examples.component';
 
 const routes: Routes = [
@@ -22,6 +23,11 @@ const routes: Routes = [
       {
         path: 'Event-binding',
         component: EventBidingComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'TwoWayData-binding',
+        component: TwoWayDataBidingComponent,
         pathMatch: 'full'
       }
     ]
