@@ -1,0 +1,11 @@
+<button mat-mini-fab color="accent" (click)="handleClick()">
+  <mat-icon>plus_one</mat-icon>
+</button>
+
+<input type="text"
+  (keyup.enter)="salvaValor(field.value)"
+  (blur)="salvaValor(field.value)"
+  #field
+>
+
+<p>Valor Salvo: {{ valorSalvo }}</p> 

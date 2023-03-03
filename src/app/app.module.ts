@@ -10,10 +10,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { DataBindingComponent } from './Examples/components/Data-binding/Data-binding.component';
+import { StyleClassBidingComponent } from './Examples/components/StyleClassBiding/StyleClassBiding.component';
+import { EventBidingComponent } from './Examples/components/EventBiding/EventBiding.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DataBindingComponent,
+    StyleClassBidingComponent,
+    EventBidingComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +32,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     MatIconModule,
     MatButtonModule,
     BsDropdownModule.forRoot(),
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

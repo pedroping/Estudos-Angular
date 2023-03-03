@@ -26,11 +26,20 @@
                 Data binding
               </a>
             </li>
+            <li role="menuitem">
+              <a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/StyleClass-binding">
+                Style & Class binding
+              </a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/Event-binding">
+                Event binding
+              </a>
+            </li>
           </ul>
         </li>
       </ul>
     </div>
-    
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
@@ -46,6 +55,8 @@
         <mat-icon>share</mat-icon>
       </button>
     </mat-toolbar>
-    <router-outlet></router-outlet>
+    <div class="main">
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
