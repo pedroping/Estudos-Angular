@@ -19,7 +19,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
+    MatSidenavModule, 
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,

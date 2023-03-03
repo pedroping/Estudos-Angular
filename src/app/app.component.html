@@ -10,13 +10,24 @@
       <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-animated">
         Exemplos Importantes <span class="caret"></span>
       </button>
-      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" style="width: 100%;"
-          role="menu" aria-labelledby="button-animated">
-        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a>
+      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" style="width: 100%;" role="menu" aria-labelledby="button-animated">
+        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="./">Home</a></li>
+        <li role="menuitem" dropdown triggers="mouseover" placement="right" container="body">
+          <a dropdownToggle class="dropdown-item dropdown-toggle"
+             (click)="false">Data Binding<span class="caret"></span></a>
+          <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem">
+              <a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples">
+                Menu
+              </a>
+            </li>
+            <li role="menuitem">
+              <a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/Data-binding">
+                Data binding
+              </a>
+            </li>
+          </ul>
         </li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Something else
-          here</a></li>
       </ul>
     </div>
     
