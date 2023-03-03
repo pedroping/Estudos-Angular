@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TwoWayDataBidingComponent implements OnInit {
 
+  data: string = ''
   constructor() { }
 
   ngOnInit() {
