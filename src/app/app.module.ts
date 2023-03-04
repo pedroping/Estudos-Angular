@@ -20,15 +20,17 @@ import { StyleClassBidingComponent } from './Examples/components/StyleClassBidin
 import { EventBidingComponent } from './Examples/components/EventBiding/EventBiding.component';
 import { TwoWayDataBidingComponent } from './Examples/components/TwoWayDataBiding/TwoWayDataBiding.component';
 import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
+import { HomeComponent } from './Home/Home.component';
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     DataBindingComponent,
     StyleClassBidingComponent,
     EventBidingComponent,
     TwoWayDataBidingComponent,
-    MeuPerfilComponent
-  ],
+    MeuPerfilComponent,
+    HomeComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,

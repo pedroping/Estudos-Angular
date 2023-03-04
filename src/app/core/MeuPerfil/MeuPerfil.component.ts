@@ -13,7 +13,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
         animate('200ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
       transition(':leave', [
-        animate('400ms ease-in', style({transform: 'translateY(-60%)'}))
+        animate('100ms ease-in', style({transform: 'translateY(-60%)'}))
       ])
     ]),
     trigger('fade', [
