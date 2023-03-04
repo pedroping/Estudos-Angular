@@ -33,3 +33,9 @@
 .header{
     padding-left: 10px;
 }
+
+::ng-deep{
+    .mat-toolbar{
+        background-color: transparent;
+    }
+}
