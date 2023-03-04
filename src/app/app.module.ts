@@ -12,18 +12,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { DataBindingComponent } from './Examples/components/Data-binding/Data-binding.component';
 import { StyleClassBidingComponent } from './Examples/components/StyleClassBiding/StyleClassBiding.component';
 import { EventBidingComponent } from './Examples/components/EventBiding/EventBiding.component';
 import { TwoWayDataBidingComponent } from './Examples/components/TwoWayDataBiding/TwoWayDataBiding.component';
+import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
 @NgModule({
   declarations: [
     AppComponent,
     DataBindingComponent,
     StyleClassBidingComponent,
     EventBidingComponent,
-    TwoWayDataBidingComponent
+    TwoWayDataBidingComponent,
+    MeuPerfilComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,9 @@ import { TwoWayDataBidingComponent } from './Examples/components/TwoWayDataBidin
     BsDropdownModule.forRoot(),
     MatSelectModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
