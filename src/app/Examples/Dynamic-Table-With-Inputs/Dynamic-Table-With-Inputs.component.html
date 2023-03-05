@@ -88,7 +88,10 @@
             </button>
           </div>
           <div *ngIf="!getControl(element).get('onEdit')!.value">
-            <button mat-icon-button (click)="setValueControl($any(getControl(element).get('onEdit')), true)" style="cursor: pointer;" color="primary">
+            <button mat-icon-button (click)="setValueControl($any(getControl(element).get('onEdit')), true)" 
+              style="cursor: pointer;" color="primary"
+              [disabled]="!element.canEdit"
+            >
               <mat-icon>edit</mat-icon>
             </button>
           </div>

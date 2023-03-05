@@ -54,7 +54,8 @@ export class DynamicTableWithInputsComponent implements OnInit, AfterViewInit {
           idade: new FormControl(item.age, Validators.required),
           email: new FormControl(item.email, [Validators.required, Validators.email]),
           onEdit: new FormControl(false),
-          isNew: new FormControl(false)
+          isNew: new FormControl(false),
+          canEdit: new FormControl(true)
         })
         this.FormArray.push(FormGrupo)
       })
@@ -122,7 +123,8 @@ export class DynamicTableWithInputsComponent implements OnInit, AfterViewInit {
       idade: new FormControl(null as any, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       onEdit: new FormControl(true),
-      isNew: new FormControl(true)
+      isNew: new FormControl(true),
+      canEdit: new FormControl(false)
     })
 
     this.FormArray.insert(0, row) 
