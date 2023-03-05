@@ -3,6 +3,7 @@ import { DataBindingComponent } from './components/Data-binding/Data-binding.com
 import { EventBidingComponent } from './components/EventBiding/EventBiding.component';
 import { StyleClassBidingComponent } from './components/StyleClassBiding/StyleClassBiding.component';
 import { TwoWayDataBidingComponent } from './components/TwoWayDataBiding/TwoWayDataBiding.component';
+import { DynamicTableWithInputsComponent } from './Dynamic-Table-With-Inputs/Dynamic-Table-With-Inputs.component';
 import { ExamplesComponent } from './Examples.component';
 
 const routes: Routes = [
@@ -28,6 +29,11 @@ const routes: Routes = [
       {
         path: 'TwoWayData-binding',
         component: TwoWayDataBidingComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'TableWithFormControls',
+        component: DynamicTableWithInputsComponent,
         pathMatch: 'full'
       }
     ]
