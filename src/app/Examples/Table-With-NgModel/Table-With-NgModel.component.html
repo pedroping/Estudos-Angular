@@ -1,0 +1,106 @@
+<div class="container">
+  <button mat-button (click)="addRow()">Adicionar row</button>
+  <button mat-button (click)="deleteSelectRow()" [disabled]="anyIsSelected()">Deletar rows selecionadas</button>
+  <table mat-table [dataSource]="dataSource" style="width: 98%;">
+    <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
+
+      <!-- Header -->
+
+      <div *ngIf="col.type != 'isSelected'; else NormalHeader">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ col.label }}
+        </th>
+      </div>
+      <ng-template #NormalHeader>
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox [(ngModel)]="allSelected" (change)="setAll($event)"></mat-checkbox>
+        </th>
+      </ng-template>
+
+      <!-- Body -->
+
+      <td mat-cell *matCellDef="let element; let index = index">
+
+        <!-- Body apenas com labels -->
+
+        <div *ngIf="!element.isEdit; else isEdit">
+
+          <!-- Rows com buttons e checkbox -->
+
+          <div [ngSwitch]="col.key">
+            
+            <div *ngSwitchCase="'isSelected'">
+              <mat-checkbox [(ngModel)]="element.isSelected" (change)="checkAll()"></mat-checkbox>
+            </div>
+            <div class="btn-edit" *ngSwitchCase="'isEdit'">
+              <button mat-icon-button (click)="element.isEdit = true" style="cursor: pointer;" color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+            <div class="btn-edit" *ngSwitchCase="'delete'">
+              <button mat-icon-button (click)="deleteRow(element)" [disabled]="validRow(element)" style="cursor: pointer;" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+
+            <!-- Row com as labels -->
+
+            <div *ngSwitchCase="'dateOfBirth'">
+              <span (click)="element.isEdit = true" style="cursor: pointer;">{{ getDate(element[col.key]) }}</span>
+            </div>
+
+            <div *ngSwitchDefault style="min-width: 80px;">
+              <span (click)="element.isEdit = true" style="cursor: pointer;">{{ element[col.key] }}</span>
+            </div>
+
+
+          </div>
+
+        </div>
+
+        <!-- Body editavel -->
+
+        <ng-template #isEdit>
+
+          <!-- Rows com buttons e checkbox -->
+          <div [ngSwitch]="col.key">
+            
+            <div *ngSwitchCase="'isSelected'">
+              <mat-checkbox [(ngModel)]="element.isSelected"></mat-checkbox>
+            </div>
+
+            <div class="btn-edit" *ngSwitchCase="'isEdit'">
+              <button mat-icon-button (click)="element.isEdit = false; handleDone(element)" color="primary" style="cursor: pointer;">
+                <mat-icon>save</mat-icon>
+              </button>
+            </div>
+
+            <div class="btn-edit" *ngSwitchCase="'delete'">
+              <button mat-icon-button (click)="deleteRow(index)" style="cursor: pointer;" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+
+            <!-- Rows com inputs -->
+
+            <div *ngSwitchDefault>
+              <div style="padding-top: 5px !important;">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{col.inputLabel}}</mat-label>
+                  <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+          
+        </ng-template>
+
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+{{dataSource.data | json}}

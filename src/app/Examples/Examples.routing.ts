@@ -5,6 +5,7 @@ import { StyleClassBidingComponent } from './components/StyleClassBiding/StyleCl
 import { TwoWayDataBidingComponent } from './components/TwoWayDataBiding/TwoWayDataBiding.component';
 import { DynamicTableWithInputsComponent } from './Dynamic-Table-With-Inputs/Dynamic-Table-With-Inputs.component';
 import { ExamplesComponent } from './Examples.component';
+import { TableWithNgModelComponent } from './Table-With-NgModel/Table-With-NgModel.component';
 
 const routes: Routes = [
   { 
@@ -34,6 +35,11 @@ const routes: Routes = [
       {
         path: 'TableWithFormControls',
         component: DynamicTableWithInputsComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'TableWithNgModel',
+        component: TableWithNgModelComponent,
         pathMatch: 'full'
       }
     ]
