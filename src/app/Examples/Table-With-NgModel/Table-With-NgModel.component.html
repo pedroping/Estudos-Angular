@@ -73,7 +73,11 @@
             </div>
 
             <div class="btn-edit" *ngSwitchCase="'isEdit'">
-              <button mat-icon-button (click)="element.isEdit = false; handleDone(element)" color="primary" style="cursor: pointer;">
+              <button mat-icon-button (click)="element.isEdit = false; handleDone(element)" 
+                [disabled]="EditeFormGroup.invalid"
+                color="primary"   
+                style="cursor: pointer;"
+              >
                 <mat-icon>save</mat-icon>
               </button>
             </div>
