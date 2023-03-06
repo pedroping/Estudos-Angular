@@ -33,7 +33,10 @@
               <mat-checkbox [(ngModel)]="element.isSelected" (change)="checkAll()"></mat-checkbox>
             </div>
             <div class="btn-edit" *ngSwitchCase="'isEdit'">
-              <button mat-icon-button (click)="element.isEdit = true" style="cursor: pointer;" color="primary">
+              <button mat-icon-button (click)="setForm(element)" 
+                style="cursor: pointer;" color="primary"
+                [disabled]="isSomeOnEdit()"
+              >
                 <mat-icon>edit</mat-icon>
               </button>
             </div>
@@ -85,10 +88,12 @@
 
             <div *ngSwitchDefault>
               <div style="padding-top: 5px !important;">
-                <mat-form-field appearance="outline">
-                  <mat-label>{{col.inputLabel}}</mat-label>
-                  <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
-                </mat-form-field>
+                <form [formGroup]="EditeFormGroup">
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{col.inputLabel}}</mat-label>
+                    <input [type]="col.type" matInput [formControlName]="col.key"/>
+                  </mat-form-field>
+                </form>
               </div>
             </div>
 

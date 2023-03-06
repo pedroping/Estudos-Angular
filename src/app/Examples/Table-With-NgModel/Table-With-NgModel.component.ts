@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog} from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { map } from 'rxjs';
+import { firstValueFrom, map } from 'rxjs';
 import { CofirmeModalComponent } from './cofirme-modal/cofirme-modal.component';
 import { User } from './models';
 import { TableServiceService } from 'src/app/core/Table_Service/tableService.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export interface COLUMNS_SCHEMA {
   key: string,
@@ -49,12 +50,12 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     label: "Idade",
     inputLabel: "Insira sua idade"
   },
-  {
-    key: "dateOfBirth",
-    type: "date",
-    label: "Data de Nascimento",
-    inputLabel: "Selecione uma data"
-  },
+  // {
+  //   key: "dateOfBirth",
+  //   type: "date",
+  //   label: "Data de Nascimento",
+  //   inputLabel: "Selecione uma data"
+  // },
   {
     key: "isEdit",
     type: "isEdit",
@@ -82,6 +83,12 @@ export class TableWithNgModelComponent implements OnInit {
     return resp.users
   }))
   
+  EditeFormGroup = new FormGroup({
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    age: new FormControl(null as any, Validators.required),
+    dateOfBirth: new FormControl(null as any)
+  })
   
   constructor(
     public dialog: MatDialog,
@@ -90,6 +97,29 @@ export class TableWithNgModelComponent implements OnInit {
 
   ngOnInit() {
     this.createTableData()
+  }
+
+  isSomeOnEdit(){
+    return this.dataSource.data.some(User => User.isEdit)
+  }
+
+  setForm(User_Row: Table_User){
+    this.EditeFormGroup.patchValue({
+      name: User_Row.name,
+      email: User_Row.email,
+      age: User_Row.age,
+      dateOfBirth: new Date(User_Row.dateOfBirth).toLocaleDateString('pt-BR')
+    })
+
+    User_Row.isEdit = true
+  }
+
+  setUser(User_Row: Table_User){
+    const Form = this.EditeFormGroup.value
+    User_Row.name = Form.name!
+    User_Row.age = Form.age
+    User_Row.email = Form.email!
+    User_Row.dateOfBirth = Form.dateOfBirth
   }
   
   validRow(User_Row: Table_User){
@@ -105,31 +135,37 @@ export class TableWithNgModelComponent implements OnInit {
   }
 
   handleDone(User_Row: Table_User){
+    const Form = this.EditeFormGroup.value
+    
     if(User_Row.isNew){
       const New_User: User = {
         id: 0,
-        firstName: User_Row.name,
-        email: User_Row.email,
-        birthDate: User_Row.dateOfBirth,
-        age: User_Row.age,
+        firstName: Form.name!,
+        email: Form.email!,
+        birthDate: Form.dateOfBirth,
+        age: Form.age,
       }
       this.tableServiceService.addUser(New_User).subscribe(resp => {
         User_Row.id = resp.id;
         User_Row.isEdit = false;
         User_Row.isNew = false
       })
+      this.setUser(User_Row)
+      this.EditeFormGroup.reset()
       return
     }
 
     const put_User: User = {
       id: User_Row.id,
-      firstName: User_Row.name,
-      email: User_Row.email,
-      birthDate: User_Row.dateOfBirth,
-      age: User_Row.age,
+      firstName: Form.name!,
+      email: Form.email!,
+      birthDate: Form.dateOfBirth,
+      age: Form.age,
     }
 
     this.tableServiceService.editUser(put_User).subscribe(resp => {
+      this.setUser(User_Row)
+      this.EditeFormGroup.reset()
       User_Row.isEdit = false;
     })
   
