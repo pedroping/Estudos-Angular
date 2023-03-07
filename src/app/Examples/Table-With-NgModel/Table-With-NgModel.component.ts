@@ -33,6 +33,11 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     label: ""
   },
   {
+    key: "id",
+    type: "id",
+    label: "Id"
+  },
+  {
     key: "name",
     type: "text",
     label: "Nome Completo",
@@ -84,6 +89,7 @@ export class TableWithNgModelComponent implements OnInit {
   }))
   
   EditeFormGroup = new FormGroup({
+    id: new FormControl(-1),
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     age: new FormControl(null as any, Validators.required),
@@ -105,6 +111,7 @@ export class TableWithNgModelComponent implements OnInit {
 
   setForm(User_Row: Table_User){
     this.EditeFormGroup.patchValue({
+      id: User_Row.id,
       name: User_Row.name,
       email: User_Row.email,
       age: User_Row.age,
@@ -122,18 +129,6 @@ export class TableWithNgModelComponent implements OnInit {
     User_Row.dateOfBirth = Form.dateOfBirth
   }
   
-  validRow(User_Row: Table_User){
-    if(
-      User_Row.name && User_Row.name != "" &&
-      User_Row.email && User_Row.email != "" && User_Row.email.includes('@') &&
-      User_Row.age &&
-      User_Row.dateOfBirth
-    )
-      return false
-
-    return true
-  }
-
   handleDone(User_Row: Table_User){
     const Form = this.EditeFormGroup.value
     

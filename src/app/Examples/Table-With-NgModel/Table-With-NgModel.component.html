@@ -41,7 +41,7 @@
               </button>
             </div>
             <div class="btn-edit" *ngSwitchCase="'delete'">
-              <button mat-icon-button (click)="deleteRow(element)" [disabled]="validRow(element)" style="cursor: pointer;" color="warn">
+              <button mat-icon-button (click)="deleteRow(element)" style="cursor: pointer;" color="warn">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -88,6 +88,9 @@
               </button>
             </div>
 
+            <div class="btn-edit" *ngSwitchCase="'id'">
+              {{ element.id }}
+            </div>
             <!-- Rows com inputs -->
 
             <div *ngSwitchDefault>
