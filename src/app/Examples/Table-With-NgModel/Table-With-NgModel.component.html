@@ -6,12 +6,12 @@
 
       <!-- Header -->
 
-      <div *ngIf="col.type != 'isSelected'; else NormalHeader">
+      <div *ngIf="col.type != 'isSelected'; else CheckBoxHeader">
         <th mat-header-cell *matHeaderCellDef>
           {{ col.label }}
         </th>
       </div>
-      <ng-template #NormalHeader>
+      <ng-template #CheckBoxHeader>
         <th mat-header-cell *matHeaderCellDef>
           <mat-checkbox [(ngModel)]="allSelected" (change)="setAll($event)"></mat-checkbox>
         </th>
