@@ -83,7 +83,7 @@
             </div>
 
             <div class="btn-edit" *ngSwitchCase="'delete'">
-              <button mat-icon-button (click)="deleteRow(index)" style="cursor: pointer;" color="warn">
+              <button mat-icon-button (click)="deleteRow(index)" style="cursor: pointer;" color="warn" [disabled]="true">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
