@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog} from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { firstValueFrom, map } from 'rxjs';
-import { CofirmeModalComponent } from './cofirme-modal/cofirme-modal.component';
-import { User } from './models';
+import { map } from 'rxjs';
+import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
+import { User } from 'src/app/core/models';
 import { TableServiceService } from 'src/app/core/Table_Service/tableService.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -12,7 +12,8 @@ export interface COLUMNS_SCHEMA {
   key: string,
   type: string,
   label: string,
-  inputLabel?: string
+  inputLabel?: string,
+  cantEdit?: boolean
 }
 
 export interface Table_User {
@@ -35,7 +36,8 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
   {
     key: "id",
     type: "id",
-    label: "Id"
+    label: "Id",
+    cantEdit: true
   },
   {
     key: "name",

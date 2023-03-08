@@ -11,6 +11,7 @@
           {{ col.label }}
         </th>
       </div>
+
       <ng-template #CheckBoxHeader>
         <th mat-header-cell *matHeaderCellDef>
           <mat-checkbox [(ngModel)]="allSelected" (change)="setAll($event)"></mat-checkbox>
@@ -66,46 +67,50 @@
         <ng-template #isEdit>
 
           <!-- Rows com buttons e checkbox -->
-          <div [ngSwitch]="col.key">
+          <div *ngIf="!col.cantEdit; else noEdit">
+            <div [ngSwitch]="col.key">
             
-            <div *ngSwitchCase="'isSelected'">
-              <mat-checkbox [(ngModel)]="element.isSelected"></mat-checkbox>
-            </div>
-
-            <div class="btn-edit" *ngSwitchCase="'isEdit'">
-              <button mat-icon-button (click)="element.isEdit = false; handleDone(element)" 
-                [disabled]="EditeFormGroup.invalid"
-                color="primary"   
-                style="cursor: pointer;"
-              >
-                <mat-icon>save</mat-icon>
-              </button>
-            </div>
-
-            <div class="btn-edit" *ngSwitchCase="'delete'">
-              <button mat-icon-button (click)="deleteRow(index)" style="cursor: pointer;" color="warn" [disabled]="true">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-
-            <div class="btn-edit" *ngSwitchCase="'id'">
-              {{ element.id }}
-            </div>
-            <!-- Rows com inputs -->
-
-            <div *ngSwitchDefault>
-              <div style="padding-top: 5px !important;">
-                <form [formGroup]="EditeFormGroup">
-                  <mat-form-field appearance="outline">
-                    <mat-label>{{col.inputLabel}}</mat-label>
-                    <input [type]="col.type" matInput [formControlName]="col.key"/>
-                  </mat-form-field>
-                </form>
+              <div *ngSwitchCase="'isSelected'">
+                <mat-checkbox [(ngModel)]="element.isSelected"></mat-checkbox>
               </div>
+  
+              <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                <button mat-icon-button (click)="element.isEdit = false; handleDone(element)" 
+                  [disabled]="EditeFormGroup.invalid"
+                  color="primary"   
+                  style="cursor: pointer;"
+                >
+                  <mat-icon>save</mat-icon>
+                </button>
+              </div>
+  
+              <div class="btn-edit" *ngSwitchCase="'delete'">
+                <button mat-icon-button (click)="deleteRow(index)" style="cursor: pointer;" color="warn" [disabled]="true">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+  
+              <!-- Rows com inputs -->
+  
+              <div *ngSwitchDefault>
+                <div style="padding-top: 5px !important;">
+                  <form [formGroup]="EditeFormGroup">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{col.inputLabel}}</mat-label>
+                      <input [type]="col.type" matInput [formControlName]="col.key"/>
+                    </mat-form-field>
+                  </form>
+                </div>
+              </div>
+  
             </div>
-
           </div>
           
+          
+          <ng-template #noEdit>
+            {{ element[col.key] }}
+          </ng-template>
+
         </ng-template>
 
       </td>

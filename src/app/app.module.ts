@@ -28,7 +28,7 @@ import { HomeComponent } from './Home/Home.component';
 import { DynamicTableWithInputsComponent } from './Examples/Dynamic-Table-With-Inputs/Dynamic-Table-With-Inputs.component';
 import { MatSortModule } from '@angular/material/sort';
 import { TableWithNgModelComponent } from './Examples/Table-With-NgModel/Table-With-NgModel.component';
-import { CofirmeModalComponent } from './Examples/Table-With-NgModel/cofirme-modal/cofirme-modal.component';
+import { CofirmeModalComponent } from './core/cofirme-modal/cofirme-modal.component';
 
 @NgModule({
   declarations: [	
