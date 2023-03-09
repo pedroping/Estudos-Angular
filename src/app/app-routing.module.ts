@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: async() => 
       (await import('./Examples/Examples.module')).ExamplesModule
   },
+  {
+    path: '**',
+    redirectTo: '',
+  }
 ];
 
 @NgModule({
