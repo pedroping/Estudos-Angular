@@ -15,10 +15,19 @@ export class AlreadyLoggedGuardService {
     
     const isLoggedin = await firstValueFrom(this.loginService.isLoggedin)
 
+    const User = JSON.parse(localStorage.getItem("User")!)
+
     if (isLoggedin) {
       this.router.navigate(['/Examples/LugarSecreto']);
       return false;
     }
+    
+    if(User && User?.Email && User?.Senha){
+      this.router.navigate(['/Examples/LugarSecreto']);
+      this.loginService.isLoggedin.next(true)
+      return false;
+    }
+
     return true;
   }
 }

@@ -36,8 +36,14 @@ export class LoginPageComponent implements OnInit {
 
   submit(){
     if(this.LoginForm.valid){
+      if(this.LoginForm.value.Checked){
+        this.loginService.isLoggedin.next(true)
+        this.router.navigate(['/Examples/LugarSecreto']);
+        localStorage.setItem("User", JSON.stringify({Email: this.LoginForm.value.Email, Senha: this.LoginForm.value.Senha}))
+      }
       this.loginService.isLoggedin.next(true)
       this.router.navigate(['/Examples/LugarSecreto']);
     }
+
   }
 }
