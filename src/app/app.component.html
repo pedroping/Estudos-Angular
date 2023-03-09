@@ -1,11 +1,12 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav class="sidenav">  
-    <div class="title">
-      <span color="primary">Sidenav</span> 
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="sidenav.close()">
+    <mat-toolbar>
+      <h2 style="position: relative; top: 8px;">Minha Sidenav</h2>
+      <span class="example-spacer"></span>
+      <button mat-icon-button class="example-icon favorite-icon" (click)="sidenav.close()">
         <mat-icon>close</mat-icon>
       </button>
-    </div>
+    </mat-toolbar>
     <div class="btn-group" dropdown style="width: 95%;">
       <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-animated">
         Exemplos Importantes <span class="caret"></span>
