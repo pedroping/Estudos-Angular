@@ -29,6 +29,9 @@ import { DynamicTableWithInputsComponent } from './Examples/Dynamic-Table-With-I
 import { MatSortModule } from '@angular/material/sort';
 import { TableWithNgModelComponent } from './Examples/Table-With-NgModel/Table-With-NgModel.component';
 import { CofirmeModalComponent } from './core/cofirme-modal/cofirme-modal.component';
+import { LoginPageComponent } from './Examples/loginPage/loginPage.component';
+import { PasswordDirective } from './core/directives/password.directive';
+import { AuthGuardService } from './core/guards/secretGuard.service';
 
 @NgModule({
   declarations: [	
@@ -41,7 +44,9 @@ import { CofirmeModalComponent } from './core/cofirme-modal/cofirme-modal.compon
     HomeComponent,
     DynamicTableWithInputsComponent,
     TableWithNgModelComponent,
-    CofirmeModalComponent
+    CofirmeModalComponent,
+    LoginPageComponent,
+    PasswordDirective
    ],
   imports: [
     BrowserModule,
@@ -62,9 +67,10 @@ import { CofirmeModalComponent } from './core/cofirme-modal/cofirme-modal.compon
     MatInputModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatSortModule
+    MatSortModule,
+    
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

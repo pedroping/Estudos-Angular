@@ -1,0 +1,39 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    
+}
+
+.icon {
+    position: absolute;
+}
+
+.icon {
+    padding: 6% 0px 20% 80%;
+}
+
+@media (max-width: 600px) {
+    .form{
+        width: 90%;
+    }
+    .icon {
+        padding: 9% 0px 20% 78%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .form{
+         width: 70%;
+    }
+    .icon {
+        padding: 7% 0px 20% 82%;
+    }
+}
+
+@media (min-width: 1001px) {
+    .form{
+        width: 50%;
+    }
+}

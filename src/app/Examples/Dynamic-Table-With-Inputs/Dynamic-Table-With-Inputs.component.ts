@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractFormGroupDirective, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { TableServiceService } from 'src/app/core/Table_Service/tableService.service';
+import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { User } from 'src/app/core/models';
 import { ChangeDetectorRef } from '@angular/core';
 
