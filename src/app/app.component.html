@@ -12,8 +12,11 @@
       </button>
       <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" style="width: 100%;" role="menu" aria-labelledby="button-animated">
         <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="./">Home</a></li>
+        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/TableWithFormControls">Table With Form Controls</a></li>
+        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/TableWithNgModel">Table With Ng Models</a></li>
+        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/LugarSecreto">Lugar Secreto</a></li>
         <li role="menuitem" dropdown triggers="mouseover" placement="right" container="body">
-          <a dropdownToggle class="dropdown-item dropdown-toggle"
+          <a dropdownToggle class="dropdown-item"
              (click)="false">Data Binding<span class="caret"></span></a>
           <ul *dropdownMenu class="dropdown-menu" role="menu">
             <li role="menuitem">
@@ -38,9 +41,6 @@
             </li> 
           </ul>
         </li>
-        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/TableWithFormControls">Table With Form Controls</a></li>
-        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/TableWithNgModel">Table With Ng Models</a></li>
-        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/LugarSecreto">Lugar Secreto</a></li>
       </ul>
     </div>
   </mat-sidenav>
