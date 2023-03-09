@@ -9,6 +9,7 @@ import { LoginPageComponent } from './loginPage/loginPage.component';
 import { PaginaProtegidaComponent } from './paginaProtegida/paginaProtegida.component';
 import { TableWithNgModelComponent } from './Table-With-NgModel/Table-With-NgModel.component';
 import { AuthGuardService as AuthGuard } from '../core/guards/secretGuard.service';
+import { AlreadyLoggedGuardService as AlreadyLogged } from '../core/guards/alreadyLoggedGuard.service';
 const routes: Routes = [
   { 
     path: '',
@@ -47,7 +48,8 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginPageComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AlreadyLogged]
       },
       {
         path: 'LugarSecreto',

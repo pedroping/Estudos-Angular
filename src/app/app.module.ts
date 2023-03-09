@@ -32,6 +32,7 @@ import { CofirmeModalComponent } from './core/cofirme-modal/cofirme-modal.compon
 import { LoginPageComponent } from './Examples/loginPage/loginPage.component';
 import { PasswordDirective } from './core/directives/password.directive';
 import { AuthGuardService } from './core/guards/secretGuard.service';
+import { AlreadyLoggedGuardService } from './core/guards/alreadyLoggedGuard.service';
 
 @NgModule({
   declarations: [	
@@ -70,7 +71,7 @@ import { AuthGuardService } from './core/guards/secretGuard.service';
     MatSortModule,
     
   ],
-  providers: [AuthGuardService],
+  providers: [AuthGuardService, AlreadyLoggedGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
