@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private router: Router,  
+    private cookieService: CookieService
   ) { }
 
   InputType: 'password' | 'text' = 'password'
@@ -37,7 +39,7 @@ export class LoginPageComponent implements OnInit {
   submit(){
     if(this.LoginForm.valid){
       if(this.LoginForm.value.Checked){
-        localStorage.setItem("User", JSON.stringify({Email: this.LoginForm.value.Email, Senha: this.LoginForm.value.Senha}))
+        this.cookieService.set("User", JSON.stringify({Email: this.LoginForm.value.Email, Senha: this.LoginForm.value.Senha}))
       }
       this.loginService.isLoggedin.next(true)
       this.router.navigate(['/Examples/LugarSecreto']);

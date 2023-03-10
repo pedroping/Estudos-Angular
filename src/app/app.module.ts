@@ -33,7 +33,7 @@ import { LoginPageComponent } from './Examples/loginPage/loginPage.component';
 import { PasswordDirective } from './core/directives/password.directive';
 import { AuthGuardService } from './core/guards/secretGuard.service';
 import { AlreadyLoggedGuardService } from './core/guards/alreadyLoggedGuard.service';
-
+import { CookieService } from 'ngx-cookie-service';
 @NgModule({
   declarations: [	
     AppComponent,
@@ -71,7 +71,7 @@ import { AlreadyLoggedGuardService } from './core/guards/alreadyLoggedGuard.serv
     MatSortModule,
     
   ],
-  providers: [AuthGuardService, AlreadyLoggedGuardService],
+  providers: [AuthGuardService, AlreadyLoggedGuardService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
