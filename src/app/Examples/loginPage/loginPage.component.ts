@@ -20,8 +20,8 @@ export class LoginPageComponent implements OnInit {
   InputType: 'password' | 'text' = 'password'
 
   LoginForm = new FormGroup({
-    Email: new FormControl('11', [Validators.required, Validators.email]),
-    Senha: new FormControl('11', Validators.required),
+    Email: new FormControl('', [Validators.required, Validators.email]),
+    Senha: new FormControl('', Validators.required),
     Checked: new FormControl(false)
   })
 
