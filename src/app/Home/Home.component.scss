@@ -1,80 +1,79 @@
 .center {
-    width: 30%;
+  width: 30%;
 }
 
-.content{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    position: relative;
+.content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  position: relative;
 }
-
 
 h2 {
-    line-height: 2rem;
-    margin-bottom: 8px;
+  line-height: 2rem;
+  margin-bottom: 8px;
 }
-  
+
 p {
-    text-align: justify;
+  text-align: justify;
 }
-  
+
 img {
-    float: left;
-    margin: 0 2rem 1rem 0;
+  float: left;
+  margin: 0 2rem 1rem 0;
 }
-  
+
 .shape {
-    shape-outside: inset(0 0 0 0);
+  shape-outside: inset(0 0 0 0);
 }
-  
+
 @media (max-width: 600px) {
-    .center{
-        width: 100%;
-    }
-    .content{
-        width: 80%;
-    }
+  .center {
+    width: 100%;
+  }
+  .content {
+    width: 80%;
+  }
 }
 
 .shape-top {
-    position: absolute;
-    top: 62px;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
+  position: absolute;
+  top: 62px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
 }
 
 .shape-top svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.2px);
-    height: 300px;
+  position: relative;
+  display: block;
+  width: calc(100% + 1.2px);
+  height: 300px;
 }
 
 .shape-top .shape-fill {
-    fill: #eed9d9;
+  fill: #eed9d9;
 }
 
 .shape-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
 }
 
 .shape-bottom svg {
-    position: relative;
-    display: block;
-    width: calc(100% + 1.3px);
-    height: 350px;
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 350px;
 }
 
 .shape-bottom .shape-fill {
-    fill: #eed9d9;
+  fill: #eed9d9;
 }

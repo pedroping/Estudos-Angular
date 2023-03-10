@@ -5,15 +5,13 @@ import { LoginService } from '../services/login.service';
 
 @Injectable()
 export class AuthGuardService {
-  constructor(
-    private router: Router,
-    private loginService: LoginService  
-    ) {}
-  teste: boolean = false
+  constructor(private router: Router, private loginService: LoginService) {}
+  teste: boolean = false;
 
-  async canActivate(): Promise<boolean | UrlTree | Observable<boolean | UrlTree>> {
-    
-    const isLoggedin = await firstValueFrom(this.loginService.isLoggedin)
+  async canActivate(): Promise<
+    boolean | UrlTree | Observable<boolean | UrlTree>
+  > {
+    const isLoggedin = await firstValueFrom(this.loginService.isLoggedin);
 
     if (!isLoggedin) {
       this.router.navigate(['/Examples/login']);

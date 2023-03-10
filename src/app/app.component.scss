@@ -1,41 +1,41 @@
 .example-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.sidenav{
-    width: 280px;
-    padding: 10px;
+.sidenav {
+  width: 280px;
+  padding: 10px;
 }
 
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
-.title{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 
-    span{
-        font-size: 17px;    
-    }
-} 
-
-.main{
-    padding: 10px;
+  span {
+    font-size: 17px;
+  }
 }
 
-.header{
-    padding-left: 10px;
+.main {
+  padding: 10px;
 }
 
-::ng-deep{
-    .mat-toolbar{
-        background-color: #eed9d9;
-    }
+.header {
+  padding-left: 10px;
+}
+
+::ng-deep {
+  .mat-toolbar {
+    background-color: #eed9d9;
+  }
 }

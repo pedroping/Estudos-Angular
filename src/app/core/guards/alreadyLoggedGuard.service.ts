@@ -9,29 +9,30 @@ export class AlreadyLoggedGuardService {
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private cookieService: CookieService  
-    ) {}
-  teste: boolean = false
+    private cookieService: CookieService
+  ) {}
+  teste: boolean = false;
 
-  async canActivate(): Promise<boolean | UrlTree | Observable<boolean | UrlTree>> {
-    
-    const isLoggedin = await firstValueFrom(this.loginService.isLoggedin)
-    
+  async canActivate(): Promise<
+    boolean | UrlTree | Observable<boolean | UrlTree>
+  > {
+    const isLoggedin = await firstValueFrom(this.loginService.isLoggedin);
+
     if (isLoggedin) {
       this.router.navigate(['/Examples/LugarSecreto']);
       return false;
     }
-    const Cookie = this.cookieService.get("User")
-    
-    if(Cookie){
-      const User = JSON.parse(Cookie)
-      if(User && User?.Email && User?.Senha){
+    const Cookie = this.cookieService.get('User');
+
+    if (Cookie) {
+      const User = JSON.parse(Cookie);
+      if (User && User?.Email && User?.Senha) {
         this.router.navigate(['/Examples/LugarSecreto']);
-        this.loginService.isLoggedin.next(true)
+        this.loginService.isLoggedin.next(true);
         return false;
       }
     }
- 
+
     return true;
   }
 }
