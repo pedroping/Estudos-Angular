@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     padding-top: 50px;
-    
+    position: relative;
 }
 
 .icon {
@@ -36,4 +36,45 @@
     .form{
         width: 50%;
     }
+}
+
+.shape-top {
+    position: absolute;
+    top: 62px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.shape-top svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.2px);
+    height: 300px;
+}
+
+.shape-top .shape-fill {
+    fill: #eed9d9;
+}
+
+.shape-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.shape-bottom svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 350px;
+}
+
+.shape-bottom .shape-fill {
+    fill: #eed9d9;
 }
