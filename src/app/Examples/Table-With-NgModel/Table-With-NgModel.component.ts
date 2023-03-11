@@ -14,6 +14,7 @@ export interface COLUMNS_SCHEMA {
   label: string;
   inputLabel?: string;
   cantEdit?: boolean;
+  cell?: any
 }
 
 export interface Table_User {
@@ -38,31 +39,29 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     type: 'id',
     label: 'Id',
     cantEdit: true,
+    cell: (element: Table_User) => `${element.id}`
   },
   {
     key: 'name',
     type: 'text',
     label: 'Nome Completo',
     inputLabel: 'Insira seu nome',
+    cell: (element: Table_User) => `${element.name}`
   },
   {
     key: 'email',
     type: 'email',
     label: 'Email',
     inputLabel: 'Insira seu Email',
+    cell: (element: Table_User) => `${element.email}`
   },
   {
     key: 'age',
     type: 'number',
     label: 'Idade',
     inputLabel: 'Insira sua idade',
+    cell: (element: Table_User) => `${element.age}`
   },
-  // {
-  //   key: "dateOfBirth",
-  //   type: "date",
-  //   label: "Data de Nascimento",
-  //   inputLabel: "Selecione uma data"
-  // },
   {
     key: 'isEdit',
     type: 'isEdit',
