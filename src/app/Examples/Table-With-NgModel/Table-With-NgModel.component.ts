@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -7,6 +7,7 @@ import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.co
 import { User } from 'src/app/core/models';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
 
 export interface COLUMNS_SCHEMA {
   key: string;
@@ -14,7 +15,8 @@ export interface COLUMNS_SCHEMA {
   label: string;
   inputLabel?: string;
   cantEdit?: boolean;
-  cell?: any
+  cell?: any,
+  hasSort?: boolean
 }
 
 export interface Table_User {
@@ -23,7 +25,6 @@ export interface Table_User {
   email: string;
   age: number;
   isEdit: boolean;
-  dateOfBirth: string;
   isSelected: boolean;
   isNew: boolean;
 }
@@ -39,14 +40,16 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     type: 'id',
     label: 'Id',
     cantEdit: true,
-    cell: (element: Table_User) => `${element.id}`
+    cell: (element: Table_User) => `${element.id}`,
+    hasSort: true
   },
   {
     key: 'name',
     type: 'text',
     label: 'Nome Completo',
     inputLabel: 'Insira seu nome',
-    cell: (element: Table_User) => `${element.name}`
+    cell: (element: Table_User) => `${element.name}`,
+    hasSort: true
   },
   {
     key: 'email',
@@ -79,7 +82,7 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
   templateUrl: './Table-With-NgModel.component.html',
   styleUrls: ['./Table-With-NgModel.component.scss'],
 })
-export class TableWithNgModelComponent implements OnInit {
+export class TableWithNgModelComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
   dataSource = new MatTableDataSource<Table_User>();
   columnsSchema: COLUMNS_SCHEMA[] = COLUMNS_SCHEMA;
@@ -90,12 +93,13 @@ export class TableWithNgModelComponent implements OnInit {
     })
   );
 
+  @ViewChild(MatSort) sort!: MatSort;
+
   EditeFormGroup = new FormGroup({
     id: new FormControl(-1),
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     age: new FormControl(null as any, Validators.required),
-    dateOfBirth: new FormControl(null as any),
   });
 
   constructor(
@@ -111,13 +115,16 @@ export class TableWithNgModelComponent implements OnInit {
     return this.dataSource.data.some((User) => User.isEdit);
   }
 
+  ngAfterViewInit(){
+    this.dataSource.sort = this.sort;
+  }
+
   setForm(User_Row: Table_User) {
     this.EditeFormGroup.patchValue({
       id: User_Row.id,
       name: User_Row.name,
       email: User_Row.email,
       age: User_Row.age,
-      dateOfBirth: new Date(User_Row.dateOfBirth).toLocaleDateString('pt-BR'),
     });
 
     User_Row.isEdit = true;
@@ -128,7 +135,6 @@ export class TableWithNgModelComponent implements OnInit {
     User_Row.name = Form.name!;
     User_Row.age = Form.age;
     User_Row.email = Form.email!;
-    User_Row.dateOfBirth = Form.dateOfBirth;
   }
 
   handleDone(User_Row: Table_User) {
@@ -139,7 +145,6 @@ export class TableWithNgModelComponent implements OnInit {
         id: 0,
         firstName: Form.name!,
         email: Form.email!,
-        birthDate: Form.dateOfBirth,
         age: Form.age,
       };
       this.tableServiceService.addUser(New_User).subscribe((resp) => {
@@ -156,7 +161,6 @@ export class TableWithNgModelComponent implements OnInit {
       id: User_Row.id,
       firstName: Form.name!,
       email: Form.email!,
-      birthDate: Form.dateOfBirth,
       age: Form.age,
     };
 
@@ -176,11 +180,6 @@ export class TableWithNgModelComponent implements OnInit {
           email: User.email,
           age: User.age,
           isEdit: false,
-          dateOfBirth:
-            new Date(User.birthDate!).toLocaleDateString('pr-BR') !=
-            'Invalid Date'
-              ? new Date(User.birthDate!).toLocaleDateString('pr-BR')
-              : new Date().toLocaleDateString('pr-BR'),
           isSelected: false,
           isNew: false,
         };
@@ -190,12 +189,11 @@ export class TableWithNgModelComponent implements OnInit {
 
   addRow() {
     const New_User = {
-      id: null as any,
+      id: -1,
       name: '',
       email: '',
       age: null as any,
       isEdit: true,
-      dateOfBirth: '',
       isSelected: false,
       isNew: true,
     };
