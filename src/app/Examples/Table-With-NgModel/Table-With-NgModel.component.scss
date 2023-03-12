@@ -26,23 +26,20 @@ button {
   fill: #eed9d9;
 }
 
-.shape-bottom {
-  position: absolute;
-  bottom: -200%;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
-}
-
-.shape-bottom svg {
+.noData{
+  display: flex;
   position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 350px;
+  justify-content: center;
+  align-items: center;
+
+  img{
+    height: 500px;
+  } 
 }
 
-.shape-bottom .shape-fill {
-  fill: #eed9d9;
+.btn{
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }

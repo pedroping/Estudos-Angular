@@ -84,7 +84,7 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
 })
 export class TableWithNgModelComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
-  dataSource = new MatTableDataSource<Table_User>();
+  dataSource = new MatTableDataSource<Table_User>([]);
   columnsSchema: COLUMNS_SCHEMA[] = COLUMNS_SCHEMA;
   allSelected: boolean = false;
   Users$ = this.tableServiceService.getAll().pipe(
@@ -298,5 +298,13 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
           },
         });
       });
+  }
+  
+  getErrorMessage(key: string) {
+    if (this.EditeFormGroup.get(key)?.hasError('required')) {
+      return 'Por favor insira um valor!';
+    }
+
+    return this.EditeFormGroup.get(key)?.hasError('email') ? 'Email Invalido' : '';
   }
 }
