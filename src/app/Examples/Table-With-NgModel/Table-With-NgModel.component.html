@@ -1,14 +1,8 @@
 <div class="shape-top">
-  <svg
-    data-name="Layer 1"
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 1200 120"
-    preserveAspectRatio="none"
-  >
+  <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
     <path
       d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-      class="shape-fill"
-    ></path>
+      class="shape-fill"></path>
   </svg>
 </div>
 
@@ -23,21 +17,13 @@
     <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
       <!-- Header -->
 
-      <th
-        mat-header-cell
-        *matHeaderCellDef
-        mat-sort-header
-        [disabled]="!col.hasSort"
-      >
+      <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!col.hasSort">
         <div *ngIf="col.type != 'isSelected'; else CheckBoxHeader">
           {{ col.label }}
         </div>
 
         <ng-template #CheckBoxHeader>
-          <mat-checkbox
-            [(ngModel)]="allSelected"
-            (change)="setAll($event)"
-          ></mat-checkbox>
+          <mat-checkbox [(ngModel)]="allSelected" (change)="setAll($event)"></mat-checkbox>
         </ng-template>
       </th>
 
@@ -51,29 +37,16 @@
 
           <div [ngSwitch]="col.key">
             <div *ngSwitchCase="'isSelected'">
-              <mat-checkbox
-                [(ngModel)]="element.isSelected"
-                (change)="checkAll()"
-              ></mat-checkbox>
+              <mat-checkbox [(ngModel)]="element.isSelected" (change)="checkAll()"></mat-checkbox>
             </div>
             <div class="btn-edit" *ngSwitchCase="'isEdit'">
-              <button
-                mat-icon-button
-                (click)="setForm(element)"
-                style="cursor: pointer"
-                color="primary"
-                [disabled]="isSomeOnEdit()"
-              >
+              <button mat-icon-button (click)="setForm(element)" style="cursor: pointer" color="primary"
+                [disabled]="isSomeOnEdit()">
                 <mat-icon>edit</mat-icon>
               </button>
             </div>
             <div class="btn-edit" *ngSwitchCase="'delete'">
-              <button
-                mat-icon-button
-                (click)="deleteRow(element)"
-                style="cursor: pointer"
-                color="warn"
-              >
+              <button mat-icon-button (click)="deleteRow(element)" style="cursor: pointer" color="warn">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -89,7 +62,7 @@
             <div *ngSwitchDefault style="min-width: 80px">
               <span (click)="setForm(element)" style="cursor: pointer">{{
                 col.cell(element)
-              }}</span>
+                }}</span>
             </div>
           </div>
         </div>
@@ -105,25 +78,15 @@
               </div>
 
               <div *ngSwitchCase="'isEdit'" class="btn-edit">
-                <button
-                  mat-icon-button
-                  (click)="element.isEdit = false; handleDone(element)"
-                  [disabled]="EditeFormGroup.invalid"
-                  color="primary"
-                  style="cursor: pointer"
-                >
+                <button mat-icon-button (click)="element.isEdit = false; handleDone(element)"
+                  [disabled]="getFormGroup(element.id).invalid" color="primary" style="cursor: pointer">
                   <mat-icon>save</mat-icon>
                 </button>
               </div>
 
               <div class="btn-edit" *ngSwitchCase="'delete'">
-                <button
-                  mat-icon-button
-                  (click)="deleteRow(index)"
-                  style="cursor: pointer"
-                  color="warn"
-                  [disabled]="true"
-                >
+                <button mat-icon-button (click)="deleteRow(index)" style="cursor: pointer" color="warn"
+                  [disabled]="true">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
@@ -132,19 +95,13 @@
 
               <div *ngSwitchDefault>
                 <div style="padding-top: 5px !important">
-                  <form [formGroup]="EditeFormGroup">
-                    <mat-form-field appearance="outline">
-                      <mat-label>{{ col.inputLabel }}</mat-label>
-                      <input
-                        [type]="col.type"
-                        matInput
-                        [formControlName]="col.key"
-                      />
-                      <mat-error *ngIf="EditeFormGroup.get(col.key)?.invalid">{{
-                        getErrorMessage(col.key)
+                  <mat-form-field appearance="outline">
+                    <mat-label>{{ col.inputLabel }}</mat-label>
+                    <input [type]="col.type" matInput [formControl]="getFormControl(element.id, col.key)" />
+                    <mat-error *ngIf="getFormControl(element.id, col.key).invalid">{{
+                      getErrorMessage(col.key, element.id)
                       }}</mat-error>
-                    </mat-form-field>
-                  </form>
+                  </mat-form-field>
                 </div>
               </div>
             </div>
