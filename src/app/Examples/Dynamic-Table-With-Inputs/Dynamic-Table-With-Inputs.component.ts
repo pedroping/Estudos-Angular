@@ -102,11 +102,11 @@ export class DynamicTableWithInputsComponent implements OnInit, AfterViewInit {
     return Control as FormGroup
   }
   
-  getIndex(index: number){
+  getIndex(itemIndex: number){
     let id!: number
 
     this.FormArray.controls.forEach((item, index) => {
-      if(item.get('id')?.value == index) 
+      if(item.get('id')?.value == itemIndex) 
         id = index
     })
     

@@ -116,13 +116,6 @@
     </table>
   </form>
 
-  <pre>{{ FormArray.value | json }}</pre>
+  <pre *ngIf="FormArray.value.lenght > 0">{{ FormArray.value | json }}</pre>
 
 </div>
-
-<!-- <button mat-icon-button color="warn" (click)="romoveSelectdsRows()">
-  <mat-icon>remove_circle_outline</mat-icon>
-</button>  -->
-
-
-getFormControl(element.id, 'email')"

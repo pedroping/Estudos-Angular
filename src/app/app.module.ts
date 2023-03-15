@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -34,8 +34,11 @@ import { PasswordDirective } from './core/directives/password.directive';
 import { AuthGuardService } from './core/guards/secretGuard.service';
 import { AlreadyLoggedGuardService } from './core/guards/alreadyLoggedGuard.service';
 import { CookieService } from 'ngx-cookie-service';
+import { LoaderComponent } from './core/componenets/loader/loader.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     DataBindingComponent,
     StyleClassBidingComponent,
@@ -47,13 +50,14 @@ import { CookieService } from 'ngx-cookie-service';
     TableWithNgModelComponent,
     CofirmeModalComponent,
     LoginPageComponent,
-    PasswordDirective
-   ],
+    PasswordDirective,
+    LoaderComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule, 
+    MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -69,9 +73,18 @@ import { CookieService } from 'ngx-cookie-service';
     MatCheckboxModule,
     MatFormFieldModule,
     MatSortModule,
-    
+    MatProgressSpinnerModule,
   ],
-  providers: [AuthGuardService, AlreadyLoggedGuardService, CookieService],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthGuardService,
+    AlreadyLoggedGuardService,
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
