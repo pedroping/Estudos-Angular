@@ -6,7 +6,7 @@ import { map } from 'rxjs';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
 import { User } from 'src/app/core/models';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 
 export interface COLUMNS_SCHEMA {
@@ -16,7 +16,8 @@ export interface COLUMNS_SCHEMA {
   inputLabel?: string;
   cantEdit?: boolean;
   cell?: any,
-  hasSort?: boolean
+  hasSort?: boolean,
+  hasControl?: boolean
 }
 
 export interface Table_User {
@@ -49,21 +50,24 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     label: 'Nome Completo',
     inputLabel: 'Insira seu nome',
     cell: (element: Table_User) => `${element.name}`,
-    hasSort: true
+    hasSort: true,
+    hasControl: true
   },
   {
     key: 'email',
     type: 'email',
     label: 'Email',
     inputLabel: 'Insira seu Email',
-    cell: (element: Table_User) => `${element.email}`
+    cell: (element: Table_User) => `${element.email}`,
+    hasControl: true
   },
   {
     key: 'age',
     type: 'number',
     label: 'Idade',
     inputLabel: 'Insira sua idade',
-    cell: (element: Table_User) => `${element.age}`
+    cell: (element: Table_User) => `${element.age}`,
+    hasControl: true
   },
   {
     key: 'isEdit',
@@ -101,6 +105,11 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     age: new FormControl(null as any, Validators.required),
   });
+
+  TableForm = new FormGroup({
+    TableFromArray: new FormArray([])
+  })
+  get TableArray() { return this.TableForm.get('TableFromArray') as FormArray}
 
   constructor(
     public dialog: MatDialog,
@@ -184,6 +193,18 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
           isNew: false,
         };
       });
+
+      this.dataSource.data.forEach(User => {
+        const newForm = new FormGroup({})
+        this.columnsSchema.forEach(schema => {
+          if(schema.hasControl){
+            const Value = User[schema.key as keyof typeof User]
+            newForm.addControl(schema.key, new FormControl(Value, Validators.required))
+          }
+        })
+        this.TableArray.push(newForm)
+      })
+      
     });
   }
 

@@ -9,9 +9,10 @@
   z-index: 99999;
 }
 
-.overlay::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: #eed9d9;
-  color: #eed9d9;
+:host{
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #2f3641!important;
+  }
 }
 
 .spinner {
@@ -19,6 +20,5 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #eed9d9;
-
+  color: black !important;
 }
