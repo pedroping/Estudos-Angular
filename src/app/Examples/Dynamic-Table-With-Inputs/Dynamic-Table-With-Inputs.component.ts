@@ -92,13 +92,13 @@ export class DynamicTableWithInputsComponent implements OnInit, AfterViewInit {
     })
   }
 
-  getControl(row: any){
-    let Control!: FormGroup
-    this.FormArray.controls.forEach((item) => {
-      if(item.value.id == row.id) 
-        Control = item as FormGroup
-    })
+  getFormControl(id: number, key: string){
+    const Control = this.FormArray.controls.find((item) => item.value.id == id)
+    return Control!.get(key) as FormControl
+  }
 
+  getControl(row: any){
+    const Control = this.FormArray.controls.find((item) => item.value.id == row.id)
     return Control as FormGroup
   }
   

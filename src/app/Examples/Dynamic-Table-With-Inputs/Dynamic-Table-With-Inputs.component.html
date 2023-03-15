@@ -14,12 +14,12 @@
           Nome
         </th>
         <td mat-cell *matCellDef="let element; let index = index">
-          <div *ngIf="getControl(element).get('onEdit')!.value">
+          <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
             <mat-form-field appearance="outline" class="form-field" floatLabel="always">
-              <input matInput type="text" placeholder="Digite seu nome:" [formControl]="$any(getControl(element).get('nome'))">
+              <input matInput type="text" placeholder="Digite seu nome:" [formControl]="getFormControl(element.id, 'nome')">
             </mat-form-field>
           </div>
-          <div *ngIf="!getControl(element).get('onEdit')!.value">
+          <div *ngIf="!getFormControl(element.id, 'onEdit')!.value">
             {{
               element.nome != "" 
               ? element.nome : "Não Inserido"
@@ -31,10 +31,10 @@
       <ng-container matColumnDef="idade">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Idade </th>
         <td mat-cell *matCellDef="let element; let index = index">
-          <div *ngIf="getControl(element).get('onEdit')!.value">
+          <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
             <mat-form-field appearance="outline" class="form-field" floatLabel="always">
               <mat-label>Idade</mat-label>
-              <input matInput placeholder="Sua idade.." type="number" [formControl]="$any(getControl(element).get('idade'))">
+              <input matInput placeholder="Sua idade.." type="number" [formControl]="getFormControl(element.id, 'idade')">
             </mat-form-field>
           </div>
           <div *ngIf="!getControl(element).get('onEdit')!.value">
@@ -46,10 +46,10 @@
       <ng-container matColumnDef="email">
         <th mat-header-cell *matHeaderCellDef> Email </th>
         <td mat-cell *matCellDef="let element; let index = index">
-          <div *ngIf="getControl(element).get('onEdit')!.value">
+          <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
             <mat-form-field appearance="outline" class="form-field" floatLabel="always">
               <mat-label>Email</mat-label>
-              <input matInput placeholder="Sua Email.." type="email" [formControl]="$any(getControl(element).get('email'))">
+              <input matInput placeholder="Sua Email.." type="email" [formControl]="getFormControl(element.id, 'email')">
             </mat-form-field>
           </div>
           <div *ngIf="!getControl(element).get('onEdit')!.value">
@@ -68,7 +68,7 @@
         <td mat-cell *matCellDef="let element; let index = index"> 
           <mat-checkbox
             (change)="checkSomeField()"
-            [formControl]="$any(getControl(element).get('checked'))"
+            [formControl]="getFormControl(element.id, 'checked')"
           ></mat-checkbox>
         </td>
       </ng-container>
@@ -80,14 +80,14 @@
           </button> 
         </th>
         <td mat-cell *matCellDef="let element; let index = index">
-          <div *ngIf="getControl(element).get('onEdit')!.value">
+          <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
             <button mat-icon-button (click)="setValueControl($any(getControl(element).get('onEdit')), false); handleSave($any(getControl(element)), index)" 
               style="cursor: pointer;" color="primary"
               [disabled]="!FormArray.controls[index].valid">
               <mat-icon>save</mat-icon>
             </button>
           </div>
-          <div *ngIf="!getControl(element).get('onEdit')!.value">
+          <div *ngIf="!getFormControl(element.id, 'onEdit')!.value">
             <button mat-icon-button (click)="setValueControl($any(getControl(element).get('onEdit')), true)" 
               style="cursor: pointer;" color="primary"
               [disabled]="!element.canEdit"
@@ -123,3 +123,6 @@
 <!-- <button mat-icon-button color="warn" (click)="romoveSelectdsRows()">
   <mat-icon>remove_circle_outline</mat-icon>
 </button>  -->
+
+
+getFormControl(element.id, 'email')"
