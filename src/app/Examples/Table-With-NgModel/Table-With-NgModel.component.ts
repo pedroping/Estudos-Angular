@@ -173,7 +173,6 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
   }
 
   handleDone(User_Row: Table_User) {
-    
     if (User_Row.isNew) {
       const Form = this.getFormGroup(-1).value;
       const New_User: User = {
@@ -186,10 +185,10 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
         User_Row.id = resp.id;
         User_Row.isEdit = false;
         User_Row.isNew = false;
-        User_Row.name = resp.firstName,
-        User_Row.id = resp.id,
-        User_Row.email = resp.email,
-        User_Row.age = resp.age;
+        (User_Row.name = resp.firstName),
+          (User_Row.id = resp.id),
+          (User_Row.email = resp.email),
+          (User_Row.age = resp.age);
         this.getFormGroup(-1).patchValue({
           name: resp.firstName,
           id: resp.id,
@@ -202,7 +201,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    const Form = this.getFormGroup(User_Row.id).value
+    const Form = this.getFormGroup(User_Row.id).value;
 
     const put_User: User = {
       id: User_Row.id,
@@ -213,10 +212,10 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
 
     this.tableServiceService.editUser(put_User).subscribe((resp) => {
       User_Row.isEdit = false;
-      User_Row.name = resp.firstName,
-      User_Row.id = resp.id,
-      User_Row.email = resp.email,
-      User_Row.age = resp.age;
+      (User_Row.name = resp.firstName),
+        (User_Row.id = resp.id),
+        (User_Row.email = resp.email),
+        (User_Row.age = resp.age);
     });
   }
 
@@ -292,7 +291,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
 
         this.tableServiceService.deleteUser(User_Row.id).subscribe({
           next: (value) => {
-            this.TableArray.removeAt(this.findIndex(User_Row.id))
+            this.TableArray.removeAt(this.findIndex(User_Row.id));
             this.dataSource.data = this.dataSource.data.filter(
               (User) => User.id != User_Row.id
             );
@@ -364,10 +363,11 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
 
         this.tableServiceService.deleteManyUsers(ids).subscribe({
           next: (value) => {
-            ids.forEach(id => this.TableArray.removeAt(this.findIndex(id)))
+            ids.forEach((id) => this.TableArray.removeAt(this.findIndex(id)));
             this.dataSource.data = this.dataSource.data.filter(
               (User) => !User.isSelected
             );
+            this.allSelected = false;
           },
           error: (err) => {
             console.log('Error');

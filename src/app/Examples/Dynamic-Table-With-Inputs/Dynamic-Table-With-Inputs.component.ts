@@ -209,6 +209,9 @@ export class DynamicTableWithInputsComponent implements OnInit, AfterViewInit {
         },
       })
     })
+    setTimeout(() => {
+      this.checkAll.setValue(false)
+    }, 1000);
   }
 
   // getActualIndex(index : number)    {
