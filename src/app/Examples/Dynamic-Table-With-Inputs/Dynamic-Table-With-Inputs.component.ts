@@ -193,7 +193,7 @@ export class DynamicTableWithInputsComponent implements OnInit, AfterViewInit {
     let Ids: number[] = []
 
     this.FormArray.value.forEach((item: any) => {
-      if(item.checked)
+      if(item.checked && item.canEdit)
         Ids.push(item.id)
     })
     

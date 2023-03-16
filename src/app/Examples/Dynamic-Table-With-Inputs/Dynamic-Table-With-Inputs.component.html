@@ -1,4 +1,12 @@
-<div class="container">
+<div class="shape-top">
+  <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path
+      d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+      class="shape-fill"></path>
+  </svg>
+</div>
+
+<div class="container" *ngIf="dataSource.data.length > 0; else noData">
   <form [formGroup]="TableForm">
     <table mat-table [dataSource]="dataSource" matTableResponsive class="mat-elevation-z8" style="width: 98%;" matSort>
     
@@ -105,7 +113,7 @@
           </button> 
         </th>
         <td mat-cell *matCellDef="let element; let index = index">
-          <button mat-icon-button color="warn" (click)="deletRow(element, index)">
+          <button mat-icon-button color="warn" (click)="deletRow(element, index)" [disabled]="!element.canEdit">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -119,3 +127,21 @@
   <pre *ngIf="FormArray.value.lenght > 0">{{ FormArray.value | json }}</pre>
 
 </div>
+
+<ng-template #noData>
+  <div class="noData">
+    <div class="container">
+      <div class="row text-center">
+        <h2>Nenhum Usuario Encontrado!</h2>
+      </div>
+      <div class="row">
+        <img src="../../../assets/No data-pana.svg" />
+      </div>
+      <div class="row text-center">
+        <button mat-button (click)="addRow()">
+          Clique aqui para adicionar um Usuario
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>

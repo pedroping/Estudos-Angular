@@ -1,3 +1,44 @@
-.form-field{
-    padding-top: 5px;
+.form-field {
+  padding-top: 5px;
+}
+
+.container{
+    position: relative;
+}
+.noData {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    height: 490px;
+  }
+}
+
+.btn {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.shape-top {
+  position: absolute;
+  top: 62px;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.shape-top svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.2px);
+  height: 300px;
+}
+
+.shape-top .shape-fill {
+  fill: #eed9d9;
 }
