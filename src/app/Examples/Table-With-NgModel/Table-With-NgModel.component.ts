@@ -15,9 +15,9 @@ export interface COLUMNS_SCHEMA {
   label: string;
   inputLabel?: string;
   cantEdit?: boolean;
-  cell?: any,
-  hasSort?: boolean,
-  hasControl?: boolean
+  cell?: any;
+  hasSort?: boolean;
+  hasControl?: boolean;
 }
 
 export interface Table_User {
@@ -43,7 +43,7 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     cantEdit: true,
     cell: (element: Table_User) => `${element.id}`,
     hasSort: true,
-    hasControl: true
+    hasControl: true,
   },
   {
     key: 'name',
@@ -52,7 +52,7 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     inputLabel: 'Insira seu nome',
     cell: (element: Table_User) => `${element.name}`,
     hasSort: true,
-    hasControl: true
+    hasControl: true,
   },
   {
     key: 'email',
@@ -60,7 +60,7 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     label: 'Email',
     inputLabel: 'Insira seu Email',
     cell: (element: Table_User) => `${element.email}`,
-    hasControl: true
+    hasControl: true,
   },
   {
     key: 'age',
@@ -68,7 +68,7 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     label: 'Idade',
     inputLabel: 'Insira sua idade',
     cell: (element: Table_User) => `${element.age}`,
-    hasControl: true
+    hasControl: true,
   },
   {
     key: 'isEdit',
@@ -108,9 +108,11 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
   });
 
   TableForm = new FormGroup({
-    TableFromArray: new FormArray([])
-  })
-  get TableArray() { return this.TableForm.get('TableFromArray') as FormArray}
+    TableFromArray: new FormArray([]),
+  });
+  get TableArray() {
+    return this.TableForm.get('TableFromArray') as FormArray;
+  }
 
   constructor(
     public dialog: MatDialog,
@@ -125,7 +127,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
     return this.dataSource.data.some((User) => User.isEdit);
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
@@ -147,20 +149,33 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
     User_Row.email = Form.email!;
   }
 
-  getFormControl(id: number, key: string){
-    const Control = this.TableArray.controls.find((item) => item.value.id == id)
-    return Control!.get(key) as FormControl
+  getFormControl(id: number, key: string) {
+    const Control = this.TableArray.controls.find(
+      (item) => item.value.id == id
+    );
+    return Control!.get(key) as FormControl;
   }
 
-  getFormGroup(id: number){
-    const Control = this.TableArray.controls.find((item) => item.value.id == id)
-    return Control! as FormGroup
+  getFormGroup(id: number) {
+    const Control = this.TableArray.controls.find(
+      (item) => item.value.id == id
+    );
+    return Control! as FormGroup;
+  }
+
+  findIndex(id: number) {
+    var Formindex!: number;
+    this.TableArray.controls.find((item, index) => {
+      if (item.value.id == id) Formindex = index;
+    });
+
+    return Formindex;
   }
 
   handleDone(User_Row: Table_User) {
-    const Form = this.getFormGroup(-1).value;
-
+    
     if (User_Row.isNew) {
+      const Form = this.getFormGroup(-1).value;
       const New_User: User = {
         id: 0,
         firstName: Form.name!,
@@ -174,18 +189,20 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
         User_Row.name = resp.firstName,
         User_Row.id = resp.id,
         User_Row.email = resp.email,
-        User_Row.age = resp.age
+        User_Row.age = resp.age;
         this.getFormGroup(-1).patchValue({
           name: resp.firstName,
           id: resp.id,
           email: resp.email,
-          age: resp.age
-        })
+          age: resp.age,
+        });
       });
       this.setUser(User_Row);
       this.EditeFormGroup.reset();
       return;
     }
+
+    const Form = this.getFormGroup(User_Row.id).value
 
     const put_User: User = {
       id: User_Row.id,
@@ -195,9 +212,11 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
     };
 
     this.tableServiceService.editUser(put_User).subscribe((resp) => {
-      this.setUser(User_Row);
-      this.EditeFormGroup.reset();
       User_Row.isEdit = false;
+      User_Row.name = resp.firstName,
+      User_Row.id = resp.id,
+      User_Row.email = resp.email,
+      User_Row.age = resp.age;
     });
   }
 
@@ -215,20 +234,23 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
         };
       });
 
-      this.dataSource.data.forEach(User => {
-        const newForm = new FormGroup({})
-        this.columnsSchema.forEach(schema => {
-          if(schema.hasControl){
-            const Value = User[schema.key as keyof typeof User]
-            newForm.addControl(schema.key, new FormControl(Value, Validators.required))
-            if(schema.key == 'email')
-              newForm.get(schema.key)?.addValidators(Validators.email)
-            if(schema.key == 'id')
-              newForm.get(schema.key)?.removeValidators(Validators.required)
+      this.dataSource.data.forEach((User) => {
+        const newForm = new FormGroup({});
+        this.columnsSchema.forEach((schema) => {
+          if (schema.hasControl) {
+            const Value = User[schema.key as keyof typeof User];
+            newForm.addControl(
+              schema.key,
+              new FormControl(Value, Validators.required)
+            );
+            if (schema.key == 'email')
+              newForm.get(schema.key)?.addValidators(Validators.email);
+            if (schema.key == 'id')
+              newForm.get(schema.key)?.removeValidators(Validators.required);
           }
-        })
-        this.TableArray.push(newForm)
-      })
+        });
+        this.TableArray.push(newForm);
+      });
     });
   }
 
@@ -242,21 +264,19 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
       isSelected: false,
       isNew: true,
     };
-    
+
     const newForm = new FormGroup({
       id: new FormControl(-1),
       name: new FormControl('', Validators.required),
       age: new FormControl(null as any, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
-    })
-    this.TableArray.push(newForm)
+    });
+    this.TableArray.push(newForm);
 
     this.dataSource.data = [New_User, ...this.dataSource.data];
   }
 
   deleteRow(User_Row: Table_User) {
-    let users: Table_User[] = this.dataSource.data;
-
     this.dialog
       .open(CofirmeModalComponent, {
         width: 'auto',
@@ -272,6 +292,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
 
         this.tableServiceService.deleteUser(User_Row.id).subscribe({
           next: (value) => {
+            this.TableArray.removeAt(this.findIndex(User_Row.id))
             this.dataSource.data = this.dataSource.data.filter(
               (User) => User.id != User_Row.id
             );
@@ -343,6 +364,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
 
         this.tableServiceService.deleteManyUsers(ids).subscribe({
           next: (value) => {
+            ids.forEach(id => this.TableArray.removeAt(this.findIndex(id)))
             this.dataSource.data = this.dataSource.data.filter(
               (User) => !User.isSelected
             );
@@ -353,12 +375,14 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
         });
       });
   }
-  
+
   getErrorMessage(key: string, id: number) {
     if (this.getFormControl(id, key).hasError('required')) {
       return 'Por favor insira um valor!';
     }
 
-    return this.getFormControl(id, key).hasError('email') ? 'Email Invalido' : '';
+    return this.getFormControl(id, key).hasError('email')
+      ? 'Email Invalido'
+      : '';
   }
 }
