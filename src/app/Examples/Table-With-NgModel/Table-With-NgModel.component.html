@@ -23,7 +23,7 @@
         </div>
 
         <ng-template #CheckBoxHeader>
-          <mat-checkbox [(ngModel)]="allSelected" (change)="setAll($event)"></mat-checkbox>
+          <mat-checkbox [formControl]="allSelected"></mat-checkbox>
         </ng-template>
       </th>
 
@@ -37,7 +37,7 @@
 
           <div [ngSwitch]="col.key">
             <div *ngSwitchCase="'isSelected'">
-              <mat-checkbox [(ngModel)]="element.isSelected" (change)="checkAll()"></mat-checkbox>
+              <mat-checkbox [formControl]="getFormControl(element.id, 'isSelected')" (change)="checkAll()"></mat-checkbox>
             </div>
             <div class="btn-edit" *ngSwitchCase="'isEdit'">
               <button mat-icon-button (click)="setForm(element)" style="cursor: pointer" color="primary"
@@ -74,7 +74,7 @@
           <div *ngIf="!col.cantEdit; else noEdit">
             <div [ngSwitch]="col.key">
               <div *ngSwitchCase="'isSelected'">
-                <mat-checkbox [(ngModel)]="element.isSelected"></mat-checkbox>
+                <mat-checkbox [formControl]="getFormControl(element.id, 'isSelected')"></mat-checkbox>
               </div>
 
               <div *ngSwitchCase="'isEdit'" class="btn-edit">

@@ -30,11 +30,20 @@ export interface Table_User {
   isNew: boolean;
 }
 
+export interface UserForm {
+  id: number;
+  name: string;
+  age: number;
+  email: string;
+  isSelected: boolean;
+}
+
 const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
   {
     key: 'isSelected',
     type: 'isSelected',
     label: '',
+    hasControl: true,
   },
   {
     key: 'id',
@@ -91,7 +100,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
   dataSource = new MatTableDataSource<Table_User>([]);
   columnsSchema: COLUMNS_SCHEMA[] = COLUMNS_SCHEMA;
-  allSelected: boolean = false;
+  allSelected = new FormControl(false);
   Users$ = this.tableServiceService.getAll().pipe(
     map((resp: any) => {
       return resp.users;
@@ -121,6 +130,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.createTableData();
+    this.allSelected.valueChanges.subscribe((val) => {this.setAll(val!)})
   }
 
   isSomeOnEdit() {
@@ -269,7 +279,9 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
       name: new FormControl('', Validators.required),
       age: new FormControl(null as any, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
+      isSelected: new FormControl(false),
     });
+
     this.TableArray.push(newForm);
 
     this.dataSource.data = [New_User, ...this.dataSource.data];
@@ -303,36 +315,18 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
       });
   }
 
-  setAll(event: MatCheckboxChange) {
-    let users: Table_User[] = this.dataSource.data;
-    if (event.checked) {
-      this.dataSource.data.forEach((x, index) => {
-        users[index].isSelected = true;
-      });
-      this.dataSource.data = users;
-      return;
-    }
-
-    this.dataSource.data.forEach((x, index) => {
-      users[index].isSelected = false;
+  setAll(val: boolean) {
+    this.TableArray.controls.forEach((control) => {
+      control.get('isSelected')?.setValue(val);
     });
-    this.dataSource.data = users;
   }
 
   checkAll() {
-    this.allSelected = this.dataSource.data.every(
-      (x: Table_User) => x.isSelected
-    );
+    this.allSelected.setValue(this.TableArray.value.every((User:UserForm) => User.isSelected), {emitEvent: false});
   }
 
   anyIsSelected() {
-    let disable: boolean = true;
-
-    this.dataSource.data.forEach((x: Table_User) => {
-      if (x.isSelected) disable = false;
-    });
-
-    return disable;
+    return !this.TableArray.value.some((User:UserForm) => User.isSelected)
   }
 
   getDate(date: string) {
@@ -357,17 +351,17 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
 
         let ids: number[] = [];
 
-        this.dataSource.data.forEach((x: Table_User, index) => {
+        this.TableArray.value.forEach((x: Table_User) => {
           if (x.isSelected) ids.push(x.id);
         });
 
         this.tableServiceService.deleteManyUsers(ids).subscribe({
           next: (value) => {
-            ids.forEach((id) => this.TableArray.removeAt(this.findIndex(id)));
             this.dataSource.data = this.dataSource.data.filter(
-              (User) => !User.isSelected
-            );
-            this.allSelected = false;
+              (User) => !this.getFormControl(User.id, 'isSelected').value
+              );
+            ids.forEach((id) => this.TableArray.removeAt(this.findIndex(id)));
+            this.allSelected.setValue(false);
           },
           error: (err) => {
             console.log('Error');
