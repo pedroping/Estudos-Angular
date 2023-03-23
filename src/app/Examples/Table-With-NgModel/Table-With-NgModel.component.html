@@ -40,7 +40,7 @@
               <mat-checkbox [formControl]="getFormControl(element.id, 'isSelected')" (change)="checkAll()"></mat-checkbox>
             </div>
             <div class="btn-edit" *ngSwitchCase="'isEdit'">
-              <button mat-icon-button (click)="setForm(element)" style="cursor: pointer" color="primary"
+              <button mat-icon-button (click)="setForm(element)" style="cursor: pointer" color="accent"
                 [disabled]="isSomeOnEdit()">
                 <mat-icon>edit</mat-icon>
               </button>
@@ -79,7 +79,7 @@
 
               <div *ngSwitchCase="'isEdit'" class="btn-edit">
                 <button mat-icon-button (click)="element.isEdit = false; handleDone(element)"
-                  [disabled]="getFormGroup(element.id).invalid" color="primary" style="cursor: pointer">
+                  [disabled]="getFormGroup(element.id).invalid" color="accent" style="cursor: pointer">
                   <mat-icon>save</mat-icon>
                 </button>
               </div>
