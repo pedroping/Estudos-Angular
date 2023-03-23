@@ -109,13 +109,6 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  EditeFormGroup = new FormGroup({
-    id: new FormControl(-1),
-    name: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    age: new FormControl(null as any, Validators.required),
-  });
-
   TableForm = new FormGroup({
     TableFromArray: new FormArray([]),
   });
@@ -142,21 +135,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
   }
 
   setForm(User_Row: Table_User) {
-    this.EditeFormGroup.patchValue({
-      id: User_Row.id,
-      name: User_Row.name,
-      email: User_Row.email,
-      age: User_Row.age,
-    });
-
     User_Row.isEdit = true;
-  }
-
-  setUser(User_Row: Table_User) {
-    const Form = this.EditeFormGroup.value;
-    User_Row.name = Form.name!;
-    User_Row.age = Form.age;
-    User_Row.email = Form.email!;
   }
 
   getFormControl(id: number, key: string) {
@@ -206,8 +185,6 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
           age: resp.age,
         });
       });
-      this.setUser(User_Row);
-      this.EditeFormGroup.reset();
       return;
     }
 
