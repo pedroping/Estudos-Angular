@@ -50,18 +50,19 @@
       </ul>
     </div>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
-        (click)="sidenav.open()">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" [matMenuTriggerFor]="menu">
-        <mat-icon>favorite</mat-icon>
-      </button>
-    </mat-toolbar>
-    <div class="main">
+  <mat-sidenav-content style="overflow-x: hidden;">
+    <app-closed-sidenav></app-closed-sidenav>
+    <div style="padding-left: 84px;"> 
+      <mat-toolbar>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+          (click)="sidenav.open()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" [matMenuTriggerFor]="menu">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </mat-toolbar>
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

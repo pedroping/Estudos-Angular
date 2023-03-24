@@ -9,6 +9,7 @@
 .sidenav {
   width: 280px;
   padding: 10px;
+  background-color: #ffccbc;
 }
 
 .example-spacer {
@@ -27,7 +28,7 @@
 }
 
 .main {
-  padding: 10px;
+  padding: 5px;
 }
 
 .header {
@@ -36,6 +37,19 @@
 
 ::ng-deep {
   .mat-toolbar {
-    background-color: #ffccbc;
+    background-color: white;
   }
 }
+
+:host {
+  ::ng-deep {
+    app-side-nav-fechada{
+      position: absolute;
+      left: 0;
+      z-index: 1;
+      height: 100%;
+      width: 84px !important;
+    }
+  }
+}
+

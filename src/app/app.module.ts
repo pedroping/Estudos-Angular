@@ -37,6 +37,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoaderComponent } from './core/componenets/loader/loader.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
+import { ClosedSidenavComponent } from './core/componenets/closed-sidenav/closed-sidenav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +53,7 @@ import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
     LoginPageComponent,
     PasswordDirective,
     LoaderComponent,
+    ClosedSidenavComponent
   ],
   imports: [
     BrowserModule,
