@@ -9,3 +9,17 @@
   top: 0;
   width: 65px !important;
 }
+
+.content{
+  .button{
+    margin-left: 1px;
+  }
+  .title{
+    padding-top: 10px;
+    margin-left: 5px;
+    img{
+      width: 30px;
+      cursor: pointer;
+    }
+  }
+}
