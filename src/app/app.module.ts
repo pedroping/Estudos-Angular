@@ -19,6 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { DataBindingComponent } from './Examples/components/Data-binding/Data-binding.component';
 import { StyleClassBidingComponent } from './Examples/components/StyleClassBiding/StyleClassBiding.component';
@@ -77,7 +78,8 @@ import { ClosedSidenavComponent } from './core/componenets/closed-sidenav/closed
     MatFormFieldModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    CdkAccordionModule
   ],
   providers: [
     AuthGuardService,
