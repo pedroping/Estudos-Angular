@@ -9,7 +9,24 @@ import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
 })
 export class AppComponent {
   title = 'Estudo_Loiane';
-  items = ['Home', 'Tabela 1', 'Tabela 2', 'Lugar Secreto'];
+  items = [
+    {
+      icon: 'home',
+      label: 'Home'
+    },
+    {
+      icon: 'table_chart',
+      label: 'Tabela 1'
+    },
+    {
+      icon: 'table_chart',
+      label: 'Tabela 2'
+    },
+    {
+      icon: 'lock',
+      label: 'Lugar Secreto'
+    },
+  ]
   expandedIndex = 0;
 
   constructor(public dialog: MatDialog){

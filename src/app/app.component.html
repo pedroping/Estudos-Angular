@@ -4,7 +4,7 @@
     <mat-toolbar style="background-color: transparent;">
       <h3>Minha Sidenav</h3>
     </mat-toolbar>
-    <div class="btn-group" dropdown style="width: 95%;">
+    <!-- <div class="btn-group" dropdown style="width: 95%;">
       <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
         aria-controls="dropdown-animated">
         Exemplos Importantes <span class="caret"></span>
@@ -44,20 +44,31 @@
           </ul>
         </li>
       </ul>
-    </div>
+    </div> -->
 
 
     <div class="accordions">
       <cdk-accordion class="example-accordion">
-        <cdk-accordion-item *ngFor="let item of items; let index = index;" #accordionItem="cdkAccordionItem"
-          class="example-accordion-item" role="button" tabindex="0" [attr.aria-expanded]="accordionItem.expanded">
-          <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-            {{ item }}
+        <cdk-accordion-item
+          *ngFor="let item of items; let index = index;"
+          #accordionItem="cdkAccordionItem"
+          class="example-accordion-item"
+        >
+          <div class="example-accordion-item-header" 
+            [style.background-color]="accordionItem.expanded ? 'lightBlue' : ''"
+          (click)="accordionItem.toggle()">
+            <span class="title">
+              <mat-icon class="titleIcon">{{item.icon}}</mat-icon>
+              {{ item.label }}
+            </span>
             <span class="example-accordion-item-description">
-              Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+              <mat-icon>{{ accordionItem.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
             </span>
           </div>
-          <div class="example-accordion-item-body" role="region" [style.display]="accordionItem.expanded ? '' : 'none'">
+          <div
+            class="example-accordion-item-body"
+          [style.display]="accordionItem.expanded ? '' : 'none'"
+          >
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis
             excepturi incidunt ipsum deleniti labore, tempore non nam doloribus blanditiis
             veritatis illo autem iure aliquid ullam rem tenetur deserunt velit culpa?

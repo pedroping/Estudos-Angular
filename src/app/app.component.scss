@@ -57,13 +57,79 @@
   cursor: pointer;
 }
 
+.title{
+  position: relative;
+  top: -2px;
+}
+
+.example-accordion-item-description{
+  position: relative;
+  top: -10px;
+}
+
+.titleIcon{
+  position: relative;
+  top: 1px;
+}
+
 .accordions{
-  padding-left: 10px !important;
- 
+  display: flex;
+  justify-content: center;
+}
+
+:host{
   cdk-accordion-item{
-    .example-accordion-item-heade{
-      padding-left: 50px !important;
+    padding-bottom: 5px;
+    width: 250px;
+  } 
+
+  .example-accordion-item-header{
+    overflow: hidden;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 10px !important; 
+   
+  }
+
+  cdk-accordion-item:hover{
+    .example-accordion-item-header{
+      transform: scale(1.01);
+      border: 1px solid black;
+      border-radius: 10px;
     }
   }
-   
 }
+
+.example-accordion {
+  display: block;
+  max-width: 250px;
+  
+
+}
+
+.example-accordion-item {
+  display: block;
+  
+}
+
+.example-accordion-item-header {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.example-accordion-item-description {
+  font-size: 0.85em;
+  color: #999;
+}
+
+.example-accordion-item-header,
+.example-accordion-item-body {
+  padding: 16px;
+}
+
+.example-accordion-item-header:hover {
+  cursor: pointer;
+}
+
+
