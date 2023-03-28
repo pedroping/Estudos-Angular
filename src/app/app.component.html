@@ -45,10 +45,31 @@
         </li>
       </ul>
     </div>
+
+
+    <div class="accordions">
+      <cdk-accordion class="example-accordion">
+        <cdk-accordion-item *ngFor="let item of items; let index = index;" #accordionItem="cdkAccordionItem"
+          class="example-accordion-item" role="button" tabindex="0" [attr.aria-expanded]="accordionItem.expanded">
+          <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+            {{ item }}
+            <span class="example-accordion-item-description">
+              Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+            </span>
+          </div>
+          <div class="example-accordion-item-body" role="region" [style.display]="accordionItem.expanded ? '' : 'none'">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis
+            excepturi incidunt ipsum deleniti labore, tempore non nam doloribus blanditiis
+            veritatis illo autem iure aliquid ullam rem tenetur deserunt velit culpa?
+          </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
+    </div>
+
   </mat-sidenav>
   <mat-sidenav-content style="overflow-x: hidden;">
     <app-closed-sidenav></app-closed-sidenav>
-    <div style="padding-left: 65px;"> 
+    <div style="padding-left: 65px;">
       <mat-toolbar>
         <mat-icon (click)="sidenav.open()" class="toolbarIcon">menu</mat-icon>
         <span class="example-spacer"></span>
@@ -66,29 +87,3 @@
     <span>Meu Perfil</span>
   </button>
 </mat-menu>
-
-
-<!-- <cdk-accordion class="example-accordion">
-  <cdk-accordion-item
-    *ngFor="let item of items; let index = index;"
-    #accordionItem="cdkAccordionItem"
-    class="example-accordion-item"
-    role="button"
-    tabindex="0"
-    [attr.aria-expanded]="accordionItem.expanded">
-    <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-      {{ item }}
-      <span class="example-accordion-item-description">
-        Click to {{ accordionItem.expanded ? 'close' : 'open' }}
-      </span>
-    </div>
-    <div
-      class="example-accordion-item-body"
-      role="region"
-      [style.display]="accordionItem.expanded ? '' : 'none'">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis
-      excepturi incidunt ipsum deleniti labore, tempore non nam doloribus blanditiis
-      veritatis illo autem iure aliquid ullam rem tenetur deserunt velit culpa?
-    </div>
-  </cdk-accordion-item>
-</cdk-accordion> -->

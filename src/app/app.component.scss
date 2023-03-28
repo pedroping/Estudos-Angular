@@ -8,8 +8,10 @@
 
 .sidenav {
   width: 280px;
-  padding: 10px;
-  background-color: #ffccbc;
+
+  .btn-group{
+    padding-left: 5px;
+  }
 }
 
 .example-spacer {
@@ -20,8 +22,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-
   span {
     font-size: 17px;
   }
@@ -57,3 +57,13 @@
   cursor: pointer;
 }
 
+.accordions{
+  padding-left: 10px !important;
+ 
+  cdk-accordion-item{
+    .example-accordion-item-heade{
+      padding-left: 50px !important;
+    }
+  }
+   
+}
