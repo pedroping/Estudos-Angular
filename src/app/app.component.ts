@@ -9,6 +9,8 @@ import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
 })
 export class AppComponent {
   
+  title = 'Estudo_Loiane'
+  
   constructor(public dialog: MatDialog){
 
   }
