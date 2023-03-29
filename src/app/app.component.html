@@ -1,90 +1,214 @@
 <app-loader></app-loader>
 <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav class="sidenav">
-    <mat-toolbar style="background-color: transparent;">
+    <mat-toolbar style="background-color: transparent">
       <h3>Minha Sidenav</h3>
     </mat-toolbar>
-    <!-- <div class="btn-group" dropdown style="width: 95%;">
-      <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-        aria-controls="dropdown-animated">
-        Exemplos Importantes <span class="caret"></span>
-      </button>
-      <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" style="width: 100%;" role="menu"
-        aria-labelledby="button-animated">
-        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="./">Home</a></li>
-        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()"
-            routerLink="/Examples/TableWithFormControls">Table With Form Controls</a></li>
-        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()"
-            routerLink="/Examples/TableWithNgModel">Table With Ng Models</a></li>
-        <li role="menuitem"><a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/LugarSecreto">Lugar
-            Secreto</a></li>
-        <li role="menuitem" dropdown triggers="mouseover" placement="right" container="body">
-          <a dropdownToggle class="dropdown-item" (click)="false">Data Binding<span class="caret"></span></a>
-          <ul *dropdownMenu class="dropdown-menu" role="menu">
-            <li role="menuitem">
-              <a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/Data-binding">
-                Data binding
-              </a>
-            </li>
-            <li role="menuitem">
-              <a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/StyleClass-binding">
-                Style & Class binding
-              </a>
-            </li>
-            <li role="menuitem">
-              <a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/Event-binding">
-                Event binding
-              </a>
-            </li>
-            <li role="menuitem">
-              <a class="dropdown-item" (click)="sidenav.close()" routerLink="/Examples/TwoWayData-binding">
-                Two Way Data binding
-              </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div> -->
-
-
     <div class="accordions">
       <cdk-accordion class="example-accordion">
         <cdk-accordion-item
-          *ngFor="let item of items; let index = index;"
-          #accordionItem="cdkAccordionItem"
+          #accordionItem1="cdkAccordionItem"
           class="example-accordion-item"
         >
-          <div class="example-accordion-item-header" 
-            [style.background-color]="accordionItem.expanded ? 'lightBlue' : ''"
-          (click)="accordionItem.toggle()">
+          <div
+            class="example-accordion-item-header"
+            [style.background-color]="accordionItem1.expanded ? '#ffccbc' : ''"
+            (click)="accordionItem1.toggle()"
+          >
             <span class="title">
-              <mat-icon class="titleIcon">{{item.icon}}</mat-icon>
-              {{ item.label }}
+              <mat-icon class="titleIcon">home</mat-icon>
+              Home
             </span>
             <span class="example-accordion-item-description">
-              <mat-icon>{{ accordionItem.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+              <mat-icon>{{
+                accordionItem1.expanded
+                  ? "keyboard_arrow_up"
+                  : "keyboard_arrow_down"
+              }}</mat-icon>
             </span>
           </div>
           <div
             class="example-accordion-item-body"
-          [style.display]="accordionItem.expanded ? '' : 'none'"
+            [style.display]="accordionItem1.expanded ? '' : 'none'"
           >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis
-            excepturi incidunt ipsum deleniti labore, tempore non nam doloribus blanditiis
-            veritatis illo autem iure aliquid ullam rem tenetur deserunt velit culpa?
+            <div class="contentItem">
+              <span routerLink="./" (click)="sidenav.close()"
+                ><mat-icon>keyboard_arrow_right</mat-icon>Pagina Inicial</span
+              >
+            </div>
+          </div>
+        </cdk-accordion-item>
+        <cdk-accordion-item
+          #accordionItem2="cdkAccordionItem"
+          class="example-accordion-item"
+        >
+          <div
+            class="example-accordion-item-header"
+            [style.background-color]="accordionItem2.expanded ? '#ffccbc' : ''"
+            (click)="accordionItem2.toggle()"
+          >
+            <span class="title">
+              <mat-icon class="titleIcon">table_chart</mat-icon>
+              Tabela 1
+            </span>
+            <span class="example-accordion-item-description">
+              <mat-icon>{{
+                accordionItem2.expanded
+                  ? "keyboard_arrow_up"
+                  : "keyboard_arrow_down"
+              }}</mat-icon>
+            </span>
+          </div>
+          <div
+            class="example-accordion-item-body"
+            [style.display]="accordionItem2.expanded ? '' : 'none'"
+          >
+            <div class="contentItem">
+              <span
+                routerLink="/Examples/TableWithFormControls"
+                (click)="sidenav.close()"
+                ><mat-icon>keyboard_arrow_right</mat-icon>Tabela</span
+              >
+            </div>
+          </div>
+        </cdk-accordion-item>
+        <cdk-accordion-item
+          #accordionItem3="cdkAccordionItem"
+          class="example-accordion-item"
+        >
+          <div
+            class="example-accordion-item-header"
+            [style.background-color]="accordionItem3.expanded ? '#ffccbc' : ''"
+            (click)="accordionItem3.toggle()"
+          >
+            <span class="title">
+              <mat-icon class="titleIcon">table_chart</mat-icon>
+              Tabela 2
+            </span>
+            <span class="example-accordion-item-description">
+              <mat-icon>{{
+                accordionItem3.expanded
+                  ? "keyboard_arrow_up"
+                  : "keyboard_arrow_down"
+              }}</mat-icon>
+            </span>
+          </div>
+          <div
+            class="example-accordion-item-body"
+            [style.display]="accordionItem3.expanded ? '' : 'none'"
+          >
+            <div class="contentItem">
+              <span
+                routerLink="/Examples/TableWithNgModel"
+                (click)="sidenav.close()"
+                ><mat-icon>keyboard_arrow_right</mat-icon>Tabela</span
+              >
+            </div>
+          </div>
+        </cdk-accordion-item>
+        <cdk-accordion-item
+          #accordionItem4="cdkAccordionItem"
+          class="example-accordion-item"
+        >
+          <div
+            class="example-accordion-item-header"
+            [style.background-color]="accordionItem4.expanded ? '#ffccbc' : ''"
+            (click)="accordionItem4.toggle()"
+          >
+            <span class="title">
+              <mat-icon class="titleIcon">lock</mat-icon>
+              Lugar Secreto
+            </span>
+            <span class="example-accordion-item-description">
+              <mat-icon>{{
+                accordionItem4.expanded
+                  ? "keyboard_arrow_up"
+                  : "keyboard_arrow_down"
+              }}</mat-icon>
+            </span>
+          </div>
+          <div
+            class="example-accordion-item-body"
+            [style.display]="accordionItem4.expanded ? '' : 'none'"
+          >
+            <div class="contentItem">
+              <span
+                routerLink="/Examples/LugarSecreto"
+                (click)="sidenav.close()"
+                ><mat-icon>keyboard_arrow_right</mat-icon>Lugar Secreto</span
+              >
+            </div>
+          </div>
+        </cdk-accordion-item>
+        <cdk-accordion-item
+          #accordionItem5="cdkAccordionItem"
+          class="example-accordion-item"
+        >
+          <div
+            class="example-accordion-item-header"
+            [style.background-color]="accordionItem5.expanded ? '#ffccbc' : ''"
+            (click)="accordionItem5.toggle()"
+          >
+            <span class="title">
+              <mat-icon class="titleIcon">code</mat-icon>
+              Binding
+            </span>
+            <span class="example-accordion-item-description">
+              <mat-icon>{{
+                accordionItem5.expanded
+                  ? "keyboard_arrow_up"
+                  : "keyboard_arrow_down"
+              }}</mat-icon>
+            </span>
+          </div>
+          <div
+            class="example-accordion-item-body"
+            [style.display]="accordionItem5.expanded ? '' : 'none'"
+          >
+            <div class="contentItem">
+              <span
+                routerLink="/Examples/Data-binding"
+                (click)="sidenav.close()"
+                ><mat-icon>keyboard_arrow_right</mat-icon>Data binding</span
+              >
+            </div>
+            <div class="contentItem">
+              <span
+                routerLink="/Examples/StyleClass-binding"
+                (click)="sidenav.close()"
+                ><mat-icon>keyboard_arrow_right</mat-icon>Style & Class
+                binding</span
+              >
+            </div>
+            <div class="contentItem">
+              <span
+                routerLink="/Examples/Event-binding"
+                (click)="sidenav.close()"
+                ><mat-icon>keyboard_arrow_right</mat-icon>Event binding</span
+              >
+            </div>
+            <div class="contentItem">
+              <span
+                routerLink="/Examples/TwoWayData-binding"
+                (click)="sidenav.close()"
+                ><mat-icon>keyboard_arrow_right</mat-icon>Two Way Data
+                binding</span
+              >
+            </div>
           </div>
         </cdk-accordion-item>
       </cdk-accordion>
     </div>
-
   </mat-sidenav>
-  <mat-sidenav-content style="overflow-x: hidden;">
+  <mat-sidenav-content style="overflow-x: hidden">
     <app-closed-sidenav></app-closed-sidenav>
-    <div style="padding-left: 65px;">
+    <div style="padding-left: 65px">
       <mat-toolbar>
         <mat-icon (click)="sidenav.open()" class="toolbarIcon">menu</mat-icon>
         <span class="example-spacer"></span>
-        <mat-icon [matMenuTriggerFor]="menu" class="toolbarIcon">favorite</mat-icon>
+        <mat-icon [matMenuTriggerFor]="menu" class="toolbarIcon"
+          >favorite</mat-icon
+        >
       </mat-toolbar>
       <router-outlet></router-outlet>
     </div>

@@ -123,13 +123,28 @@
   color: #999;
 }
 
-.example-accordion-item-header,
-.example-accordion-item-body {
+.example-accordion-item-header {
   padding: 16px;
+}
+
+.example-accordion-item-body{
+  padding: 5px;
 }
 
 .example-accordion-item-header:hover {
   cursor: pointer;
 }
 
+.contentItem{
+  span{
+    cursor: pointer;
+    mat-icon{
+      position: relative;
+      top: 7px;
+    }
+  }
+  :hover{
+    color: lightblue;
+  }
+}
 

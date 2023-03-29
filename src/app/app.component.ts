@@ -8,27 +8,7 @@ import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Estudo_Loiane';
-  items = [
-    {
-      icon: 'home',
-      label: 'Home'
-    },
-    {
-      icon: 'table_chart',
-      label: 'Tabela 1'
-    },
-    {
-      icon: 'table_chart',
-      label: 'Tabela 2'
-    },
-    {
-      icon: 'lock',
-      label: 'Lugar Secreto'
-    },
-  ]
-  expandedIndex = 0;
-
+  
   constructor(public dialog: MatDialog){
 
   }
