@@ -75,21 +75,21 @@
   
       <ng-container matColumnDef="editField">
         <th mat-header-cell *matHeaderCellDef>
-          <button mat-icon-button color="primary" (click)="addnewStaticrow()">
+          <button mat-icon-button color="accent" (click)="addnewStaticrow()">
             <mat-icon>create_new_folder</mat-icon>
           </button> 
         </th>
         <td mat-cell *matCellDef="let element; let index = index">
           <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
             <button mat-icon-button (click)="setValueControl($any(getControl(element).get('onEdit')), false); handleSave($any(getControl(element)), index)" 
-              style="cursor: pointer;" color="primary"
+              style="cursor: pointer;" color="accent"
               [disabled]="!FormArray.controls[index].valid">
               <mat-icon>save</mat-icon>
             </button>
           </div>
           <div *ngIf="!getFormControl(element.id, 'onEdit')!.value">
             <button mat-icon-button (click)="setValueControl($any(getControl(element).get('onEdit')), true)" 
-              style="cursor: pointer;" color="primary"
+              style="cursor: pointer;" color="accent"
               [disabled]="!element.canEdit"
             >
               <mat-icon>edit</mat-icon>
