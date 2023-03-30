@@ -1,10 +1,18 @@
 <div class="container" *ngIf="dataSource.data.length > 0; else noData">
-  <button mat-button (click)="addRow()" [disabled]="isSomeOnEdit()">
-    Adicionar row
-  </button>
-  <button mat-button (click)="deleteSelectRow()" [disabled]="anyIsSelected()">
-    Deletar rows selecionadas
-  </button>
+  <div class="row">
+    <div class="col-sm-6">
+      <button mat-button (click)="addRow()" [disabled]="isSomeOnEdit()">
+        Adicionar row
+      </button>
+      <button mat-button (click)="deleteSelectRow()" [disabled]="anyIsSelected()">
+        Deletar rows selecionadas
+      </button>
+    </div>
+    <div class="col-sm-6 text-end">
+      <input type="text" placeholder="Filtrar Data...." [formControl]="filter">
+    </div>
+  </div>
+  
   <table mat-table [dataSource]="dataSource" style="width: 98%" matSort>
     <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
       <!-- Header -->

@@ -115,7 +115,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
   get TableArray() {
     return this.TableForm.get('TableFromArray') as FormArray;
   }
-
+  filter = new FormControl('')
   constructor(
     public dialog: MatDialog,
     private tableServiceService: TableServiceService
@@ -124,6 +124,9 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.createTableData();
     this.allSelected.valueChanges.subscribe((val) => {this.setAll(val!)})
+    this.filter.valueChanges.subscribe(x => {
+      this.dataSource.filter = x ? x.trim().toLocaleLowerCase() : '' 
+    })
   }
 
   isSomeOnEdit() {
@@ -174,10 +177,10 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
         User_Row.id = resp.id;
         User_Row.isEdit = false;
         User_Row.isNew = false;
-        (User_Row.name = resp.firstName),
-          (User_Row.id = resp.id),
-          (User_Row.email = resp.email),
-          (User_Row.age = resp.age);
+        User_Row.name = resp.firstName,
+        User_Row.id = resp.id,
+        User_Row.email = resp.email,
+        User_Row.age = resp.age;
         this.getFormGroup(-1).patchValue({
           name: resp.firstName,
           id: resp.id,
@@ -199,10 +202,10 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
 
     this.tableServiceService.editUser(put_User).subscribe((resp) => {
       User_Row.isEdit = false;
-      (User_Row.name = resp.firstName),
-        (User_Row.id = resp.id),
-        (User_Row.email = resp.email),
-        (User_Row.age = resp.age);
+      User_Row.name = resp.firstName,
+      User_Row.id = resp.id,
+      User_Row.email = resp.email,
+      User_Row.age = resp.age;
     });
   }
 
@@ -219,7 +222,6 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
           isNew: false,
         };
       });
-
       this.dataSource.data.forEach((User) => {
         const newForm = new FormGroup({});
         this.columnsSchema.forEach((schema) => {
