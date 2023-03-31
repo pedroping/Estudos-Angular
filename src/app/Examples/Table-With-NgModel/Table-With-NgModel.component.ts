@@ -125,6 +125,8 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
     this.createTableData();
     this.allSelected.valueChanges.subscribe((val) => {this.setAll(val!)})
     this.filter.valueChanges.subscribe(x => {
+      this.setAll(false)
+      this.dataSource.data = this.TableArray.value
       this.dataSource.filter = x ? x.trim().toLocaleLowerCase() : '' 
     })
   }
