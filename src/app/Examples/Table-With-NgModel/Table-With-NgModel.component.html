@@ -1,4 +1,4 @@
-<div class="container" *ngIf="dataSource.data.length > 0; else noData">
+<div class="container">
   <div class="row">
     <div class="col-sm-6">
       <button mat-button (click)="addRow()" [disabled]="isSomeOnEdit()">
@@ -12,7 +12,9 @@
       <input type="text" class="form-control" placeholder="Filtrar Data...." [formControl]="filter" [readOnly]="isSomeOnEdit()">
     </div>
   </div>
-  
+</div>
+
+<div class="container" *ngIf="dataSource.data.length > 0; else noData">
   <table mat-table [dataSource]="dataSource" style="width: 98%" matSort>
     <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
       <!-- Header -->
@@ -115,8 +117,12 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <div>
+        <span>Nenhum usuario encontrado com base no Filtro: {{filter.value}}</span>
+      </div>
+    </tr>
   </table>
-  {{ dataSource.data | json }}
 </div>
 
 <ng-template #noData>

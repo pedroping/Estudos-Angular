@@ -243,6 +243,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
   }
 
   addRow() {
+    this.filter.setValue('')
     const New_User = {
       id: -1,
       name: '',

@@ -28,10 +28,8 @@ button {
 
 .noData{
   display: flex;
-  position: relative;
   justify-content: center;
-  align-items: center;
-
+  align-items: center; 
   img{
     height: 500px;
   } 
@@ -43,3 +41,5 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+.text-center { text-align: center; }
