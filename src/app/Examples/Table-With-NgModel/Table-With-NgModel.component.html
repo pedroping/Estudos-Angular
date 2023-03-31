@@ -9,7 +9,7 @@
       </button>
     </div>
     <div class="col-sm-6 text-end">
-      <input type="text" class="form-control" placeholder="Filtrar Data...." [formControl]="filter">
+      <input type="text" class="form-control" placeholder="Filtrar Data...." [formControl]="filter" [readOnly]="isSomeOnEdit()">
     </div>
   </div>
   
