@@ -1,0 +1,85 @@
+:host {
+  cdk-accordion-item {
+    padding-bottom: 5px;
+    width: 250px;
+  }
+
+  .example-accordion-item-header {
+    overflow: hidden;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 10px !important;
+  }
+
+  cdk-accordion-item:hover {
+    .example-accordion-item-header {
+      transform: scale(1.01);
+      border: 1px solid black;
+      border-radius: 10px;
+    }
+  }
+}
+
+.example-accordion {
+  display: block;
+  max-width: 250px;
+}
+
+.example-accordion-item {
+  display: block;
+}
+
+.example-accordion-item-header {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.example-accordion-item-description {
+  font-size: 0.85em;
+  color: #999;
+}
+
+.example-accordion-item-header {
+  padding: 16px;
+}
+
+.example-accordion-item-body {
+  padding: 5px;
+}
+
+.example-accordion-item-header:hover {
+  cursor: pointer;
+}
+
+.contentItem {
+  span {
+    cursor: pointer;
+    mat-icon {
+      position: relative;
+      top: 7px;
+    }
+  }
+  :hover {
+    color: lightblue;
+  }
+}
+
+.toolbarIcon {
+  cursor: pointer;
+}
+
+.title {
+  position: relative;
+  top: -16px;
+}
+
+.example-accordion-item-description {
+  position: relative;
+  top: -10px;
+}
+
+.titleIcon {
+  position: relative;
+  top: 5px;
+}

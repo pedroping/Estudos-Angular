@@ -40,6 +40,7 @@ import { LoaderComponent } from './core/componenets/loader/loader.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 import { ClosedSidenavComponent } from './core/componenets/closed-sidenav/closed-sidenav.component';
+import { AccordionComponent } from './core/componenets/accordion/accordion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { ClosedSidenavComponent } from './core/componenets/closed-sidenav/closed
     LoginPageComponent,
     PasswordDirective,
     LoaderComponent,
-    ClosedSidenavComponent
+    ClosedSidenavComponent,
+    AccordionComponent
   ],
   imports: [
     BrowserModule,

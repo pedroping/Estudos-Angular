@@ -1,0 +1,30 @@
+<cdk-accordion-item
+  #accordionItem1="cdkAccordionItem"
+  class="example-accordion-item"
+>
+  <div
+    class="example-accordion-item-header"
+    [style.background-color]="accordionItem1.expanded ? '#ffccbc' : ''"
+    (click)="accordionItem1.toggle()"
+  >
+    <span class="title">
+      <mat-icon class="titleIcon">{{Icon}}</mat-icon>
+      {{Title}}
+    </span>
+    <span class="example-accordion-item-description">
+      <mat-icon>{{
+        accordionItem1.expanded ? "keyboard_arrow_up" : "keyboard_arrow_down"
+      }}</mat-icon>
+    </span>
+  </div>
+  <div
+    class="example-accordion-item-body"
+    [style.display]="accordionItem1.expanded ? '' : 'none'"
+  >
+    <div class="contentItem" *ngFor="let item of Rotas">
+      <span [routerLink]="item.rota" (click)="sendData.closeSideNav$.next(true)"
+        ><mat-icon>keyboard_arrow_right</mat-icon>{{item.label}}</span
+      >
+    </div>
+  </div>
+</cdk-accordion-item>
