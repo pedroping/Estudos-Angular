@@ -6,11 +6,7 @@
     </mat-toolbar>
     <div class="accordions">
       <cdk-accordion class="example-accordion">
-        <app-accordion Title="Home" Icon="home" [Rotas]="[{ rota: './' , label: 'Pagina Inicial'}]"></app-accordion>
-        <app-accordion Title="Tabela 1" Icon="table_chart" [Rotas]="[{ rota: '/Examples/TableWithFormControls' , label: 'Tabela'}]"></app-accordion>
-        <app-accordion Title="Tabela 2" Icon="table_chart" [Rotas]="[{ rota: '/Examples/TableWithNgModel' , label: 'Tabela'}]"></app-accordion>
-        <app-accordion Title="Lugar Secreto" Icon="lock" [Rotas]="[{ rota: '/Examples/LugarSecreto' , label: 'Lugar Secreto'}]"></app-accordion>
-        <app-accordion Title="Binding" Icon="code" [Rotas]="RotasBinding"></app-accordion>
+        <app-accordion *ngFor="let item of Accordions"  [Title]="item.Title" [Icon]="item.Icon" [Rotas]="item.Rotas"></app-accordion>
       </cdk-accordion>
     </div>
   </mat-sidenav>

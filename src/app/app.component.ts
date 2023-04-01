@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
 import { SendDataService } from './core/services/sendData.service';
-
+import { ACCORDIONS } from './helper/accordions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,26 +14,7 @@ export class AppComponent implements OnInit{
   @ViewChild('sidenav') sidenav!: MatSidenav
   
   title = 'Estudo_Loiane';
-
-
-  RotasBinding = [
-    {
-      rota: '/Examples/Data-binding',
-      label: 'Data binding',
-    },
-    {
-      rota: '/Examples/StyleClass-binding',
-      label: 'Style & Class binding',
-    },
-    {
-      rota: '/Examples/Event-binding',
-      label: 'Event binding',
-    },
-    {
-      rota: '/Examples/TwoWayData-binding',
-      label: 'Two Way Data binding',
-    },
-  ];
+  Accordions = ACCORDIONS
 
   constructor(
     public dialog: MatDialog,
