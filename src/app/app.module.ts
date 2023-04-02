@@ -41,6 +41,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderInterceptor } from './core/interceptors/loader.interceptor';
 import { ClosedSidenavComponent } from './core/componenets/closed-sidenav/closed-sidenav.component';
 import { AccordionComponent } from './core/componenets/accordion/accordion.component';
+import { CdkMenuModule } from '@angular/cdk/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { ColunasComponent } from './Examples/components/colunas/colunas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +60,8 @@ import { AccordionComponent } from './core/componenets/accordion/accordion.compo
     PasswordDirective,
     LoaderComponent,
     ClosedSidenavComponent,
-    AccordionComponent
+    AccordionComponent,
+    ColunasComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +85,9 @@ import { AccordionComponent } from './core/componenets/accordion/accordion.compo
     MatSortModule,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    CdkAccordionModule
+    CdkAccordionModule,
+    CdkMenuModule,
+    MatRadioModule
   ],
   providers: [
     AuthGuardService,

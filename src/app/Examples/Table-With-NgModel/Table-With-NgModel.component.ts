@@ -8,6 +8,7 @@ import { User } from 'src/app/core/models';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
+import { ColunasComponent } from '../components/colunas/colunas.component';
 
 export interface COLUMNS_SCHEMA {
   key: string;
@@ -97,17 +98,28 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
   styleUrls: ['./Table-With-NgModel.component.scss'],
 })
 export class TableWithNgModelComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatSort) sort!: MatSort;
+  
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
-  dataSource = new MatTableDataSource<Table_User>([]);
   columnsSchema: COLUMNS_SCHEMA[] = COLUMNS_SCHEMA;
+  filteredDisplayedColumns = this.displayedColumns
+  filteredColumnsSchema = this.columnsSchema
+
+  dataSource = new MatTableDataSource<Table_User>([]);
   allSelected = new FormControl(false);
+  selectedRow!: Table_User
   Users$ = this.tableServiceService.getAll().pipe(
     map((resp: any) => {
       return resp.users;
     })
   );
 
-  @ViewChild(MatSort) sort!: MatSort;
+  Colunms = new FormGroup({
+    id: new FormControl(true),
+    name: new FormControl(true),
+    email: new FormControl(true),
+    age: new FormControl(true),
+  })
 
   TableForm = new FormGroup({
     TableFromArray: new FormArray([]),
@@ -116,6 +128,7 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
     return this.TableForm.get('TableFromArray') as FormArray;
   }
   filter = new FormControl('')
+
   constructor(
     public dialog: MatDialog,
     private tableServiceService: TableServiceService
@@ -358,5 +371,26 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
     return this.getFormControl(id, key).hasError('email')
       ? 'Email Invalido'
       : '';
+  }
+
+  selectColunms(){
+    this.dialog.open(ColunasComponent, {
+      width: '250px',
+      data: {
+        Form: this.Colunms
+      }
+    }).afterClosed().subscribe(() => {
+      const Form = this.Colunms.value
+      this.filteredColumnsSchema = this.columnsSchema
+      this.filteredDisplayedColumns = this.displayedColumns
+
+      Object.keys(this.Colunms.value).forEach(key => {
+        if(!Form[key as keyof typeof Form]){
+          this.filteredColumnsSchema = this.filteredColumnsSchema.filter(item => item.key != key)
+          this.filteredDisplayedColumns = this.filteredDisplayedColumns.filter(item => item != key)
+        }
+      })  
+
+    })
   }
 }

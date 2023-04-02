@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
 import { SendDataService } from './core/services/sendData.service';
-import { ACCORDIONS } from './helper/accordions';
+import { ACCORDIONS } from './helpers/accordions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

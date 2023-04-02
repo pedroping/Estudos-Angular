@@ -1,0 +1,4 @@
+<div class="container" [formGroup]="data.Form">
+  <h4>Colunas:</h4>
+  <p *ngFor="let item of checkboxs"><mat-checkbox [formControlName]="item.formName">{{item.label}}</mat-checkbox></p>
+</div>
