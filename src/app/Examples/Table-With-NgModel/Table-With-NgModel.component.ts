@@ -7,7 +7,7 @@ import { User } from 'src/app/core/models';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
-import { ColunasComponent } from '../components/colunas/colunas.component';
+import { ColunasComponent } from '../../core/componenets/colunas/colunas.component';
 
 export interface COLUMNS_SCHEMA {
   key: string;

@@ -43,7 +43,7 @@ import { ClosedSidenavComponent } from './core/componenets/closed-sidenav/closed
 import { AccordionComponent } from './core/componenets/accordion/accordion.component';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { MatRadioModule } from '@angular/material/radio';
-import { ColunasComponent } from './Examples/components/colunas/colunas.component';
+import { ColunasComponent } from './core/componenets/colunas/colunas.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
