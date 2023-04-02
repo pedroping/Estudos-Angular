@@ -116,7 +116,7 @@
         </ng-template>
       </td>
     </ng-container>
-    <tr mat-header-row *matHeaderRowDef="filteredDisplayedColumns"></tr>
+    <tr mat-header-row *matHeaderRowDef="filteredDisplayedColumns" (click)="ngOnChanges()"></tr>
     <tr mat-row *matRowDef="let row; columns: filteredDisplayedColumns" [cdkContextMenuTriggerFor]="outer" (contextmenu)="selectedRow = row"></tr>
     <tr class="mat-row" *matNoDataRow>
       <div>

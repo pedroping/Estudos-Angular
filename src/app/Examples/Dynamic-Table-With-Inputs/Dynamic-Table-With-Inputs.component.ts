@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, OnChanges } from '@angular/core';
 import { AbstractFormGroupDirective, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,11 +21,11 @@ export interface FormValue {
   templateUrl: './Dynamic-Table-With-Inputs.component.html',
   styleUrls: ['./Dynamic-Table-With-Inputs.component.scss']
 })
-export class DynamicTableWithInputsComponent implements OnInit, AfterViewInit {
+export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
 
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) sort?: MatSort;
   displayedColumns: string[] = ["checkBox", "id", "nome", "idade", "email", "editField", "excluir"];
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource([]);
   
   checkAll = new FormControl(false)
 
@@ -40,6 +40,10 @@ export class DynamicTableWithInputsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.getAllUser()    
+  }
+
+  ngOnChanges(){
+    this.dataSource.sort = this.sort!; 
   }
 
   getAllUser() {
@@ -58,11 +62,8 @@ export class DynamicTableWithInputsComponent implements OnInit, AfterViewInit {
         this.FormArray.push(FormGrupo)
       })
       this.dataSource.data = this.FormArray.value
+      this.ngOnChanges()
     })  
-  }
-
-  ngAfterViewInit(){
-    this.dataSource.sort = this.sort;
   }
   
   getOcuupation(sexo: string){

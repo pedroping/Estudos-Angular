@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs';
@@ -78,6 +77,7 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
     label: 'Idade',
     inputLabel: 'Insira sua idade',
     cell: (element: Table_User) => `${element.age}`,
+    hasSort: true,
     hasControl: true,
   },
   {
@@ -97,7 +97,7 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
   templateUrl: './Table-With-NgModel.component.html',
   styleUrls: ['./Table-With-NgModel.component.scss'],
 })
-export class TableWithNgModelComponent implements OnInit, AfterViewInit {
+export class TableWithNgModelComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort!: MatSort;
   
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
@@ -142,12 +142,12 @@ export class TableWithNgModelComponent implements OnInit, AfterViewInit {
     })
   }
 
-  isSomeOnEdit() {
-    return this.dataSource.data.some((User) => User.isEdit);
+  ngOnChanges(){
+    this.dataSource.sort = this.sort!; 
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+  isSomeOnEdit() {
+    return this.dataSource.data.some((User) => User.isEdit);
   }
 
   setForm(User_Row: Table_User) {

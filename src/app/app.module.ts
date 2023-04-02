@@ -44,6 +44,7 @@ import { AccordionComponent } from './core/componenets/accordion/accordion.compo
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { ColunasComponent } from './Examples/components/colunas/colunas.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +62,7 @@ import { ColunasComponent } from './Examples/components/colunas/colunas.componen
     LoaderComponent,
     ClosedSidenavComponent,
     AccordionComponent,
-    ColunasComponent
+    ColunasComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,7 +88,8 @@ import { ColunasComponent } from './Examples/components/colunas/colunas.componen
     MatTooltipModule,
     CdkAccordionModule,
     CdkMenuModule,
-    MatRadioModule
+    MatRadioModule,
+    MatPaginatorModule,
   ],
   providers: [
     AuthGuardService,
