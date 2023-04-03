@@ -35,6 +35,7 @@
             <mat-form-field appearance="outline" class="form-field" floatLabel="always">
               <mat-label>Idade</mat-label>
               <input matInput placeholder="Sua idade.." type="number" [formControl]="getFormControl(element.id, 'idade')">
+              <mat-error FormError [formcontrol]="getFormControl(element.id, 'idade')"></mat-error>
             </mat-form-field>
           </div>
           <div *ngIf="!getControl(element).get('onEdit')!.value">

@@ -45,6 +45,7 @@ import { CdkMenuModule } from '@angular/cdk/menu';
 import { MatRadioModule } from '@angular/material/radio';
 import { ColunasComponent } from './core/componenets/colunas/colunas.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormErrorDirective } from './core/directives/FormError.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +64,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ClosedSidenavComponent,
     AccordionComponent,
     ColunasComponent,
+    FormErrorDirective
   ],
   imports: [
     BrowserModule,
