@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormControl, NgControl, Validators } from '@angular/forms';
 
 export const ERRORS: {[key: string]: any} = {
@@ -41,7 +41,7 @@ export const ERRORS: {[key: string]: any} = {
 export class FormErrorDirective implements OnInit {
   @Input() formcontrol?: FormControl;
   @Input() formControlName?: string;
-
+  @HostBinding('innerHTML') innerHTML?: string;
 
   form = new FormControl('', [
     Validators.required,
@@ -68,12 +68,15 @@ export class FormErrorDirective implements OnInit {
   }
 
   validatForm(Control: AbstractControl | FormControl){
+    this.setInnerHTML('')
     Object.keys(ERRORS).forEach(key => {
       if(Control.hasError(key)){
-        console.log(" ERRORS[key].messageFn()",  ERRORS[key].messageFn()  );
-        //this.el.nativeElement.innerHTML = "teste"    
-        this.renderer.setProperty(this.el, 'innerHTML', "Teste"); 
+        this.setInnerHTML(ERRORS[key].messageFn())  
       }
     })
   } 
+
+  private setInnerHTML(html: string): void {
+    this.innerHTML = html;
+  }
 }
