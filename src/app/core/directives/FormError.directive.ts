@@ -71,7 +71,7 @@ export class FormErrorDirective implements OnInit {
     this.setInnerHTML('')
     Object.keys(ERRORS).forEach(key => {
       if(Control.hasError(key)){
-        this.setInnerHTML(ERRORS[key].messageFn())  
+        this.setInnerHTML(`<small>${ERRORS[key].messageFn()}</small>`)  
       }
     })
   } 

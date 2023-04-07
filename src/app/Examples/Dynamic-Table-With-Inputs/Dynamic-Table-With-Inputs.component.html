@@ -18,7 +18,7 @@
             <mat-form-field appearance="outline" class="form-field" floatLabel="always">
               <mat-label>Nome</mat-label>
               <input matInput type="text" placeholder="Digite seu nome:" [formControl]="getFormControl(element.id, 'nome')">
-              <mat-error><small FormError [formcontrol]="getFormControl(element.id, 'nome')"></small></mat-error>
+              <mat-error FormError [formcontrol]="getFormControl(element.id, 'nome')"></mat-error>
             </mat-form-field>
           </div>
           <div *ngIf="!getFormControl(element.id, 'onEdit')!.value">
@@ -37,7 +37,7 @@
             <mat-form-field appearance="outline" class="form-field" floatLabel="always">
               <mat-label>Idade</mat-label>
               <input matInput placeholder="Sua idade.." type="number" [formControl]="getFormControl(element.id, 'idade')">
-              <mat-error><small FormError [formcontrol]="getFormControl(element.id, 'idade')"></small></mat-error>
+              <mat-error FormError [formcontrol]="getFormControl(element.id, 'idade')"></mat-error>
             </mat-form-field>
           </div>
           <div *ngIf="!getControl(element).get('onEdit')!.value">
@@ -53,7 +53,7 @@
             <mat-form-field appearance="outline" class="form-field" floatLabel="always">
               <mat-label>Email</mat-label>
               <input matInput placeholder="Sua Email.." type="email" [formControl]="getFormControl(element.id, 'email')">
-              <mat-error><small FormError [formcontrol]="getFormControl(element.id, 'email')"></small></mat-error>
+              <mat-error  FormError [formcontrol]="getFormControl(element.id, 'email')"></mat-error>
             </mat-form-field>
           </div>
           <div *ngIf="!getControl(element).get('onEdit')!.value">
