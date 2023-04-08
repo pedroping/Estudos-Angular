@@ -1,6 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { ControlContainer, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-colunas',
@@ -27,13 +27,15 @@ export class ColunasComponent implements OnInit {
     },
   ];
 
+  Form!: FormGroup
+
   constructor(
-    public dialogRef: DialogRef<ColunasComponent>,
-    @Inject(DIALOG_DATA) public data: { Form: FormGroup }
+    private ControlContainer : ControlContainer
   ) {}
 
   ngOnInit() {
-    this.data.Form.valueChanges.subscribe((val) => {
+    this.Form = this.ControlContainer.control as FormGroup
+    this.Form.valueChanges.subscribe((val) => {
       let Count: number = 0;
 
       Object.keys(val).forEach((key) => {
@@ -42,10 +44,10 @@ export class ColunasComponent implements OnInit {
         }
       });
 
-      Object.keys(this.data.Form.controls).forEach((key) => {
-        this.data.Form.get(key)?.enable({ emitEvent: false });
-        if (this.data.Form.get(key)?.value && Count == 1) {
-          this.data.Form.get(key)?.disable({ emitEvent: false });
+      Object.keys(this.Form.controls).forEach((key) => {
+        this.Form.get(key)?.enable({ emitEvent: false });
+        if (this.Form.get(key)?.value && Count == 1) {
+          this.Form.get(key)?.disable({ emitEvent: false });
         }
       });
     });

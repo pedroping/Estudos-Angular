@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs';
@@ -8,6 +8,8 @@ import { TableServiceService } from 'src/app/core/services/tableService.service'
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { ColunasComponent } from '../../core/componenets/colunas/colunas.component';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 
 export interface COLUMNS_SCHEMA {
   key: string;
@@ -97,9 +99,14 @@ const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
   templateUrl: './Table-With-NgModel.component.html',
   styleUrls: ['./Table-With-NgModel.component.scss'],
 })
-export class TableWithNgModelComponent implements OnInit, OnChanges {
+export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewInit {
+  
   @ViewChild(MatSort) sort!: MatSort;
   
+  @ViewChild('ColunmsTemplate') dialogTemplate!: TemplateRef<any>;
+  private overlayRef!: OverlayRef;
+  private portal!: TemplatePortal;
+
   displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
   columnsSchema: COLUMNS_SCHEMA[] = COLUMNS_SCHEMA;
   filteredDisplayedColumns = this.displayedColumns
@@ -131,7 +138,9 @@ export class TableWithNgModelComponent implements OnInit, OnChanges {
 
   constructor(
     public dialog: MatDialog,
-    private tableServiceService: TableServiceService
+    private tableServiceService: TableServiceService,
+    private overlay: Overlay, 
+    private viewContainerRef: ViewContainerRef
   ) {}
 
   ngOnInit() {
@@ -140,8 +149,30 @@ export class TableWithNgModelComponent implements OnInit, OnChanges {
     this.filter.valueChanges.subscribe(x => {
       this.dataSource.filter = x ? x.trim().toLocaleLowerCase() : '' 
     })
+
+    this.Colunms.valueChanges.subscribe(() => {
+      const Form = this.Colunms.value
+      this.filteredColumnsSchema = this.columnsSchema
+      this.filteredDisplayedColumns = this.displayedColumns
+
+      Object.keys(this.Colunms.value).forEach(key => {
+        if(!Form[key as keyof typeof Form]){
+          this.filteredColumnsSchema = this.filteredColumnsSchema.filter(item => item.key != key)
+          this.filteredDisplayedColumns = this.filteredDisplayedColumns.filter(item => item != key)
+        }
+      })  
+    })
   }
 
+  ngAfterViewInit() {
+    this.portal = new TemplatePortal(this.dialogTemplate, this.viewContainerRef);
+    this.overlayRef = this.overlay.create({
+      positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
+      hasBackdrop: true,
+    });
+    this.overlayRef.backdropClick().subscribe(() => this.overlayRef.detach());
+  }
+  
   ngOnChanges(){
     this.dataSource.sort = this.sort!; 
   }
@@ -374,23 +405,6 @@ export class TableWithNgModelComponent implements OnInit, OnChanges {
   }
 
   selectColunms(){
-    this.dialog.open(ColunasComponent, {
-      width: '250px',
-      data: {
-        Form: this.Colunms
-      }
-    }).afterClosed().subscribe(() => {
-      const Form = this.Colunms.value
-      this.filteredColumnsSchema = this.columnsSchema
-      this.filteredDisplayedColumns = this.displayedColumns
-
-      Object.keys(this.Colunms.value).forEach(key => {
-        if(!Form[key as keyof typeof Form]){
-          this.filteredColumnsSchema = this.filteredColumnsSchema.filter(item => item.key != key)
-          this.filteredDisplayedColumns = this.filteredDisplayedColumns.filter(item => item != key)
-        }
-      })  
-
-    })
+    this.overlayRef.attach(this.portal);
   }
 }

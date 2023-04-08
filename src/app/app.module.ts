@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { DataBindingComponent } from './Examples/components/Data-binding/Data-binding.component';
 import { StyleClassBidingComponent } from './Examples/components/StyleClassBiding/StyleClassBiding.component';
@@ -92,6 +93,7 @@ import { FormErrorDirective } from './core/directives/FormError.directive';
     CdkMenuModule,
     MatRadioModule,
     MatPaginatorModule,
+    DragDropModule
   ],
   providers: [
     AuthGuardService,
