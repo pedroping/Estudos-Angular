@@ -150,7 +150,7 @@
       Escolher Colunas
     </button>
     <button class="example-menu-item" cdkMenuItem (click)="selectTemplate(ColunmsTemplate2, 1)">
-      Escolher Colunas2
+      Template de Teste
     </button>
     <button class="example-menu-item" cdkMenuItem [disabled]="!selectedRow" (click)="setForm(selectedRow)">Editar</button>
   </div>
@@ -160,11 +160,8 @@
 <ng-template #ColunmsTemplate>
   <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
     <Form [formGroup]="Colunms">
-      <app-colunas></app-colunas>
+      <app-colunas (Close)="closeElement(0)"></app-colunas>
     </Form>
-    <button mat-mini-fab (click)="closeElement(0)">
-      <mat-icon>close</mat-icon>
-    </button>
   </div>
 </ng-template>
 

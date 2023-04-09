@@ -25,7 +25,7 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
 
   Portals = 2
   
-  displayedColumns: string[] = COLUMNS.map((col) => col.key);
+  displayedColumns: string[] = COLUMNS.filter((col) => col.key != 'isEdit').map((col) => col.key);
   columnsSchema: COLUMNS_SCHEMA[] = COLUMNS;
   filteredDisplayedColumns = this.displayedColumns
   filteredColumnsSchema = this.columnsSchema
@@ -70,12 +70,10 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
 
     this.Colunms.valueChanges.subscribe(() => {
       const Form = this.Colunms.value
-      this.filteredColumnsSchema = this.columnsSchema
       this.filteredDisplayedColumns = this.displayedColumns
 
       Object.keys(this.Colunms.value).forEach(key => {
         if(!Form[key as keyof typeof Form]){
-          this.filteredColumnsSchema = this.filteredColumnsSchema.filter(item => item.key != key)
           this.filteredDisplayedColumns = this.filteredDisplayedColumns.filter(item => item != key)
         }
       })  
@@ -109,6 +107,7 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   setForm(User_Row: Table_User) {
+    this.filteredDisplayedColumns = COLUMNS.map((col) => col.key);
     User_Row.isEdit = true;
   }
 
@@ -137,7 +136,7 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
 
   handleDone(User_Row: Table_User) {
     if (User_Row.isNew) {
-      const Form = this.getFormGroup(-1).value;
+      const Form = this.getFormGroup(0).value;
       const New_User: User = {
         id: 0,
         firstName: Form.name!,
@@ -152,7 +151,7 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
         User_Row.id = resp.id,
         User_Row.email = resp.email,
         User_Row.age = resp.age;
-        this.getFormGroup(-1).patchValue({
+        this.getFormGroup(0).patchValue({
           name: resp.firstName,
           id: resp.id,
           email: resp.email,
@@ -214,9 +213,10 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   addRow() {
+    this.filteredDisplayedColumns = COLUMNS.map((col) => col.key);
     this.filter.setValue('')
     const New_User = {
-      id: -1,
+      id: 0,
       name: '',
       email: '',
       age: null as any,
@@ -226,7 +226,7 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
     };
 
     const newForm = new FormGroup({
-      id: new FormControl(-1),
+      id: new FormControl(0),
       name: new FormControl('', Validators.required),
       age: new FormControl(null as any, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),

@@ -1,5 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { ControlContainer, FormGroup } from '@angular/forms';
 
 @Component({
@@ -29,10 +29,12 @@ export class ColunasComponent implements OnInit {
 
   Form!: FormGroup
 
+  @Output() Close = new EventEmitter<boolean>()
+
   constructor(
     private ControlContainer : ControlContainer
   ) {}
-
+  
   ngOnInit() {
     this.Form = this.ControlContainer.control as FormGroup
     this.Form.valueChanges.subscribe((val) => {
