@@ -146,8 +146,11 @@
 
 <ng-template #menu>
   <div class="example-menu" cdkMenu>
-    <button class="example-menu-item" cdkMenuItem (click)="selectColunms()">
+    <button class="example-menu-item" cdkMenuItem (click)="selectTemplate(ColunmsTemplate, 0)">
       Escolher Colunas
+    </button>
+    <button class="example-menu-item" cdkMenuItem (click)="selectTemplate(ColunmsTemplate2, 1)">
+      Escolher Colunas2
     </button>
     <button class="example-menu-item" cdkMenuItem [disabled]="!selectedRow" (click)="setForm(selectedRow)">Editar</button>
   </div>
@@ -159,6 +162,17 @@
     <Form [formGroup]="Colunms">
       <app-colunas></app-colunas>
     </Form>
+    <button mat-mini-fab (click)="closeElement(0)">
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
 </ng-template>
 
+<ng-template #ColunmsTemplate2>
+  <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+    ColunmsTemplate2
+    <button mat-mini-fab (click)="closeElement(1)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</ng-template>

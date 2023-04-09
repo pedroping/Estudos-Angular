@@ -19,8 +19,11 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
   @ViewChild(MatSort) sort!: MatSort;
   
   @ViewChild('ColunmsTemplate') dialogTemplate!: TemplateRef<any>;
-  private overlayRef!: OverlayRef;
+
+  private overlayRef: OverlayRef[] = [];
   private portal!: TemplatePortal;
+
+  Portals = 2
   
   displayedColumns: string[] = COLUMNS.map((col) => col.key);
   columnsSchema: COLUMNS_SCHEMA[] = COLUMNS;
@@ -80,12 +83,21 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   ngAfterViewInit() {
-    this.portal = new TemplatePortal(this.dialogTemplate, this.viewContainerRef);
-    this.overlayRef = this.overlay.create({
-      positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
-      hasBackdrop: true,
-    });
-    this.overlayRef.backdropClick().subscribe(() => this.overlayRef.detach());
+    for(let i = 0; i < this.Portals; i++){
+      this.overlayRef.push(this.overlay.create({
+        positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
+        hasBackdrop: false,
+      }));
+    }
+  }
+
+  selectTemplate(Template: TemplateRef<any>, id: number){
+    this.portal = new TemplatePortal(Template, this.viewContainerRef);
+    this.overlayRef[id].attach(this.portal)
+  }
+
+  closeElement(id: number){
+    this.overlayRef[id].detach()
   }
   
   ngOnChanges(){
@@ -319,7 +331,4 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
       : '';
   }
 
-  selectColunms(){
-    this.overlayRef.attach(this.portal);
-  }
 }
