@@ -3,97 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
-import { User } from 'src/app/core/models';
+import { COLUMNS_SCHEMA, Table_User, User, UserForm, COLUMNS } from 'src/app/core/models';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
-import { ColunasComponent } from '../../core/componenets/colunas/colunas.component';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-
-export interface COLUMNS_SCHEMA {
-  key: string;
-  type: string;
-  label: string;
-  inputLabel?: string;
-  cantEdit?: boolean;
-  cell?: any;
-  hasSort?: boolean;
-  hasControl?: boolean;
-}
-
-export interface Table_User {
-  id: number;
-  name: string;
-  email: string;
-  age: number;
-  isEdit: boolean;
-  isSelected: boolean;
-  isNew: boolean;
-}
-
-export interface UserForm {
-  id: number;
-  name: string;
-  age: number;
-  email: string;
-  isSelected: boolean;
-}
-
-const COLUMNS_SCHEMA: COLUMNS_SCHEMA[] = [
-  {
-    key: 'isSelected',
-    type: 'isSelected',
-    label: '',
-    hasControl: true,
-  },
-  {
-    key: 'id',
-    type: 'id',
-    label: 'Id',
-    cantEdit: true,
-    cell: (element: Table_User) => `${element.id}`,
-    hasSort: true,
-    hasControl: true,
-  },
-  {
-    key: 'name',
-    type: 'text',
-    label: 'Nome Completo',
-    inputLabel: 'Insira seu nome',
-    cell: (element: Table_User) => `${element.name}`,
-    hasSort: true,
-    hasControl: true,
-  },
-  {
-    key: 'email',
-    type: 'email',
-    label: 'Email',
-    inputLabel: 'Insira seu Email',
-    cell: (element: Table_User) => `${element.email}`,
-    hasControl: true,
-  },
-  {
-    key: 'age',
-    type: 'number',
-    label: 'Idade',
-    inputLabel: 'Insira sua idade',
-    cell: (element: Table_User) => `${element.age}`,
-    hasSort: true,
-    hasControl: true,
-  },
-  {
-    key: 'isEdit',
-    type: 'isEdit',
-    label: 'Editar',
-  },
-  {
-    key: 'delete',
-    type: 'delete',
-    label: 'Excluir',
-  },
-];
-
 @Component({
   selector: 'app-Table-With-NgModel',
   templateUrl: './Table-With-NgModel.component.html',
@@ -106,9 +21,9 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
   @ViewChild('ColunmsTemplate') dialogTemplate!: TemplateRef<any>;
   private overlayRef!: OverlayRef;
   private portal!: TemplatePortal;
-
-  displayedColumns: string[] = COLUMNS_SCHEMA.map((col) => col.key);
-  columnsSchema: COLUMNS_SCHEMA[] = COLUMNS_SCHEMA;
+  
+  displayedColumns: string[] = COLUMNS.map((col) => col.key);
+  columnsSchema: COLUMNS_SCHEMA[] = COLUMNS;
   filteredDisplayedColumns = this.displayedColumns
   filteredColumnsSchema = this.columnsSchema
 

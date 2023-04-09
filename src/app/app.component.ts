@@ -13,7 +13,7 @@ export class AppComponent implements OnInit{
 
   @ViewChild('sidenav') sidenav!: MatSidenav
   
-  title = 'Estudo_Loiane';
+  title = 'Estudo_Angular';
   Accordions = ACCORDIONS
 
   constructor(

@@ -15,7 +15,7 @@ import {
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
-import { User } from 'src/app/core/models';
+import { FormValue, User } from 'src/app/core/models';
 import { ChangeDetectorRef } from '@angular/core';
 import {
   animate,
@@ -24,16 +24,6 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-
-export interface FormValue {
-  checked: boolean;
-  id: number;
-  nome: string;
-  idade: number;
-  email: string;
-  isNew: boolean;
-  onEdit: boolean;
-}
 
 @Component({
   selector: 'app-Dynamic-Table-With-Inputs',
