@@ -135,6 +135,7 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   handleDone(User_Row: Table_User) {
+    this.filteredDisplayedColumns = COLUMNS.filter((col) => col.key != 'isEdit').map((col) => col.key);
     if (User_Row.isNew) {
       const Form = this.getFormGroup(0).value;
       const New_User: User = {
