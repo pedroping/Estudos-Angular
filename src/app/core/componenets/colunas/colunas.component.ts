@@ -1,6 +1,7 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { ControlContainer, FormGroup } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-colunas',
@@ -27,16 +28,15 @@ export class ColunasComponent implements OnInit {
     },
   ];
 
-  Form!: FormGroup
+  Form!: FormGroup;
 
-  @Output() Close = new EventEmitter<boolean>()
+  @Output() Close = new EventEmitter<boolean>();
+  @Output() ChangeOrder = new EventEmitter<string[]>();
 
-  constructor(
-    private ControlContainer : ControlContainer
-  ) {}
-  
+  constructor(private ControlContainer: ControlContainer) {}
+
   ngOnInit() {
-    this.Form = this.ControlContainer.control as FormGroup
+    this.Form = this.ControlContainer.control as FormGroup;
     this.Form.valueChanges.subscribe((val) => {
       let Count: number = 0;
 
@@ -53,5 +53,18 @@ export class ColunasComponent implements OnInit {
         }
       });
     });
+  }
+
+  drop(
+    event: CdkDragDrop<
+      {
+        formName: string;
+        label: string;
+      }[]
+    >
+  ) {
+    moveItemInArray(this.checkboxs, event.previousIndex, event.currentIndex);
+  
+    this.ChangeOrder.emit(this.checkboxs.filter(item => this.Form.get(item.formName)?.value).map(item => item.formName))
   }
 }

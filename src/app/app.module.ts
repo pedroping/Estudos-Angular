@@ -65,7 +65,7 @@ import { FormErrorDirective } from './core/directives/FormError.directive';
     ClosedSidenavComponent,
     AccordionComponent,
     ColunasComponent,
-    FormErrorDirective
+    FormErrorDirective,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +93,7 @@ import { FormErrorDirective } from './core/directives/FormError.directive';
     CdkMenuModule,
     MatRadioModule,
     MatPaginatorModule,
-    DragDropModule
+    DragDropModule,
   ],
   providers: [
     AuthGuardService,

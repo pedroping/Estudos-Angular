@@ -1,9 +1,23 @@
-import { Component, OnChanges, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnInit,
+  ViewChild,
+  TemplateRef,
+  ViewContainerRef,
+  AfterViewInit,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { map } from 'rxjs';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
-import { COLUMNS_SCHEMA, Table_User, User, UserForm, COLUMNS } from 'src/app/core/models';
+import {
+  COLUMNS_SCHEMA,
+  Table_User,
+  User,
+  UserForm,
+  COLUMNS,
+} from 'src/app/core/models';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
@@ -14,25 +28,28 @@ import { TemplatePortal } from '@angular/cdk/portal';
   templateUrl: './Table-With-NgModel.component.html',
   styleUrls: ['./Table-With-NgModel.component.scss'],
 })
-export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewInit {
-  
+export class TableWithNgModelComponent
+  implements OnInit, OnChanges, AfterViewInit
+{
   @ViewChild(MatSort) sort!: MatSort;
-  
+
   @ViewChild('ColunmsTemplate') dialogTemplate!: TemplateRef<any>;
 
   private overlayRef: OverlayRef[] = [];
   private portal!: TemplatePortal;
 
-  Portals = 2
-  
-  displayedColumns: string[] = COLUMNS.filter((col) => col.key != 'isEdit').map((col) => col.key);
+  Portals = 2;
+
+  displayedColumns: string[] = COLUMNS.filter((col) => col.key != 'isEdit').map(
+    (col) => col.key
+  );
   columnsSchema: COLUMNS_SCHEMA[] = COLUMNS;
-  filteredDisplayedColumns = this.displayedColumns
-  filteredColumnsSchema = this.columnsSchema
+  filteredDisplayedColumns = this.displayedColumns;
+  filteredColumnsSchema = this.columnsSchema;
 
   dataSource = new MatTableDataSource<Table_User>([]);
   allSelected = new FormControl(false);
-  selectedRow!: Table_User
+  selectedRow!: Table_User;
   Users$ = this.tableServiceService.getAll().pipe(
     map((resp: any) => {
       return resp.users;
@@ -44,7 +61,7 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
     name: new FormControl(true),
     email: new FormControl(true),
     age: new FormControl(true),
-  })
+  });
 
   TableForm = new FormGroup({
     TableFromArray: new FormArray([]),
@@ -52,54 +69,73 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
   get TableArray() {
     return this.TableForm.get('TableFromArray') as FormArray;
   }
-  filter = new FormControl('')
+  filter = new FormControl('');
 
   constructor(
     public dialog: MatDialog,
     private tableServiceService: TableServiceService,
-    private overlay: Overlay, 
+    private overlay: Overlay,
     private viewContainerRef: ViewContainerRef
   ) {}
 
   ngOnInit() {
     this.createTableData();
-    this.allSelected.valueChanges.subscribe((val) => {this.setAll(val!)})
-    this.filter.valueChanges.subscribe(x => {
-      this.dataSource.filter = x ? x.trim().toLocaleLowerCase() : '' 
-    })
+    this.allSelected.valueChanges.subscribe((val) => {
+      this.setAll(val!);
+    });
+    this.filter.valueChanges.subscribe((x) => {
+      this.dataSource.filter = x ? x.trim().toLocaleLowerCase() : '';
+    });
 
     this.Colunms.valueChanges.subscribe(() => {
-      const Form = this.Colunms.value
-      this.filteredDisplayedColumns = this.displayedColumns
+      const Form = this.Colunms.value;
+      this.filteredDisplayedColumns = this.displayedColumns;
 
-      Object.keys(this.Colunms.value).forEach(key => {
-        if(!Form[key as keyof typeof Form]){
-          this.filteredDisplayedColumns = this.filteredDisplayedColumns.filter(item => item != key)
+      Object.keys(this.Colunms.value).forEach((key) => {
+        if (!Form[key as keyof typeof Form]) {
+          this.filteredDisplayedColumns = this.filteredDisplayedColumns.filter(
+            (item) => item != key
+          );
         }
-      })  
-    })
+      });
+    });
   }
 
   ngAfterViewInit() {
-    for(let i = 0; i < this.Portals; i++){
-      this.overlayRef.push(this.overlay.create({
-        positionStrategy: this.overlay.position().global().centerHorizontally().centerVertically(),
-        hasBackdrop: false,
-      }));
+    for (let i = 0; i < this.Portals; i++) {
+      this.overlayRef.push(
+        this.overlay.create({
+          positionStrategy: this.overlay
+            .position()
+            .global()
+            .centerHorizontally()
+            .centerVertically(),
+          hasBackdrop: false,
+        })
+      );
     }
   }
 
-  selectTemplate(Template: TemplateRef<any>, id: number){
+  selectTemplate(Template: TemplateRef<any>, id: number) {
     this.portal = new TemplatePortal(Template, this.viewContainerRef);
-    this.overlayRef[id].attach(this.portal)
+    this.overlayRef[id].attach(this.portal);
   }
 
-  closeElement(id: number){
-    this.overlayRef[id].detach()
+  handleOrder(order: string[]) {
+    this.filteredDisplayedColumns = [
+      'isSelected',
+      ...order,
+      'isEdit',
+      'delete',
+    ];
   }
-  
-  ngOnChanges(){
-    this.dataSource.sort = this.sort!; 
+
+  closeElement(id: number) {
+    this.overlayRef[id].detach();
+  }
+
+  ngOnChanges() {
+    this.dataSource.sort = this.sort!;
   }
 
   isSomeOnEdit() {
@@ -135,7 +171,9 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   handleDone(User_Row: Table_User) {
-    this.filteredDisplayedColumns = COLUMNS.filter((col) => col.key != 'isEdit').map((col) => col.key);
+    this.filteredDisplayedColumns = COLUMNS.filter(
+      (col) => col.key != 'isEdit'
+    ).map((col) => col.key);
     if (User_Row.isNew) {
       const Form = this.getFormGroup(0).value;
       const New_User: User = {
@@ -148,10 +186,10 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
         User_Row.id = resp.id;
         User_Row.isEdit = false;
         User_Row.isNew = false;
-        User_Row.name = resp.firstName,
-        User_Row.id = resp.id,
-        User_Row.email = resp.email,
-        User_Row.age = resp.age;
+        (User_Row.name = resp.firstName),
+          (User_Row.id = resp.id),
+          (User_Row.email = resp.email),
+          (User_Row.age = resp.age);
         this.getFormGroup(0).patchValue({
           name: resp.firstName,
           id: resp.id,
@@ -173,10 +211,10 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
 
     this.tableServiceService.editUser(put_User).subscribe((resp) => {
       User_Row.isEdit = false;
-      User_Row.name = resp.firstName,
-      User_Row.id = resp.id,
-      User_Row.email = resp.email,
-      User_Row.age = resp.age;
+      (User_Row.name = resp.firstName),
+        (User_Row.id = resp.id),
+        (User_Row.email = resp.email),
+        (User_Row.age = resp.age);
     });
   }
 
@@ -215,7 +253,7 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
 
   addRow() {
     this.filteredDisplayedColumns = COLUMNS.map((col) => col.key);
-    this.filter.setValue('')
+    this.filter.setValue('');
     const New_User = {
       id: 0,
       name: '',
@@ -274,11 +312,14 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   checkAll() {
-    this.allSelected.setValue(this.TableArray.value.every((User:UserForm) => User.isSelected), {emitEvent: false});
+    this.allSelected.setValue(
+      this.TableArray.value.every((User: UserForm) => User.isSelected),
+      { emitEvent: false }
+    );
   }
 
   anyIsSelected() {
-    return !this.TableArray.value.some((User:UserForm) => User.isSelected)
+    return !this.TableArray.value.some((User: UserForm) => User.isSelected);
   }
 
   getDate(date: string) {
@@ -311,7 +352,7 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
           next: (value) => {
             this.dataSource.data = this.dataSource.data.filter(
               (User) => !this.getFormControl(User.id, 'isSelected').value
-              );
+            );
             ids.forEach((id) => this.TableArray.removeAt(this.findIndex(id)));
             this.allSelected.setValue(false);
           },
@@ -331,5 +372,4 @@ export class TableWithNgModelComponent implements OnInit, OnChanges, AfterViewIn
       ? 'Email Invalido'
       : '';
   }
-
 }

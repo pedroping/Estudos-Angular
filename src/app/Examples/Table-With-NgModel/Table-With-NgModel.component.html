@@ -160,7 +160,7 @@
 <ng-template #ColunmsTemplate>
   <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
     <Form [formGroup]="Colunms">
-      <app-colunas (Close)="closeElement(0)"></app-colunas>
+      <app-colunas (Close)="closeElement(0)" (ChangeOrder)="handleOrder($event)"></app-colunas>
     </Form>
   </div>
 </ng-template>
