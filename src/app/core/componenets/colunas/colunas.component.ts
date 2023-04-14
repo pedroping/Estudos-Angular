@@ -38,6 +38,11 @@ export class ColunasComponent implements OnInit {
   ngOnInit() {
     this.Form = this.ControlContainer.control as FormGroup;
     this.Form.valueChanges.subscribe((val) => {
+      this.ChangeOrder.emit(
+        this.checkboxs
+          .filter((item) => this.Form.get(item.formName)?.value)
+          .map((item) => item.formName)
+      );
       let Count: number = 0;
 
       Object.keys(val).forEach((key) => {
@@ -64,7 +69,11 @@ export class ColunasComponent implements OnInit {
     >
   ) {
     moveItemInArray(this.checkboxs, event.previousIndex, event.currentIndex);
-  
-    this.ChangeOrder.emit(this.checkboxs.filter(item => this.Form.get(item.formName)?.value).map(item => item.formName))
+
+    this.ChangeOrder.emit(
+      this.checkboxs
+        .filter((item) => this.Form.get(item.formName)?.value)
+        .map((item) => item.formName)
+    );
   }
 }
