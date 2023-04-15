@@ -122,10 +122,18 @@ export class TableWithNgModelComponent
   }
 
   handleOrder(order: string[]) {
+    if(this.isSomeOnEdit()){
+      this.filteredDisplayedColumns = [
+        'isSelected',
+        ...order,
+        'isEdit',
+        'delete',
+      ];
+      return   
+    }
     this.filteredDisplayedColumns = [
       'isSelected',
       ...order,
-      'isEdit',
       'delete',
     ];
   }

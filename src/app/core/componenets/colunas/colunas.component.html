@@ -1,5 +1,5 @@
 <div class="container" [formGroup]="Form">
-  <div class="header" >
+  <div class="header">
     <h4>Colunas:</h4>
     <button mat-mini-fab (click)="Close.emit(true)">
       <mat-icon>close</mat-icon>
@@ -7,10 +7,13 @@
   </div>
   <div class="example-list" cdkDropList (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let item of checkboxs" cdkDrag>
-      <div  class="example-custom-placeholder" *cdkDragPlaceholder></div>
-      <mat-checkbox [formControlName]="item.formName">{{
-        item.label
-      }}</mat-checkbox>
+      <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+      <div class="item">
+        <mat-icon cdkDragHandle>drag_indicator</mat-icon>
+        <mat-checkbox [formControlName]="item.formName">{{
+          item.label
+        }}</mat-checkbox>
+      </div>
     </div>
   </div>
 </div>
