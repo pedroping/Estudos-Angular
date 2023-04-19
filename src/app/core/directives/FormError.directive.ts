@@ -74,12 +74,8 @@ export class FormErrorDirective implements OnInit {
     Control.markAsDirty()
     Object.keys(ERRORS).forEach(key => {
       if(Control.hasError(key)){
-        if(key == 'maxlength'){
-          this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors!['maxlength'].requiredLength)}</small>`)  
-          return
-        }
-        if(key == 'minlength'){
-          this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors!['minlength'].requiredLength)}</small>`)  
+        if(key == 'maxlength' || key == 'minlength'){
+          this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors![key].requiredLength)}</small>`)  
           return
         }
         this.setInnerHTML(`<small>${ERRORS[key].messageFn()}</small>`)  
