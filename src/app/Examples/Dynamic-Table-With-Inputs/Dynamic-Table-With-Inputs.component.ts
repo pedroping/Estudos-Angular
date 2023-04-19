@@ -86,7 +86,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
           checked: new FormControl(false),
           id: new FormControl(item.id),
           nome: new FormControl(item.firstName, [Validators.required, Validators.maxLength(10)]),
-          idade: new FormControl(item.age, Validators.required),
+          idade: new FormControl(item.age, [Validators.required, Validators.min(100)]),
           email: new FormControl(item.email, [
             Validators.required,
             Validators.email,
