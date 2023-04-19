@@ -24,6 +24,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-Dynamic-Table-With-Inputs',
@@ -63,11 +64,15 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec dui ut dui varius accumsan nec congue nisi. Cras vel ligula eleifend, consequat massa vitae, bibendum nulla. Vivamus feugiat sem purus, vel mollis sem consectetur ac. Fusce maximus purus ut tellus blandit, a faucibus neque suscipit. In vel rutrum tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec maximus mattis nibh. Suspendisse cursus orci sed fermentum efficitur. Nam et justo id mi dictum ullamcorper.';
   constructor(
     private readonly tableService: TableServiceService,
-    private readonly changeDetectorRef: ChangeDetectorRef
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private activeRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.getAllUser();
+    this.activeRoute.queryParams.subscribe(paramns => {
+      console.log("paramns", paramns);
+    })
   }
 
   ngOnChanges() {

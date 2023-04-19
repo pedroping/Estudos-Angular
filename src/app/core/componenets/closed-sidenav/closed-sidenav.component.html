@@ -16,7 +16,8 @@
     <button
       mat-mini-fab
       class="button"
-      routerLink="/Examples/TableWithFormControls"
+      [routerLink]="['/Examples/TableWithFormControls']"
+      [queryParams]="{teste: 'teste' }"
       matTooltip="Tabela com FormControls"
       matTooltipPosition="right"
       color="primary"
