@@ -85,7 +85,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
         const FormGrupo = new FormGroup({
           checked: new FormControl(false),
           id: new FormControl(item.id),
-          nome: new FormControl(item.firstName, Validators.required),
+          nome: new FormControl(item.firstName, [Validators.required, Validators.minLength(10)]),
           idade: new FormControl(item.age, Validators.required),
           email: new FormControl(item.email, [
             Validators.required,
@@ -157,7 +157,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     const row = new FormGroup({
       checked: new FormControl(false),
       id: new FormControl(null as any),
-      nome: new FormControl('', Validators.required),
+      nome: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       idade: new FormControl(null as any, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       onEdit: new FormControl(true),

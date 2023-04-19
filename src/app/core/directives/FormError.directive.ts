@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormControl, NgControl, Validators } from '@angular/forms';
+import { debounceTime, startWith } from 'rxjs';
 
 export const ERRORS: {[key: string]: any} = {
   required: {
@@ -7,12 +8,12 @@ export const ERRORS: {[key: string]: any} = {
       return "Esse campo é obrigatorio!"
     }
   },
-  maxLength: {
+  maxlength: {
     messageFn: (paramns?: string) => {
       return `O tamanho maximo é ${paramns}`
     }
   },
-  minLength: {
+  minlength: {
     messageFn: (paramns?: string) => {
       return `O tamanho minimo é ${paramns} `
     }
@@ -51,6 +52,7 @@ export class FormErrorDirective implements OnInit {
     Validators.max(1000),
     Validators.min(1000),
   ])
+
   constructor(
     private controlContainer: ControlContainer,
     private el: ElementRef,
@@ -63,14 +65,23 @@ export class FormErrorDirective implements OnInit {
       if(!Control) return
       Control.valueChanges.subscribe(() => this.validatForm(Control))
     }
-
-    this.formcontrol!.valueChanges.subscribe(() => this.validatForm(this.formcontrol!))
+    this.formcontrol!.valueChanges.pipe(startWith(this.formcontrol?.value)).subscribe(() => this.validatForm(this.formcontrol!))
   }
 
   validatForm(Control: AbstractControl | FormControl){
     this.setInnerHTML('')
+    Control.markAsTouched()
+    Control.markAsDirty()
     Object.keys(ERRORS).forEach(key => {
       if(Control.hasError(key)){
+        if(key == 'maxlength'){
+          this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors!['maxlength'].requiredLength)}</small>`)  
+          return
+        }
+        if(key == 'minlength'){
+          this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors!['minlength'].requiredLength)}</small>`)  
+          return
+        }
         this.setInnerHTML(`<small>${ERRORS[key].messageFn()}</small>`)  
       }
     })
