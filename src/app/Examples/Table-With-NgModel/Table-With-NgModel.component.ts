@@ -370,14 +370,4 @@ export class TableWithNgModelComponent
         });
       });
   }
-
-  getErrorMessage(key: string, id: number) {
-    if (this.getFormControl(id, key).hasError('required')) {
-      return 'Por favor insira um valor!';
-    }
-
-    return this.getFormControl(id, key).hasError('email')
-      ? 'Email Invalido'
-      : '';
-  }
 }
