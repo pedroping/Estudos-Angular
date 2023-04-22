@@ -4,126 +4,185 @@
       <button mat-button (click)="addRow()" [disabled]="isSomeOnEdit()">
         Adicionar row
       </button>
-      <button mat-button (click)="deleteSelectRow()" [disabled]="anyIsSelected()">
+      <button
+        mat-button
+        (click)="deleteSelectRow()"
+        [disabled]="anyIsSelected()"
+      >
         Deletar rows selecionadas
       </button>
     </div>
     <div class="col-sm-6 text-end">
-      <input type="text" class="form-control" placeholder="Filtrar Data...." [formControl]="filter" [readOnly]="isSomeOnEdit()">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Filtrar Data...."
+        [formControl]="filter"
+        [readOnly]="isSomeOnEdit()"
+      />
     </div>
   </div>
 </div>
 
 <div class="container" *ngIf="dataSource.data.length > 0; else noData">
-  <table mat-table [dataSource]="dataSource" style="width: 98%" matSort>
-    <ng-container [matColumnDef]="col.key" *ngFor="let col of filteredColumnsSchema">
-      <!-- Header -->
+  <form>
+    <table mat-table [dataSource]="dataSource" style="width: 98%" matSort>
+      <ng-container
+        [matColumnDef]="col.key"
+        *ngFor="let col of filteredColumnsSchema"
+      >
+        <!-- Header -->
 
-      <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!col.hasSort">
-        <div *ngIf="col.type != 'isSelected'; else CheckBoxHeader">
-          {{ col.label }}
-        </div>
-
-        <ng-template #CheckBoxHeader>
-          <mat-checkbox [formControl]="allSelected"></mat-checkbox>
-        </ng-template>
-      </th>
-
-      <!-- Body -->
-
-      <td mat-cell *matCellDef="let element; let index = index">
-        <!-- Body apenas com labels -->
-        
-        <div *ngIf="!element.isEdit; else isEdit">
-          
-          <!-- Rows com buttons e checkbox -->
-
-          <div [ngSwitch]="col.key">
-            <div *ngSwitchCase="'isSelected'">
-              <mat-checkbox [formControl]="getFormControl(element.id, 'isSelected')" (change)="checkAll()"></mat-checkbox>
-            </div>
-            <div class="btn-edit" *ngSwitchCase="'isEdit'">
-              <button mat-icon-button (click)="setForm(element)" style="cursor: pointer" color="accent"
-                [disabled]="isSomeOnEdit()">
-                <mat-icon>edit</mat-icon>
-              </button>
-            </div>
-            <div class="btn-edit" *ngSwitchCase="'delete'">
-              <button mat-icon-button (click)="deleteRow(element)" style="cursor: pointer" color="warn">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-
-            <!-- Row com as labels -->
-
-            <div *ngSwitchCase="'id'">
-              <span style="cursor: pointer">
-                {{ col.cell(element) == -1 ? "..." : col.cell(element) }}
-              </span>
-            </div>
-
-            <div *ngSwitchDefault style="min-width: 80px">
-              <span style="cursor: pointer">{{
-                col.cell(element)
-                }}</span>
-            </div>
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          [disabled]="!col.hasSort"
+        >
+          <div *ngIf="col.type != 'isSelected'; else CheckBoxHeader">
+            {{ col.label }}
           </div>
-        </div>
 
-        <!-- Body editavel -->
+          <ng-template #CheckBoxHeader>
+            <mat-checkbox [formControl]="allSelected"></mat-checkbox>
+          </ng-template>
+        </th>
 
-        <ng-template #isEdit>
-          <!-- Rows com buttons e checkbox -->
-          <div *ngIf="!col.cantEdit; else noEdit">
+        <!-- Body -->
+
+        <td mat-cell *matCellDef="let element; let index = index">
+          <!-- Body apenas com labels -->
+
+          <div *ngIf="!element.isEdit; else isEdit">
+            <!-- Rows com buttons e checkbox -->
+
             <div [ngSwitch]="col.key">
               <div *ngSwitchCase="'isSelected'">
-                <mat-checkbox [formControl]="getFormControl(element.id, 'isSelected')"></mat-checkbox>
+                <mat-checkbox
+                  [formControl]="getFormControl(element.id, 'isSelected')"
+                  (change)="checkAll()"
+                ></mat-checkbox>
               </div>
-
-              <div *ngSwitchCase="'isEdit'" class="btn-edit">
-                <button mat-icon-button (click)="element.isEdit = false; handleDone(element)"
-                  [disabled]="getFormGroup(element.id).invalid" color="accent" style="cursor: pointer">
-                  <mat-icon>save</mat-icon>
+              <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                <button
+                  mat-icon-button
+                  (click)="setForm(element)"
+                  style="cursor: pointer"
+                  color="accent"
+                  [disabled]="isSomeOnEdit()"
+                >
+                  <mat-icon>edit</mat-icon>
                 </button>
               </div>
-
               <div class="btn-edit" *ngSwitchCase="'delete'">
-                <button mat-icon-button (click)="deleteRow(index)" style="cursor: pointer" color="warn"
-                  [disabled]="true">
+                <button
+                  mat-icon-button
+                  (click)="deleteRow(element)"
+                  style="cursor: pointer"
+                  color="warn"
+                >
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
 
-              <!-- Rows com inputs -->
+              <!-- Row com as labels -->
 
-              <div *ngSwitchDefault>
-                <div style="padding-top: 5px !important">
-                  <mat-form-field appearance="outline">
-                    <mat-label>{{ col.inputLabel }}</mat-label>
-                    <input [type]="col.type" matInput [formControl]="getFormControl(element.id, col.key)" />
-                    <mat-error *ngIf="getFormControl(element.id, col.key).invalid">{{
-                      getErrorMessage(col.key, element.id)
-                      }}</mat-error>
-                  </mat-form-field>
-                </div>
+              <div *ngSwitchCase="'id'">
+                <span style="cursor: pointer">
+                  {{ col.cell(element) == -1 ? "..." : col.cell(element) }}
+                </span>
+              </div>
+
+              <div *ngSwitchDefault style="min-width: 80px">
+                <span style="cursor: pointer">{{ col.cell(element) }}</span>
               </div>
             </div>
           </div>
 
-          <ng-template #noEdit>
-            {{ col.cell(element) == -1 ? "..." : col.cell(element) }}
+          <!-- Body editavel -->
+
+          <ng-template #isEdit>
+            <!-- Rows com buttons e checkbox -->
+            <div *ngIf="!col.cantEdit; else noEdit">
+              <div [ngSwitch]="col.key">
+                <div *ngSwitchCase="'isSelected'">
+                  <mat-checkbox
+                    [formControl]="getFormControl(element.id, 'isSelected')"
+                  ></mat-checkbox>
+                </div>
+
+                <div *ngSwitchCase="'isEdit'" class="btn-edit">
+                  <button
+                    mat-icon-button
+                    (click)="element.isEdit = false; handleDone(element)"
+                    [disabled]="getFormGroup(element.id).invalid"
+                    color="accent"
+                    style="cursor: pointer"
+                  >
+                    <mat-icon>save</mat-icon>
+                  </button>
+                </div>
+
+                <div class="btn-edit" *ngSwitchCase="'delete'">
+                  <button
+                    mat-icon-button
+                    (click)="deleteRow(index)"
+                    style="cursor: pointer"
+                    color="warn"
+                    [disabled]="true"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+
+                <!-- Rows com inputs -->
+
+                <div *ngSwitchDefault>
+                  <div style="padding-top: 5px !important">
+                    <mat-form-field appearance="outline">
+                      <mat-label>{{ col.inputLabel }}</mat-label>
+                      <input
+                        [type]="col.type"
+                        matInput
+                        [formControl]="getFormControl(element.id, col.key)"
+                      />
+                      <mat-error
+                        FormError
+                        [formcontrol]="getFormControl(element.id, col.key)"
+                      ></mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #noEdit>
+              {{ col.cell(element) == -1 ? "..." : col.cell(element) }}
+            </ng-template>
           </ng-template>
-        </ng-template>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="filteredDisplayedColumns" (click)="ngOnChanges()"></tr>
-    <tr mat-row *matRowDef="let row; columns: filteredDisplayedColumns" [cdkContextMenuTriggerFor]="menu" (contextmenu)="selectedRow = row"></tr>
-    <tr class="mat-row" *matNoDataRow>
-      <div>
-        <span>Nenhum usuario encontrado com base no Filtro: {{filter.value}}</span>
-      </div>
-    </tr>
-  </table>
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="filteredDisplayedColumns"
+        (click)="ngOnChanges()"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: filteredDisplayedColumns"
+        [cdkContextMenuTriggerFor]="menu"
+        (contextmenu)="selectedRow = row"
+      ></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <div>
+          <span
+            >Nenhum usuario encontrado com base no Filtro:
+            {{ filter.value }}</span
+          >
+        </div>
+      </tr>
+    </table>
+  </form>
 </div>
 
 <ng-template #noData>
@@ -146,27 +205,52 @@
 
 <ng-template #menu>
   <div class="example-menu" cdkMenu>
-    <button class="example-menu-item" cdkMenuItem (click)="selectTemplate(ColunmsTemplate, 0)">
+    <button
+      class="example-menu-item"
+      cdkMenuItem
+      (click)="selectTemplate(ColunmsTemplate, 0)"
+    >
       Escolher Colunas
     </button>
-    <button class="example-menu-item" cdkMenuItem (click)="selectTemplate(ColunmsTemplate2, 1)">
+    <button
+      class="example-menu-item"
+      cdkMenuItem
+      (click)="selectTemplate(ColunmsTemplate2, 1)"
+    >
       Template de Teste
     </button>
-    <button class="example-menu-item" cdkMenuItem [disabled]="!selectedRow" (click)="setForm(selectedRow)">Editar</button>
+    <button
+      class="example-menu-item"
+      cdkMenuItem
+      [disabled]="!selectedRow"
+      (click)="setForm(selectedRow)"
+    >
+      Editar
+    </button>
   </div>
 </ng-template>
 
-
 <ng-template #ColunmsTemplate>
-  <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div
+    class="example-dialog-content"
+    cdkDrag
+    cdkDragRootElement=".cdk-overlay-pane"
+  >
     <Form [formGroup]="Colunms">
-      <app-colunas (Close)="closeElement(0)" (ChangeOrder)="handleOrder($event)"></app-colunas>
+      <app-colunas
+        (Close)="closeElement(0)"
+        (ChangeOrder)="handleOrder($event)"
+      ></app-colunas>
     </Form>
   </div>
 </ng-template>
 
 <ng-template #ColunmsTemplate2>
-  <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div
+    class="example-dialog-content"
+    cdkDrag
+    cdkDragRootElement=".cdk-overlay-pane"
+  >
     ColunmsTemplate2
     <button mat-mini-fab (click)="closeElement(1)">
       <mat-icon>close</mat-icon>

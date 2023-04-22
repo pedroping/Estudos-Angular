@@ -41,7 +41,7 @@ export const ERRORS: {[key: string]: any} = {
 
 export class FormErrorDirective implements OnInit {
   @Input() formcontrol?: FormControl;
-  @Input() formControlName?: string;
+  @Input() formcontrolName?: string;
   @HostBinding('innerHTML') innerHTML?: string;
 
   form = new FormControl('', [
@@ -60,10 +60,11 @@ export class FormErrorDirective implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(this.formControlName){
-      const Control = this.controlContainer.control?.get(this.formControlName)
+    if(this.controlContainer && this.formcontrolName){
+      const Control = this.controlContainer?.control?.get(this.formcontrolName)
       if(!Control) return
       Control.valueChanges.subscribe(() => this.validatForm(Control))
+      return
     }
     this.formcontrol!.valueChanges.pipe(startWith(this.formcontrol?.value)).subscribe(() => this.validatForm(this.formcontrol!))
   }
