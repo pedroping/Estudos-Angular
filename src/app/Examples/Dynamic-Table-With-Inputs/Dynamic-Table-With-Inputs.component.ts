@@ -118,11 +118,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     const All_Select = this.FormArray.controls.every(
       (control) => control.get('checked')?.value
     );
-    if (All_Select) {
-      this.checkAll.setValue(true);
-    } else {
-      this.checkAll.setValue(false);
-    }
+    this.checkAll.setValue(All_Select);
   }
 
   checkAllFields() {
