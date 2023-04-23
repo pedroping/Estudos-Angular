@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnInit, Optional, Renderer2 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormControl, NgControl, Validators } from '@angular/forms';
 import { debounceTime, startWith } from 'rxjs';
 
@@ -54,7 +54,7 @@ export class FormErrorDirective implements OnInit {
   ])
 
   constructor(
-    private controlContainer: ControlContainer,
+    @Optional() private controlContainer: ControlContainer,
     private el: ElementRef,
     private renderer: Renderer2
   ) { }
