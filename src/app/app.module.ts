@@ -47,6 +47,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ColunasComponent } from './core/componenets/colunas/colunas.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormErrorDirective } from './core/directives/FormError.directive';
+import { CdkTableExampleComponent } from './Examples/cdk-Table-Example/cdk-Table-Example.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { TableInlineComponent } from './Examples/cdk-Table-Example/table-inline/table-inline.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +69,8 @@ import { FormErrorDirective } from './core/directives/FormError.directive';
     AccordionComponent,
     ColunasComponent,
     FormErrorDirective,
+    CdkTableExampleComponent,
+    TableInlineComponent
   ],
   imports: [
     BrowserModule,
@@ -94,6 +99,7 @@ import { FormErrorDirective } from './core/directives/FormError.directive';
     MatRadioModule,
     MatPaginatorModule,
     DragDropModule,
+    CdkTableModule
   ],
   providers: [
     AuthGuardService,

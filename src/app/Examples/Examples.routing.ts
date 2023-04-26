@@ -10,6 +10,7 @@ import { PaginaProtegidaComponent } from './paginaProtegida/paginaProtegida.comp
 import { TableWithNgModelComponent } from './Table-With-NgModel/Table-With-NgModel.component';
 import { AuthGuardService as AuthGuard } from '../core/guards/secretGuard.service';
 import { AlreadyLoggedGuardService as AlreadyLogged } from '../core/guards/alreadyLoggedGuard.service';
+import { CdkTableExampleComponent } from './cdk-Table-Example/cdk-Table-Example.component';
 const routes: Routes = [
   { 
     path: '',
@@ -56,6 +57,11 @@ const routes: Routes = [
         component: PaginaProtegidaComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard] 
+      },
+      {
+        path: 'CdkTable',
+        component: CdkTableExampleComponent,
+        pathMatch: 'full'
       }
     ]
   },
