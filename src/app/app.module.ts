@@ -50,6 +50,8 @@ import { FormErrorDirective } from './core/directives/FormError.directive';
 import { CdkTableExampleComponent } from './Examples/cdk-Table-Example/cdk-Table-Example.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { TableInlineComponent } from './Examples/cdk-Table-Example/table-inline/table-inline.component';
+import { CdkDragdropComponent } from './Examples/cdkDrag&Drop/cdkDrag&drop.component';
+import { CdkDragdropModule } from './Examples/cdkDrag&Drop/cdkDrag&drop.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +72,8 @@ import { TableInlineComponent } from './Examples/cdk-Table-Example/table-inline/
     ColunasComponent,
     FormErrorDirective,
     CdkTableExampleComponent,
-    TableInlineComponent
+    TableInlineComponent,
+    CdkDragdropComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +102,8 @@ import { TableInlineComponent } from './Examples/cdk-Table-Example/table-inline/
     MatRadioModule,
     MatPaginatorModule,
     DragDropModule,
-    CdkTableModule
+    CdkTableModule,
+    CdkDragdropModule
   ],
   providers: [
     AuthGuardService,

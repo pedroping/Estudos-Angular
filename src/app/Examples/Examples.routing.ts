@@ -12,58 +12,64 @@ import { AuthGuardService as AuthGuard } from '../core/guards/secretGuard.servic
 import { AlreadyLoggedGuardService as AlreadyLogged } from '../core/guards/alreadyLoggedGuard.service';
 import { CdkTableExampleComponent } from './cdk-Table-Example/cdk-Table-Example.component';
 const routes: Routes = [
-  { 
+  {
     path: '',
     component: ExamplesComponent,
     children: [
       {
         path: 'Data-binding',
         component: DataBindingComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'StyleClass-binding',
         component: StyleClassBidingComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'Event-binding',
         component: EventBidingComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'TwoWayData-binding',
         component: TwoWayDataBidingComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'TableWithFormControls',
         component: DynamicTableWithInputsComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'TableWithNgModel',
         component: TableWithNgModelComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'login',
         component: LoginPageComponent,
         pathMatch: 'full',
-        canActivate: [AlreadyLogged]
+        canActivate: [AlreadyLogged],
       },
       {
         path: 'LugarSecreto',
         component: PaginaProtegidaComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard] 
+        canActivate: [AuthGuard],
       },
       {
         path: 'CdkTable',
         component: CdkTableExampleComponent,
-        pathMatch: 'full'
-      }
-    ]
+        pathMatch: 'full',
+      },
+      {
+        path: 'CdkDragDrop',
+        loadChildren: async () =>
+          (await import('../Examples/cdkDrag&Drop/cdkDrag&drop.module'))
+            .CdkDragdropModule,
+      },
+    ],
   },
 ];
 
