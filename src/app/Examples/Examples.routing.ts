@@ -11,6 +11,7 @@ import { TableWithNgModelComponent } from './Table-With-NgModel/Table-With-NgMod
 import { AuthGuardService as AuthGuard } from '../core/guards/secretGuard.service';
 import { AlreadyLoggedGuardService as AlreadyLogged } from '../core/guards/alreadyLoggedGuard.service';
 import { CdkTableExampleComponent } from './cdk-Table-Example/cdk-Table-Example.component';
+import { CdkDragdropComponent } from './cdkDrag&Drop/cdkDrag&drop.component';
 const routes: Routes = [
   {
     path: '',
@@ -65,9 +66,9 @@ const routes: Routes = [
       },
       {
         path: 'CdkDragDrop',
-        loadChildren: async () =>
-          (await import('../Examples/cdkDrag&Drop/cdkDrag&drop.module'))
-            .CdkDragdropModule,
+        loadChildren: () =>(import('../Examples/cdkDrag&Drop/cdkDrag&drop.module').then(m => m.CdkDragdropModule)),
+        component: CdkDragdropComponent
+            
       },
     ],
   },
