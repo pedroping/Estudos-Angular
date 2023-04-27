@@ -12,7 +12,7 @@
             ID
           </cdk-header-cell>
           <cdk-cell *cdkCellDef="let row" class="example-cell">
-            {{ row.id }}
+            {{ row?.get('id')?.value }}
           </cdk-cell>
         </ng-container>
   
@@ -22,7 +22,7 @@
             Progress
           </cdk-header-cell>
           <cdk-cell *cdkCellDef="let row" class="example-cell">
-            {{ row.progress }}%
+            {{ row?.get('progress')?.value }}%
           </cdk-cell>
         </ng-container>
   
@@ -32,7 +32,7 @@
             Name
           </cdk-header-cell>
           <cdk-cell *cdkCellDef="let row" class="example-cell">
-            {{ row.name }}
+            {{ row?.get('name')?.value }}
           </cdk-cell>
         </ng-container>
   
@@ -44,9 +44,9 @@
           <cdk-cell
             *cdkCellDef="let row"
             class="example-cell"
-            [style.color]="row.color"
+            [style.color]="row?.get('color')?.value"
           >
-            {{ row.color }}
+            {{ row?.get('color')?.value }}
           </cdk-cell>
         </ng-container>
   
@@ -57,15 +57,15 @@
         <cdk-row
           *cdkRowDef="let row; columns: displayedColumns; let index = index"
           class="example-row"
-          (click)="expandRow(index)"
+         
           #row
         >
           <!-- (click)="expandRow(index)" -->
         </cdk-row>
       </cdk-table>
     </div>
+    <!-- (page)="handlePageEvent($event)" -->
     <mat-paginator
-      (page)="handlePageEvent($event)"
       [length]="tablelength"
       [pageSize]="10"
       [pageSizeOptions]="[5, 10, 20]"
