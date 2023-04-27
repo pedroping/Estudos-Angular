@@ -27,7 +27,7 @@ export class PhotosSideBarComponent implements OnInit {
           let Filteres_Resp: Photo[] = [];
           resp.forEach((item) => {
             if (
-              !this.cdkDragDropService.selectedUser.photos.find(
+              !this.cdkDragDropService.selectedUser?.photos.find(
                 (photo) => photo.thumbnailUrl == item.thumbnailUrl
               )
             )

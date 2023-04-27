@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CdkDragdropComponent } from './cdkDrag&drop.component';
 import { UserSideBarComponent } from './userSideBar/userSideBar.component';
 import { UserDetailsComponent } from './userDetails/userDetails.component';
 import { PhotosDetailsComponent } from './photosDetails/photosDetails.component';
