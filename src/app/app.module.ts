@@ -52,6 +52,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { TableInlineComponent } from './Examples/cdk-Table-Example/table-inline/table-inline.component';
 import { CdkDragdropComponent } from './Examples/cdkDrag&Drop/cdkDrag&drop.component';
 import { CdkDragdropModule } from './Examples/cdkDrag&Drop/cdkDrag&drop.module';
+import { UserSideBarComponent } from './Examples/cdkDrag&Drop/userSideBar/userSideBar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,7 +74,8 @@ import { CdkDragdropModule } from './Examples/cdkDrag&Drop/cdkDrag&drop.module';
     FormErrorDirective,
     CdkTableExampleComponent,
     TableInlineComponent,
-    CdkDragdropComponent
+    CdkDragdropComponent,
+    UserSideBarComponent
   ],
   imports: [
     BrowserModule,
