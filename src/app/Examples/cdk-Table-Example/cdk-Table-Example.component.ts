@@ -39,38 +39,41 @@ export class CdkTableExampleComponent implements OnInit {
     this.tablelength = this.exampleDatabase.data.length;
   }
 
-  logrow(row: any){
-    this.dataSource!.connect().subscribe(console.log)
-    console.log(row, );
-    
+  logrow(row: any) {
+    this.dataSource!.connect().subscribe(console.log);
+    console.log(row);
   }
 
   ngOnInit() {
-    //this.handlePageEvent({ pageIndex: 0, pageSize: 10, length: 100 });
+    this.handlePageEvent({ pageIndex: 0, pageSize: 10, length: 100 });
   }
 
-  // handlePageEvent(e: PageEvent) {
-  //   this.containers?.toArray().forEach((element) => element.clear());
-  //   this.expandedRow = [];
-  //   const CopiedData = this.exampleDatabase.DefaultData;
-  //   const index = e.pageIndex * e.pageSize;
-  //   this.exampleDatabase.dataChange.next(
-  //     CopiedData.slice(index, index + e.pageSize)
-  //   );
-  // }
+  handlePageEvent(e: PageEvent) {
+    this.containers?.toArray().forEach((element) => element.clear());
+    this.expandedRow = [];
+    const CopiedData = this.exampleDatabase.DefaultData;
+    const index = e.pageIndex * e.pageSize;
+    this.exampleDatabase.dataChange.next(
+      CopiedData.slice(index, index + e.pageSize)
+    );
+  }
 
-  // expandRow(index: number) {
-  //   if (this.expandedRow.indexOf(index) > -1) {
-  //     this.containers.toArray()[index]?.clear();
-  //     this.expandedRow = this.expandedRow.filter((x) => x != index);
-  //     return;
-  //   }
-  //   this.expandedRow.push(index);
-  //   const messageComponent = this.containers
-  //     .toArray()
-  //     [index]?.createComponent(TableInlineComponent);
-  //   messageComponent.instance.user = this.exampleDatabase.data[index].name;
-  // }
+  expandRow(index: number) {
+    if (this.expandedRow.indexOf(index) > -1) {
+      this.containers.toArray()[index]?.clear();
+      this.expandedRow = this.expandedRow.filter((x) => x != index);
+      return;
+    }
+    this.expandedRow.push(index);
+    const messageComponent = this.containers
+      .toArray()
+      [index]?.createComponent(TableInlineComponent);
+
+    //.find((item) => item.value.id == )
+
+    const Control = this.exampleDatabase.dataChange.value;
+    messageComponent.instance.user = Control[index].value.name;
+  }
 }
 
 export class ExampleDatabase {
@@ -82,7 +85,7 @@ export class ExampleDatabase {
     return this.TableForm.get('TableFromArray') as FormArray;
   }
   dataChange: BehaviorSubject<any> = new BehaviorSubject<any>(null as any);
-  DefaultData: UserData[] = [];
+  DefaultData: any;
 
   get data(): FormArray<any> {
     return this.dataChange.value ?? [];
@@ -95,7 +98,6 @@ export class ExampleDatabase {
   }
 
   addUser() {
-
     const newUser = this.createNewUser();
     const newForm = new FormGroup({
       id: new FormControl(newUser.id),
@@ -105,7 +107,9 @@ export class ExampleDatabase {
     });
     this.TableFromArray.push(newForm);
 
+    this.DefaultData = this.TableFromArray.controls
     this.dataChange.next(this.TableFromArray.controls);
+    
   }
 
   public createNewUser() {
