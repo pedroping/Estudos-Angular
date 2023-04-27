@@ -85,15 +85,13 @@ export class ExampleDatabase {
   DefaultData: UserData[] = [];
 
   get data(): FormArray<any> {
-    return this.dataChange.value?.value ?? [];
+    return this.dataChange.value ?? [];
   }
 
   constructor() {
     for (let i = 0; i < 100; i++) {
       this.addUser();
     }
-    console.log("Form", this.TableFromArray.controls);
-    
   }
 
   addUser() {
