@@ -79,6 +79,10 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     this.dataSource.sort = this.sort!;
   }
 
+  setData(){
+    this.dataSource.data = this.FormArray.value;
+  }
+
   getAllUser() {
     this.tableService.getAll().subscribe((resp) => {
       resp.users.forEach((item: User) => {
@@ -97,7 +101,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
         });
         this.FormArray.push(FormGrupo);
       });
-      this.dataSource.data = this.FormArray.value;
+      this.setData();
       this.ngOnChanges();
     });
   }
@@ -162,21 +166,21 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     });
 
     this.FormArray.insert(0, row);
-    this.dataSource.data = this.FormArray.value;
+    this.setData();
   }
 
   deletRow(row: any, index: number) {
     this.setElement(row);
     if (!row.id) {
       this.FormArray.removeAt(index);
-      this.dataSource.data = this.FormArray.value;
+      this.setData();
       return;
     }
 
     this.tableService.deleteUser(row.id).subscribe({
       next: (resp) => {
         this.FormArray.removeAt(index);
-        this.dataSource.data = this.FormArray.value;
+        this.setData();
       },
     });
   }
@@ -211,7 +215,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
         next: (resp) => {
           row.get('id')?.setValue(resp.id);
           row.get('isNew')?.setValue(false);
-          this.dataSource.data = this.FormArray.value;
+          this.setData();
         },
         error: (err) => {
           this.FormArray.removeAt(0);
@@ -230,7 +234,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
 
     this.tableService.editUser(put_User).subscribe((resp) => {
       row.get('onEdit')?.setValue(false);
-      this.dataSource.data = this.FormArray.value;
+      this.setData();
     });
   }
 
@@ -246,7 +250,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
         next: (resp) => {
           const index = this.getIndex(id);
           this.FormArray.removeAt(index);
-          this.dataSource.data = this.FormArray.value;
+          this.setData();
         },
         error: (err) => {},
       });
