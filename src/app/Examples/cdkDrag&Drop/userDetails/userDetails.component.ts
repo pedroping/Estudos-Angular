@@ -46,6 +46,5 @@ export class UserDetailsComponent implements OnInit {
       event.previousIndex,
       event.currentIndex
     );
-    console.log('drop', event);
   }
 }
