@@ -1,17 +1,26 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { CdkDragDropService, Photo, User } from '../services/cdkDragDrop.service';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
+import {
+  CdkDragDropService,
+  Photo,
+  User,
+} from '../services/cdkDragDrop.service';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-userDetails',
   templateUrl: './userDetails.component.html',
   styleUrls: ['./userDetails.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDetailsComponent implements OnInit {
-  user!: User;
+  user$!: Observable<User>;
 
   constructor(
     public cdkDragDropService: CdkDragDropService,
@@ -22,10 +31,11 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((id) => {
       console.log(id);
-      
-      let users = this.cdkDragDropService.users$.value;
-      this.user = users.find((item) => item.id == id['id'])!;
-      this.cdr.detectChanges()
+
+      this.cdkDragDropService.users$.subscribe((val) => {
+        this.user$ = of(val.find((item) => item.id == id['id'])!);
+        this.cdr.detectChanges();
+      });
     });
   }
 
