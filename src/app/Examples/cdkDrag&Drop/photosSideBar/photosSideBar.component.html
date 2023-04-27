@@ -3,6 +3,7 @@
   cdkDropList
   [cdkDropListData]="photos"
   (cdkDropListDropped)="drop($event)"
+  class="drop-area"
 >
   <li *ngFor="let photo of photos" class="user" cdkDrag>
     <a
