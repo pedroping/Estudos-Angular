@@ -4,16 +4,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-cdkDrag&drop',
   templateUrl: './cdkDrag&drop.component.html',
-  styleUrls:  ['./cdkDrag&drop.component.scss']
+  styleUrls: ['./cdkDrag&drop.component.scss'],
 })
 export class CdkDragdropComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  changeRouter(argumentes: any){
-    this.router.navigate([argumentes])
+  changeRouter(argumentes: any) {
+    this.router.navigate([argumentes]);
   }
 }

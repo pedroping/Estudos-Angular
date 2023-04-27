@@ -1,3 +1,16 @@
-<p>
-  userDetails works!
-</p>
+<h1>User Details</h1>
+<section>
+  <h4 class="mat-title">{{ user.name }}</h4>
+  <p class="mat-caption">{{ user.email }}</p>
+  <p class="mat-caption">User Id: {{ user.id }}</p>
+</section>
+<ul
+  class="drop-area"
+  cdkDropList
+  [cdkDropListData]="user.photos"
+  (cdkDropListDropped)="drop($event)"
+>
+  <li *ngFor="let photo of user.photos" cdkDrag>
+    <img [src]="photo.thumbnailUrl" width="60" />
+  </li>
+</ul>

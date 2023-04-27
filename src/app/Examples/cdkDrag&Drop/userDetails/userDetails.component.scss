@@ -1,0 +1,14 @@
+.drop-area {
+  border: #ccc dashed 2px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  margin-top: 15px;
+  display: flex;
+}
+:host {
+  display: block;
+  background-color: #fafafa;
+  padding: 15px;
+  margin: 20px;
+  box-sizing: border-box;
+}

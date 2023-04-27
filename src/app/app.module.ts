@@ -56,6 +56,8 @@ import { UserSideBarComponent } from './Examples/cdkDrag&Drop/userSideBar/userSi
 import { MatTabsModule } from '@angular/material/tabs';
 import { PhotosDetailsComponent } from './Examples/cdkDrag&Drop/photosDetails/photosDetails.component';
 import { PhotosSideBarComponent } from './Examples/cdkDrag&Drop/photosSideBar/photosSideBar.component';
+import { CdkDragDropService } from './Examples/cdkDrag&Drop/services/cdkDragDrop.service';
+import { UserDetailsComponent } from './Examples/cdkDrag&Drop/userDetails/userDetails.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +82,8 @@ import { PhotosSideBarComponent } from './Examples/cdkDrag&Drop/photosSideBar/ph
     CdkDragdropComponent,
     UserSideBarComponent,
     PhotosDetailsComponent,
-    PhotosSideBarComponent
+    PhotosSideBarComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

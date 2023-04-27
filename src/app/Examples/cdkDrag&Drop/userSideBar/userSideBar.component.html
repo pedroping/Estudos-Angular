@@ -1,6 +1,17 @@
-<p>
-  userSideBar works!
-</p>
-
-<a [routerLink]="['/Examples/CdkDragDrop', {outlets: {details: ['user', 2]}}]">Details</a>
+<ul>
+  <br />
+  <li *ngFor="let user of cdkDragDropService.users$ | async">
+    <a
+      [routerLink]="[
+        '/Examples/CdkDragDrop',
+        { outlets: { details: ['user', user.id] } }
+      ]"
+      (click)="cdkDragDropService.selectedUser = user"
+      class="link primary"
+    >
+      <h4 class="mat-title">{{ user.name }}</h4>
+    </a>
+    <p class="mat-caption">{{ user.email }}</p>
+  </li>
+</ul>
 

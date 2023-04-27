@@ -1,5 +1,15 @@
-<p>
-  photosSideBar works!
-</p>
-
-<a [routerLink]="['/Examples/CdkDragDrop', {outlets: {details: ['photo', 2]}}]">Details</a>
+<ul
+  *ngIf="photos$ | async as photos"
+  cdkDropList
+  [cdkDropListData]="photos"
+  (cdkDropListDropped)="drop($event)"
+>
+  <li *ngFor="let photo of photos" class="user" cdkDrag>
+    <a
+      class="link"
+      [routerLink]="['', { outlets: { details: ['photo', photo.id] } }]"
+    >
+      <img [src]="photo.thumbnailUrl" alt="" width="60" />
+    </a>
+  </li>
+</ul>
