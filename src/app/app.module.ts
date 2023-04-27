@@ -53,6 +53,9 @@ import { TableInlineComponent } from './Examples/cdk-Table-Example/table-inline/
 import { CdkDragdropComponent } from './Examples/cdkDrag&Drop/cdkDrag&drop.component';
 import { CdkDragdropModule } from './Examples/cdkDrag&Drop/cdkDrag&drop.module';
 import { UserSideBarComponent } from './Examples/cdkDrag&Drop/userSideBar/userSideBar.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { PhotosDetailsComponent } from './Examples/cdkDrag&Drop/photosDetails/photosDetails.component';
+import { PhotosSideBarComponent } from './Examples/cdkDrag&Drop/photosSideBar/photosSideBar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +78,9 @@ import { UserSideBarComponent } from './Examples/cdkDrag&Drop/userSideBar/userSi
     CdkTableExampleComponent,
     TableInlineComponent,
     CdkDragdropComponent,
-    UserSideBarComponent
+    UserSideBarComponent,
+    PhotosDetailsComponent,
+    PhotosSideBarComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +110,8 @@ import { UserSideBarComponent } from './Examples/cdkDrag&Drop/userSideBar/userSi
     MatPaginatorModule,
     DragDropModule,
     CdkTableModule,
-    CdkDragdropModule
+    CdkDragdropModule,
+    MatTabsModule
   ],
   providers: [
     AuthGuardService,

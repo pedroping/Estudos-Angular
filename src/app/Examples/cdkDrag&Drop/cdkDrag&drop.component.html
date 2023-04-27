@@ -1,10 +1,30 @@
-DragDrop
-<a [routerLink]="['./users']">Teste</a>
-<main>
-    <aside>
-        <router-outlet></router-outlet>
-    </aside>
-    <section>
-        <router-outlet name="details"></router-outlet>
-    </section>
-</main>
+<div class="container">
+  <mat-toolbar>
+    <button
+      mat-icon-button
+      style="padding-right: 100px"
+      class="example-icon"
+      color="accent"
+      routerLink="/Examples/CdkDragDrop/users"
+    >
+      <span>Users</span><mat-icon>menu</mat-icon>
+    </button>
+    <button
+      style="padding-right: 100px"
+      mat-icon-button
+      color="accent"
+      routerLink="/Examples/CdkDragDrop/photos"
+    >
+      <span>Photos</span><mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="routerComps">
+    <div class="comp1">
+      <router-outlet></router-outlet>
+    </div>
+    <div>
+      <router-outlet name="details"></router-outlet>
+    </div>
+  </div>
+</div>

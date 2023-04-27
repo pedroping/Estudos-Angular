@@ -1,0 +1,20 @@
+mat-toolbar{
+  display: flex;
+  justify-content: space-between;
+
+  button{
+    span{
+      font-size: 20px;
+      position: relative;
+      top: -6px
+    }
+  }
+}
+
+
+.routerComps{
+  display: flex;
+  .comp1{
+    width: 350px;
+  }
+}

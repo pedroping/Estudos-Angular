@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cdkDrag&drop',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CdkDragdropComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  changeRouter(argumentes: any){
+    this.router.navigate([argumentes])
+  }
 }

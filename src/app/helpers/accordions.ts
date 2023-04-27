@@ -46,4 +46,9 @@ export const ACCORDIONS = [
       },
     ],
   },
+  {
+    Title: 'Cdk Drag e Drop',
+    Icon: 'build',
+    Rotas: [{ rota: '/Examples/CdkDragDrop', label: 'Cdk Drag e Drop' }],
+  },
 ];
