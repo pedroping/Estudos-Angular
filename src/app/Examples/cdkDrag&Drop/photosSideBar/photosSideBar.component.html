@@ -10,6 +10,7 @@
       [routerLink]="['/Examples/CdkDragDrop', { outlets: { details: ['photo', photo.id] } }]"
     >
       <img [src]="photo.thumbnailUrl" alt="" width="60" />
+      <img *cdkDragPreview [src]="photo.thumbnailUrl" alt="" width="60" />
     </a>
   </li>
 </ul>
