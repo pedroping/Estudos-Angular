@@ -9,6 +9,7 @@
     <li *ngFor="let photo of user.photos" cdkDrag>
       <a [routerLink]="['/Examples/CdkDragDrop', { outlets: { details: ['photo', photo.id] } }]">
         <img [src]="photo.thumbnailUrl" width="60" style="padding-left: 10px;" />
+        <img *cdkDragPreview [src]="photo.thumbnailUrl" width="60" style="padding-left: 10px;" />
       </a>
     </li>
   </ul>
