@@ -10,7 +10,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { COLORS, NAMES } from 'src/app/core/models';
 import { TableInlineComponent } from './table-inline/table-inline.component';
-import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export interface UserData {
   id: string;
@@ -37,11 +37,6 @@ export class CdkTableExampleComponent implements OnInit {
   constructor() {
     this.dataSource = new ExampleDataSource(this.exampleDatabase);
     this.tablelength = this.exampleDatabase.data.length;
-  }
-
-  logrow(row: any) {
-    this.dataSource!.connect().subscribe(console.log);
-    console.log(row);
   }
 
   ngOnInit() {
@@ -84,10 +79,10 @@ export class ExampleDatabase {
   get TableFromArray() {
     return this.TableForm.get('TableFromArray') as FormArray;
   }
-  dataChange: BehaviorSubject<any> = new BehaviorSubject<any>(null as any);
-  DefaultData: any;
+  dataChange: BehaviorSubject<AbstractControl[]> = new BehaviorSubject<AbstractControl[]>([]);
+  DefaultData: AbstractControl[] = [];
 
-  get data(): FormArray<any> {
+  get data(): AbstractControl[] {
     return this.dataChange.value ?? [];
   }
 
@@ -135,11 +130,11 @@ export class ExampleDatabase {
  * the underlying data. Instead, it only needs to take the data and send the table exactly what
  * should be rendered.
  */
-export class ExampleDataSource extends DataSource<FormArray<any>> {
+export class ExampleDataSource extends DataSource<AbstractControl> {
   constructor(private _exampleDatabase: ExampleDatabase) {
     super();
   }
-  connect(): Observable<any> {
+  connect(): Observable<AbstractControl[]> {
     return this._exampleDatabase.dataChange;
   }
   disconnect() {}
