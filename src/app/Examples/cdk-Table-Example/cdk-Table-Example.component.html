@@ -12,6 +12,7 @@
             ID
           </cdk-header-cell>
           <cdk-cell *cdkCellDef="let row" class="example-cell">
+            <input type="text" [formControl]="row?.get('id')" (click)="$event.stopPropagation()">
             {{ row?.get('id')?.value }}
           </cdk-cell>
         </ng-container>
@@ -44,9 +45,18 @@
           </cdk-cell>
         </ng-container>
 
+        <ng-container cdkColumnDef="excluir">
+          <cdk-header-cell *cdkHeaderCellDef class="example-header-cell"></cdk-header-cell>
+          <cdk-cell *cdkCellDef="let row; let index = index" class="example-cell">
+            <button mat-icon-button color="warn" (click)="removeElement(index)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </cdk-cell>
+        </ng-container>
+
         <cdk-header-row *cdkHeaderRowDef="displayedColumns" class="example-header-row"></cdk-header-row>
         <cdk-row *cdkRowDef="let row; columns: displayedColumns; let index = index" class="example-row"
-          (click)="expandRow(index)" #row>
+          (click)="expandRow(index)" #row >
           <!-- (click)="expandRow(index)" -->
         </cdk-row>
       </cdk-table>

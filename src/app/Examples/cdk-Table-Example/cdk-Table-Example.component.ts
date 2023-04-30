@@ -10,7 +10,12 @@ import { PageEvent } from '@angular/material/paginator';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { COLORS, NAMES } from 'src/app/core/models';
 import { TableInlineComponent } from './table-inline/table-inline.component';
-import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 
 export interface UserData {
   id: string;
@@ -28,10 +33,11 @@ export class CdkTableExampleComponent implements OnInit {
   @ViewChildren('row', { read: ViewContainerRef })
   containers!: QueryList<ViewContainerRef>;
 
-  displayedColumns = ['userId', 'userName', 'progress', 'color'];
+  displayedColumns = ['userId', 'userName', 'progress', 'color', 'excluir'];
   exampleDatabase = new ExampleDatabase();
   dataSource!: ExampleDataSource | null;
   tablelength: number;
+  actualPaginator: PageEvent = { pageIndex: 0, pageSize: 10, length: 100 };
   expandedRow: number[] = [];
 
   constructor() {
@@ -40,10 +46,12 @@ export class CdkTableExampleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.handlePageEvent({ pageIndex: 0, pageSize: 10, length: 100 });
+    this.handlePageEvent(this.actualPaginator);
+    this.exampleDatabase.TableFromArray.valueChanges.subscribe(console.log);
   }
 
   handlePageEvent(e: PageEvent) {
+    this.actualPaginator = e;
     this.containers?.toArray().forEach((element) => element.clear());
     this.expandedRow = [];
     const CopiedData = this.exampleDatabase.DefaultData;
@@ -64,10 +72,21 @@ export class CdkTableExampleComponent implements OnInit {
       .toArray()
       [index]?.createComponent(TableInlineComponent);
 
-    //.find((item) => item.value.id == )
-
     const Control = this.exampleDatabase.dataChange.value;
     messageComponent.instance.user = Control[index].value.name;
+  }
+
+  removeElement(index: number) {
+    if (this.containers.toArray()[index]) {
+      this.containers.toArray()[index]?.clear();
+      this.expandedRow = this.expandedRow.filter((x) => x != index);
+    }
+
+    this.exampleDatabase.TableFromArray.removeAt(index);
+    this.exampleDatabase.dataChange.next(
+      this.exampleDatabase.TableFromArray.controls
+    );
+    this.handlePageEvent(this.actualPaginator);
   }
 }
 
@@ -79,7 +98,9 @@ export class ExampleDatabase {
   get TableFromArray() {
     return this.TableForm.get('TableFromArray') as FormArray;
   }
-  dataChange: BehaviorSubject<AbstractControl[]> = new BehaviorSubject<AbstractControl[]>([]);
+  dataChange: BehaviorSubject<AbstractControl[]> = new BehaviorSubject<
+    AbstractControl[]
+  >([]);
   DefaultData: AbstractControl[] = [];
 
   get data(): AbstractControl[] {
@@ -101,10 +122,8 @@ export class ExampleDatabase {
       color: new FormControl(newUser.color),
     });
     this.TableFromArray.push(newForm);
-
-    this.DefaultData = this.TableFromArray.controls
+    this.DefaultData = this.TableFromArray.controls;
     this.dataChange.next(this.TableFromArray.controls);
-    
   }
 
   public createNewUser() {
