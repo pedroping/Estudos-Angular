@@ -51,6 +51,7 @@ export class CdkTableExampleComponent implements OnInit {
   }
 
   handlePageEvent(e: PageEvent) {
+    this.tablelength = this.exampleDatabase.data.length;
     this.actualPaginator = e;
     this.containers?.toArray().forEach((element) => element.clear());
     this.expandedRow = [];
