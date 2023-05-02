@@ -12,7 +12,6 @@
             ID
           </cdk-header-cell>
           <cdk-cell *cdkCellDef="let row" class="example-cell">
-            <input type="text" [formControl]="row?.get('id')" (click)="$event.stopPropagation()">
             {{ row?.get('id')?.value }}
           </cdk-cell>
         </ng-container>

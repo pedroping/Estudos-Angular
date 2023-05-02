@@ -1,4 +1,20 @@
-<p>Detail: {{ user }}</p>
-<textarea style="width: 100%" rows="6">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sollicitudin gravida tellus, nec faucibus sapien. Morbi et est nibh. Vivamus vestibulum sapien non blandit lacinia. In viverra lectus nulla, ut dignissim metus congue nec. Vivamus dictum dolor urna, et volutpat ante aliquet et. Sed maximus magna vitae massa ultrices iaculis. Quisque posuere, risus a egestas convallis, ipsum arcu fringilla libero, quis hendrerit ante neque eget nulla.</textarea
->
+<p>Detail:{{ userForm.get('name')?.value }}</p>
+<div class="forms">
+    <mat-form-field appearance="outline">
+        <mat-label>Nome:</mat-label>
+        <input matInput placeholder="Nome..." [formControl]="$any(userForm.get('name'))">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Progress:</mat-label>
+        <input matInput placeholder="Progress..." [formControl]="$any(userForm.get('progress'))">
+    </mat-form-field>
+
+    <mat-form-field  appearance="outline">
+        <mat-label>Colors</mat-label>
+        <mat-select [formControl]="$any(userForm.get('color'))">
+            <mat-option *ngFor="let item of colorOptions" [value]="item">{{ item }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+</div>

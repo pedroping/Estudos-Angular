@@ -73,7 +73,7 @@ export class CdkTableExampleComponent implements OnInit {
       [index]?.createComponent(TableInlineComponent);
 
     const Control = this.exampleDatabase.dataChange.value;
-    messageComponent.instance.user = Control[index].value.name;
+    messageComponent.instance.userForm = Control[index] as FormGroup;
   }
 
   removeElement(index: number) {
