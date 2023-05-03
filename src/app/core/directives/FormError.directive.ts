@@ -33,6 +33,11 @@ export const ERRORS: {[key: string]: any} = {
       return `O valor minimo é ${paramns}`
     }
   },
+  not_allowed_characters: {
+    messageFn: (paramns: string) => {
+      return `Caracter ${paramns} invalido!`
+    }
+  }
 };
 
 @Directive({
@@ -78,7 +83,7 @@ export class FormErrorDirective implements OnInit {
         if(key == 'maxlength' || key == 'minlength') return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors![key].requiredLength)}</small>`)  
         if(key == 'max')  return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors![key].max)}</small>`)  
         if(key == 'min')  return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors![key].min)}</small>`) 
-
+        if(key == 'not_allowed_characters') return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors![key][0])}</small>`) 
         this.setInnerHTML(`<small>${ERRORS[key].messageFn()}</small>`)  
       }
     })

@@ -25,6 +25,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
+import { CustomValidators } from 'src/app/core/validators/customValidator';
 
 @Component({
   selector: 'app-Dynamic-Table-With-Inputs',
@@ -89,7 +90,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
         const FormGrupo = new FormGroup({
           checked: new FormControl(false),
           id: new FormControl(item.id),
-          nome: new FormControl(item.firstName, [Validators.required, Validators.maxLength(10)]),
+          nome: new FormControl(item.firstName, [CustomValidators.validateCharacters, Validators.required, Validators.maxLength(10)]),
           idade: new FormControl(item.age, [Validators.required, Validators.min(100)]),
           email: new FormControl(item.email, [
             Validators.required,
@@ -157,7 +158,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     const row = new FormGroup({
       checked: new FormControl(false),
       id: new FormControl(null as any),
-      nome: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      nome: new FormControl('', [CustomValidators.validateCharacters, Validators.required, Validators.maxLength(10)]),
       idade: new FormControl(null as any, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       onEdit: new FormControl(true),
