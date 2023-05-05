@@ -24,4 +24,38 @@ body {
   .mat-toolbar {
     background-color: #303030 !important;
   }
+  .headerActionsButtons {
+    color: white;
+  }
+
+  .headerActionsButtons:disabled {
+    color: rgb(179, 179, 179);
+  }
+
+  .cdkTableColors {
+    background-color: #303030;
+    color: white;
+
+    input,
+    select,
+    mat-select,
+    mat-option,
+    mat-label,
+    .mat-mdc-select-min-line,
+    .mat-mdc-select-arrow, 
+    .mat-select-panel{
+      color: white !important;
+    }
+
+    
+      .mat-select-panel{
+        background-color: white;
+      }
+    
+
+    cdk-header-cell,
+    .darkColors {
+      color: white !important;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="example-container mat-elevation-z8">
+  <div class="example-container mat-elevation-z8 cdkTableColors">
     <div #insertionPoint></div>
     <div class="table">
       <cdk-table #table [dataSource]="dataSource!" class="example-table">
@@ -11,7 +11,7 @@
           <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
             ID
           </cdk-header-cell>
-          <cdk-cell *cdkCellDef="let row" class="example-cell">
+          <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
             {{ row?.get('id')?.value }}
           </cdk-cell>
         </ng-container>
@@ -21,7 +21,7 @@
           <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
             Progress
           </cdk-header-cell>
-          <cdk-cell *cdkCellDef="let row" class="example-cell">
+          <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
             {{ row?.get('progress')?.value }}%
           </cdk-cell>
         </ng-container>
@@ -31,7 +31,7 @@
           <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
             Name
           </cdk-header-cell>
-          <cdk-cell *cdkCellDef="let row" class="example-cell">
+          <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
             {{ row?.get('name')?.value }}
           </cdk-cell>
         </ng-container>
@@ -46,7 +46,7 @@
 
         <ng-container cdkColumnDef="excluir">
           <cdk-header-cell *cdkHeaderCellDef class="example-header-cell"></cdk-header-cell>
-          <cdk-cell *cdkCellDef="let row; let index = index" class="example-cell">
+          <cdk-cell *cdkCellDef="let row; let index = index" class="example-cell darkColors">
             <button mat-icon-button color="warn" (click)="removeElement(index)">
               <mat-icon>delete</mat-icon>
             </button>
@@ -55,14 +55,15 @@
 
         <cdk-header-row *cdkHeaderRowDef="displayedColumns" class="example-header-row"></cdk-header-row>
         <cdk-row *cdkRowDef="let row; columns: displayedColumns; let index = index" class="example-row"
-          (click)="expandRow(index)" #row >
+          (click)="expandRow(index)" #row>
           <!-- (click)="expandRow(index)" -->
         </cdk-row>
-      </cdk-table>
-    </div>
 
-    <mat-paginator (page)="handlePageEvent($event)" [length]="tablelength" [pageSize]="10"
-      [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
-    </mat-paginator>
+      </cdk-table>
+      <mat-paginator (page)="handlePageEvent($event)" [length]="tablelength" [pageSize]="10" class="cdkTableColors"
+      style="height: 50px;"
+        [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
+      </mat-paginator>
+    </div>
   </div>
 </div>
