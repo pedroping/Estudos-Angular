@@ -1,32 +1,48 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
 import { SendDataService } from './core/services/sendData.service';
 import { ACCORDIONS } from './helpers/accordions';
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
+  darkMode = false;
 
-  @ViewChild('sidenav') sidenav!: MatSidenav
-  
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
   title = 'Estudo_Angular';
-  Accordions = ACCORDIONS
+  Accordions = ACCORDIONS;
 
   constructor(
     public dialog: MatDialog,
-    readonly sendData : SendDataService
+    readonly sendData: SendDataService,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit() {
     this.sendData.closeSideNav$.subscribe((val) => {
-      this.sidenav.close()
-    })
+      this.sidenav.close();
+    });
   }
-  
+
+  toggleDarkMode(): void {
+    this.darkMode = !this.darkMode;
+    const darkClassName = 'darkMode';
+    if(this.darkMode) return this.document.body.classList.add('darkMode');
+    this.document.body.classList.remove('darkMode');    
+  }
+
   openPerfil() {
     this.dialog
       .open(MeuPerfilComponent, {

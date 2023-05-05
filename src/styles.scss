@@ -1,7 +1,11 @@
-html, body { height: 100%;}
-body { 
-    margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  background-color: black;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 /* Importing Bootstrap SCSS file. */
@@ -10,6 +14,14 @@ body {
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
-.container{
-    padding-top: 10px;
+.container {
+  padding-top: 10px;
+}
+
+.darkMode .mat-drawer-container {
+  background-color: #303030;
+  color: white;
+  .mat-toolbar {
+    background-color: #303030 !important;
   }
+}

@@ -6,10 +6,14 @@
   right: 0;
 }
 
+.mat-toolbar {
+  background-color: transparent !important;
+}
+
 .sidenav {
   width: 280px;
 
-  .btn-group{
+  .btn-group {
     padding-left: 5px;
   }
 }
@@ -35,15 +39,9 @@
   padding-left: 10px;
 }
 
-::ng-deep {
-  .mat-toolbar {
-    background-color: white;
-  }
-}
-
 :host {
   ::ng-deep {
-    app-side-nav-fechada{
+    app-side-nav-fechada {
       position: absolute;
       left: 0;
       z-index: 1;
@@ -53,46 +51,45 @@
   }
 }
 
-.toolbarIcon{
+.toolbarIcon {
   cursor: pointer;
 }
 
-.title{
+.title {
   position: relative;
   top: -2px;
 }
 
-.example-accordion-item-description{
+.example-accordion-item-description {
   position: relative;
   top: -10px;
 }
 
-.titleIcon{
+.titleIcon {
   position: relative;
   top: 1px;
 }
 
-.accordions{
+.accordions {
   display: flex;
   justify-content: center;
 }
 
-:host{
-  cdk-accordion-item{
+:host {
+  cdk-accordion-item {
     padding-bottom: 5px;
     width: 250px;
-  } 
+  }
 
-  .example-accordion-item-header{
+  .example-accordion-item-header {
     overflow: hidden;
     border: 1px solid black;
     border-radius: 10px;
-    height: 10px !important; 
-   
+    height: 10px !important;
   }
 
-  cdk-accordion-item:hover{
-    .example-accordion-item-header{
+  cdk-accordion-item:hover {
+    .example-accordion-item-header {
       transform: scale(1.01);
       border: 1px solid black;
       border-radius: 10px;
@@ -103,13 +100,10 @@
 .example-accordion {
   display: block;
   max-width: 250px;
-  
-
 }
 
 .example-accordion-item {
   display: block;
-  
 }
 
 .example-accordion-item-header {
@@ -127,7 +121,7 @@
   padding: 16px;
 }
 
-.example-accordion-item-body{
+.example-accordion-item-body {
   padding: 5px;
 }
 
@@ -135,16 +129,15 @@
   cursor: pointer;
 }
 
-.contentItem{
-  span{
+.contentItem {
+  span {
     cursor: pointer;
-    mat-icon{
+    mat-icon {
       position: relative;
       top: 7px;
     }
   }
-  :hover{
+  :hover {
     color: lightblue;
   }
 }
-
