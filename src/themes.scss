@@ -6,7 +6,7 @@ $my-primary: mat.define-palette(mat.$deep-orange-palette, 500);
 $my-accent: mat.define-palette(mat.$blue-grey-palette, 700, A100, A400);
 
 $dark-primary: mat.define-palette(mat.$pink-palette, 500);
-$dark-accent: mat.define-palette(mat.$deep-orange-palette, 500);
+$dark-accent: mat.define-palette(mat.$light-blue-palette, 500);
 
 $my-theme: mat.define-light-theme(
   (

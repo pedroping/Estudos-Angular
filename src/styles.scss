@@ -21,6 +21,15 @@ body {
 .darkMode .mat-drawer-container {
   background-color: #303030;
   color: white;
+
+  .sidenav {
+    background-color: #303030;
+    color: white;
+    h3{
+      color: white;
+    }
+  }
+
   .mat-toolbar {
     background-color: #303030 !important;
   }
@@ -32,26 +41,39 @@ body {
     color: rgb(179, 179, 179);
   }
 
+  .form-control {
+    color: black !important;
+  }
+
+  .FormTable {
+    background-color: #303030;
+    color: white;
+    th,
+    td {
+      color: white;
+    }
+  }
+
+  input,
+  select,
+  mat-select,
+  mat-option,
+  mat-label,
+  .mat-mdc-select-min-line,
+  .mat-mdc-select-arrow,
+  .mat-select-panel,
+  .mat-mdc-form-field-required-marker {
+    color: white !important;
+  }
+
+  .mat-select-panel,
+  .dc-checkbox__background {
+    background-color: white;
+  }
+
   .cdkTableColors {
     background-color: #303030;
     color: white;
-
-    input,
-    select,
-    mat-select,
-    mat-option,
-    mat-label,
-    .mat-mdc-select-min-line,
-    .mat-mdc-select-arrow, 
-    .mat-select-panel{
-      color: white !important;
-    }
-
-    
-      .mat-select-panel{
-        background-color: white;
-      }
-    
 
     cdk-header-cell,
     .darkColors {
