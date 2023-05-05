@@ -6,26 +6,20 @@
     </mat-toolbar>
     <div class="accordions">
       <cdk-accordion class="example-accordion">
-        <app-accordion
-          *ngFor="let item of Accordions"
-          [Title]="item.Title"
-          [Icon]="item.Icon"
-          [Rotas]="item.Rotas"
-        ></app-accordion>
+        <app-accordion *ngFor="let item of Accordions" [Title]="item.Title" [Icon]="item.Icon"
+          [Rotas]="item.Rotas"></app-accordion>
       </cdk-accordion>
     </div>
   </mat-sidenav>
   <mat-sidenav-content class="content">
     <app-closed-sidenav></app-closed-sidenav>
     <div style="padding-left: 65px">
-      <mat-toolbar>
+      <mat-toolbar class="mainToolbar">
         <mat-icon (click)="sidenav.open()" class="toolbarIcon">menu</mat-icon>
         <span class="example-spacer"></span>
-        <mat-icon [matMenuTriggerFor]="menu" class="toolbarIcon"
-          >favorite</mat-icon
-        >
-        <mat-icon *ngIf="!darkMode" (click)="toggleDarkMode()">dark_mode</mat-icon>
-        <mat-icon *ngIf="darkMode" (click)="toggleDarkMode()">light_mode</mat-icon>
+        <mat-icon [matMenuTriggerFor]="menu" class="toolbarIcon">favorite</mat-icon>
+        <mat-icon *ngIf="!darkMode" (click)="toggleDarkMode()" style="cursor: pointer;">dark_mode</mat-icon>
+        <mat-icon *ngIf="darkMode" (click)="toggleDarkMode()" style="cursor: pointer;">light_mode</mat-icon>
       </mat-toolbar>
       <router-outlet></router-outlet>
     </div>

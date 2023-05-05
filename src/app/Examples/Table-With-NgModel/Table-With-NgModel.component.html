@@ -126,7 +126,7 @@
 </div>
 
 <ng-template #noData>
-  <div class="noData">
+  <div class="noData darkColors">
     <div class="container">
       <div class="row text-center">
         <h2>Nenhum Usuario Encontrado!</h2>
@@ -135,7 +135,7 @@
         <img src="../../../assets/No data-pana.svg" />
       </div>
       <div class="row text-center">
-        <button mat-button (click)="addRow()" [disabled]="isSomeOnEdit()">
+        <button mat-button (click)="addRow()" [disabled]="isSomeOnEdit()" class="headerActionsButtons">
           Clique aqui para adicionar um Usuario
         </button>
       </div>
@@ -144,7 +144,7 @@
 </ng-template>
 
 <ng-template #menu>
-  <div class="example-menu" cdkMenu>
+  <div class="example-menu darkColors" cdkMenu>
     <button class="example-menu-item" cdkMenuItem (click)="selectTemplate(ColunmsTemplate, 0)">
       Escolher Colunas
     </button>
@@ -158,7 +158,7 @@
 </ng-template>
 
 <ng-template #ColunmsTemplate>
-  <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="example-dialog-content darkColors" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
     <Form [formGroup]="Colunms">
       <app-colunas (Close)="closeElement(0)" (ChangeOrder)="handleOrder($event)"></app-colunas>
     </Form>
@@ -166,7 +166,7 @@
 </ng-template>
 
 <ng-template #ColunmsTemplate2>
-  <div class="example-dialog-content" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
+  <div class="example-dialog-content darkColors" cdkDrag cdkDragRootElement=".cdk-overlay-pane">
     ColunmsTemplate2
     <button mat-mini-fab (click)="closeElement(1)">
       <mat-icon>close</mat-icon>

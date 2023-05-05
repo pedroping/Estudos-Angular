@@ -25,9 +25,17 @@ body {
   .sidenav {
     background-color: #303030;
     color: white;
-    h3{
+    h3 {
       color: white;
     }
+  }
+
+  .mainToolbar,
+  .container,
+  .UserContent 
+  .darkColors {
+    background-color: #303030;
+    color: white;
   }
 
   .mat-toolbar {
