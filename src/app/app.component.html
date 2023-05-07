@@ -18,8 +18,8 @@
         <mat-icon (click)="sidenav.open()" class="toolbarIcon">menu</mat-icon>
         <span class="example-spacer"></span>
         <mat-icon [matMenuTriggerFor]="menu" class="toolbarIcon">favorite</mat-icon>
-        <mat-icon *ngIf="!darkMode" (click)="toggleDarkMode()" style="cursor: pointer;">dark_mode</mat-icon>
-        <mat-icon *ngIf="darkMode" (click)="toggleDarkMode()" style="cursor: pointer;">light_mode</mat-icon>
+        <mat-icon *ngIf="!darkModeService.darkMode" (click)="toggleDarkMode()" style="cursor: pointer;">dark_mode</mat-icon>
+        <mat-icon *ngIf="darkModeService.darkMode" (click)="toggleDarkMode()" style="cursor: pointer;">light_mode</mat-icon>
       </mat-toolbar>
       <router-outlet></router-outlet>
     </div>

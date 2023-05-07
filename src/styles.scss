@@ -32,15 +32,18 @@ body {
 
   .mainToolbar,
   .container,
-  .UserContent 
-  .darkColors {
-    background-color: #303030;
-    color: white;
+  .UserContent,
+  .example-menu,
+  .example-box,
+  .item {
+    background-color: #303030 !important;
+    color: white !important;
   }
 
   .mat-toolbar {
     background-color: #303030 !important;
   }
+
   .headerActionsButtons {
     color: white;
   }
@@ -87,5 +90,9 @@ body {
     .darkColors {
       color: white !important;
     }
+  }
+
+  .header {
+    color: black !important;
   }
 }

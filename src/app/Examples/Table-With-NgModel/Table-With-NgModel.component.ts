@@ -23,6 +23,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
+import { DarkModeService } from 'src/app/core/services/darkMode.service';
 @Component({
   selector: 'app-Table-With-NgModel',
   templateUrl: './Table-With-NgModel.component.html',
@@ -75,7 +76,8 @@ export class TableWithNgModelComponent
     public dialog: MatDialog,
     private tableServiceService: TableServiceService,
     private overlay: Overlay,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    readonly darkModeService: DarkModeService
   ) {}
 
   ngOnInit() {

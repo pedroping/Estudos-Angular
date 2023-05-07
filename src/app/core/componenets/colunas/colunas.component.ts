@@ -2,6 +2,7 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { ControlContainer, FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DarkModeService } from '../../services/darkMode.service';
 
 @Component({
   selector: 'app-colunas',
@@ -33,7 +34,10 @@ export class ColunasComponent implements OnInit {
   @Output() Close = new EventEmitter<boolean>();
   @Output() ChangeOrder = new EventEmitter<string[]>();
 
-  constructor(private ControlContainer: ControlContainer) {}
+  constructor(
+    private ControlContainer: ControlContainer,
+    readonly darkModeService: DarkModeService
+  ) {}
 
   ngOnInit() {
     this.Form = this.ControlContainer.control as FormGroup;

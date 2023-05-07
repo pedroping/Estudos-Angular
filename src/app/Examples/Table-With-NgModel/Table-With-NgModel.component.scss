@@ -2,8 +2,8 @@ button {
   text-align: left !important;
 }
 
-.container{
-   position: relative;
+.container {
+  position: relative;
 }
 
 .shape-top {
@@ -26,23 +26,25 @@ button {
   fill: #ffccbc;
 }
 
-.noData{
+.noData {
   display: flex;
   justify-content: center;
-  align-items: center; 
-  img{
+  align-items: center;
+  img {
     height: 500px;
-  } 
+  }
 }
 
-.btn{
+.btn {
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
 }
 
-.text-center { text-align: center; }
+.text-center {
+  text-align: center;
+}
 
 .example-context-area {
   display: inline-grid;
@@ -88,7 +90,24 @@ button {
   background-color: rgb(170, 170, 170);
 }
 
-.example-dialog-content{
+.example-dialog-content {
   background-color: white;
   cursor: move;
+}
+
+.onDarkMode {
+  background-color: #303030 !important;
+  color: white !important;
+  
+  .example-menu-item {
+    color: white !important;
+  }
+
+  .example-menu-item:hover {
+    background-color: rgb(0, 0, 0);
+  }
+
+  .example-menu-item:active {
+    background-color: rgb(0, 0, 0);
+  }
 }

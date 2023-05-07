@@ -5,14 +5,33 @@
       <mat-icon>close</mat-icon>
     </button>
   </div>
-  <div class="example-list" cdkDropList (cdkDropListDropped)="drop($event)">
+  <div
+    class="example-list"
+    cdkDropList
+    (cdkDropListDropped)="drop($event)"
+    [ngClass]="{
+      onDarkMode: darkModeService.darkMode
+    }"
+  >
     <div class="example-box" *ngFor="let item of checkboxs" cdkDrag>
       <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
       <div class="item">
         <mat-icon cdkDragHandle>drag_indicator</mat-icon>
-        <mat-checkbox [formControlName]="item.formName">{{
-          item.label
-        }}</mat-checkbox>
+        <mat-checkbox [formControlName]="item.formName">
+          <span>{{ item.label }}</span>
+        </mat-checkbox>
+
+        <div *cdkDragPreview>
+          <mat-icon cdkDragHandle>drag_indicator</mat-icon>
+          <mat-checkbox [formControlName]="item.formName">
+            <span
+              [ngStyle]="{
+                color: darkModeService.darkMode ? 'white' : 'black'
+              }"
+              >{{ item.label }}</span
+            >
+          </mat-checkbox>
+        </div>
       </div>
     </div>
   </div>
