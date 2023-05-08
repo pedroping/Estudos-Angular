@@ -21,9 +21,6 @@ export class ExpandUserService {
         this.Users$$.value.push(user)
         this.Users$$.next(this.Users$$.value)
         this.Users$ = this.Users$$.asObservable()
-
-        console.log(this.Users$$.value);
-        
       }
     })
   }
