@@ -132,7 +132,6 @@
                 $event
               );
               handleSave($any(getControl(element)), index);
-              setElement(element)
             "
             style="cursor: pointer"
             color="accent"
@@ -182,21 +181,18 @@
         [attr.colspan]="displayedColumns.length"
       >
         <div
-          class="example-element-detail"
+          class="detail"
           [@detailExpand]="
             ElementsSelecteds.includes(element) ? 'expanded' : 'collapsed'
           "
-        >
-          <div class="example-element-diagram">
-            {{ element.nome }}
+          [attr.UserId]="element.id"
+        > 
+          <div #Expand>
+            <ng-container *ngIf="getExpandUserData(Expand) | async as User">
+              {{ User | json }}
+            </ng-container>
           </div>
-          <textarea
-            class="form-control"
-            id="exampleFormControlTextarea1"
-            rows="5"
-            [value]="lorem"
-          ></textarea>
-          <br />
+          
         </div>
       </td>
     </ng-container>
@@ -209,14 +205,13 @@
     <tr
       mat-row
       *matRowDef="let row; columns: displayedColumns"
-      (click)="setElement(row)"
-      class="example-element-row"
-      [class.example-expanded-row]="ElementsSelecteds.includes(row)"
+      bsExpandedRow
+      [tableElement]="row"
     ></tr>
     <tr
       mat-row
       *matRowDef="let row; columns: ['expandedDetail']"
-      class="example-detail-row"
+      class="detail-row"
     ></tr>
   </table>
   <pre *ngIf="FormArray.value.lenght > 0">{{ FormArray.value | json }}</pre>

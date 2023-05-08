@@ -26,6 +26,8 @@ import {
 } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'src/app/core/validators/customValidator';
+import { ExpandUserService } from 'src/app/core/services/expandUser.service';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-Dynamic-Table-With-Inputs',
@@ -44,6 +46,8 @@ import { CustomValidators } from 'src/app/core/validators/customValidator';
 })
 export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort?: MatSort;
+  
+  expandedElement: any;
   displayedColumns: string[] = [
     'checkBox',
     'id',
@@ -66,7 +70,8 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   constructor(
     private readonly tableService: TableServiceService,
     private readonly changeDetectorRef: ChangeDetectorRef,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private readonly expandUserService: ExpandUserService
   ) {}
 
   ngOnInit() {
@@ -171,7 +176,6 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   }
 
   deletRow(row: any, index: number) {
-    this.setElement(row);
     if (!row.id) {
       this.FormArray.removeAt(index);
       this.setData();
@@ -259,21 +263,19 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     this.checkAll.setValue(false);
   }
 
-  setElement(element: any) {
-    if (this.getFormControl(element.id, 'onEdit').value) {
-      this.ElementsSelecteds = this.ElementsSelecteds.filter(
-        (item) => item != element
-      );
-      return;
-    }
+  getExpandUserData(element: HTMLElement){
+    const ID = element.parentElement?.getAttribute('UserId')
+    return this.expandUserService.Users$.pipe(
+      switchMap(users => {
 
-    if (!this.ElementsSelecteds.includes(element)) {
-      this.ElementsSelecteds.push(element);
-      return;
-    }
-    this.ElementsSelecteds = this.ElementsSelecteds.filter(
-      (item) => item != element
-    );
+        if(!users) return of(null)
+
+        const User = users.find(element => element.id == +ID!)
+
+        if(!User) return of(null)
+        return of(User)
+      })
+    )
   }
 
   // getActualIndex(index : number)    {

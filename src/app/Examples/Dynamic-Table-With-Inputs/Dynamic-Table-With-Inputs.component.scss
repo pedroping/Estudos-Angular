@@ -43,13 +43,17 @@
   fill: #ffccbc;
 }
 
-tr.example-detail-row {
-  height: 0;
+tr.detail-row {
+  display: none;
 }
 
-.example-element-row{
-  cursor: pointer;
-}
-.example-element-row td {
-  border-bottom-width: 0;
+.expanded-row + .detail-row {
+  display: table-row;
+  width: 100%;
+  animation: fadeIn 0.5s ease-in-out;
+  .detail {
+    padding-top: 10px;
+    height: 100% !important;
+    min-height: 100px !important;
+  }
 }

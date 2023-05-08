@@ -29,6 +29,10 @@ export class TableServiceService {
     return this.http.delete<User>(`${this.baseUrl}/${id}`);
   }
 
+  getUser(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/${id}`);
+  }
+
   deleteManyUsers(Ids: number[]): Observable<User[]> {
     return forkJoin(
       Ids.map(id => {

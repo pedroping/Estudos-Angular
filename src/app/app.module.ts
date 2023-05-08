@@ -58,6 +58,7 @@ import { PhotosDetailsComponent } from './Examples/cdkDrag&Drop/photosDetails/ph
 import { PhotosSideBarComponent } from './Examples/cdkDrag&Drop/photosSideBar/photosSideBar.component';
 import { CdkDragDropService } from './Examples/cdkDrag&Drop/services/cdkDragDrop.service';
 import { UserDetailsComponent } from './Examples/cdkDrag&Drop/userDetails/userDetails.component';
+import { ExpandedRowDirective } from './core/directives/expand-row.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +84,8 @@ import { UserDetailsComponent } from './Examples/cdkDrag&Drop/userDetails/userDe
     UserSideBarComponent,
     PhotosDetailsComponent,
     PhotosSideBarComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    ExpandedRowDirective
   ],
   imports: [
     BrowserModule,
