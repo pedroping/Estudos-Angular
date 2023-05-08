@@ -43,15 +43,16 @@ export class CdkTableExampleComponent implements OnInit {
     'excluir',
   ];
   exampleDatabase = new ExampleDatabase();
-  dataSource!: ExampleDataSource | null;
   tablelength: number;
   actualPaginator: PageEvent = { pageIndex: 0, pageSize: 10, length: 100 };
   expandedRow: number[] = [];
 
   constValue = 0;
 
+  DataSource = new BehaviorSubject<AbstractControl[]>([])
+
   constructor() {
-    this.dataSource = new ExampleDataSource(this.exampleDatabase);
+    this.DataSource.next(this.exampleDatabase.TableFromArray.controls)
     this.tablelength = this.exampleDatabase.data.length;
   }
 
@@ -158,21 +159,4 @@ export class ExampleDatabase {
       color: COLORS[Math.round(Math.random() * (COLORS.length - 1))],
     };
   }
-}
-
-/**
- * Data source to provide what data should be rendered in the table. Note that the data source
- * can retrieve its data in any way. In this case, the data source is provided a reference
- * to a common data base, ExampleDatabase. It is not the data source's responsibility to manage
- * the underlying data. Instead, it only needs to take the data and send the table exactly what
- * should be rendered.
- */
-export class ExampleDataSource extends DataSource<AbstractControl> {
-  constructor(private _exampleDatabase: ExampleDatabase) {
-    super();
-  }
-  connect(): Observable<AbstractControl[]> {
-    return this._exampleDatabase.dataChange;
-  }
-  disconnect() {}
 }
