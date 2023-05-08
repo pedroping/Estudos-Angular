@@ -1,69 +1,78 @@
-<div class="container">
-  <div class="example-container mat-elevation-z8 cdkTableColors">
-    <div #insertionPoint></div>
-    <div class="table">
-      <cdk-table #table [dataSource]="dataSource!" class="example-table">
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- ID Column -->
-        <ng-container cdkColumnDef="userId">
-          <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
-            ID
-          </cdk-header-cell>
-          <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
-            {{ row?.get('id')?.value }}
-          </cdk-cell>
-        </ng-container>
-
-        <!-- Progress Column -->
-        <ng-container cdkColumnDef="progress">
-          <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
-            Progress
-          </cdk-header-cell>
-          <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
-            {{ row?.get('progress')?.value }}%
-          </cdk-cell>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container cdkColumnDef="userName">
-          <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
-            Name
-          </cdk-header-cell>
-          <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
-            {{ row?.get('name')?.value }}
-          </cdk-cell>
-        </ng-container>
-
-        <!-- Color Column -->
-        <ng-container cdkColumnDef="color">
-          <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">Color</cdk-header-cell>
-          <cdk-cell *cdkCellDef="let row" class="example-cell" [style.color]="row?.get('color')?.value">
-            {{ row?.get('color')?.value }}
-          </cdk-cell>
-        </ng-container>
-
-        <ng-container cdkColumnDef="excluir">
-          <cdk-header-cell *cdkHeaderCellDef class="example-header-cell"></cdk-header-cell>
-          <cdk-cell *cdkCellDef="let row; let index = index" class="example-cell darkColors">
-            <button mat-icon-button color="warn" (click)="removeElement(index)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </cdk-cell>
-        </ng-container>
-
-        <cdk-header-row *cdkHeaderRowDef="displayedColumns" class="example-header-row"></cdk-header-row>
-        <cdk-row *cdkRowDef="let row; columns: displayedColumns; let index = index" class="example-row"
-          (click)="expandRow(index)" #row>
-          <!-- (click)="expandRow(index)" -->
-        </cdk-row>
-
-      </cdk-table>
-      <mat-paginator (page)="handlePageEvent($event)" [length]="tablelength" [pageSize]="10" class="cdkTableColors"
-      style="height: 50px;"
-        [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
-      </mat-paginator>
+<div class="container" style="justify-content: center;">
+  <div class="row justify-content-center">
+    <div class="example-container mat-elevation-z8 cdkTableColors">
+      <div #insertionPoint></div>
+      <div class="table">
+        <cdk-table #table [dataSource]="dataSource!" class="example-table">
+          <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+  
+          <!-- ID Column -->
+          <ng-container cdkColumnDef="userId">
+            <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
+              ID
+            </cdk-header-cell>
+            <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
+              {{ row?.get('id')?.value }}
+            </cdk-cell>
+          </ng-container>
+  
+          <!-- Progress Column -->
+          <ng-container cdkColumnDef="progress">
+            <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
+              Progress
+            </cdk-header-cell>
+            <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
+              {{ row?.get('progress')?.value }}%
+            </cdk-cell>
+          </ng-container>
+  
+          <!-- Name Column -->
+          <ng-container cdkColumnDef="userName">
+            <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
+              Name
+            </cdk-header-cell>
+            <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
+              {{ row?.get('name')?.value }}
+            </cdk-cell>
+          </ng-container>
+  
+          <!-- Color Column -->
+          <ng-container cdkColumnDef="color">
+            <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">Color</cdk-header-cell>
+            <cdk-cell *cdkCellDef="let row" class="example-cell" [style.color]="row?.get('color')?.value">
+              {{ row?.get('color')?.value }}
+            </cdk-cell>
+          </ng-container>
+  
+          <ng-container cdkColumnDef="valor">
+            <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">Valor</cdk-header-cell>
+            <cdk-cell *cdkCellDef="let row" class="example-cell">
+              {{ row?.get('valor')?.value }}
+            </cdk-cell>
+          </ng-container>
+  
+          <ng-container cdkColumnDef="excluir">
+            <cdk-header-cell *cdkHeaderCellDef class="example-header-cell"></cdk-header-cell>
+            <cdk-cell *cdkCellDef="let row; let index = index" class="example-cell darkColors">
+              <button mat-icon-button color="warn" (click)="removeElement(index)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </cdk-cell>
+          </ng-container>
+  
+          <cdk-header-row *cdkHeaderRowDef="displayedColumns" class="example-header-row"></cdk-header-row>
+          <cdk-row *cdkRowDef="let row; columns: displayedColumns; let index = index" class="example-row"
+            (click)="expandRow(index)" #row>
+            <!-- (click)="expandRow(index)" -->
+          </cdk-row>
+  
+        </cdk-table>
+        <mat-paginator (page)="handlePageEvent($event)" [length]="tablelength" [pageSize]="10" class="cdkTableColors"
+          style="height: 50px;" [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
+        </mat-paginator>
+      </div>
     </div>
   </div>
+  {{constValue}}
 </div>

@@ -10,11 +10,16 @@
         <input matInput placeholder="Progress..." [formControl]="$any(userForm.get('progress'))">
     </mat-form-field>
 
-    <mat-form-field  appearance="outline">
+    <mat-form-field appearance="outline">
         <mat-label>Colors</mat-label>
         <mat-select [formControl]="$any(userForm.get('color'))">
             <mat-option *ngFor="let item of colorOptions" [value]="item">{{ item }}</mat-option>
         </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Valor:</mat-label>
+        <input matInput placeholder="Nome..." [formControl]="$any(userForm.get('valor'))" type="number">
     </mat-form-field>
 
 </div>

@@ -7,7 +7,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, startWith } from 'rxjs';
 import { COLORS, NAMES } from 'src/app/core/models';
 import { TableInlineComponent } from './table-inline/table-inline.component';
 import {
@@ -22,6 +22,7 @@ export interface UserData {
   name: string;
   progress: string;
   color: string;
+  valor: string;
 }
 
 @Component({
@@ -33,12 +34,21 @@ export class CdkTableExampleComponent implements OnInit {
   @ViewChildren('row', { read: ViewContainerRef })
   containers!: QueryList<ViewContainerRef>;
 
-  displayedColumns = ['userId', 'userName', 'progress', 'color', 'excluir'];
+  displayedColumns = [
+    'userId',
+    'userName',
+    'progress',
+    'color',
+    'valor',
+    'excluir',
+  ];
   exampleDatabase = new ExampleDatabase();
   dataSource!: ExampleDataSource | null;
   tablelength: number;
   actualPaginator: PageEvent = { pageIndex: 0, pageSize: 10, length: 100 };
   expandedRow: number[] = [];
+
+  constValue = 0;
 
   constructor() {
     this.dataSource = new ExampleDataSource(this.exampleDatabase);
@@ -47,7 +57,13 @@ export class CdkTableExampleComponent implements OnInit {
 
   ngOnInit() {
     this.handlePageEvent(this.actualPaginator);
-    this.exampleDatabase.TableFromArray.valueChanges.subscribe(console.log);
+    this.exampleDatabase.TableFromArray.valueChanges
+      .pipe(startWith(this.exampleDatabase.TableFromArray.value))
+      .subscribe((controlsValue: UserData[]) => {
+        this.constValue = controlsValue.reduce((a,b) => {
+          return a + Number(b.valor)
+        }, 0)        
+      });
   }
 
   handlePageEvent(e: PageEvent) {
@@ -121,6 +137,7 @@ export class ExampleDatabase {
       name: new FormControl(newUser.name),
       progress: new FormControl(newUser.progress),
       color: new FormControl(newUser.color),
+      valor: new FormControl(newUser.id),
     });
     this.TableFromArray.push(newForm);
     this.DefaultData = this.TableFromArray.controls;
