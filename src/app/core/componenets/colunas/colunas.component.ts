@@ -1,8 +1,16 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  Output,
+  EventEmitter,
+  Input,
+} from '@angular/core';
 import { ControlContainer, FormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DarkModeService } from '../../services/darkMode.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-colunas',
@@ -10,29 +18,17 @@ import { DarkModeService } from '../../services/darkMode.service';
   styleUrls: ['./colunas.component.scss'],
 })
 export class ColunasComponent implements OnInit {
-  checkboxs = [
-    {
-      formName: 'id',
-      label: 'Id',
-    },
-    {
-      formName: 'name',
-      label: 'Nome Completo',
-    },
-    {
-      formName: 'email',
-      label: 'Email',
-    },
-    {
-      formName: 'age',
-      label: 'Idade',
-    },
-  ];
 
   Form!: FormGroup;
 
   @Output() Close = new EventEmitter<boolean>();
   @Output() ChangeOrder = new EventEmitter<string[]>();
+  @Input() Checkboxs!: BehaviorSubject<
+  {
+    formName: string;
+    label: string;
+  }[]
+>
 
   constructor(
     private ControlContainer: ControlContainer,
@@ -43,7 +39,7 @@ export class ColunasComponent implements OnInit {
     this.Form = this.ControlContainer.control as FormGroup;
     this.Form.valueChanges.subscribe((val) => {
       this.ChangeOrder.emit(
-        this.checkboxs
+        this.Checkboxs.value
           .filter((item) => this.Form.get(item.formName)?.value)
           .map((item) => item.formName)
       );
@@ -72,10 +68,10 @@ export class ColunasComponent implements OnInit {
       }[]
     >
   ) {
-    moveItemInArray(this.checkboxs, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.Checkboxs.value, event.previousIndex, event.currentIndex);
 
     this.ChangeOrder.emit(
-      this.checkboxs
+      this.Checkboxs.value
         .filter((item) => this.Form.get(item.formName)?.value)
         .map((item) => item.formName)
     );

@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
 import {
   COLUMNS_SCHEMA,
@@ -40,6 +40,30 @@ export class TableWithNgModelComponent
   private portal!: TemplatePortal;
 
   Portals = 2;
+
+  colunmsCheckbox = new BehaviorSubject<
+    {
+      formName: string;
+      label: string;
+    }[]
+  >([
+    {
+      formName: 'id',
+      label: 'Id',
+    },
+    {
+      formName: 'name',
+      label: 'Nome Completo',
+    },
+    {
+      formName: 'email',
+      label: 'Email',
+    },
+    {
+      formName: 'age',
+      label: 'Idade',
+    },
+  ]);
 
   displayedColumns: string[] = COLUMNS.filter((col) => col.key != 'isEdit').map(
     (col) => col.key
@@ -124,20 +148,16 @@ export class TableWithNgModelComponent
   }
 
   handleOrder(order: string[]) {
-    if(this.isSomeOnEdit()){
+    if (this.isSomeOnEdit()) {
       this.filteredDisplayedColumns = [
         'isSelected',
         ...order,
         'isEdit',
         'delete',
       ];
-      return   
+      return;
     }
-    this.filteredDisplayedColumns = [
-      'isSelected',
-      ...order,
-      'delete',
-    ];
+    this.filteredDisplayedColumns = ['isSelected', ...order, 'delete'];
   }
 
   closeElement(id: number) {
