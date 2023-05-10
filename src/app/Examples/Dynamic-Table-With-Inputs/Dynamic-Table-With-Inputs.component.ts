@@ -58,7 +58,6 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     'excluir',
   ];
   dataSource = new MatTableDataSource([]);
-  ElementsSelecteds: any[] = [];
 
   checkAll = new FormControl(false);
 
@@ -201,9 +200,6 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     event?: Event
   ) {
     event?.preventDefault();
-    this.ElementsSelecteds = this.ElementsSelecteds.filter(
-      (item) => item != element
-    );
     row.setValue(state, { emitEvent: false });
   }
 
@@ -263,14 +259,13 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     this.checkAll.setValue(false);
   }
 
-  getExpandUserData(element: HTMLElement){
-    const ID = element.parentElement?.getAttribute('UserId')
-    return this.expandUserService.Users$.pipe(
+  getExpandUserData(id: number){
+    return this.expandUserService.Users$$.pipe(
       switchMap(users => {
 
         if(!users) return of(null)
 
-        const User = users.find(element => element.id == +ID!)
+        const User = users.find(element => element.id == id)
 
         if(!User) return of(null)
         return of(User)

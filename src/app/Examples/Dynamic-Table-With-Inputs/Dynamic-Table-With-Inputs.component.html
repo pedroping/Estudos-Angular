@@ -182,13 +182,10 @@
       >
         <div
           class="detail"
-          [@detailExpand]="
-            ElementsSelecteds.includes(element) ? 'expanded' : 'collapsed'
-          "
-          [attr.UserId]="element.id"
+          @detailExpand
         > 
-          <div #Expand>
-            <ng-container *ngIf="getExpandUserData(Expand) | async as User">
+          <div>
+            <ng-container *ngIf="getExpandUserData(element.id) | async as User">
               {{ User | json }}
             </ng-container>
           </div>
@@ -205,8 +202,8 @@
     <tr
       mat-row
       *matRowDef="let row; columns: displayedColumns"
-      bsExpandedRow
-      [tableElement]="row"
+      ExpandedRow
+      [tableElement]="getControl(row).value"
     ></tr>
     <tr
       mat-row

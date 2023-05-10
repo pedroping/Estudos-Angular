@@ -10,42 +10,40 @@ import { ExpandedStatusService } from '../services/expandedStatus.service';
 import { ExpandUserService } from '../services/expandUser.service';
 
 @Directive({
-  selector: '[bsExpandedRow]',
+  selector: '[ExpandedRow]',
   exportAs: 'expandedRow',
 })
 export class ExpandedRowDirective<T> {
   expandedElement!: T | null;
   @Input() tableElement!: T;
-  @Input() bsExpandedRow!: number | string;
-  @Input() hasMediaIf!: boolean;
-  @Input() expandedElementViewMedia!: number;
-  @Input() hasChamadoDetail!: boolean;
-  @Input() hasOcorrenciaDetail!: boolean;
-  @Input() hasEquipamentoDetail!: boolean;
+  @Input() ExpandedRow!: number | string;
 
   @HostBinding('style.cursor')
   cursor!: string;
   @HostBinding('class.expanded-row') get expandedRow() {
-    if (this.hasMediaIf && window.innerWidth >= +this.bsExpandedRow)
-      this.elementRef.nativeElement.style.cursor = 'pointer';
+    
+    this.elementRef.nativeElement.style.cursor = 'pointer';
 
-    const isActive =
-      this.expandedStatusService.activedExapandedRow.find(
-        (element: any) => element === this.tableElement
-      ) ?? this.expandedElement === this.tableElement;
+    const isActive = this.expandedStatusService.activedExapandedRow.find(
+      (element: any) => element === this.tableElement
+    );
 
     this.changeDetectorRef.detectChanges();
 
     return !!isActive;
   }
   @HostListener('click', ['$event']) onClick(event: Event): void {
+    const element = event.target as HTMLElement;
+
+    const OnEdit = this.tableElement as T & {
+      onEdit: boolean;
+    };
+
+    if (['INPUT', 'SPAN'].includes(element.tagName) || OnEdit.onEdit) return;
+
     event.stopImmediatePropagation();
     event.stopPropagation();
     event.preventDefault();
-
-    const element = event.target as HTMLElement;
-
-    if (this.hasMediaIf && window.innerWidth >= +this.bsExpandedRow) return;
 
     const hasOpen = this.expandedStatusService.activedExapandedRow.find(
       (element: any) => element === this.tableElement

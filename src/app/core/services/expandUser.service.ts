@@ -9,7 +9,6 @@ import { User } from '../models';
 export class ExpandUserService {
 
   Users$$ = new BehaviorSubject<any[]>([])
-  Users$: Observable<any[]> = this.Users$$.asObservable()
 
   constructor(private readonly tableServiceService: TableServiceService) {}
 
@@ -20,7 +19,6 @@ export class ExpandUserService {
       if(!FindUser){
         this.Users$$.value.push(user)
         this.Users$$.next(this.Users$$.value)
-        this.Users$ = this.Users$$.asObservable()
       }
     })
   }
