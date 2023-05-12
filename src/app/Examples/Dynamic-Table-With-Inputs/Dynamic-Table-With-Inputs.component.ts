@@ -4,6 +4,7 @@ import {
   OnInit,
   ViewChild,
   OnChanges,
+  Inject,
 } from '@angular/core';
 import {
   AbstractFormGroupDirective,
@@ -28,6 +29,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'src/app/core/validators/customValidator';
 import { ExpandUserService } from 'src/app/core/services/expandUser.service';
 import { of, switchMap } from 'rxjs';
+import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
 
 @Component({
   selector: 'app-Dynamic-Table-With-Inputs',
@@ -43,10 +45,11 @@ import { of, switchMap } from 'rxjs';
       ),
     ]),
   ],
+  providers: [{ provide: TABLESERVICE, useClass: TableServiceService }],
 })
 export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort?: MatSort;
-  
+
   expandedElement: any;
   displayedColumns: string[] = [
     'checkBox',
@@ -65,9 +68,10 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     Array: new FormArray([]),
   });
 
-  lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec dui ut dui varius accumsan nec congue nisi. Cras vel ligula eleifend, consequat massa vitae, bibendum nulla. Vivamus feugiat sem purus, vel mollis sem consectetur ac. Fusce maximus purus ut tellus blandit, a faucibus neque suscipit. In vel rutrum tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec maximus mattis nibh. Suspendisse cursus orci sed fermentum efficitur. Nam et justo id mi dictum ullamcorper.';
+  lorem =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec dui ut dui varius accumsan nec congue nisi. Cras vel ligula eleifend, consequat massa vitae, bibendum nulla. Vivamus feugiat sem purus, vel mollis sem consectetur ac. Fusce maximus purus ut tellus blandit, a faucibus neque suscipit. In vel rutrum tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec maximus mattis nibh. Suspendisse cursus orci sed fermentum efficitur. Nam et justo id mi dictum ullamcorper.';
   constructor(
-    private readonly tableService: TableServiceService,
+    @Inject(TABLESERVICE) private readonly tableService: IToken,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private activeRoute: ActivatedRoute,
     private readonly expandUserService: ExpandUserService
@@ -75,16 +79,16 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.getAllUser();
-    this.activeRoute.queryParams.subscribe(paramns => {
-      console.log("paramns", paramns);
-    })
+    this.activeRoute.queryParams.subscribe((paramns) => {
+      console.log('paramns', paramns);
+    });
   }
 
   ngOnChanges() {
     this.dataSource.sort = this.sort!;
   }
 
-  setData(){
+  setData() {
     this.dataSource.data = this.FormArray.value;
   }
 
@@ -94,8 +98,15 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
         const FormGrupo = new FormGroup({
           checked: new FormControl(false),
           id: new FormControl(item.id),
-          nome: new FormControl(item.firstName, [CustomValidators.validateCharacters, Validators.required, Validators.maxLength(10)]),
-          idade: new FormControl(item.age, [Validators.required, Validators.min(100)]),
+          nome: new FormControl(item.firstName, [
+            CustomValidators.validateCharacters,
+            Validators.required,
+            Validators.maxLength(10),
+          ]),
+          idade: new FormControl(item.age, [
+            Validators.required,
+            Validators.min(100),
+          ]),
           email: new FormControl(item.email, [
             Validators.required,
             Validators.email,
@@ -162,7 +173,11 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     const row = new FormGroup({
       checked: new FormControl(false),
       id: new FormControl(null as any),
-      nome: new FormControl('', [CustomValidators.validateCharacters, Validators.required, Validators.maxLength(10)]),
+      nome: new FormControl('', [
+        CustomValidators.validateCharacters,
+        Validators.required,
+        Validators.maxLength(10),
+      ]),
       idade: new FormControl(null as any, Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       onEdit: new FormControl(true),
@@ -259,18 +274,17 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     this.checkAll.setValue(false);
   }
 
-  getExpandUserData(id: number){
+  getExpandUserData(id: number) {
     return this.expandUserService.Users$$.pipe(
-      switchMap(users => {
+      switchMap((users) => {
+        if (!users) return of(null);
 
-        if(!users) return of(null)
+        const User = users.find((element) => element.id == id);
 
-        const User = users.find(element => element.id == id)
-
-        if(!User) return of(null)
-        return of(User)
+        if (!User) return of(null);
+        return of(User);
       })
-    )
+    );
   }
 
   // getActualIndex(index : number)    {

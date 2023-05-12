@@ -2,19 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { User } from '../models';
+import { IToken } from '../tokens/tokens';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class TableServiceService {
+export class TableServiceService implements IToken {
+  baseUrl = 'https://dummyjson.com/users';
 
-  baseUrl = 'https://dummyjson.com/users'
+  constructor(private readonly http: HttpClient) {}
 
-  constructor(
-    private readonly http : HttpClient
-  ) { }
-
-  getAll(): Observable<any>{
-    return this.http.get<any>(`${this.baseUrl}`)
+  getAll(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}`);
   }
 
   addUser(user: User): Observable<User> {
@@ -29,16 +27,15 @@ export class TableServiceService {
     return this.http.delete<User>(`${this.baseUrl}/${id}`);
   }
 
-  getUser(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
   }
 
   deleteManyUsers(Ids: number[]): Observable<User[]> {
     return forkJoin(
-      Ids.map(id => {
-        return this.deleteUser(id)
+      Ids.map((id) => {
+        return this.deleteUser(id);
       })
-    )
+    );
   }
-
 }

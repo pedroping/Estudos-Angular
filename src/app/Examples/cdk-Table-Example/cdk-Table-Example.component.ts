@@ -74,7 +74,7 @@ export class CdkTableExampleComponent implements OnInit {
     this.expandedRow = [];
     const CopiedData = this.exampleDatabase.DefaultData;
     const index = e.pageIndex * e.pageSize;
-    this.exampleDatabase.dataChange.next(
+    this.DataSource.next(
       CopiedData.slice(index, index + e.pageSize)
     );
   }

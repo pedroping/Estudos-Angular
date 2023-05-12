@@ -6,6 +6,7 @@ import {
   TemplateRef,
   ViewContainerRef,
   AfterViewInit,
+  Inject,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,10 +25,12 @@ import { MatSort } from '@angular/material/sort';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { DarkModeService } from 'src/app/core/services/darkMode.service';
+import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
 @Component({
   selector: 'app-Table-With-NgModel',
   templateUrl: './Table-With-NgModel.component.html',
   styleUrls: ['./Table-With-NgModel.component.scss'],
+  providers: [{ provide: TABLESERVICE, useClass: TableServiceService }],
 })
 export class TableWithNgModelComponent
   implements OnInit, OnChanges, AfterViewInit
@@ -98,7 +101,7 @@ export class TableWithNgModelComponent
 
   constructor(
     public dialog: MatDialog,
-    private tableServiceService: TableServiceService,
+    @Inject(TABLESERVICE) private readonly tableServiceService: IToken,
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
     readonly darkModeService: DarkModeService
