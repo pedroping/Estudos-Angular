@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DarkModeService {
-
-constructor() { }
   darkMode = false;
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    const isDarkMode = sessionStorage.getItem('darkMode');
+    this.darkMode = !!isDarkMode;
+    if (isDarkMode) this.document.body.classList.add('darkMode');
+  }
 }

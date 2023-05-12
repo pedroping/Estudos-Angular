@@ -41,8 +41,12 @@ export class AppComponent implements OnInit {
   toggleDarkMode(): void {
     this.darkModeService.darkMode = !this.darkModeService.darkMode;
     const darkClassName = 'darkMode';
-    if(this.darkModeService.darkMode) return this.document.body.classList.add('darkMode');
-    this.document.body.classList.remove('darkMode');    
+    if (this.darkModeService.darkMode) {
+      sessionStorage.setItem('darkMode', 'isDarkMode');
+      return this.document.body.classList.add('darkMode');
+    }
+    sessionStorage.removeItem('darkMode');
+    this.document.body.classList.remove('darkMode');
   }
 
   openPerfil() {
