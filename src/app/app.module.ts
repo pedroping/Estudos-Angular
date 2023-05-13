@@ -59,6 +59,7 @@ import { PhotosSideBarComponent } from './Examples/cdkDrag&Drop/photosSideBar/ph
 import { CdkDragDropService } from './Examples/cdkDrag&Drop/services/cdkDragDrop.service';
 import { UserDetailsComponent } from './Examples/cdkDrag&Drop/userDetails/userDetails.component';
 import { ExpandedRowDirective } from './core/directives/expand-row.directive';
+import { IncrementorComponent } from './core/componenets/incrementor/incrementor.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +86,8 @@ import { ExpandedRowDirective } from './core/directives/expand-row.directive';
     PhotosDetailsComponent,
     PhotosSideBarComponent,
     UserDetailsComponent,
-    ExpandedRowDirective
+    ExpandedRowDirective,
+    IncrementorComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,7 +118,7 @@ import { ExpandedRowDirective } from './core/directives/expand-row.directive';
     DragDropModule,
     CdkTableModule,
     CdkDragdropModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   providers: [
     AuthGuardService,
@@ -128,6 +130,7 @@ import { ExpandedRowDirective } from './core/directives/expand-row.directive';
       multi: true,
     },
   ],
+  exports: [IncrementorComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

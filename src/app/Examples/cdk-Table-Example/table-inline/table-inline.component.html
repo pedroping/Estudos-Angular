@@ -17,9 +17,8 @@
         </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Valor:</mat-label>
-        <input matInput placeholder="Nome..." [formControl]="$any(userForm.get('valor'))" type="number">
-    </mat-form-field>
+    <div class="Incrementor">
+        <app-incrementor [formControl]="$any(userForm.get('valor'))"></app-incrementor>
+    </div>
 
 </div>

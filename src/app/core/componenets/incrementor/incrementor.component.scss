@@ -1,0 +1,67 @@
+.Incrementor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  input {
+    height: 36px;
+    width: 30px;
+    text-align: center;
+    border: 1px black solid;
+    background-color: gray;
+  }
+
+  input:focus{
+    border: none !important;
+  }
+
+  .Icon {
+    height: 36px;
+    width: 30px;
+    background-color: gray;
+    border: 1px black solid;
+    cursor: pointer;
+  }
+
+  .PlusIcon {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    position: relative;
+    left: 1px;
+    mat-icon {
+      position: relative;
+      top: 5px;
+      left: 2px;
+    }
+  }
+
+  .MinusIcon {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    position: relative;
+    left: -1px;
+    mat-icon {
+      position: relative;
+      top: -2px;
+      left: 2px;
+    }
+  }
+}
+
+.ErrorMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  font-size: 12px;
+  color: red;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
