@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     readonly sendData: SendDataService,
-    @Inject(DOCUMENT) private document: Document,
     readonly darkModeService: DarkModeService
   ) {}
 
@@ -40,13 +39,12 @@ export class AppComponent implements OnInit {
 
   toggleDarkMode(): void {
     this.darkModeService.darkMode = !this.darkModeService.darkMode;
-    const darkClassName = 'darkMode';
     if (this.darkModeService.darkMode) {
       sessionStorage.setItem('darkMode', 'isDarkMode');
-      return this.document.body.classList.add('darkMode');
+      return document.body.classList.add('darkMode');
     }
     sessionStorage.removeItem('darkMode');
-    this.document.body.classList.remove('darkMode');
+    document.body.classList.remove('darkMode');
   }
 
   openPerfil() {
