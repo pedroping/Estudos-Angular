@@ -6,14 +6,6 @@ import { CheckboxInputComponent } from './default-inputs/checkbox-input/checkbox
 import { DateInputComponent } from './default-inputs/date-input/date-input.component';
 import { PaginatorInputComponent } from './default-inputs/paginator-input/paginator-input.component';
 
-export type Fields =
-  | 'textInput'
-  | 'selectInput'
-  | 'checkboxInput'
-  | 'textareaInput'
-  | 'dateInput'
-  | 'pageInput';
-
 export type DynamicFormConfig = {
   type: Fields;
   label: string;
@@ -29,10 +21,17 @@ export type DynamicFormConfig = {
   fnLink?: string;
   formFn?: (params?: any) => void;
 };
-
 export interface DynamicControl {
   formConfig: DynamicFormConfig;
 }
+
+export type Fields =
+  | 'textInput'
+  | 'selectInput'
+  | 'checkboxInput'
+  | 'textareaInput'
+  | 'dateInput'
+  | 'pageInput';
 
 export type ComponentFields = {
   [Property in Fields]: Type<DynamicControl>;
@@ -47,4 +46,6 @@ export const DEFAULT_FORMS = {
   pageInput: PaginatorInputComponent,
 };
 
-export const DYNAMIC_FORMS = new InjectionToken<ComponentFields>('DYNAMIC_FORMS');
+export const DYNAMIC_FORMS = new InjectionToken<ComponentFields>(
+  'DYNAMIC_FORMS'
+);
