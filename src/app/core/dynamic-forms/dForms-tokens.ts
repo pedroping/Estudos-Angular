@@ -7,7 +7,7 @@ import { DateInputComponent } from './default-inputs/date-input/date-input.compo
 import { PaginatorInputComponent } from './default-inputs/paginator-input/paginator-input.component';
 
 export type DynamicFormConfig = {
-  type: Fields;
+  type: string;
   label: string;
   controlName: string;
   mask?: string;
@@ -25,16 +25,8 @@ export interface DynamicControl {
   formConfig: DynamicFormConfig;
 }
 
-export type Fields =
-  | 'textInput'
-  | 'selectInput'
-  | 'checkboxInput'
-  | 'textareaInput'
-  | 'dateInput'
-  | 'pageInput';
-
 export type ComponentFields = {
-  [Property in Fields]: Type<DynamicControl>;
+  [key: string]: Type<DynamicControl>;
 };
 
 export const DEFAULT_FORMS = {
