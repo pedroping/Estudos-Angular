@@ -14,8 +14,6 @@ export class CreateFormDirective implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    console.log("Teste");
-    
     const FormComp = this.viewContainerRef.createComponent(this.forms[this.FormConfig.type])
     FormComp.instance.formConfig = this.FormConfig
   }

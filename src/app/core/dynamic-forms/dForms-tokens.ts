@@ -6,8 +6,6 @@ import { CheckboxInputComponent } from './default-inputs/checkbox-input/checkbox
 import { DateInputComponent } from './default-inputs/date-input/date-input.component';
 import { PaginatorInputComponent } from './default-inputs/paginator-input/paginator-input.component';
 
-export interface IFormToken {}
-
 export type Fields =
   | 'textInput'
   | 'selectInput'
