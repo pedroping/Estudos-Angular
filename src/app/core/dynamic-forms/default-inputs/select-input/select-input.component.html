@@ -1,0 +1,12 @@
+<div pa-input>
+  <h3>{{ formConfig.label }}</h3>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ formConfig.placeholder }}</mat-label>
+    <mat-select [formControlName]="formConfig.controlName">
+      <mat-option>Limpar filtros</mat-option>
+      <mat-option [value]="option" *ngFor="let option of formConfig.options">{{
+        option
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

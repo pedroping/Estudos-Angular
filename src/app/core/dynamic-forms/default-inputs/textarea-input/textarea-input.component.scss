@@ -1,0 +1,26 @@
+:host {
+  h3 {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 9px;
+    color: var(--pa-secondary);
+  }
+  textarea {
+    padding: 8px;
+    border: 1px solid var(--pa-gray-02);
+    border-radius: 5px;
+    width: 100%;
+    height: 137.5px;
+    resize: none;
+    transition: border 0.2s ease-in-out;
+    background-color: var(--pa-background);
+    color: var(--pv-secondary);
+    margin-bottom: 20px;
+    &:focus {
+      border: 1px solid var(--pa-gray-04);
+    }
+    &:focus-visible {
+      outline: 0;
+    }
+  }
+}

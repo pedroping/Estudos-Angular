@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  ::ng-deep {
+    mat-checkbox {
+      margin-right: 10px;
+    }
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+      background-color: var(--pa-primary);
+    }
+  }
+}

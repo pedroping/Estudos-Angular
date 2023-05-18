@@ -12,6 +12,7 @@ import { AuthGuardService as AuthGuard } from '../core/guards/secretGuard.servic
 import { AlreadyLoggedGuardService as AlreadyLogged } from '../core/guards/alreadyLoggedGuard.service';
 import { CdkTableExampleComponent } from './cdk-Table-Example/cdk-Table-Example.component';
 import { CdkDragdropComponent } from './cdkDrag&Drop/cdkDrag&drop.component';
+import { FormExampleComponent } from './formExample/formExample.component';
 const routes: Routes = [
   {
     path: '',
@@ -69,6 +70,11 @@ const routes: Routes = [
         loadChildren: () =>(import('../Examples/cdkDrag&Drop/cdkDrag&drop.module').then(m => m.CdkDragdropModule)),
         component: CdkDragdropComponent
             
+      },
+      {
+        path: 'formExamples',
+        component: FormExampleComponent,
+        pathMatch: 'full',
       },
     ],
   },

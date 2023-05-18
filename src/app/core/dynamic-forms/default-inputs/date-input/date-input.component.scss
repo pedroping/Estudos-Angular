@@ -1,0 +1,104 @@
+:host {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  h3.ate {
+    margin: 8px 20px 0 20px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #595959;
+  }
+
+  div[pa-input-date] {
+    h3 {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 2px;
+      color: #595959;
+    }
+
+    ::ng-deep {
+      .mat-datepicker-toggle {
+        position: relative;
+        top: -12px;
+      }
+      .mat-form-field-appearance-outline .mat-form-field-outline {
+        background-color: var(--pa-white);
+        border-radius: 3px;
+      }
+      .mat-form-field-appearance-outline .mat-form-field-flex {
+        font-size: 12px;
+        height: 40px;
+      }
+      .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: 0;
+      }
+
+      .mat-form-field-appearance-outline .mat-form-field-label {
+        top: 8px;
+      }
+
+      .mat-select-value {
+        color: #595959;
+        position: relative;
+        top: 6px;
+      }
+
+      .mat-select-arrow-wrapper {
+        position: relative;
+        top: 9px;
+      }
+
+      .mat-form-field-label-wrapper {
+        top: 0;
+      }
+
+      .mat-form-field-wrapper {
+        padding: 0;
+      }
+
+      .form-error {
+        top: 35px;
+      }
+
+      .mat-form-field-appearance-outline .mat-form-field-prefix,
+      .mat-form-field-appearance-outline .mat-form-field-suffix {
+        left: 5px;
+        top: -5px;
+        mat-icon {
+          color: var(--pa-gray-04);
+        }
+      }
+
+      .mat-form-field:not(.mat-form-field-appearance-legacy)
+        .mat-form-field-prefix
+        .mat-icon-button,
+      .mat-form-field:not(.mat-form-field-appearance-legacy)
+        .mat-form-field-suffix
+        .mat-icon-button {
+        position: relative;
+        top: 12px;
+      }
+
+      input.mat-input-element {
+        margin-top: -0.0625em;
+        height: 31px;
+        position: relative;
+        bottom: 3px;
+        color: #595959;
+      }
+      &.mat-form-field-appearance-outline.mat-form-field-should-float {
+        .mat-form-field-label {
+          display: none;
+        }
+
+        .mat-form-field-outline-gap {
+          border-top-color: initial;
+        }
+      }
+      .mat-select-value-text {
+        color: #595959;
+      }
+    }
+  }
+}

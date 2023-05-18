@@ -1,0 +1,16 @@
+<div pa-input>
+  <h3>{{ formConfig.label }}</h3>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ formConfig.placeholder }}</mat-label>
+    <input
+      [formControlName]="formConfig.controlName"
+      matInput
+      type="text"  
+    />
+  </mat-form-field>
+  <span
+    *ngIf="formConfig.formFn"
+  >
+    {{ formConfig.fnLink ?? 'fnLink não definido' }}
+  </span>
+</div>

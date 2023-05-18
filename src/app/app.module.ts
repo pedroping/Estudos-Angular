@@ -60,6 +60,8 @@ import { CdkDragDropService } from './Examples/cdkDrag&Drop/services/cdkDragDrop
 import { UserDetailsComponent } from './Examples/cdkDrag&Drop/userDetails/userDetails.component';
 import { ExpandedRowDirective } from './core/directives/expand-row.directive';
 import { IncrementorComponent } from './core/componenets/incrementor/incrementor.component';
+import { DFormsModule } from './core/dynamic-forms/dForms.module';
+import { FormExampleComponent } from './Examples/formExample/formExample.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,6 +90,7 @@ import { IncrementorComponent } from './core/componenets/incrementor/incrementor
     UserDetailsComponent,
     ExpandedRowDirective,
     IncrementorComponent,
+    FormExampleComponent
   ],
   imports: [
     BrowserModule,
@@ -119,6 +122,7 @@ import { IncrementorComponent } from './core/componenets/incrementor/incrementor
     CdkTableModule,
     CdkDragdropModule,
     MatTabsModule,
+    DFormsModule
   ],
   providers: [
     AuthGuardService,

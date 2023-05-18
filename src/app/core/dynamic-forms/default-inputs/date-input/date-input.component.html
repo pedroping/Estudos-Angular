@@ -1,0 +1,14 @@
+<div pa-input-date>
+  <h3>{{ formConfig.label }}</h3>
+  <mat-form-field appearance="outline">
+    <mat-label>{{ formConfig.placeholder }}</mat-label>
+    <input
+      [formControlName]="formConfig.controlName"
+      matInput
+      [matDatepicker]="datePicker"
+    />
+    <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+    <mat-datepicker #datePicker></mat-datepicker>
+  </mat-form-field>
+</div>
+<h3 *ngIf="formConfig.rangeDate" class="ate">Até</h3>
