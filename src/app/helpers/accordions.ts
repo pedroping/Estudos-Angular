@@ -51,4 +51,9 @@ export const ACCORDIONS = [
     Icon: 'build',
     Rotas: [{ rota: '/Examples/CdkDragDrop', label: 'Cdk Drag e Drop' }],
   },
+  {
+    Title: 'Formulario Dinamicos',
+    Icon: 'input',
+    Rotas: [{ rota: '/Examples/formExamples', label: 'Formulario Dinamicos' }],
+  },
 ];
