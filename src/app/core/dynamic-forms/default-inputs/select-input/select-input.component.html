@@ -4,8 +4,8 @@
     <mat-label>{{ formConfig.placeholder }}</mat-label>
     <mat-select [formControlName]="formConfig.controlName">
       <mat-option>Limpar filtros</mat-option>
-      <mat-option [value]="option" *ngFor="let option of formConfig.options">{{
-        option
+      <mat-option [value]="option.key" *ngFor="let option of formConfig.options">{{
+        option.label
       }}</mat-option>
     </mat-select>
   </mat-form-field>

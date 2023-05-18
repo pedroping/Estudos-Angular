@@ -15,7 +15,7 @@ export type DynamicFormConfig = {
   prefix?: string;
   initialValue?: any;
   placeholder?: string;
-  options?: string[];
+  options?: { label: string; key: number }[];
   validation?: ValidatorFn[];
   rangeDate?: boolean;
   fnLink?: string;

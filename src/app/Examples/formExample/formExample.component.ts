@@ -11,7 +11,9 @@ export class FormExampleComponent implements OnInit {
   constructor() {}
 
   form = new FormGroup({
-    testeInput: new FormControl('')
+    testeInput1: new FormControl(''),
+    testeInput2: new FormControl(''),
+    testeSelect1: new FormControl(2)
   })
   
   formConfig: DynamicFormConfig[][] = [
@@ -19,17 +21,31 @@ export class FormExampleComponent implements OnInit {
       {
         type: 'textInput',
         label: 'Teste',
-        controlName: 'testeInput',
+        controlName: 'testeInput1',
       },
       {
         type: 'selectInput',
         label: 'Teste',
-        controlName: 'testeInput',
+        controlName: 'testeSelect1',
+        options: [
+          {
+            key: 1,
+            label: '1',
+          },
+          {
+            key: 2,
+            label: '2',
+          },
+          {
+            key: 3,
+            label: '3',
+          }
+        ]
       },
       {
         type: 'textInput',
         label: 'Teste',
-        controlName: 'testeInput',
+        controlName: 'testeInput2',
       },
     ],
   ];
