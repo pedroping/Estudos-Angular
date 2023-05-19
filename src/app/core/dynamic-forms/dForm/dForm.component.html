@@ -1,7 +1,10 @@
-<div class="container">
-  <ng-container *ngFor="let item of FormConfig">
-    <div class="formLine">
-      <div *ngFor="let form of item" appCreateForm [FormConfig]="form"></div>
-    </div>
-  </ng-container>
-</div>
+<div class="container formLine">
+    <ng-container *ngFor="let item of FormConfig">
+      <div *ngFor="let form of item">
+        <div appCreateForm [FormConfig]="form"></div>
+      </div>
+    </ng-container>
+  </div>
+
+
+ 
