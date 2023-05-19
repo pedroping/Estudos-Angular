@@ -13,13 +13,12 @@ export class ExpandUserService {
   constructor(private readonly tableServiceService: TableServiceService) {}
 
   changeUser(id: number){
+    const FindUser = this.Users$$.value.find((element) => element.id == id)
+    if(FindUser) return;
+    
     this.tableServiceService.getUser(id).subscribe(user => {
-      const FindUser = this.Users$$.value.find((element) => element == user)
-
-      if(!FindUser){
         this.Users$$.value.push(user)
         this.Users$$.next(this.Users$$.value)
-      }
     })
   }
 }

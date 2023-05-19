@@ -55,17 +55,12 @@ export class ExpandedRowDirective<T> {
     const User = this.tableElement as T & {
       id: number;
     };
+    
     if (hasOpen) {
       this.expandedStatusService.activedExapandedRow =
         this.expandedStatusService.activedExapandedRow.filter(
           (element: any) => element !== this.tableElement
         );
-      this.expandUserService.Users$$.next(
-        this.expandUserService.Users$$.value.filter(
-          (element) => element.id != User.id
-        )
-      );
-
       return;
     }
 
