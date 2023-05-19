@@ -87,36 +87,36 @@
     margin: 0px 20px 15px 0px;
   }
 
-  ::ng-deep {
-    .mat-radio-container {
-      transform: scale(0.6);
-    }
-    .mat-radio-label {
-      white-space: break-spaces;
-      font-size: 13px;
-      font-family: 'Open Sans', sans-serif;
-    }
-    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-      border-color: var(--pa-primary);
-    }
-    .mat-form-field-appearance-outline
-      .mat-form-field-outline-thick
-      .mat-form-field-outline-start,
-    .mat-form-field-appearance-outline
-      .mat-form-field-outline-thick
-      .mat-form-field-outline-end,
-    .mat-form-field-appearance-outline
-      .mat-form-field-outline-thick
-      .mat-form-field-outline-gap {
-      border-width: 1px;
-    }
-    .mat-radio-button.mat-accent .mat-radio-inner-circle,
-    .mat-radio-button.mat-accent
-      .mat-radio-ripple
-      .mat-ripple-element:not(.mat-radio-persistent-ripple),
-    .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
-    .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
-      background-color: var(--pa-primary);
-    }
-  }
+  // ::ng-deep {
+  //   .mat-radio-container {
+  //     transform: scale(0.6);
+  //   }
+  //   .mat-radio-label {
+  //     white-space: break-spaces;
+  //     font-size: 13px;
+  //     font-family: 'Open Sans', sans-serif;
+  //   }
+  //   .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  //     border-color: var(--pa-primary);
+  //   }
+  //   .mat-form-field-appearance-outline
+  //     .mat-form-field-outline-thick
+  //     .mat-form-field-outline-start,
+  //   .mat-form-field-appearance-outline
+  //     .mat-form-field-outline-thick
+  //     .mat-form-field-outline-end,
+  //   .mat-form-field-appearance-outline
+  //     .mat-form-field-outline-thick
+  //     .mat-form-field-outline-gap {
+  //     border-width: 1px;
+  //   }
+  //   .mat-radio-button.mat-accent .mat-radio-inner-circle,
+  //   .mat-radio-button.mat-accent
+  //     .mat-radio-ripple
+  //     .mat-ripple-element:not(.mat-radio-persistent-ripple),
+  //   .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple,
+  //   .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  //     background-color: var(--pa-primary);
+  //   }
+  // }
 }
