@@ -18,10 +18,7 @@ export class ExpandedRowDirective<T> {
   @Input() tableElement!: T;
   @Input() ExpandedRow!: number | string;
 
-  @HostBinding('style.cursor')
-  cursor!: string;
   @HostBinding('class.expanded-row') get expandedRow() {
-    
     this.elementRef.nativeElement.style.cursor = 'pointer';
 
     const isActive = this.expandedStatusService.activedExapandedRow.find(
@@ -55,7 +52,7 @@ export class ExpandedRowDirective<T> {
     const User = this.tableElement as T & {
       id: number;
     };
-    
+
     if (hasOpen) {
       this.expandedStatusService.activedExapandedRow =
         this.expandedStatusService.activedExapandedRow.filter(
