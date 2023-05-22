@@ -33,7 +33,7 @@ import { Observable, Subject, fromEvent, takeUntil, tap, timer } from 'rxjs';
 export class IncrementorComponent
   implements ControlValueAccessor, OnInit, AfterViewInit
 {
-  incrementorControl = new FormControl();
+  incrementorControl = new FormControl(0);
   disabled!: boolean;
   ngControl!: NgControl;
 
@@ -69,7 +69,7 @@ export class IncrementorComponent
     }
 
     this.incrementorControl.valueChanges.subscribe((val) => {
-      this.onChanged(val);
+      this.onChanged(val!);
       this.onTouched();
     });
   }

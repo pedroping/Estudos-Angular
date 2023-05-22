@@ -4,46 +4,45 @@
   justify-content: center;
 
   input {
-    height: 36px;
-    width: 30px;
+    height: 56px;
+    width: 40px;
     text-align: center;
     border: 1px black solid;
     background-color: gray;
-  }
-
-  input:focus{
-    border: none !important;
+    outline: none;
   }
 
   .Icon {
-    height: 36px;
-    width: 30px;
+    height: 56px;
+    width: 40px;
     background-color: gray;
     border: 1px black solid;
     cursor: pointer;
   }
 
   .PlusIcon {
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-right: none;
     position: relative;
     left: 1px;
     mat-icon {
       position: relative;
-      top: 5px;
-      left: 2px;
+      top: 15px;
+      left: 6px;
     }
   }
 
   .MinusIcon {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left: none;
     position: relative;
     left: -1px;
     mat-icon {
       position: relative;
-      top: -2px;
-      left: 2px;
+      top: 7px;
+      left: 6px;
     }
   }
 }
@@ -60,6 +59,7 @@
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type="number"] {
