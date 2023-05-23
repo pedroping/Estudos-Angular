@@ -35,7 +35,9 @@ body {
   .UserContent,
   .example-menu,
   .example-box,
-  .item {
+  .item,
+  .card,
+  .darkModeContent {
     background-color: #303030 !important;
     color: white !important;
   }

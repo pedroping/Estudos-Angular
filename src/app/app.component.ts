@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
-import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
 import { SendDataService } from './core/services/sendData.service';
 import { ACCORDIONS } from './helpers/accordions';
 import { DOCUMENT } from '@angular/common';
@@ -47,15 +46,4 @@ export class AppComponent implements OnInit {
     document.body.classList.remove('darkMode');
   }
 
-  openPerfil() {
-    this.dialog
-      .open(MeuPerfilComponent, {
-        width: '350px',
-        height: 'auto',
-        enterAnimationDuration: '0.5s',
-        exitAnimationDuration: '0.5s',
-      })
-      .afterClosed()
-      .subscribe((x) => {});
-  }
 }

@@ -26,7 +26,6 @@ import { DataBindingComponent } from './Examples/components/Data-binding/Data-bi
 import { StyleClassBidingComponent } from './Examples/components/StyleClassBiding/StyleClassBiding.component';
 import { EventBidingComponent } from './Examples/components/EventBiding/EventBiding.component';
 import { TwoWayDataBidingComponent } from './Examples/components/TwoWayDataBiding/TwoWayDataBiding.component';
-import { MeuPerfilComponent } from './core/MeuPerfil/MeuPerfil.component';
 import { HomeComponent } from './Home/Home.component';
 import { DynamicTableWithInputsComponent } from './Examples/Dynamic-Table-With-Inputs/Dynamic-Table-With-Inputs.component';
 import { MatSortModule } from '@angular/material/sort';
@@ -69,7 +68,6 @@ import { FormExampleComponent } from './Examples/formExample/formExample.compone
     StyleClassBidingComponent,
     EventBidingComponent,
     TwoWayDataBidingComponent,
-    MeuPerfilComponent,
     HomeComponent,
     DynamicTableWithInputsComponent,
     TableWithNgModelComponent,
