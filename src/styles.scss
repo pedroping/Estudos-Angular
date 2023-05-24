@@ -30,6 +30,11 @@ body {
     }
   }
 
+  div[mat-dialog-content]{
+    background-color: #303030 !important;
+    color: white !important;
+  }
+  
   .mainToolbar,
   .container,
   .UserContent,
@@ -37,7 +42,9 @@ body {
   .example-box,
   .item,
   .card,
-  .darkModeContent {
+  .darkModeContent,
+  .mat-dialog-container,
+  .mat-mdc-dialog-surface {
     background-color: #303030 !important;
     color: white !important;
   }
