@@ -1,0 +1,13 @@
+:host {
+  overflow: hidden;
+  height: 200px;
+
+  .container {
+    border-radius: 15px;
+    padding: 16px 16px 16px;
+  }
+
+  .actions{
+    padding-top: 10px;
+  }
+}

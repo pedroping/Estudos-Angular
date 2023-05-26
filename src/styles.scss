@@ -18,99 +18,128 @@ body {
   padding-top: 10px;
 }
 
-.darkMode .mat-drawer-container {
-  background-color: #303030;
-  color: white;
+cdk-dialog-container {
+  border-radius: 10px;
+  background-color: white;
+}
 
-  .sidenav {
-    background-color: #303030;
-    color: white;
-    h3 {
-      color: white;
-    }
+.mat-typography {
+  .cdk-overlay-pane.modalClass {
+    overflow-y: auto;
+    background-color: transparent !important;
+    background: transparent !important;
+    border-radius: 15px !important;
   }
+}
 
-  div[mat-dialog-content]{
-    background-color: #303030 !important;
-    color: white !important;
+.darkMode {
+  .modalClass {
+    background-color: #303030;
   }
   
-  .mainToolbar,
-  .container,
-  .UserContent,
-  .example-menu,
-  .example-box,
-  .item,
-  .card,
-  .darkModeContent,
-  .mat-dialog-container,
-  .mat-mdc-dialog-surface {
-    background-color: #303030 !important;
-    color: white !important;
+  cdk-dialog-container {
+    border-radius: 10px;
+    background-color: #303030;
   }
 
-  .mat-toolbar {
-    background-color: #303030 !important;
-  }
-
-  .headerActionsButtons {
-    color: white;
-  }
-
-  .headerActionsButtons:disabled {
-    color: rgb(179, 179, 179);
-  }
-
-  .formControl,
-  .form-control {
-    color: black !important;
-  }
-
-  .FormTable {
+  .mat-drawer-container {
     background-color: #303030;
     color: white;
-    th,
-    td {
+
+    .modalClass {
+      background-color: #303030;
+    }
+
+    .sidenav {
+      background-color: #303030;
       color: white;
+      h3 {
+        color: white;
+      }
     }
-  }
 
-  input,
-  select,
-  mat-select,
-  mat-option,
-  mat-label,
-  .mat-mdc-select-min-line,
-  .mat-mdc-select-arrow,
-  .mat-select-panel,
-  .mat-mdc-form-field-required-marker {
-    color: white !important;
-  }
-
-  .mat-select-panel,
-  .dc-checkbox__background {
-    background-color: white;
-  }
-
-  .cdkTableColors {
-    background-color: #303030;
-    color: white;
-
-    cdk-header-cell,
-    .darkColors {
-      color: white !important;
-    }
-  }
-
-  .header {
-    color: black !important;
-  }
-
-  .Incrementor {
-    input,
-    .Icon {
+    div[mat-dialog-content] {
       background-color: #303030 !important;
       color: white !important;
+    }
+
+    .mainToolbar,
+    .container,
+    .UserContent,
+    .example-menu,
+    .example-box,
+    .item,
+    .card,
+    .darkModeContent,
+    .mat-dialog-container,
+    .mat-mdc-dialog-surface {
+      background-color: #303030 !important;
+      color: white !important;
+    }
+
+    .mat-toolbar {
+      background-color: #303030 !important;
+    }
+
+    .headerActionsButtons {
+      color: white;
+    }
+
+    .headerActionsButtons:disabled {
+      color: rgb(179, 179, 179);
+    }
+
+    .formControl,
+    .form-control {
+      color: black !important;
+    }
+
+    .FormTable {
+      background-color: #303030;
+      color: white;
+      th,
+      td {
+        color: white;
+      }
+    }
+
+    input,
+    select,
+    mat-select,
+    mat-option,
+    mat-label,
+    .mat-mdc-select-min-line,
+    .mat-mdc-select-arrow,
+    .mat-select-panel,
+    .mat-mdc-form-field-required-marker {
+      color: white !important;
+    }
+
+    .mat-select-panel,
+    .dc-checkbox__background {
+      background-color: white;
+    }
+
+    .cdkTableColors {
+      background-color: #303030;
+      color: white;
+
+      cdk-header-cell,
+      .darkColors {
+        color: white !important;
+      }
+    }
+
+    .header {
+      color: black !important;
+    }
+
+    .Incrementor {
+      input,
+      .Icon {
+        background-color: #303030 !important;
+        color: white !important;
+      }
     }
   }
 }

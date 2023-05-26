@@ -8,7 +8,7 @@ import {
   AfterViewInit,
   Inject,
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {Dialog } from '@angular/cdk/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, map } from 'rxjs';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
@@ -100,7 +100,7 @@ export class TableWithNgModelComponent
   filter = new FormControl('');
 
   constructor(
-    public dialog: MatDialog,
+    public dialog: Dialog,
     @Inject(TABLESERVICE) private readonly tableServiceService: IToken,
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
@@ -313,7 +313,6 @@ export class TableWithNgModelComponent
   deleteRow(User_Row: Table_User) {
     this.dialog
       .open(CofirmeModalComponent, {
-        panelClass: 'confirmeModal',
         width: 'auto',
         data: {
           title: 'Deletar um usuario',
@@ -321,7 +320,7 @@ export class TableWithNgModelComponent
           type: 'oneUser',
         },
       })
-      .afterClosed()
+      .closed
       .subscribe((resp) => {
         if (!resp) return;
 
@@ -365,14 +364,14 @@ export class TableWithNgModelComponent
   deleteSelectRow() {
     this.dialog
       .open(CofirmeModalComponent, {
-        width: '550px',
+        width: '510px',
         data: {
           title: 'Deletar usuarios selecionados',
           text: 'Você deseja deletar todos os usuarios selecionados ?',
           type: 'manyUsers',
         },
       })
-      .afterClosed()
+      .closed
       .subscribe((resp) => {
         if (!resp) return;
 

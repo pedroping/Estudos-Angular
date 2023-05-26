@@ -1,22 +1,18 @@
-<mat-dialog-content [style.background-color]="darkModeService.darkMode ? '#303030' : ''">
-  <div mat-dialog-title>
-    <h4>{{ data.title }}</h4>
+<div class="container">
+  <h4>{{ data.title }}</h4>
+
+  <div>
+    <div *ngIf="data.type == 'oneUser'">
+      Você deseja deletar o usuario {{ data.user.name }} ?
+    </div>
+    <div *ngIf="data.type == 'manyUsers'">
+      {{ data.text }}
+    </div>
+    <div class="actions">
+      <button mat-flat-button mat-dialog-close color="accent" style="margin-right: 5px; color: white;">
+        No
+      </button>
+      <button mat-flat-button (click)="dialogRef.close(true)" color="warn">Ok</button>
+    </div>
   </div>
-  <div mat-dialog-content *ngIf="data.type == 'oneUser'">
-    Você deseja deletar o usuario {{ data.user.name }} ?
-  </div>
-  <div mat-dialog-content *ngIf="data.type == 'manyUsers'">
-    {{ data.text }}
-  </div>
-  <div mat-dialog-title>
-    <button
-      mat-flat-button
-      mat-dialog-close
-      color="accent"
-      style="margin-right: 5px; color: white;"
-    >
-      No
-    </button>
-    <button mat-flat-button [mat-dialog-close]="true" color="warn">Ok</button>
-  </div>
-</mat-dialog-content>
+</div>

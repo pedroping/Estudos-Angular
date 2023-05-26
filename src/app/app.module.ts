@@ -61,6 +61,7 @@ import { ExpandedRowDirective } from './core/directives/expand-row.directive';
 import { IncrementorComponent } from './core/componenets/incrementor/incrementor.component';
 import { DFormsModule } from './core/dynamic-forms/dForms.module';
 import { FormExampleComponent } from './Examples/formExample/formExample.component';
+import { DialogModule } from '@angular/cdk/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,7 +89,7 @@ import { FormExampleComponent } from './Examples/formExample/formExample.compone
     UserDetailsComponent,
     ExpandedRowDirective,
     IncrementorComponent,
-    FormExampleComponent
+    FormExampleComponent,
   ],
   imports: [
     BrowserModule,
@@ -120,7 +121,8 @@ import { FormExampleComponent } from './Examples/formExample/formExample.compone
     CdkTableModule,
     CdkDragdropModule,
     MatTabsModule,
-    DFormsModule
+    DFormsModule,
+    DialogModule,
   ],
   providers: [
     AuthGuardService,
