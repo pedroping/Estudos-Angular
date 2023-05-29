@@ -36,10 +36,16 @@ cdk-dialog-container {
   .modalClass {
     background-color: #303030;
   }
-  
+
   cdk-dialog-container {
     border-radius: 10px;
     background-color: #303030;
+
+    app-cofirme-modal {
+      .container {
+        background-color: #303030 !important;
+      }
+    }
   }
 
   .mat-drawer-container {

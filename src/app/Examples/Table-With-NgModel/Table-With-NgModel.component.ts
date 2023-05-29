@@ -364,7 +364,7 @@ export class TableWithNgModelComponent
   deleteSelectRow() {
     this.dialog
       .open(CofirmeModalComponent, {
-        width: '510px',
+        width: '410px',
         data: {
           title: 'Deletar usuarios selecionados',
           text: 'Você deseja deletar todos os usuarios selecionados ?',
