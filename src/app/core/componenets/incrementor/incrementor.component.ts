@@ -16,7 +16,13 @@ import {
   FormGroup,
   NgControl,
 } from '@angular/forms';
-import { Observable, Subject, fromEvent, takeUntil, tap, timer } from 'rxjs';
+import {
+  Observable,
+  fromEvent,
+  merge,
+  takeUntil,
+  timer,
+} from 'rxjs';
 
 @Component({
   selector: 'app-incrementor',
@@ -45,7 +51,10 @@ export class IncrementorComponent
 
   PlusIconUp$!: Observable<unknown>;
   MinusIconUp$!: Observable<unknown>;
- 
+
+  PlusIconLeave$!: Observable<unknown>;
+  MinusIconLeave$!: Observable<unknown>;
+
   constructor(
     @Optional() private controlContainer: ControlContainer,
     private injector: Injector
@@ -77,6 +86,12 @@ export class IncrementorComponent
   ngAfterViewInit() {
     this.PlusIconUp$ = fromEvent(this.PlusIcon.nativeElement, 'mouseup');
     this.MinusIconUp$ = fromEvent(this.MinusIcon.nativeElement, 'mouseup');
+
+    this.PlusIconLeave$ = fromEvent(this.PlusIcon.nativeElement, 'mouseleave');
+    this.MinusIconLeave$ = fromEvent(
+      this.MinusIcon.nativeElement,
+      'mouseleave'
+    );
   }
 
   writeValue(value: number) {
@@ -97,7 +112,7 @@ export class IncrementorComponent
 
   upClick() {
     timer(0, 100)
-      .pipe(takeUntil(this.PlusIconUp$))
+      .pipe(takeUntil(merge(this.PlusIconUp$, this.PlusIconLeave$)))
       .subscribe(() => {
         this.caclValue(1);
       });
@@ -105,7 +120,7 @@ export class IncrementorComponent
 
   downClick() {
     timer(0, 100)
-      .pipe(takeUntil(this.MinusIconUp$))
+      .pipe(takeUntil(merge(this.MinusIconUp$, this.MinusIconLeave$)))
       .subscribe(() => {
         this.caclValue(-1);
       });
