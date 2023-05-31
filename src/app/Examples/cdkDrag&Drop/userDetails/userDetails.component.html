@@ -6,7 +6,7 @@
       <p class="mat-caption">{{ user.email }}</p>
       <p class="mat-caption">User Id: {{ user.id }}</p>
     </section>
-    <ul class="drop-area" cdkDropList [cdkDropListData]="user.photos" (cdkDropListDropped)="drop($event)">
+    <ul class="drop-area" cdkDropListOrientation="horizontal" cdkDropList [cdkDropListData]="user.photos" (cdkDropListDropped)="drop($event)">
       <li *ngFor="let photo of user.photos" cdkDrag>
         <a [routerLink]="['/Examples/CdkDragDrop', { outlets: { details: ['photo', photo.id] } }]">
           <img [src]="photo.thumbnailUrl" width="60" style="padding-left: 10px;" />

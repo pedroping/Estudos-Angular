@@ -11,7 +11,10 @@ import {
 } from '../services/cdkDragDrop.service';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable, of } from 'rxjs';
-import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-userDetails',
