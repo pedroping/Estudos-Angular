@@ -55,6 +55,16 @@ cdk-dialog-container {
     background-color: #303030;
   }
 
+  .mat-mdc-tooltip-trigger svg {
+    filter: brightness(0) invert(1);
+  }
+
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__leading{
+    border-color: white !important;
+  }
+
   cdk-dialog-container {
     border-radius: 10px;
     background-color: #303030;
