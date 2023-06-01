@@ -41,6 +41,16 @@ cdk-dialog-container {
 }
 
 .darkMode {
+  .mat-mdc-checkbox.mat-accent {
+    color: white !important;
+    --mdc-checkbox-unselected-hover-icon-color: white !important;
+    --mdc-checkbox-unselected-icon-color: white !important;
+  }
+
+  .cdk-drop-list .example-list {
+    background-color: #303030 !important;
+  }
+
   .modalClass {
     background-color: #303030;
   }
