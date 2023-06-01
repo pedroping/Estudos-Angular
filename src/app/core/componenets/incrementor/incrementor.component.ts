@@ -17,15 +17,10 @@ import {
   NgControl,
 } from '@angular/forms';
 import {
-  BehaviorSubject,
   Observable,
   fromEvent,
-  interval,
   merge,
-  switchMap,
-  take,
   takeUntil,
-  tap,
   timer,
 } from 'rxjs';
 
@@ -59,11 +54,6 @@ export class IncrementorComponent
 
   PlusIconLeave$!: Observable<unknown>;
   MinusIconLeave$!: Observable<unknown>;
-
-  tickCount = 0;
-
-  tickPlusMultiple$ = new BehaviorSubject<number>(1);
-  tickMinusMultiple$ = new BehaviorSubject<number>(1);
 
   constructor(
     @Optional() private controlContainer: ControlContainer,
@@ -108,7 +98,7 @@ export class IncrementorComponent
     this.incrementorControl.setValue(+value, { emitEvent: false });
   }
 
-  registerOnChange(fn: (value: number) => void) {
+  registerOnChange(fn: (stars: number) => void) {
     this.onChanged = fn;
   }
 
@@ -121,52 +111,18 @@ export class IncrementorComponent
   }
 
   upClick() {
-    this.tickPlusMultiple$
-      .pipe(
-        take(3),
-        switchMap((val) =>
-          interval(100 / val).pipe(
-            takeUntil(
-              merge(this.PlusIconUp$, this.PlusIconLeave$).pipe(
-                tap(() => {
-                  this.tickCount = 0;
-                  this.tickPlusMultiple$.next(1);
-                })
-              )
-            )
-          )
-        )
-      )
+    timer(0, 100)
+      .pipe(takeUntil(merge(this.PlusIconUp$, this.PlusIconLeave$)))
       .subscribe(() => {
-        this.tickCount++;
         this.caclValue(1);
-        if (this.tickCount > 100) this.tickPlusMultiple$.next(100);
-        else if (this.tickCount > 10) this.tickPlusMultiple$.next(10);
       });
   }
 
   downClick() {
-    this.tickMinusMultiple$
-      .pipe(
-        take(3),
-        switchMap((val) =>
-          interval(100 / val).pipe(
-            takeUntil(
-              merge(this.MinusIconUp$, this.MinusIconLeave$).pipe(
-                tap(() => {
-                  this.tickCount = 0;
-                  this.tickMinusMultiple$.next(1);
-                })
-              )
-            )
-          )
-        )
-      )
+    timer(0, 100)
+      .pipe(takeUntil(merge(this.MinusIconUp$, this.MinusIconLeave$)))
       .subscribe(() => {
-        this.tickCount++;
         this.caclValue(-1);
-        if (this.tickCount > 100) this.tickMinusMultiple$.next(100);
-        else if (this.tickCount > 10) this.tickMinusMultiple$.next(10);
       });
   }
 
