@@ -41,13 +41,19 @@ cdk-dialog-container {
 }
 
 .darkMode {
-  .mat-mdc-checkbox.mat-accent {
+  .mat-mdc-checkbox.mat-accent,
+  .mdc-list-item__primary-text {
     color: white !important;
     --mdc-checkbox-unselected-hover-icon-color: white !important;
     --mdc-checkbox-unselected-icon-color: white !important;
   }
 
-  .cdk-drop-list .example-list {
+  div[cdkdroplist] {
+    background-color: #303030 !important;
+  }
+
+  .cdk-drop-list .example-list,
+  .mdc-menu-surface {
     background-color: #303030 !important;
   }
 
@@ -61,8 +67,8 @@ cdk-dialog-container {
 
   .mdc-notched-outline__notch,
   .mdc-notched-outline__trailing,
-  .mdc-notched-outline__leading{
-    border-color: #9F9F9F !important;
+  .mdc-notched-outline__leading {
+    border-color: #9f9f9f !important;
   }
 
   cdk-dialog-container {
