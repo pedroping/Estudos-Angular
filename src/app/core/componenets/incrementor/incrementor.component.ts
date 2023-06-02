@@ -16,13 +16,7 @@ import {
   FormGroup,
   NgControl,
 } from '@angular/forms';
-import {
-  Observable,
-  fromEvent,
-  merge,
-  takeUntil,
-  timer,
-} from 'rxjs';
+import { Observable, fromEvent, merge, takeUntil, tap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-incrementor',
@@ -54,6 +48,8 @@ export class IncrementorComponent
 
   PlusIconLeave$!: Observable<unknown>;
   MinusIconLeave$!: Observable<unknown>;
+
+  tick = 0;
 
   constructor(
     @Optional() private controlContainer: ControlContainer,
@@ -112,17 +108,33 @@ export class IncrementorComponent
 
   upClick() {
     timer(0, 100)
-      .pipe(takeUntil(merge(this.PlusIconUp$, this.PlusIconLeave$)))
+      .pipe(
+        takeUntil(
+          merge(this.PlusIconUp$, this.PlusIconLeave$).pipe(
+            tap(() => (this.tick = 0))
+          )
+        )
+      )
       .subscribe(() => {
-        this.caclValue(1);
+        this.tick++;
+        console.log((this.tick / 5 > 1 ? +((this.tick / 5).toFixed(0)) : 1));
+        
+        this.caclValue(1 * (this.tick / 5 > 1 ? +((this.tick / 5).toFixed(0)) : 1));
       });
   }
 
   downClick() {
     timer(0, 100)
-      .pipe(takeUntil(merge(this.MinusIconUp$, this.MinusIconLeave$)))
+      .pipe(
+        takeUntil(
+          merge(this.MinusIconUp$, this.MinusIconLeave$).pipe(
+            tap(() => (this.tick = 0))
+          )
+        )
+      )
       .subscribe(() => {
-        this.caclValue(-1);
+        this.tick++;
+        this.caclValue(-1 * (this.tick / 5 > 1 ? +((this.tick / 5).toFixed(0)) : 1));
       });
   }
 
