@@ -117,9 +117,7 @@ export class IncrementorComponent
       )
       .subscribe(() => {
         this.tick++;
-        console.log((this.tick / 5 > 1 ? +((this.tick / 5).toFixed(0)) : 1));
-        
-        this.caclValue(1 * (this.tick / 5 > 1 ? +((this.tick / 5).toFixed(0)) : 1));
+        this.caclValue(1 * (this.tick / 5 > 1 ? +((this.tick / 3).toFixed(0)) : 1));
       });
   }
 
@@ -134,7 +132,7 @@ export class IncrementorComponent
       )
       .subscribe(() => {
         this.tick++;
-        this.caclValue(-1 * (this.tick / 5 > 1 ? +((this.tick / 5).toFixed(0)) : 1));
+        this.caclValue(-1 * (this.tick / 5 > 1 ? +((this.tick / 3).toFixed(0)) : 1));
       });
   }
 
