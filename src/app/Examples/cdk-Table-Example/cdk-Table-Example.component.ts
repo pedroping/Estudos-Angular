@@ -49,10 +49,10 @@ export class CdkTableExampleComponent implements OnInit {
 
   constValue = 0;
 
-  DataSource = new BehaviorSubject<AbstractControl[]>([])
+  DataSource = new BehaviorSubject<AbstractControl[]>([]);
 
   constructor() {
-    this.DataSource.next(this.exampleDatabase.TableFromArray.controls)
+    this.DataSource.next(this.exampleDatabase.TableFromArray.controls);
     this.tablelength = this.exampleDatabase.data.length;
   }
 
@@ -61,9 +61,9 @@ export class CdkTableExampleComponent implements OnInit {
     this.exampleDatabase.TableFromArray.valueChanges
       .pipe(startWith(this.exampleDatabase.TableFromArray.value))
       .subscribe((controlsValue: UserData[]) => {
-        this.constValue = controlsValue.reduce((a,b) => {
-          return a + Number(b.valor)
-        }, 0)        
+        this.constValue = controlsValue.reduce((a, b) => {
+          return a + Number(b.valor);
+        }, 0);
       });
   }
 
@@ -74,12 +74,17 @@ export class CdkTableExampleComponent implements OnInit {
     this.expandedRow = [];
     const CopiedData = this.exampleDatabase.DefaultData;
     const index = e.pageIndex * e.pageSize;
-    this.DataSource.next(
-      CopiedData.slice(index, index + e.pageSize)
+    this.DataSource.next(CopiedData.slice(index, index + e.pageSize));
+  }
+
+  getActualIndex(index: number) {
+    return (
+      index + this.actualPaginator.pageSize * this.actualPaginator.pageIndex
     );
   }
 
   expandRow(index: number) {
+    const controlIndex = this.getActualIndex(index);
     if (this.expandedRow.indexOf(index) > -1) {
       this.containers.toArray()[index]?.clear();
       this.expandedRow = this.expandedRow.filter((x) => x != index);
@@ -91,7 +96,7 @@ export class CdkTableExampleComponent implements OnInit {
       [index]?.createComponent(TableInlineComponent);
 
     const Control = this.exampleDatabase.dataChange.value;
-    messageComponent.instance.userForm = Control[index] as FormGroup;
+    messageComponent.instance.userForm = Control[controlIndex] as FormGroup;
   }
 
   removeElement(index: number) {
