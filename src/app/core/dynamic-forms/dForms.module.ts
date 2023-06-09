@@ -15,7 +15,9 @@ import { PaginatorInputComponent } from './default-inputs/paginator-input/pagina
 import { SelectInputComponent } from './default-inputs/select-input/select-input.component';
 import { TextInputComponent } from './default-inputs/text-input/text-input.component';
 import { TextareaInputComponent } from './default-inputs/textarea-input/textarea-input.component';
-import { DEFAULT_FORMS, DYNAMIC_FORMS } from './dForms-tokens';
+import {
+  DYNAMIC_FORMS_DEFAULT_PROVIDERS,
+} from './dForms-tokens';
 import { DFormComponent } from './dForm/dForm.component';
 import { CreateFormDirective } from './createForm.directive';
 
@@ -30,9 +32,9 @@ import { CreateFormDirective } from './createForm.directive';
     MatSelectModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
-  declarations: [	
+  declarations: [
     CheckboxInputComponent,
     DateInputComponent,
     PaginatorInputComponent,
@@ -40,18 +42,9 @@ import { CreateFormDirective } from './createForm.directive';
     TextInputComponent,
     TextareaInputComponent,
     DFormComponent,
-    CreateFormDirective
-   ],
-  exports: [
-    DFormComponent,
+    CreateFormDirective,
   ],
-  providers: [
-    {
-      provide: DYNAMIC_FORMS,
-      useValue: DEFAULT_FORMS
-    }
-  ]
+  exports: [DFormComponent],
+  providers: [DYNAMIC_FORMS_DEFAULT_PROVIDERS],
 })
-
-
 export class DFormsModule {}
