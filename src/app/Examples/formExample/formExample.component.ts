@@ -13,6 +13,7 @@ export class FormExampleComponent implements OnInit {
   form = new FormGroup({
     testeInput1: new FormControl(''),
     testeInput2: new FormControl(''),
+    testeInput3: new FormControl(''),
     testeSelect1: new FormControl(2)
   })
   
@@ -42,12 +43,19 @@ export class FormExampleComponent implements OnInit {
           }
         ]
       },
+    ],
+    [
       {
         type: 'textInput',
         label: 'Teste',
         controlName: 'testeInput2',
       },
-    ],
+      {
+        type: 'textInput',
+        label: 'Teste',
+        controlName: 'testeInput3',
+      },
+    ]
   ];
 
   ngOnInit() {}

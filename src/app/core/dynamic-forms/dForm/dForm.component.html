@@ -1,9 +1,9 @@
-<div class="container formLine">
-    <ng-container *ngFor="let item of FormConfig">
-      <div *ngFor="let form of item">
-        <div appCreateForm [FormConfig]="form"></div>
+<div class="container">
+    <div *ngFor="let item of FormConfig" class="formLine">
+      <div *ngFor="let form of item" class="w-100">
+        <div appCreateForm [FormConfig]="form" class="w-100"></div>
       </div>
-    </ng-container>
+    </div>
   </div>
 
 
