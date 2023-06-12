@@ -15,9 +15,6 @@ import { PaginatorInputComponent } from './default-inputs/paginator-input/pagina
 import { SelectInputComponent } from './default-inputs/select-input/select-input.component';
 import { TextInputComponent } from './default-inputs/text-input/text-input.component';
 import { TextareaInputComponent } from './default-inputs/textarea-input/textarea-input.component';
-import {
-  DYNAMIC_FORMS_DEFAULT_PROVIDERS,
-} from './dForms-tokens';
 import { DFormComponent } from './dForm/dForm.component';
 import { CreateFormDirective } from './createForm.directive';
 
@@ -45,6 +42,5 @@ import { CreateFormDirective } from './createForm.directive';
     CreateFormDirective,
   ],
   exports: [DFormComponent],
-  providers: [DYNAMIC_FORMS_DEFAULT_PROVIDERS],
 })
 export class DFormsModule {}

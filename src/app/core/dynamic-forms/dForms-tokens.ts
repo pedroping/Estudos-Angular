@@ -39,10 +39,7 @@ export const DEFAULT_FORMS = {
 };
 
 export const DYNAMIC_FORMS = new InjectionToken<ComponentFields>(
-  'DYNAMIC_FORMS'
+  'DYNAMIC_FORMS',
+  { factory: () => DEFAULT_FORMS }
 );
 
-export const DYNAMIC_FORMS_DEFAULT_PROVIDERS = {
-  provide: DYNAMIC_FORMS,
-  useValue: DEFAULT_FORMS,
-};
