@@ -5,6 +5,7 @@ import {
   ViewChild,
   OnChanges,
   Inject,
+  inject,
 } from '@angular/core';
 import {
   AbstractFormGroupDirective,
@@ -69,13 +70,14 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   });
 
   lorem =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec dui ut dui varius accumsan nec congue nisi. Cras vel ligula eleifend, consequat massa vitae, bibendum nulla. Vivamus feugiat sem purus, vel mollis sem consectetur ac. Fusce maximus purus ut tellus blandit, a faucibus neque suscipit. In vel rutrum tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec maximus mattis nibh. Suspendisse cursus orci sed fermentum efficitur. Nam et justo id mi dictum ullamcorper.';
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec dui ut dui varius accumsan nec congue nisi.Cras vel ligula eleifend, consequat massa vitae, bibendum nulla. Vivamus feugiat sem purus, vel mollis sem consectetur ac. Fusce maximus purus ut tellus blandit, a faucibus neque suscipit. In vel rutrum tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec maximus mattis nibh. Suspendisse cursus orci sed fermentum efficitur. Nam et justo id mi dictum ullamcorper.';
   constructor(
-    @Inject(TABLESERVICE) private readonly tableService: IToken,
     private readonly changeDetectorRef: ChangeDetectorRef,
     private activeRoute: ActivatedRoute,
     private readonly expandUserService: ExpandUserService
   ) {}
+
+  tableService = inject(TABLESERVICE);
 
   ngOnInit() {
     this.getAllUser();
