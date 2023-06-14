@@ -100,12 +100,13 @@ export class CdkTableExampleComponent implements OnInit {
   }
 
   removeElement(index: number) {
+    debugger;
     if (this.containers.toArray()[index]) {
       this.containers.toArray()[index]?.clear();
       this.expandedRow = this.expandedRow.filter((x) => x != index);
     }
 
-    this.exampleDatabase.TableFromArray.removeAt(index);
+    this.exampleDatabase.TableFromArray.removeAt(this.getActualIndex(index));
     this.exampleDatabase.dataChange.next(
       this.exampleDatabase.TableFromArray.controls
     );
