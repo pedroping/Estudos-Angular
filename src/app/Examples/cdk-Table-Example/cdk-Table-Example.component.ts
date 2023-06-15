@@ -1,10 +1,12 @@
 import { DataSource } from '@angular/cdk/collections';
 import {
   Component,
+  Injectable,
   OnInit,
   QueryList,
   ViewChildren,
   ViewContainerRef,
+  inject,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { BehaviorSubject, Observable, startWith } from 'rxjs';
@@ -42,7 +44,7 @@ export class CdkTableExampleComponent implements OnInit {
     'valor',
     'excluir',
   ];
-  exampleDatabase = new ExampleDatabase();
+  exampleDatabase = inject(ExampleDatabase);
   tablelength: number;
   actualPaginator: PageEvent = { pageIndex: 0, pageSize: 10, length: 100 };
   expandedRow: number[] = [];
@@ -100,7 +102,6 @@ export class CdkTableExampleComponent implements OnInit {
   }
 
   removeElement(index: number) {
-    debugger;
     if (this.containers.toArray()[index]) {
       this.containers.toArray()[index]?.clear();
       this.expandedRow = this.expandedRow.filter((x) => x != index);
@@ -114,6 +115,9 @@ export class CdkTableExampleComponent implements OnInit {
   }
 }
 
+@Injectable({
+  providedIn: 'root',
+})
 export class ExampleDatabase {
   TableForm = new FormGroup({
     TableFromArray: new FormArray([]),
