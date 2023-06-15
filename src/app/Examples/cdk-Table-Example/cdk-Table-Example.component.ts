@@ -4,11 +4,12 @@ import {
   Injectable,
   OnInit,
   QueryList,
+  ViewChild,
   ViewChildren,
   ViewContainerRef,
   inject,
 } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { BehaviorSubject, Observable, startWith } from 'rxjs';
 import { COLORS, NAMES } from 'src/app/core/models';
 import { TableInlineComponent } from './table-inline/table-inline.component';
@@ -35,6 +36,8 @@ export interface UserData {
 export class CdkTableExampleComponent implements OnInit {
   @ViewChildren('row', { read: ViewContainerRef })
   containers!: QueryList<ViewContainerRef>;
+
+  @ViewChild('paginator') paginator?: MatPaginator;
 
   displayedColumns = [
     'userId',
@@ -76,6 +79,11 @@ export class CdkTableExampleComponent implements OnInit {
     this.expandedRow = [];
     const CopiedData = this.exampleDatabase.DefaultData;
     const index = e.pageIndex * e.pageSize;
+
+    if(this.paginator){
+      this.paginator!.pageIndex = this.actualPaginator.pageIndex
+    }
+    
     this.DataSource.next(CopiedData.slice(index, index + e.pageSize));
   }
 
@@ -111,6 +119,14 @@ export class CdkTableExampleComponent implements OnInit {
     this.exampleDatabase.dataChange.next(
       this.exampleDatabase.TableFromArray.controls
     );
+    this.tablelength = this.exampleDatabase.data.length;
+    console.log(this.actualPaginator);
+
+    this.actualPaginator.pageIndex = 0;
+    this.actualPaginator.previousPageIndex = null as any;
+
+    console.log(this.paginator);
+    
     this.handlePageEvent(this.actualPaginator);
   }
 }

@@ -69,7 +69,7 @@
   
         </cdk-table>
         <mat-paginator (page)="handlePageEvent($event)" [length]="tablelength" [pageSize]="10" class="cdkTableColors"
-          style="height: 50px;" [pageSizeOptions]="[5, 10, 20]" aria-label="Select page">
+          style="height: 50px;" [pageSizeOptions]="[5, 10, 20]" aria-label="Select page" #paginator>
         </mat-paginator>
       </div>
     </div>
