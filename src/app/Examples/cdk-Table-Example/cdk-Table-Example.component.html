@@ -48,7 +48,7 @@
           <ng-container cdkColumnDef="valor">
             <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">Valor</cdk-header-cell>
             <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
-              {{ row?.get('valor')?.value }}
+              {{ row?.get('valor')?.value }} - {{constValue}}
             </cdk-cell>
           </ng-container>
   
@@ -74,5 +74,4 @@
       </div>
     </div>
   </div>
-  {{constValue}}
 </div>

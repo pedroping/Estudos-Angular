@@ -8,6 +8,10 @@
 
 .mat-toolbar {
   background-color: transparent !important;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .sidenav {
@@ -37,18 +41,6 @@
 
 .header {
   padding-left: 10px;
-}
-
-:host {
-  ::ng-deep {
-    app-side-nav-fechada {
-      position: absolute;
-      left: 0;
-      z-index: 1;
-      height: 100%;
-      width: 84px !important;
-    }
-  }
 }
 
 .toolbarIcon {
@@ -140,4 +132,23 @@
   :hover {
     color: lightblue;
   }
+}
+
+mat-drawer-content {
+  align-items: flex-start;
+}
+
+.drawer-content {
+  width: 100%;
+  padding-left: 65px;
+}
+
+.mat-drawer-content,
+.example-container {
+  min-height: 100vh;
+}
+
+button,
+mat-form-field {
+  width: 250px;
 }

@@ -1,5 +1,38 @@
 <app-loader></app-loader>
-<mat-sidenav-container class="example-container">
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="over" #drawer class="sidenav">
+    <mat-toolbar style="background-color: transparent">
+      <h3>Minha Sidenav</h3>
+    </mat-toolbar>
+    <div class="accordions">
+      <cdk-accordion class="example-accordion">
+        <app-accordion *ngFor="let item of Accordions" [Title]="item.Title" [Icon]="item.Icon"
+          [Rotas]="item.Rotas"></app-accordion>
+      </cdk-accordion>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <mat-drawer-container class="example-container" [hasBackdrop]="false">
+      <mat-drawer mode="push" [opened]="true" class="mat-elevation-z2">
+        <app-closed-sidenav></app-closed-sidenav>
+      </mat-drawer>
+      <mat-drawer-content class='drawer-content'>
+        <div>
+          <mat-toolbar class="mainToolbar">
+            <mat-icon (click)="drawer.toggle()" class="toolbarIcon">menu</mat-icon>
+            <span class="example-spacer"></span>
+            <mat-icon *ngIf="!darkModeService.darkMode" (click)="toggleDarkMode()"
+              style="cursor: pointer;">dark_mode</mat-icon>
+            <mat-icon *ngIf="darkModeService.darkMode" (click)="toggleDarkMode()"
+              style="cursor: pointer;">light_mode</mat-icon>
+          </mat-toolbar>
+          <router-outlet></router-outlet>
+        </div>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </mat-drawer-content>
+</mat-drawer-container>
+<!-- <mat-sidenav-container class="example-container">
   <mat-sidenav #sidenav class="sidenav">
     <mat-toolbar style="background-color: transparent">
       <h3>Minha Sidenav</h3>
@@ -23,4 +56,4 @@
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->
