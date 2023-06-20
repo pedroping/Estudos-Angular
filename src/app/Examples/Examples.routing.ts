@@ -20,59 +20,70 @@ const routes: Routes = [
     children: [
       {
         path: 'Data-binding',
+        title: 'Data Biding',
         component: DataBindingComponent,
         pathMatch: 'full',
       },
       {
         path: 'StyleClass-binding',
+        title: 'StyleClass Cinding',
         component: StyleClassBidingComponent,
         pathMatch: 'full',
       },
       {
         path: 'Event-binding',
+        title: 'Event Binding',
         component: EventBidingComponent,
         pathMatch: 'full',
       },
       {
         path: 'TwoWayData-binding',
+        title: 'Two Way Data Binding',
         component: TwoWayDataBidingComponent,
         pathMatch: 'full',
       },
       {
         path: 'TableWithFormControls',
+        title: 'Table With Form Controls',
         component: DynamicTableWithInputsComponent,
         pathMatch: 'full',
       },
       {
         path: 'TableWithNgModel',
+        title: 'Table With Ng Model',
         component: TableWithNgModelComponent,
         pathMatch: 'full',
       },
       {
         path: 'login',
+        title: 'Login',
         component: LoginPageComponent,
         pathMatch: 'full',
         canActivate: [AlreadyLogged],
       },
       {
         path: 'LugarSecreto',
+        title: 'Lugar Secreto',
         component: PaginaProtegidaComponent,
         pathMatch: 'full',
         canActivate: [AuthGuard],
       },
       {
         path: 'CdkTable',
+        title: 'Cdk Table',
         component: CdkTableExampleComponent,
         pathMatch: 'full',
       },
       {
         path: 'CdkDragDrop',
+        title: 'Cdk Drag Drop',
         loadChildren: () =>(import('../Examples/cdkDrag&Drop/cdkDrag&drop.module').then(m => m.CdkDragdropModule)),
         component: CdkDragdropComponent
             
       },
       {
         path: 'formExamples',
+        title: 'Form Examples',
         component: FormExampleComponent,
         pathMatch: 'full',
       },
