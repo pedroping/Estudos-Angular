@@ -120,7 +120,7 @@ cdk-dialog-container {
     .mat-toolbar {
       background-color: #303030 !important;
     }
-
+    mat-icon,
     .headerActionsButtons {
       color: white;
     }
@@ -181,5 +181,27 @@ cdk-dialog-container {
         color: white !important;
       }
     }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  app-closed-sidenav {
+    display: none !important;
+  }
+  .drawer-content {
+    padding-left: 0px !important;
+  }
+  .sidenav{
+    width: 100% !important;
+    cdk-accordion-item{
+      width: 98% !important;
+    }
+    cdk-accordion,
+    .example-accordion {
+      display: block;
+      max-width: 98% !important;
+      width: 98% !important;
+    }
+
   }
 }

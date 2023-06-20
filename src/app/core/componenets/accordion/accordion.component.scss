@@ -1,7 +1,6 @@
 :host {
   cdk-accordion-item {
     padding-bottom: 5px;
-    width: 250px;
   }
 
   .example-accordion-item-header {
@@ -18,11 +17,6 @@
       border-radius: 10px;
     }
   }
-}
-
-.example-accordion {
-  display: block;
-  max-width: 250px;
 }
 
 .example-accordion-item {

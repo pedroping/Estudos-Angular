@@ -91,7 +91,6 @@
 
 .example-accordion {
   display: block;
-  max-width: 250px;
 }
 
 .example-accordion-item {
@@ -151,4 +150,11 @@ mat-drawer-content {
 button,
 mat-form-field {
   width: 250px;
+}
+
+.sidenavToolbar{
+  background-color: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

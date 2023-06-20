@@ -1,8 +1,8 @@
 <app-loader></app-loader>
 <mat-drawer-container class="example-container">
   <mat-drawer mode="over" #drawer class="sidenav">
-    <mat-toolbar style="background-color: transparent">
-      <h3>Minha Sidenav</h3>
+    <mat-toolbar class="sidenavToolbar">
+      <h3>Minha Sidenav</h3><mat-icon (click)="drawer.close()">close</mat-icon> 
     </mat-toolbar>
     <div class="accordions">
       <cdk-accordion class="example-accordion">

@@ -19,7 +19,7 @@ import { DarkModeService } from './core/services/darkMode.service';
 export class AppComponent implements OnInit {
   darkMode = false;
 
-  @ViewChild('sidenav') sidenav!: MatSidenav;
+  @ViewChild('drawer') sidenav!: MatSidenav;
 
   title = 'Estudo_Angular';
   Accordions = ACCORDIONS;
