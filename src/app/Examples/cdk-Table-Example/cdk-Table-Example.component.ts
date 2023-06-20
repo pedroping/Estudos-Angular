@@ -80,10 +80,10 @@ export class CdkTableExampleComponent implements OnInit {
     const CopiedData = this.exampleDatabase.DefaultData;
     const index = e.pageIndex * e.pageSize;
 
-    if(this.paginator){
-      this.paginator!.pageIndex = this.actualPaginator.pageIndex
+    if (this.paginator) {
+      this.paginator!.pageIndex = this.actualPaginator.pageIndex;
     }
-    
+
     this.DataSource.next(CopiedData.slice(index, index + e.pageSize));
   }
 
@@ -120,13 +120,10 @@ export class CdkTableExampleComponent implements OnInit {
       this.exampleDatabase.TableFromArray.controls
     );
     this.tablelength = this.exampleDatabase.data.length;
-    console.log(this.actualPaginator);
 
     this.actualPaginator.pageIndex = 0;
     this.actualPaginator.previousPageIndex = null as any;
 
-    console.log(this.paginator);
-    
     this.handlePageEvent(this.actualPaginator);
   }
 }
