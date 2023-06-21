@@ -157,4 +157,7 @@ mat-form-field {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  mat-icon{
+    cursor: pointer;
+  }
 }
