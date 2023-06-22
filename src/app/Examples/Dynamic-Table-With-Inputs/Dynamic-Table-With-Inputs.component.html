@@ -3,7 +3,7 @@
     mat-table
     [dataSource]="dataSource"
     matTableResponsive
-    class="mat-elevation-z8 FormTable"
+    class="mat-elevation-z8 FormTable tableWithForms"
     style="width: 98%"
     matSort
     multiTemplateDataRows
@@ -159,7 +159,7 @@
     <ng-container matColumnDef="excluir">
       <th mat-header-cell *matHeaderCellDef>
         <button mat-icon-button color="warn" (click)="romoveSelectdsRows()">
-          <mat-icon>remove_circle_outline</mat-icon>
+          <mat-icon deleteHeader>remove_circle_outline</mat-icon>
         </button>
       </th>
       <td mat-cell *matCellDef="let element; let index = index">
@@ -169,7 +169,7 @@
           (click)="deletRow(element, index)"
           [disabled]="!element.canEdit"
         >
-          <mat-icon>delete</mat-icon>
+          <mat-icon delete>delete</mat-icon>
         </button>
       </td>
     </ng-container>

@@ -125,6 +125,11 @@ cdk-dialog-container {
       color: white;
     }
 
+    mat-icon[delete],
+    mat-icon[deleteHeader] {
+      color: #f44336 !important;
+    }
+
     .headerActionsButtons:disabled {
       color: rgb(179, 179, 179);
     }
@@ -191,10 +196,11 @@ cdk-dialog-container {
   .drawer-content {
     padding-left: 0px !important;
   }
-  .sidenav{
+  .sidenav {
     width: 100% !important;
-    cdk-accordion-item{
+    cdk-accordion-item {
       width: 98% !important;
+      padding-left: 10px;
     }
     cdk-accordion,
     .example-accordion {
@@ -202,6 +208,71 @@ cdk-dialog-container {
       max-width: 98% !important;
       width: 98% !important;
     }
+  }
 
+  .tableWithForms {
+    th:not(
+        .cdk-column-checkBox,
+        .cdk-column-id,
+        .cdk-column-nome,
+        .cdk-column-idade,
+        .cdk-column-excluir
+      ) {
+      display: none !important;
+    }
+    td:not(
+        .cdk-column-checkBox,
+        .cdk-column-id,
+        .cdk-column-nome,
+        .cdk-column-expandedDetail,
+        .cdk-column-idade,
+        .cdk-column-excluir
+      ) {
+      display: none !important;
+    }
+  }
+}
+
+@media screen and (max-width: 409px) {
+  .tableWithForms {
+    th:not(
+        .cdk-column-checkBox,
+        .cdk-column-id,
+        .cdk-column-nome,
+        .cdk-column-excluir
+      ) {
+      display: none !important;
+    }
+    td:not(
+        .cdk-column-checkBox,
+        .cdk-column-id,
+        .cdk-column-nome,
+        .cdk-column-expandedDetail,
+        .cdk-column-excluir
+      ) {
+      display: none !important;
+    }
+  }
+}
+
+@media screen and (max-width: 781px) {
+  .tableWithForms {
+    th:is(.cdk-column-email) {
+      display: none !important;
+    }
+    td:is(.cdk-column-email) {
+      display: none !important;
+    }
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .tableWithForms {
+    th:is(.cdk-column-email, .cdk-column-editField) {
+      display: none !important;
+    }
+    td:is(.cdk-column-email, .cdk-column-editField) {
+      display: none !important;
+    }
   }
 }
