@@ -1,8 +1,15 @@
-.formLine{
-    display: flex;
-    gap: 20px;  
+.grid {
+    display: grid;
+    gap: 20px;
+    &.template-2{
+        grid-template-columns: repeat(2, 1fr);   
+    }
 }
 
-.w-100{
-    width: 100%;
+@media screen and (max-width: 600px) {
+    .grid {
+        &.template-2{
+            grid-template-columns: repeat(1, 1fr);   
+        }
+    }
 }

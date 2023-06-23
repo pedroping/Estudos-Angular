@@ -1,7 +1,7 @@
 <div class="container">
-    <div *ngFor="let item of FormConfig" class="formLine">
-      <div *ngFor="let form of item" class="w-100">
-        <div appCreateForm [FormConfig]="form" class="w-100"></div>
+    <div *ngFor="let item of FormConfig" class="grid w-100" [class]="'template-'+item.length">
+      <div *ngFor="let form of item" >
+          <div appCreateForm [FormConfig]="form" style="display: none;"></div>
       </div>
     </div>
   </div>
