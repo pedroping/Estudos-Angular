@@ -1,5 +1,5 @@
-<div class="container">
-  <mat-toolbar style="background-color: transparent;">
+
+<mat-toolbar style="background-color: transparent; width: 100%;" class="mat-toolbar darkModeContent">
     <button
       mat-icon-button
       style="padding-right: 100px"
@@ -9,6 +9,7 @@
     >
       <span>Users</span><mat-icon>menu</mat-icon>
     </button>
+    <span class="example-spacer"></span>
     <button
       style="padding-right: 100px"
       mat-icon-button
@@ -17,8 +18,9 @@
     >
       <span>Photos</span><mat-icon>menu</mat-icon>
     </button>
-  </mat-toolbar>
+</mat-toolbar>
 
+<div class="container">
   <div class="routerComps" cdkDropListGroup>
     <div class="comp1">
       <router-outlet></router-outlet>

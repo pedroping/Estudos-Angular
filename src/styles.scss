@@ -33,6 +33,14 @@ cdk-dialog-container {
   background-color: white;
 }
 
+.mat-toolbar {
+  background-color: transparent !important;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 .mat-typography {
   .cdk-overlay-pane.modalClass {
     overflow-y: auto;

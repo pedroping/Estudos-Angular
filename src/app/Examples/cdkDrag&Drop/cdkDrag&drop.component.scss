@@ -1,20 +1,41 @@
-mat-toolbar{
+.mainToolbar {
+  background-color: red;
+}
+
+mat-toolbar {
   display: flex;
   justify-content: space-between;
+  position: fixed;
+  left: 100px;
+  width: calc(100% - 160px)!important;
+  z-index: 2000;
 
-  button{
-    span{
+  button {
+    span {
       font-size: 20px;
       position: relative;
-      top: -6px
+      top: -6px;
     }
   }
 }
 
+.darkModeContent {
+  background-color: white !important;
+}
 
-.routerComps{
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.buttons {
   display: flex;
-  .comp1{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.routerComps {
+  display: flex;
+  .comp1 {
     width: 350px;
   }
 }

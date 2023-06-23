@@ -6,12 +6,8 @@
   right: 0;
 }
 
-.mat-toolbar {
-  background-color: transparent !important;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-  z-index: 1000;
+.mainToolbar {
+  z-index: 1001;
 }
 
 .sidenav {
