@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ControlContainer, FormGroupDirective } from '@angular/forms';
-import { DynamicControl, DynamicFormConfig } from '../../dForms-tokens';
+import { DynamicFormConfig } from '../../dForms-tokens';
+import { DefaultFormInput } from '../../defaultFormInput';
 
 @Component({
   selector: 'brunsker-date-input',
@@ -14,6 +15,4 @@ import { DynamicControl, DynamicFormConfig } from '../../dForms-tokens';
     },
   ],
 })
-export class DateInputComponent implements DynamicControl {
-  @Input() formConfig!: DynamicFormConfig;
-}
+export class DateInputComponent extends DefaultFormInput<DynamicFormConfig> {}

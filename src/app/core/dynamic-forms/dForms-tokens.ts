@@ -21,12 +21,12 @@ export type DynamicFormConfig = {
   fnLink?: string;
   formFn?: (params?: any) => void;
 };
-export interface DynamicControl {
-  formConfig: DynamicFormConfig;
+export interface DynamicControl<T> {
+  formConfig: T;
 }
 
-export type ComponentFields = {
-  [key: string]: Type<DynamicControl>;
+export type ComponentFields<T> = {
+  [key: string]: Type<T>;
 };
 
 export const DEFAULT_FORMS = {
@@ -38,8 +38,7 @@ export const DEFAULT_FORMS = {
   pageInput: PaginatorInputComponent,
 };
 
-export const DYNAMIC_FORMS = new InjectionToken<ComponentFields>(
+export const DYNAMIC_FORMS = new InjectionToken<ComponentFields<DynamicControl<DynamicFormConfig>>>(
   'DYNAMIC_FORMS',
   { factory: () => DEFAULT_FORMS }
 );
-
