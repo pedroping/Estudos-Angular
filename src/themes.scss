@@ -25,9 +25,9 @@ $dark-theme: mat.define-light-theme(
       primary: $dark-primary,
       accent: $dark-accent,
     ),
+    background-color: #333,
   )
 );
-
 
 @include mat.all-component-themes($my-theme);
 .darkMode {
