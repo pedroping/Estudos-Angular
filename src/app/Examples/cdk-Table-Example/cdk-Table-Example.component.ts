@@ -1,5 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import {
+  AfterViewInit,
   Component,
   Injectable,
   OnInit,
@@ -19,6 +20,7 @@ import {
   FormControl,
   FormGroup,
 } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface UserData {
   id: string;
@@ -33,7 +35,7 @@ export interface UserData {
   templateUrl: './cdk-Table-Example.component.html',
   styleUrls: ['./cdk-Table-Example.component.scss'],
 })
-export class CdkTableExampleComponent implements OnInit {
+export class CdkTableExampleComponent implements OnInit, AfterViewInit {
   @ViewChildren('row', { read: ViewContainerRef })
   containers!: QueryList<ViewContainerRef>;
 
@@ -48,21 +50,17 @@ export class CdkTableExampleComponent implements OnInit {
     'excluir',
   ];
   exampleDatabase = inject(ExampleDatabase);
-  tablelength: number;
-  actualPaginator: PageEvent = { pageIndex: 0, pageSize: 10, length: 100 };
   expandedRow: number[] = [];
 
   constValue = 0;
 
-  DataSource = new BehaviorSubject<AbstractControl[]>([]);
+  DataSource = new MatTableDataSource<AbstractControl>([]);
 
   constructor() {
-    this.DataSource.next(this.exampleDatabase.TableFromArray.controls);
-    this.tablelength = this.exampleDatabase.data.length;
+    this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
   }
 
   ngOnInit() {
-    this.handlePageEvent(this.actualPaginator);
     this.exampleDatabase.TableFromArray.valueChanges
       .pipe(startWith(this.exampleDatabase.TableFromArray.value))
       .subscribe((controlsValue: UserData[]) => {
@@ -72,25 +70,16 @@ export class CdkTableExampleComponent implements OnInit {
       });
   }
 
+  ngAfterViewInit() {
+    this.DataSource.paginator = this.paginator!;
+  }
+
   handlePageEvent(e: PageEvent) {
-    this.tablelength = this.exampleDatabase.TableFromArray.length;
-    this.actualPaginator = e;
-    this.containers?.toArray().forEach((element) => element.clear());
-    this.expandedRow = [];
-    const CopiedData = this.exampleDatabase.DefaultData;
-    const index = e.pageIndex * e.pageSize;
-
-    if (this.paginator) {
-      this.paginator!.pageIndex = this.actualPaginator.pageIndex;
-    }
-
-    this.DataSource.next(CopiedData.slice(index, index + e.pageSize));
+    console.log(e);
   }
 
   getActualIndex(index: number) {
-    return (
-      index + this.actualPaginator.pageSize * this.actualPaginator.pageIndex
-    );
+    return index + this.paginator!.pageSize * this.paginator!.pageIndex;
   }
 
   expandRow(index: number) {
@@ -114,17 +103,11 @@ export class CdkTableExampleComponent implements OnInit {
       this.containers.toArray()[index]?.clear();
       this.expandedRow = this.expandedRow.filter((x) => x != index);
     }
-
     this.exampleDatabase.TableFromArray.removeAt(this.getActualIndex(index));
     this.exampleDatabase.dataChange.next(
       this.exampleDatabase.TableFromArray.controls
     );
-    this.tablelength = this.exampleDatabase.data.length;
-
-    this.actualPaginator.pageIndex = 0;
-    this.actualPaginator.previousPageIndex = null as any;
-
-    this.handlePageEvent(this.actualPaginator);
+    this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
   }
 }
 
