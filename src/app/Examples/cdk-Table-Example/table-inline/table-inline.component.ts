@@ -4,16 +4,18 @@ import { COLORS } from 'src/app/core/models';
 @Component({
   selector: 'app-table-inline',
   templateUrl: './table-inline.component.html',
-  styleUrls: ['./table-inline.component.scss']
+  styleUrls: ['./table-inline.component.scss'],
 })
 export class TableInlineComponent implements OnInit {
   @Input() userForm!: FormGroup;
-  
-  colorOptions = COLORS
-  
-  constructor() { }
+  @Input() sideEffectFunction!: Function;
+
+  colorOptions = COLORS;
+
+  constructor() {}
 
   ngOnInit() {
+    const ValueChanges$ = this.sideEffectFunction(this.userForm.valueChanges);
+    ValueChanges$.subscribe();
   }
-
 }

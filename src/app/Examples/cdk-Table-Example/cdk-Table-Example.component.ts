@@ -11,7 +11,7 @@ import {
   inject,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { BehaviorSubject, Observable, startWith } from 'rxjs';
+import { BehaviorSubject, Observable, startWith, tap } from 'rxjs';
 import { COLORS, NAMES } from 'src/app/core/models';
 import { TableInlineComponent } from './table-inline/table-inline.component';
 import {
@@ -96,6 +96,8 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
 
     const Control = this.exampleDatabase.dataChange.value;
     messageComponent.instance.userForm = Control[controlIndex] as FormGroup;
+    messageComponent.instance.sideEffectFunction =
+      this.sideEffectFunction.bind(this);
   }
 
   removeElement(index: number) {
@@ -108,6 +110,12 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
       this.exampleDatabase.TableFromArray.controls
     );
     this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
+  }
+
+  sideEffectFunction(formValueChanges$: Observable<any>) {
+    return formValueChanges$.pipe(tap(() => {
+      console.log('Form Has Changed');
+    }));
   }
 }
 
