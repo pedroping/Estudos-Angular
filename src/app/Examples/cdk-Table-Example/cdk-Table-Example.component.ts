@@ -60,15 +60,7 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
     this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
   }
 
-  ngOnInit() {
-    this.exampleDatabase.TableFromArray.valueChanges
-      .pipe(startWith(this.exampleDatabase.TableFromArray.value))
-      .subscribe((controlsValue: UserData[]) => {
-        this.constValue = controlsValue.reduce((a, b) => {
-          return a + Number(b.valor);
-        }, 0);
-      });
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.DataSource.paginator = this.paginator!;
@@ -112,10 +104,21 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
     this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
   }
 
-  sideEffectFunction(formValueChanges$: Observable<any>) {
-    return formValueChanges$.pipe(tap(() => {
-      console.log('Form Has Changed');
-    }));
+  sideEffectFunction(formValueChanges$: Observable<any>, key: string) {
+    return formValueChanges$.pipe(
+      tap(() => {
+        console.log(key + ' Form Has Changed');
+        if (key == 'valor') {
+          this.setCount();
+        }
+      })
+    );
+  }
+
+  setCount() {
+    this.constValue = this.DataSource.data.reduce((a, b) => {
+      return a + Number(b.value.valor);
+    }, 0);
   }
 }
 

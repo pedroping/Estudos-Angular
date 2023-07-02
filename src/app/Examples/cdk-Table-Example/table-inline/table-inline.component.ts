@@ -15,7 +15,10 @@ export class TableInlineComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    const ValueChanges$ = this.sideEffectFunction(this.userForm.valueChanges);
-    ValueChanges$.subscribe();
+    const controls = this.userForm.controls;
+    Object.entries(controls).forEach(([key, control]) => {
+      const ValueChanges$ = this.sideEffectFunction(control.valueChanges, key);
+      ValueChanges$.subscribe();
+    });
   }
 }
