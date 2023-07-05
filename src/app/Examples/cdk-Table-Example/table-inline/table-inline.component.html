@@ -1,24 +1,33 @@
-<p>Detail:{{ userForm.get('name')?.value }}</p>
+<p>Detail:{{ userForm.get("name")?.value }}</p>
 <div class="forms">
-    <mat-form-field appearance="outline">
-        <mat-label>Nome:</mat-label>
-        <input matInput placeholder="Nome..." [formControl]="$any(userForm.get('name'))">
-    </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Nome:</mat-label>
+    <input
+      matInput
+      placeholder="Nome..."
+      [formControl]="$any(userForm.get('name'))"
+    />
+  </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Progress:</mat-label>
-        <input matInput placeholder="Progress..." [formControl]="$any(userForm.get('progress'))">
-    </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Progress:</mat-label>
+    <input
+      matInput
+      placeholder="Progress..."
+      [formControl]="$any(userForm.get('progress'))"
+    />
+  </mat-form-field>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Colors</mat-label>
-        <mat-select [formControl]="$any(userForm.get('color'))">
-            <mat-option *ngFor="let item of colorOptions" [value]="item">{{ item }}</mat-option>
-        </mat-select>
-    </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Colors</mat-label>
+    <mat-select [formControl]="$any(userForm.get('color'))">
+      <mat-option *ngFor="let item of colorOptions" [value]="item">{{
+        item
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <div class="Incrementor">
-        <app-incrementor [formControl]="$any(userForm.get('valor'))"></app-incrementor>
-    </div>
-
+  <div class="Incrementor">
+    <app-incrementor [formControl]="incrementorControl"></app-incrementor>
+  </div>
 </div>

@@ -1,6 +1,7 @@
-import { DataSource } from '@angular/cdk/collections';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Injectable,
   OnInit,
@@ -11,7 +12,7 @@ import {
   inject,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { BehaviorSubject, Observable, startWith, tap } from 'rxjs';
+import { BehaviorSubject, Observable, pairwise, pipe, tap } from 'rxjs';
 import { COLORS, NAMES } from 'src/app/core/models';
 import { TableInlineComponent } from './table-inline/table-inline.component';
 import {
@@ -34,6 +35,7 @@ export interface UserData {
   selector: 'app-cdk-Table-Example',
   templateUrl: './cdk-Table-Example.component.html',
   styleUrls: ['./cdk-Table-Example.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CdkTableExampleComponent implements OnInit, AfterViewInit {
   @ViewChildren('row', { read: ViewContainerRef })
@@ -56,11 +58,13 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
 
   DataSource = new MatTableDataSource<AbstractControl>([]);
 
-  constructor() {
+  constructor(private readonly cdr: ChangeDetectorRef) {
     this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setCount();
+  }
 
   ngAfterViewInit() {
     this.DataSource.paginator = this.paginator!;
@@ -87,9 +91,12 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
       [index]?.createComponent(TableInlineComponent);
 
     const Control = this.exampleDatabase.dataChange.value;
+    messageComponent.instance.id = Control[controlIndex].value.id;
     messageComponent.instance.userForm = Control[controlIndex] as FormGroup;
     messageComponent.instance.sideEffectFunction =
       this.sideEffectFunction.bind(this);
+    messageComponent.instance.DefaultIncrementorValue =
+      Control[controlIndex].value.valor;
   }
 
   removeElement(index: number) {
@@ -104,12 +111,32 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
     this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
   }
 
-  sideEffectFunction(formValueChanges$: Observable<any>, key: string) {
+  sideEffectFunction(
+    formValueChanges$: Observable<unknown>,
+    key: string,
+    id: number
+  ) {
     return formValueChanges$.pipe(
       tap(() => {
         console.log(key + ' Form Has Changed');
-        if (key == 'valor') {
-          this.setCount();
+      }),
+      this.changeCount(key, id)
+    );
+  }
+
+  changeCount(key: string, id: number) {
+    if (key != 'newIncrementor') return pipe(tap());
+
+    return pipe(
+      pairwise(),
+      tap(([prev, curr]) => {
+        if (
+          (typeof prev == 'number' || typeof prev == 'string') &&
+          typeof curr == 'number'
+        ) {
+          this.DataSource.data[+id - 1].get('valor')?.setValue(+curr);
+          this.constValue = this.constValue + curr - +prev;
+          this.cdr.detectChanges();
         }
       })
     );
