@@ -11,9 +11,13 @@
    * https://material.io/guidelines/components/data-tables.html
    */
 .mat-mdc-paginator {
-  background-color: transparent !important;
+  background-color: #FAFAFA;
+  position: sticky;
+  bottom: 0px;
+  z-index: 10;
 }
 
+.cdk-footer-row,
 .example-header-row,
 .example-row {
   display: flex;
@@ -26,6 +30,7 @@
   cursor: pointer;
 }
 
+th[cdk-footer-cell],
 .example-cell,
 .example-header-cell {
   flex: 1;
@@ -40,6 +45,15 @@
 .example-cell {
   font-size: 13px;
   color: rgba(0, 0, 0, 0.87);
+}
+
+.cdk-footer-row {
+  background-color: #FAFAFA;
+  bottom: 64px !important;
+}
+
+th[cdk-footer-cell]{
+  border: none !important;
 }
 
 @media screen and (max-width: 700px) {

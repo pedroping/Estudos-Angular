@@ -1,138 +1,139 @@
 .darkMode {
-    .mat-mdc-checkbox.mat-accent,
-    .mdc-list-item__primary-text {
-      color: white !important;
-      --mdc-checkbox-unselected-hover-icon-color: white !important;
-      --mdc-checkbox-unselected-icon-color: white !important;
-    }
-  
-    div[cdkdroplist] {
-      background-color: #303030 !important;
-    }
-  
-    .cdk-drop-list .example-list,
-    .mdc-menu-surface {
-      background-color: #303030 !important;
-    }
-  
+  .mat-mdc-checkbox.mat-accent,
+  .mdc-list-item__primary-text {
+    color: white !important;
+    --mdc-checkbox-unselected-hover-icon-color: white !important;
+    --mdc-checkbox-unselected-icon-color: white !important;
+  }
+
+  div[cdkdroplist] {
+    background-color: #303030 !important;
+  }
+
+  .cdk-drop-list .example-list,
+  .mdc-menu-surface {
+    background-color: #303030 !important;
+  }
+
+  .modalClass {
+    background-color: #303030;
+  }
+
+  .mat-mdc-tooltip-trigger svg {
+    filter: brightness(0) invert(1);
+  }
+
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing,
+  .mdc-notched-outline__leading {
+    border-color: #9f9f9f !important;
+  }
+
+  cdk-dialog-container {
+    border-radius: 10px;
+    background-color: #303030;
+  }
+
+  .mat-drawer-container {
+    background-color: #303030;
+    color: white;
+
     .modalClass {
       background-color: #303030;
     }
-  
-    .mat-mdc-tooltip-trigger svg {
-      filter: brightness(0) invert(1);
-    }
-  
-    .mdc-notched-outline__notch,
-    .mdc-notched-outline__trailing,
-    .mdc-notched-outline__leading {
-      border-color: #9f9f9f !important;
-    }
-  
-    cdk-dialog-container {
-      border-radius: 10px;
-      background-color: #303030;
-    }
-  
-    .mat-drawer-container {
+
+    .sidenav {
       background-color: #303030;
       color: white;
-  
-      .modalClass {
-        background-color: #303030;
-      }
-  
-      .sidenav {
-        background-color: #303030;
+      h3 {
         color: white;
-        h3 {
-          color: white;
-        }
       }
-  
-      div[mat-dialog-content] {
-        background-color: #303030 !important;
+    }
+
+    div[mat-dialog-content] {
+      background-color: #303030 !important;
+      color: white !important;
+    }
+
+    .container,
+    .UserContent,
+    .example-menu,
+    .example-box,
+    .item,
+    .card,
+    .darkModeContent,
+    .mat-dialog-container,
+    .mat-mdc-dialog-surface,
+    .cdk-footer-row {
+      background-color: #303030 !important;
+      color: white !important;
+    }
+
+    mat-icon,
+    .headerActionsButtons {
+      color: white;
+    }
+
+    mat-icon[delete],
+    mat-icon[deleteHeader] {
+      color: #f44336 !important;
+    }
+
+    .headerActionsButtons:disabled {
+      color: rgb(179, 179, 179);
+    }
+
+    .formControl,
+    .form-control {
+      color: black !important;
+    }
+
+    .FormTable {
+      background-color: #303030;
+      color: white;
+      th,
+      td {
+        color: white;
+      }
+    }
+
+    input,
+    select,
+    mat-select,
+    mat-option,
+    mat-label,
+    .mat-mdc-select-min-line,
+    .mat-mdc-select-arrow,
+    .mat-select-panel,
+    .mat-mdc-form-field-required-marker {
+      color: white !important;
+    }
+
+    .mat-select-panel,
+    .dc-checkbox__background {
+      background-color: white;
+    }
+
+    .cdkTableColors {
+      background-color: #303030;
+      color: white;
+
+      cdk-header-cell,
+      .darkColors {
         color: white !important;
       }
-  
-      .container,
-      .UserContent,
-      .example-menu,
-      .example-box,
-      .item,
-      .card,
-      .darkModeContent,
-      .mat-dialog-container,
-      .mat-mdc-dialog-surface {
-        background-color: #303030 !important;
-        color: white !important;
-      }
-  
-      mat-icon,
-      .headerActionsButtons {
-        color: white;
-      }
-  
-      mat-icon[delete],
-      mat-icon[deleteHeader] {
-        color: #f44336 !important;
-      }
-  
-      .headerActionsButtons:disabled {
-        color: rgb(179, 179, 179);
-      }
-  
-      .formControl,
-      .form-control {
-        color: black !important;
-      }
-  
-      .FormTable {
-        background-color: #303030;
-        color: white;
-        th,
-        td {
-          color: white;
-        }
-      }
-  
+    }
+
+    .header {
+      color: black !important;
+    }
+
+    .Incrementor {
       input,
-      select,
-      mat-select,
-      mat-option,
-      mat-label,
-      .mat-mdc-select-min-line,
-      .mat-mdc-select-arrow,
-      .mat-select-panel,
-      .mat-mdc-form-field-required-marker {
+      .Icon {
+        background-color: #303030 !important;
         color: white !important;
-      }
-  
-      .mat-select-panel,
-      .dc-checkbox__background {
-        background-color: white;
-      }
-  
-      .cdkTableColors {
-        background-color: #303030;
-        color: white;
-  
-        cdk-header-cell,
-        .darkColors {
-          color: white !important;
-        }
-      }
-  
-      .header {
-        color: black !important;
-      }
-  
-      .Incrementor {
-        input,
-        .Icon {
-          background-color: #303030 !important;
-          color: white !important;
-        }
       }
     }
   }
+}

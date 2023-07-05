@@ -1,13 +1,8 @@
 <div class="container" style="justify-content: center;">
   <div class="row justify-content-center">
-    {{constValue}}
     <div class="example-container mat-elevation-z8 cdkTableColors">
       <div class="table">
         <cdk-table #table [dataSource]="DataSource" class="example-table">
-          <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->
-
-          <!-- ID Column -->
           <ng-container cdkColumnDef="userId">
             <cdk-header-cell *cdkHeaderCellDef class="example-header-cell">
               ID
@@ -15,6 +10,7 @@
             <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
               {{ row?.get('id')?.value }}
             </cdk-cell>
+            <th cdk-footer-cell *cdkFooterCellDef>Total: {{constValue}}</th>
           </ng-container>
 
           <!-- Progress Column -->
@@ -25,6 +21,7 @@
             <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
               {{ row?.get('progress')?.value }}%
             </cdk-cell>
+            <th cdk-footer-cell *cdkFooterCellDef></th>
           </ng-container>
 
           <!-- Name Column -->
@@ -35,6 +32,7 @@
             <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
               {{ row?.get('name')?.value }}
             </cdk-cell>
+            <th cdk-footer-cell *cdkFooterCellDef></th>
           </ng-container>
 
           <!-- Color Column -->
@@ -43,6 +41,7 @@
             <cdk-cell *cdkCellDef="let row" class="example-cell" [style.color]="row?.get('color')?.value">
               {{ row?.get('color')?.value }}
             </cdk-cell>
+            <th cdk-footer-cell *cdkFooterCellDef></th>
           </ng-container>
 
           <ng-container cdkColumnDef="valor">
@@ -50,6 +49,7 @@
             <cdk-cell *cdkCellDef="let row" class="example-cell darkColors">
               {{ row?.get('valor')?.value }} - {{constValue}}
             </cdk-cell>
+            <th cdk-footer-cell *cdkFooterCellDef></th>
           </ng-container>
 
           <ng-container cdkColumnDef="excluir">
@@ -59,6 +59,7 @@
                 <mat-icon>delete</mat-icon>
               </button>
             </cdk-cell>
+            <th cdk-footer-cell *cdkFooterCellDef></th>
           </ng-container>
 
           <cdk-header-row *cdkHeaderRowDef="displayedColumns" class="example-header-row"></cdk-header-row>
@@ -66,6 +67,7 @@
             (click)="expandRow(index)" #row>
             <!-- (click)="expandRow(index)" -->
           </cdk-row>
+          <cdk-footer-row *cdkFooterRowDef="displayedColumns; sticky: true"></cdk-footer-row>
 
         </cdk-table>
         <!-- (page)="handlePageEvent($event)" -->
