@@ -1,3 +1,36 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from '../app-routing.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSortModule } from '@angular/material/sort';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { CdkMenuModule } from '@angular/cdk/menu';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkTableModule } from '@angular/cdk/table';
+import { CdkDragdropModule } from '../Examples/cdkDrag&Drop/cdkDrag&drop.module';
+import { MatTabsModule } from '@angular/material/tabs';
+import { DFormsModule } from '../core/dynamic-forms/dForms.module';
+import { DialogModule } from '@angular/cdk/dialog';
 import {
   TuiActiveZoneModule,
   TuiAlertHostModule,
@@ -7,7 +40,6 @@ import {
   TuiControlModule,
   TuiCopyProcessorModule,
   TuiDialogHostModule,
-  TuiDragModule,
   TuiDropdownHostModule,
   TuiDroppableModule,
   TuiElementModule,
@@ -31,7 +63,6 @@ import {
   TuiPanModule,
   TuiPortalModule,
   TuiPressedModule,
-  TuiPreventDefaultModule,
   TuiRepeatTimesModule,
   TuiReplacePipeModule,
   TuiResizeModule,
@@ -109,7 +140,6 @@ import {
   TuiFilterModule,
   TuiHighlightModule,
   TuiInputCopyModule,
-  TuiInputCountModule,
   TuiInputDateModule,
   TuiInputDateRangeModule,
   TuiInputDateTimeModule,
@@ -169,39 +199,6 @@ import {
   TuiValueAccessorModule,
 } from '@taiga-ui/kit';
 
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
-import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from '../app-routing.module';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { MatSelectModule } from '@angular/material/select';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSortModule } from '@angular/material/sort';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { CdkMenuModule } from '@angular/cdk/menu';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CdkTableModule } from '@angular/cdk/table';
-import { CdkDragdropModule } from '../Examples/cdkDrag&Drop/cdkDrag&drop.module';
-import { MatTabsModule } from '@angular/material/tabs';
-import { DFormsModule } from '../core/dynamic-forms/dForms.module';
-import { DialogModule } from '@angular/cdk/dialog';
 
 export const ALL_MODULES = [
   BrowserModule,
