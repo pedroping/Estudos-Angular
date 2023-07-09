@@ -56,7 +56,7 @@
             <cdk-header-cell *cdkHeaderCellDef class="example-header-cell"></cdk-header-cell>
             <cdk-cell *cdkCellDef="let row; let index = index" class="example-cell darkColors">
               <button mat-icon-button color="warn" (click)="removeElement(index); $event.stopPropagation()">
-                <mat-icon>delete</mat-icon>
+                <mat-icon delete>delete</mat-icon>
               </button>
             </cdk-cell>
             <th cdk-footer-cell *cdkFooterCellDef></th>
@@ -78,5 +78,3 @@
     </div>
   </div>
 </div>
-
-<tui-checkbox class="tui-space_bottom-3"></tui-checkbox>

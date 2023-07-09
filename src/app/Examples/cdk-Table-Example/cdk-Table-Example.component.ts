@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Inject,
   Injectable,
   OnInit,
   QueryList,
@@ -22,6 +23,7 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
 
 export interface UserData {
   id: string;
@@ -58,7 +60,10 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
 
   DataSource = new MatTableDataSource<AbstractControl>([]);
 
-  constructor(private readonly cdr: ChangeDetectorRef) {
+  constructor(
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
+    private readonly cdr: ChangeDetectorRef
+  ) {
     this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
   }
 
@@ -104,11 +109,21 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
       this.containers.toArray()[index]?.clear();
       this.expandedRow = this.expandedRow.filter((x) => x != index);
     }
+    const nome =
+      this.exampleDatabase.TableFromArray.controls[this.getActualIndex(index)]
+        .value.name;
     this.exampleDatabase.TableFromArray.removeAt(this.getActualIndex(index));
     this.exampleDatabase.dataChange.next(
       this.exampleDatabase.TableFromArray.controls
     );
     this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
+
+    this.alerts
+      .open(`Usuario <strong>${nome}</strong> removido com sucesso!`, {
+        status: TuiNotification.Success,
+        hasCloseButton: true,
+      })
+      .subscribe();
   }
 
   sideEffectFunction(
