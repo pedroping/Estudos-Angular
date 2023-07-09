@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   OnInit,
   ViewChild,
@@ -8,7 +7,6 @@ import {
   inject,
 } from '@angular/core';
 import {
-  AbstractFormGroupDirective,
   FormArray,
   FormControl,
   FormGroup,
@@ -18,7 +16,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { FormValue, User } from 'src/app/core/models';
-import { ChangeDetectorRef } from '@angular/core';
 import {
   animate,
   state,
@@ -30,7 +27,8 @@ import { ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'src/app/core/validators/customValidator';
 import { ExpandUserService } from 'src/app/core/services/expandUser.service';
 import { of, switchMap } from 'rxjs';
-import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
+import { TABLESERVICE } from 'src/app/core/tokens/tokens';
+import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-Dynamic-Table-With-Inputs',
@@ -39,7 +37,7 @@ import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
   animations: [
     trigger('detailExpand', [
       state('collapsed, void', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*', dysplay: 'none' })),
+      state('expanded', style({ height: '*' })),
       transition(
         'expanded <=> collapsed',
         animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
@@ -72,7 +70,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   lorem =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec dui ut dui varius accumsan nec congue nisi.Cras vel ligula eleifend, consequat massa vitae, bibendum nulla. Vivamus feugiat sem purus, vel mollis sem consectetur ac. Fusce maximus purus ut tellus blandit, a faucibus neque suscipit. In vel rutrum tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec maximus mattis nibh. Suspendisse cursus orci sed fermentum efficitur. Nam et justo id mi dictum ullamcorper.';
   constructor(
-    private readonly changeDetectorRef: ChangeDetectorRef,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
     private activeRoute: ActivatedRoute,
     private readonly expandUserService: ExpandUserService
   ) {}
@@ -197,11 +195,18 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
       this.setData();
       return;
     }
+    const name = row.nome;
 
     this.tableService.deleteUser(row.id).subscribe({
-      next: (resp) => {
+      next: () => {
         this.FormArray.removeAt(index);
         this.setData();
+        this.alerts
+          .open(`Usuario <strong>${name}</strong> removido com sucesso!`, {
+            status: TuiNotification.Success,
+            hasCloseButton: true,
+          })
+          .subscribe();
       },
     });
   }
@@ -235,7 +240,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
           row.get('isNew')?.setValue(false);
           this.setData();
         },
-        error: (err) => {
+        error: () => {
           this.FormArray.removeAt(0);
         },
       });
@@ -250,7 +255,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
       age: User.idade,
     };
 
-    this.tableService.editUser(put_User).subscribe((resp) => {
+    this.tableService.editUser(put_User).subscribe(() => {
       row.get('onEdit')?.setValue(false);
       this.setData();
     });
@@ -263,15 +268,21 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
       if (item.checked && item.canEdit) Ids.push(item.id);
     });
 
-    Ids.forEach((id) => {
-      this.tableService.deleteUser(id).subscribe({
-        next: (resp) => {
+    this.tableService.deleteManyUsers(Ids).subscribe({
+      next: () => {
+        Ids.forEach(id => {
           const index = this.getIndex(id);
           this.FormArray.removeAt(index);
-          this.setData();
-        },
-        error: (err) => {},
-      });
+        })
+        this.setData();
+        this.alerts
+          .open(`Usuarios selecionados removidos com sucesso!`, {
+            status: TuiNotification.Success,
+            hasCloseButton: true,
+          })
+          .subscribe();
+      },
+      error: () => {},
     });
     this.checkAll.setValue(false);
   }

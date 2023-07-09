@@ -149,7 +149,9 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
           (typeof prev == 'number' || typeof prev == 'string') &&
           typeof curr == 'number'
         ) {
-          this.DataSource.data[+id - 1].get('valor')?.setValue(+curr);
+          this.DataSource.data[+id - 1]
+            .get('valor')
+            ?.setValue(+curr, { emitEvent: false });
           this.constValue = this.constValue + curr - +prev;
           this.cdr.detectChanges();
         }
