@@ -13,7 +13,14 @@ import {
   inject,
 } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { BehaviorSubject, Observable, pairwise, pipe, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  pairwise,
+  pipe,
+  startWith,
+  tap,
+} from 'rxjs';
 import { COLORS, NAMES } from 'src/app/core/models';
 import { TableInlineComponent } from './table-inline/table-inline.component';
 import {
@@ -96,12 +103,10 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
       [index]?.createComponent(TableInlineComponent);
 
     const Control = this.exampleDatabase.dataChange.value;
-    messageComponent.instance.id = Control[controlIndex].value.id;
+
     messageComponent.instance.userForm = Control[controlIndex] as FormGroup;
     messageComponent.instance.sideEffectFunction =
       this.sideEffectFunction.bind(this);
-    messageComponent.instance.DefaultIncrementorValue =
-      Control[controlIndex].value.valor;
   }
 
   removeElement(index: number) {
@@ -129,13 +134,14 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
   sideEffectFunction(
     formValueChanges$: Observable<unknown>,
     key: string,
-    id: number
+    element: any
   ) {
     return formValueChanges$.pipe(
+      startWith(element[key]),
       tap(() => {
         console.log(key + ' Form Has Changed');
       }),
-      this.changeCount(key, id)
+      this.changeCount(key, element.id)
     );
   }
 

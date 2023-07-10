@@ -7,11 +7,9 @@ import { COLORS } from 'src/app/core/models';
   templateUrl: './table-inline.component.html',
   styleUrls: ['./table-inline.component.scss'],
 })
-export class TableInlineComponent implements OnInit {
-  @Input() id!: number;
+export class TableInlineComponent<T> implements OnInit {
   @Input() userForm!: FormGroup;
   @Input() sideEffectFunction!: Function;
-  @Input() DefaultIncrementorValue: number = 0;
 
   colorOptions = COLORS;
   incrementorControl = new FormControl(0);
@@ -19,20 +17,20 @@ export class TableInlineComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.incrementorControl.setValue(this.userForm.value.valor);
     const ValueChanges$ = this.sideEffectFunction(
       this.incrementorControl.valueChanges,
       'newIncrementor',
-      this.id
+      this.userForm.value
     );
     ValueChanges$.subscribe();
-    this.incrementorControl.setValue(this.DefaultIncrementorValue);
 
     const controls = this.userForm.controls;
     Object.entries(controls).forEach(([key, control]) => {
       const ValueChanges$ = this.sideEffectFunction(
         control.valueChanges,
         key,
-        this.id
+        this.userForm.value
       );
       ValueChanges$.subscribe();
     });

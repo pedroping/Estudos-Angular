@@ -6,8 +6,8 @@ import { DebugElement } from '@angular/core';
 import { TableInlineComponent } from './table-inline.component';
 
 describe('TableInlineComponent', () => {
-  let component: TableInlineComponent;
-  let fixture: ComponentFixture<TableInlineComponent>;
+  let component: TableInlineComponent<any>;
+  let fixture: ComponentFixture<TableInlineComponent<any>>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
