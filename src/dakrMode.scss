@@ -33,6 +33,11 @@
     border-radius: 10px;
     background-color: #303030;
   }
+  
+  .form-outline .form-control {
+    border: none;
+    background-color: white;
+  }
 
   .mat-drawer-container {
     background-color: #303030;
@@ -69,6 +74,7 @@
       color: white !important;
     }
 
+    .form-label,
     mat-icon,
     .headerActionsButtons {
       color: white;

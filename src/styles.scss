@@ -50,6 +50,10 @@ cdk-dialog-container {
   }
 }
 
+.form-outline .form-control {
+  border: #d5d5d5 1px solid;
+}
+
 @media screen and (max-width: 500px) {
   app-closed-sidenav {
     display: none !important;
