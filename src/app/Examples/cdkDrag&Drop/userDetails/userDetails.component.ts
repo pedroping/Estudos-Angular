@@ -10,12 +10,9 @@ import {
   User,
 } from '../services/cdkDragDrop.service';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable, of } from 'rxjs';
-import {
-  CdkDragDrop,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-
+import { Observable, map, of } from 'rxjs';
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import { BreakpointObserver } from '@angular/cdk/layout';
 @Component({
   selector: 'app-userDetails',
   templateUrl: './userDetails.component.html',
@@ -24,22 +21,30 @@ import {
 })
 export class UserDetailsComponent implements OnInit {
   user$!: Observable<User>;
+  isSmallSize$!: Observable<boolean>;
 
   constructor(
     public cdkDragDropService: CdkDragDropService,
     private activatedRoute: ActivatedRoute,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((id) => {
-      console.log(id);
-
       this.cdkDragDropService.users$.subscribe((val) => {
         this.user$ = of(val.find((item) => item.id == id['id'])!);
         this.cdr.detectChanges();
       });
     });
+
+    this.isSmallSize$ = this.breakpointObserver
+      .observe(['(max-width: 500px)'])
+      .pipe(
+        map((result) => {
+          return result.matches;
+        })
+      );
   }
 
   drop(event: CdkDragDrop<Photo[]>) {
