@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { DataBindingComponent } from './Examples/components/Data-binding/Data-binding.component';
 import { StyleClassBidingComponent } from './Examples/components/StyleClassBiding/StyleClassBiding.component';
 import { EventBidingComponent } from './Examples/components/EventBiding/EventBiding.component';
@@ -31,6 +31,7 @@ import { FormExampleComponent } from './Examples/formExample/formExample.compone
 import { ALL_MODULES } from './helpers/all-module-imports';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +61,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     IncrementorComponent,
     FormExampleComponent,
   ],
-  imports: [ALL_MODULES],
+  imports: [ALL_MODULES, ServiceWorkerModule.register('ngsw-worker.js', {
+  enabled: !isDevMode(),
+  // Register the ServiceWorker as soon as the application is stable
+  // or after 30 seconds (whichever comes first).
+  registrationStrategy: 'registerWhenStable:30000'
+})],
   providers: [
     AuthGuardService,
     AlreadyLoggedGuardService,
