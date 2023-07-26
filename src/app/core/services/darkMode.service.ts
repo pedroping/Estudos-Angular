@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { DARK_COLORS } from 'src/app/helpers/colors';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,11 @@ export class DarkModeService {
   constructor() {
     const isDarkMode = sessionStorage.getItem('darkMode');
     this.darkMode = !!isDarkMode;
-    if (isDarkMode) document.body.classList.add('darkMode');
+    if (isDarkMode) {
+      document
+        .querySelector('meta[name="theme-color"]')!
+        .setAttribute('content', DARK_COLORS);
+      document.body.classList.add('darkMode');
+    }
   }
 }

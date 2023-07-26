@@ -1,7 +1,7 @@
 {
   "name": "Estudo_Angular",
   "short_name": "Estudo_Angular",
-  "theme_color": "#1976d2",
+  "theme_color": "#303030",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

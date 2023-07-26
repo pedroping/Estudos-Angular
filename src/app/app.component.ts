@@ -1,16 +1,10 @@
-import {
-  Component,
-  HostBinding,
-  Inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SendDataService } from './core/services/sendData.service';
 import { ACCORDIONS } from './helpers/accordions';
-import { DOCUMENT } from '@angular/common';
 import { DarkModeService } from './core/services/darkMode.service';
+import { DARK_COLORS, LIGHT_COLORS } from './helpers/colors';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -31,7 +25,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.sendData.closeSideNav$.subscribe((val) => {
+    this.sendData.closeSideNav$.subscribe(() => {
       this.sidenav.close();
     });
   }
@@ -40,10 +34,16 @@ export class AppComponent implements OnInit {
     this.darkModeService.darkMode = !this.darkModeService.darkMode;
     if (this.darkModeService.darkMode) {
       sessionStorage.setItem('darkMode', 'isDarkMode');
-      return document.body.classList.add('darkMode');
+      document
+        .querySelector('meta[name="theme-color"]')!
+        .setAttribute('content', DARK_COLORS);
+      document.body.classList.add('darkMode');
+      return;
     }
     sessionStorage.removeItem('darkMode');
+    document
+      .querySelector('meta[name="theme-color"]')!
+      .setAttribute('content', LIGHT_COLORS);
     document.body.classList.remove('darkMode');
   }
-
 }
