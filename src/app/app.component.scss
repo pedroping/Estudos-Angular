@@ -134,8 +134,12 @@ mat-drawer-content {
 }
 
 .drawer-content {
-  width: 100%;
-  padding-left: 65px;
+  width: calc(100% - 65px);
+}
+
+.mat-elevation-z2 {
+  box-shadow: none !important;
+  background-color: transparent !important;
 }
 
 .mat-drawer-content,
@@ -148,12 +152,12 @@ mat-form-field {
   width: 250px;
 }
 
-.sidenavToolbar{
+.sidenavToolbar {
   background-color: transparent !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  mat-icon{
+  mat-icon {
     cursor: pointer;
   }
 }
