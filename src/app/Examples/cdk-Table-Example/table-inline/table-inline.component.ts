@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { startWith } from 'rxjs';
 import { COLORS } from 'src/app/core/models';
 @Component({
@@ -10,11 +10,12 @@ import { COLORS } from 'src/app/core/models';
 export class TableInlineComponent<T> implements OnInit {
   @Input() userForm!: FormGroup;
   @Input() sideEffectFunction!: Function;
+  @Input() controls!: { [key: string]: (AbstractControl | FormControl)[] }
 
   colorOptions = COLORS;
   incrementorControl = new FormControl(0);
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.incrementorControl.setValue(this.userForm.value.valor);
@@ -23,6 +24,7 @@ export class TableInlineComponent<T> implements OnInit {
       'newIncrementor',
       this.userForm.value
     );
+    this.controls['newIncrementor'][this.userForm.value.id] = this.incrementorControl
     ValueChanges$.subscribe();
 
     const controls = this.userForm.controls;
@@ -32,6 +34,7 @@ export class TableInlineComponent<T> implements OnInit {
         key,
         this.userForm.value
       );
+      if (this.controls[key]) this.controls[key][this.userForm.value.id] = control
       ValueChanges$.subscribe();
     });
   }

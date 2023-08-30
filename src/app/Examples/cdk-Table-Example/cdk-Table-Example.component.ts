@@ -62,10 +62,15 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
   ];
   exampleDatabase = inject(ExampleDatabase);
   expandedRow: number[] = [];
-
   constValue = 0;
-
   DataSource = new MatTableDataSource<AbstractControl>([]);
+  controls: { [key: string]: (AbstractControl | FormControl)[] } = {
+    name: [],
+    progress: [],
+    color: [],
+    valor: [],
+    newIncrementor: []
+  }
 
   constructor(
     @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
@@ -100,13 +105,14 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
     this.expandedRow.push(index);
     const messageComponent = this.containers
       .toArray()
-      [index]?.createComponent(TableInlineComponent);
+    [index]?.createComponent(TableInlineComponent);
 
     const Control = this.exampleDatabase.dataChange.value;
 
     messageComponent.instance.userForm = Control[controlIndex] as FormGroup;
     messageComponent.instance.sideEffectFunction =
       this.sideEffectFunction.bind(this);
+    messageComponent.instance.controls = this.controls
   }
 
   removeElement(index: number) {
@@ -139,7 +145,7 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
     return formValueChanges$.pipe(
       startWith(element[key]),
       tap(() => {
-        console.log(key + ' Form Has Changed');
+        console.log(key + ' Form Has Changed', this.getControl(element.id, key));
       }),
       this.changeCount(key, element.id)
     );
@@ -169,6 +175,10 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
     this.constValue = this.DataSource.data.reduce((a, b) => {
       return a + Number(b.value.valor);
     }, 0);
+  }
+
+  getControl(id: number, key: string) {
+    return this.controls[key] ? this.controls[key][id] : null
   }
 }
 
