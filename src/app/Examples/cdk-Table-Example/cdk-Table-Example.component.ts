@@ -140,10 +140,10 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
   sideEffectFunction(
     formValueChanges$: Observable<unknown>,
     key: string,
-    element: any
+    element: unknown & { id: number }
   ) {
     return formValueChanges$.pipe(
-      startWith(element[key]),
+      startWith(element[key as keyof typeof element]),
       tap(() => {
         console.log(key + ' Form Has Changed', this.getControl(element.id, key));
       }),

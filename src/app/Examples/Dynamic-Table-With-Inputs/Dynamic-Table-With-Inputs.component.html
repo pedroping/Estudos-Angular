@@ -1,218 +1,223 @@
-<div class="container" *ngIf="dataSource.data.length > 0; else noData">
-  <table
-    mat-table
-    [dataSource]="dataSource"
-    matTableResponsive
-    class="mat-elevation-z8 FormTable tableWithForms"
-    style="width: 98%"
-    matSort
-    multiTemplateDataRows
-  >
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let element; let index = index">
-        {{ element.id ?? 0 }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
-      <td mat-cell *matCellDef="let element; let index = index">
-        <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
-          <mat-form-field
-            appearance="outline"
-            class="form-field"
-            floatLabel="always"
-          >
-            <mat-label>Nome</mat-label>
-            <input
-              matInput
-              type="text"
-              placeholder="Digite seu nome:"
-              [formControl]="getFormControl(element.id, 'nome')"
-            />
-            <mat-error
-              FormError
-              [formcontrol]="getFormControl(element.id, 'nome')"
-            ></mat-error>
-          </mat-form-field>
-        </div>
-        <div *ngIf="!getFormControl(element.id, 'onEdit')!.value">
-          {{ element.nome != "" ? element.nome : "Não Inserido" }}
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="idade">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Idade</th>
-      <td mat-cell *matCellDef="let element; let index = index">
-        <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
-          <mat-form-field
-            appearance="outline"
-            class="form-field"
-            floatLabel="always"
-          >
-            <mat-label>Idade</mat-label>
-            <input
-              matInput
-              placeholder="Sua idade.."
-              type="number"
-              [formControl]="getFormControl(element.id, 'idade')"
-            />
-            <mat-error
-              FormError
-              [formcontrol]="getFormControl(element.id, 'idade')"
-            ></mat-error>
-          </mat-form-field>
-        </div>
-        <div *ngIf="!getControl(element).get('onEdit')!.value">
-          {{ element.idade ?? "Não Inserido" }}
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let element; let index = index">
-        <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
-          <mat-form-field
-            appearance="outline"
-            class="form-field"
-            floatLabel="always"
-          >
-            <mat-label>Email</mat-label>
-            <input
-              matInput
-              placeholder="Sua Email.."
-              type="email"
-              [formControl]="getFormControl(element.id, 'email')"
-            />
-            <mat-error
-              FormError
-              [formcontrol]="getFormControl(element.id, 'email')"
-            ></mat-error>
-          </mat-form-field>
-        </div>
-        <div *ngIf="!getControl(element).get('onEdit')!.value">
-          {{ element.email ?? "Não Inserido" }}
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="checkBox">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox
-          [formControl]="checkAll"
-          (change)="checkAllFields()"
-        ></mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let element; let index = index">
-        <mat-checkbox
-          (change)="checkSomeField()"
-          [formControl]="getFormControl(element.id, 'checked')"
-        ></mat-checkbox>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="editField">
-      <th mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button color="accent" (click)="addnewStaticrow()">
-          <mat-icon>create_new_folder</mat-icon>
-        </button>
-      </th>
-      <td mat-cell *matCellDef="let element; let index = index">
-        <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
-          <button
-            mat-icon-button
-            (click)="
-              setValueControl(
-                $any(getControl(element).get('onEdit')),
-                false,
-                element,
-                $event
-              );
-              handleSave($any(getControl(element)), index);
-            "
-            style="cursor: pointer"
-            color="accent"
-            [disabled]="getControl(element).invalid"
-          >
-            <mat-icon>save</mat-icon>
+<ng-container *ngIf="tableData$ | async as baseData">
+  <div class="container" *ngIf="dataSource.data.length > 0; else noData">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matTableResponsive
+      class="mat-elevation-z8 FormTable tableWithForms"
+      style="width: 98%"
+      matSort
+      multiTemplateDataRows
+      [appTableFormBuilder]="baseData.users"
+      [appTableFormBuilderCdr]="cdr"
+      #formBuilder="appTableFormBuilder"
+    >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let element; let index = index">
+          {{ element.id ?? 0 }}
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
+        <td mat-cell *matCellDef="let element; let index = index">
+          <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
+            <mat-form-field
+              appearance="outline"
+              class="form-field"
+              floatLabel="always"
+            >
+              <mat-label>Nome</mat-label>
+              <input
+                matInput
+                type="text"
+                placeholder="Digite seu nome:"
+                [formControl]="getFormControl(element.id, 'nome')"
+              />
+              <mat-error
+                FormError
+                [formcontrol]="getFormControl(element.id, 'nome')"
+              ></mat-error>
+            </mat-form-field>
+          </div>
+          <div *ngIf="!getFormControl(element.id, 'onEdit')!.value">
+            {{ element.nome != "" ? element.nome : "Não Inserido" }}
+          </div>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="idade">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Idade</th>
+        <td mat-cell *matCellDef="let element; let index = index">
+          <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
+            <mat-form-field
+              appearance="outline"
+              class="form-field"
+              floatLabel="always"
+            >
+              <mat-label>Idade</mat-label>
+              <input
+                matInput
+                placeholder="Sua idade.."
+                type="number"
+                [formControl]="formBuilder.getControl(element.id, 'age')"
+              />
+              <mat-error
+                FormError
+                [formcontrol]="getFormControl(element.id, 'idade')"
+              ></mat-error>
+            </mat-form-field>
+          </div>
+          <div *ngIf="!getControl(element).get('onEdit')!.value">
+            {{ element.idade ?? "Não Inserido" }}
+          </div>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element; let index = index">
+          <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
+            <mat-form-field
+              appearance="outline"
+              class="form-field"
+              floatLabel="always"
+            >
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                placeholder="Sua Email.."
+                type="email"
+                [formControl]="getFormControl(element.id, 'email')"
+              />
+              <mat-error
+                FormError
+                [formcontrol]="getFormControl(element.id, 'email')"
+              ></mat-error>
+            </mat-form-field>
+          </div>
+          <div *ngIf="!getControl(element).get('onEdit')!.value">
+            {{ element.email ?? "Não Inserido" }}
+          </div>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="checkBox">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            [formControl]="checkAll"
+            (change)="checkAllFields()"
+          ></mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let element; let index = index">
+          <mat-checkbox
+            (change)="checkSomeField()"
+            [formControl]="getFormControl(element.id, 'checked')"
+          ></mat-checkbox>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="editField">
+        <th mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button color="accent" (click)="addnewStaticrow()">
+            <mat-icon>create_new_folder</mat-icon>
           </button>
-        </div>
-        <div *ngIf="!getFormControl(element.id, 'onEdit')!.value">
+        </th>
+        <td mat-cell *matCellDef="let element; let index = index">
+          <div *ngIf="getFormControl(element.id, 'onEdit')!.value">
+            <button
+              mat-icon-button
+              (click)="
+                setValueControl(
+                  $any(getControl(element).get('onEdit')),
+                  false,
+                  element,
+                  $event
+                );
+                handleSave($any(getControl(element)), index);
+              "
+              style="cursor: pointer"
+              color="accent"
+              [disabled]="getControl(element).invalid"
+            >
+              <mat-icon>save</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="!getFormControl(element.id, 'onEdit')!.value">
+            <button
+              mat-icon-button
+              (click)="
+                setValueControl($any(getControl(element).get('onEdit')), true)
+              "
+              style="cursor: pointer"
+              color="accent"
+              [disabled]="!element.canEdit"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="excluir">
+        <th mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button color="warn" (click)="romoveSelectdsRows()">
+            <mat-icon deleteHeader>remove_circle_outline</mat-icon>
+          </button>
+        </th>
+        <td mat-cell *matCellDef="let element; let index = index">
           <button
             mat-icon-button
-            (click)="
-              setValueControl($any(getControl(element).get('onEdit')), true)
-            "
-            style="cursor: pointer"
-            color="accent"
+            color="warn"
+            (click)="deletRow(element, index)"
             [disabled]="!element.canEdit"
           >
-            <mat-icon>edit</mat-icon>
+            <mat-icon delete>delete</mat-icon>
           </button>
-        </div>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="excluir">
-      <th mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button color="warn" (click)="romoveSelectdsRows()">
-          <mat-icon deleteHeader>remove_circle_outline</mat-icon>
-        </button>
-      </th>
-      <td mat-cell *matCellDef="let element; let index = index">
-        <button
-          mat-icon-button
-          color="warn"
-          (click)="deletRow(element, index)"
-          [disabled]="!element.canEdit"
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="expandedDetail">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="displayedColumns.length"
         >
-          <mat-icon delete>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="expandedDetail">
-      <td
-        mat-cell
-        *matCellDef="let element"
-        [attr.colspan]="displayedColumns.length"
-      >
-        <div
-          class="detail"
-          @detailExpand
-        > 
-          <div>
-            <ng-container *ngIf="getExpandUserData(element.id) | async as User">
-              {{ User | json }}
-            </ng-container>
+          <div
+            class="detail"
+            @detailExpand
+          > 
+            <div>
+              <ng-container *ngIf="getExpandUserData(element.id) | async as User">
+                {{ User | json }}
+              </ng-container>
+            </div>
+            
           </div>
-          
-        </div>
-      </td>
-    </ng-container>
-
-    <tr
-      mat-header-row
-      *matHeaderRowDef="displayedColumns"
-      (click)="ngOnChanges()"
-    ></tr>
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      ExpandedRow
-      [tableElement]="getControl(row).value"
-    ></tr>
-    <tr
-      mat-row
-      *matRowDef="let row; columns: ['expandedDetail']"
-      class="detail-row"
-    ></tr>
-  </table>
-  <pre *ngIf="FormArray.value.lenght > 0">{{ FormArray.value | json }}</pre>
-</div>
+        </td>
+      </ng-container>
+  
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        (click)="ngOnChanges()"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        ExpandedRow
+        [tableElement]="getControl(row).value"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="detail-row"
+      ></tr>
+    </table>
+    <pre *ngIf="FormArray.value.lenght > 0">{{ FormArray.value | json }}</pre>
+  </div>
+</ng-container>
 
 <ng-template #noData>
   <div class="noData">

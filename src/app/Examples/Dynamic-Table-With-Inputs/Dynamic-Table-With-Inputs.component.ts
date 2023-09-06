@@ -5,6 +5,7 @@ import {
   OnChanges,
   Inject,
   inject,
+  ChangeDetectorRef,
 } from '@angular/core';
 import {
   FormArray,
@@ -72,10 +73,13 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   constructor(
     @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
     private activeRoute: ActivatedRoute,
-    private readonly expandUserService: ExpandUserService
-  ) {}
+    private readonly expandUserService: ExpandUserService,
+    readonly cdr: ChangeDetectorRef
+  ) { }
 
   tableService = inject(TABLESERVICE);
+
+  tableData$ = this.tableService.getAll()
 
   ngOnInit() {
     this.getAllUser();
@@ -282,7 +286,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
           })
           .subscribe();
       },
-      error: () => {},
+      error: () => { },
     });
     this.checkAll.setValue(false);
   }

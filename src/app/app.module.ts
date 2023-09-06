@@ -32,6 +32,7 @@ import { ALL_MODULES } from './helpers/all-module-imports';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { TableFormBuilderDirective } from './core/directives/table-form-builder.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,13 +61,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ExpandedRowDirective,
     IncrementorComponent,
     FormExampleComponent,
+    TableFormBuilderDirective
   ],
-  imports: [ALL_MODULES, ServiceWorkerModule.register('ngsw-worker.js', {
-  enabled: !isDevMode(),
-  // Register the ServiceWorker as soon as the application is stable
-  // or after 30 seconds (whichever comes first).
-  registrationStrategy: 'registerWhenStable:30000'
-})],
+  imports: [...ALL_MODULES, ServiceWorkerModule.register('ngsw-worker.js', {
+    enabled: !isDevMode(),
+    registrationStrategy: 'registerWhenStable:30000'
+  })],
   providers: [
     AuthGuardService,
     AlreadyLoggedGuardService,
@@ -80,4 +80,4 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   exports: [IncrementorComponent],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
