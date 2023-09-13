@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Directive, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -8,22 +8,25 @@ export type IFormArray = FormGroup<{}> | AbstractControl
   selector: '[appTableFormBuilder]',
   exportAs: 'appTableFormBuilder'
 })
-export class TableFormBuilderDirective<T> implements OnInit {
+export class TableFormBuilderDirective<T> implements OnInit, OnChanges {
 
   @Input('appTableFormBuilder') data!: T[]
   @Input('appTableFormBuilderCdr') cdr!: ChangeDetectorRef
 
-  form: {
+  form!: {
     [key: number]: FormGroup
-  } = {}
+  }
   subscriptions$: Subscription[] = []
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.data);
-
+    this.form = {}
     this.buildForm()
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['data']) this.ngOnInit()
   }
 
   buildForm() {

@@ -2,7 +2,7 @@
   <div class="container" *ngIf="dataSource.data.length > 0; else noData">
     <table
       mat-table
-      [dataSource]="dataSource"
+      [dataSource]="baseData.users"
       matTableResponsive
       class="mat-elevation-z8 FormTable tableWithForms"
       style="width: 98%"
