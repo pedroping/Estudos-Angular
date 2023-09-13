@@ -1,8 +1,8 @@
-import { Directive, ElementRef, HostBinding, Input, OnInit, Optional, Renderer2 } from '@angular/core';
-import { AbstractControl, ControlContainer, FormControl, NgControl, Validators } from '@angular/forms';
-import { debounceTime, startWith } from 'rxjs';
+import { Directive, HostBinding, Input, OnInit, Optional } from '@angular/core';
+import { AbstractControl, ControlContainer, FormControl, Validators } from '@angular/forms';
+import { startWith } from 'rxjs';
 
-export const ERRORS: {[key: string]: any} = {
+export const ERRORS: { [key: string]: any } = {
   required: {
     messageFn: () => {
       return "Esse campo é obrigatorio!"
@@ -60,34 +60,33 @@ export class FormErrorDirective implements OnInit {
 
   constructor(
     @Optional() private controlContainer: ControlContainer,
-    private el: ElementRef,
-    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
-    if(this.controlContainer && this.formcontrolName){
+    if (this.controlContainer && this.formcontrolName) {
       const Control = this.controlContainer?.control?.get(this.formcontrolName)
-      if(!Control) return
+      if (!Control) return
       Control.valueChanges.subscribe(() => this.validatForm(Control))
       return
     }
-    this.formcontrol!.valueChanges.pipe(startWith(this.formcontrol?.value)).subscribe(() => this.validatForm(this.formcontrol!))
+    if (this.formcontrol)
+      this.formcontrol.valueChanges.pipe(startWith(this.formcontrol.value)).subscribe(() => this.validatForm(this.formcontrol!))
   }
 
-  validatForm(Control: AbstractControl | FormControl){
+  validatForm(Control: AbstractControl | FormControl) {
     this.setInnerHTML('')
     Control.markAsTouched()
     Control.markAsDirty()
     Object.keys(ERRORS).forEach(key => {
-      if(Control.hasError(key)){
-        if(key == 'maxlength' || key == 'minlength') return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors![key].requiredLength)}</small>`)  
-        if(key == 'max')  return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors![key].max)}</small>`)  
-        if(key == 'min')  return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors![key].min)}</small>`) 
-        if(key == 'not_allowed_characters') return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors![key][0])}</small>`) 
-        this.setInnerHTML(`<small>${ERRORS[key].messageFn()}</small>`)  
-      }
+      if (!Control.hasError(key) || !Control.errors) return
+      if (key == 'maxlength' || key == 'minlength') return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors[key].requiredLength)}</small>`)
+      if (key == 'max') return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors[key].max)}</small>`)
+      if (key == 'min') return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors[key].min)}</small>`)
+      if (key == 'not_allowed_characters') return this.setInnerHTML(`<small>${ERRORS[key].messageFn(Control.errors[key][0])}</small>`)
+      this.setInnerHTML(`<small>${ERRORS[key].messageFn()}</small>`)
+
     })
-  } 
+  }
 
   private setInnerHTML(html: string): void {
     this.innerHTML = html;

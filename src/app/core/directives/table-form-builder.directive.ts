@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
+import { ChangeDetectorRef, Directive, Input, OnInit } from '@angular/core';
+import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 export type IFormArray = FormGroup<{}> | AbstractControl
@@ -68,7 +68,7 @@ export class TableFormBuilderDirective<T> implements OnInit {
     const form = this.getForm(id)
     if (!form || !form.get(name)) return new FormControl()
 
-    return form.get(name)! as FormControl
+    return form.get(name) as FormControl
   }
 
   getForm(id: number) {
