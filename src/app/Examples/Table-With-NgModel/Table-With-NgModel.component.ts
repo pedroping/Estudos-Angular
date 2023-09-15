@@ -33,8 +33,7 @@ import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
   providers: [{ provide: TABLESERVICE, useClass: TableServiceService }],
 })
 export class TableWithNgModelComponent
-  implements OnInit, OnChanges, AfterViewInit
-{
+  implements OnInit, OnChanges, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   @ViewChild('ColunmsTemplate') dialogTemplate!: TemplateRef<any>;
@@ -109,7 +108,7 @@ export class TableWithNgModelComponent
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
     readonly darkModeService: DarkModeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.createTableData();
@@ -136,19 +135,24 @@ export class TableWithNgModelComponent
 
   setCliente(element: HTMLDivElement) {
     console.log(element.parentElement);
-    // this.dragPosition = {
-    //   x: 0,
-    //   y: window.innerHeight,
-    // };
     element.parentElement!.style.transform = '';
-    element.parentElement!.style.position = 'absolute';
-    element.parentElement!.style.top = '0';
+    // element.parentElement!.style.position = 'absolute';
+    // element.parentElement!.style.top = '0';
     for (let i = 20; i < 101; i++) {
-      setTimeout(() => {
-        element.style.width = `${i}vw`;
-        element.style.height = `${i > 98 ? 98 : i}vh`;
-      }, 1);
+      element.style.width = `${i}vw`;
+      element.style.height = `${i > 98 ? 98 : i}vh`;
     }
+    this.fixMoving()
+  }
+
+  fixMoving() {
+    const modalHeight = window.innerHeight * 0.98
+    const newY = (window.innerHeight - modalHeight).toFixed(0)
+    this.dragPosition = { x: 0, y: -(+newY - 5) }
+    console.log(modalHeight, this.dragPosition);
+
+    // element.parentElement!.style.position = 'static';
+    // element.parentElement!.style.top = '';
   }
 
   ngAfterViewInit() {
