@@ -93,12 +93,13 @@ button {
 .example-dialog-content {
   background-color: white;
   cursor: move;
+  transition: width 2s ease 2s, height 4s ease 4s !important;
 }
 
 .onDarkMode {
   background-color: #303030 !important;
   color: white !important;
-  
+
   .example-menu-item {
     color: white !important;
   }

@@ -255,11 +255,15 @@
   <div
     class="example-dialog-content"
     cdkDrag
+    [cdkDragFreeDragPosition]="dragPosition"
     cdkDragRootElement=".cdk-overlay-pane"
+    [style.width]="isHighScreen ? '100vw' : 'auto'"
     [ngStyle]="{
       'background-color': darkModeService.darkMode ? '#303030' : 'white'
     }"
+    #element
   >
+    <button (click)="setCliente(element)">Tela Cheia</button>
     <Form [formGroup]="Colunms">
       <app-colunas
         (Close)="closeElement(0)"

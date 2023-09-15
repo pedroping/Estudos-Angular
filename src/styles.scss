@@ -54,6 +54,12 @@ cdk-dialog-container {
   border: #d5d5d5 1px solid;
 }
 
+.select-columns {
+  transition: width 2s ease 2s, height 4s ease 4s !important;
+  width: 100vw;
+  height: 90vh;
+}
+
 @media screen and (max-width: 500px) {
   app-closed-sidenav {
     display: none !important;

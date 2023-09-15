@@ -63,6 +63,7 @@ import { OnRouteDirective } from './core/directives/onRoute.directive';
     IncrementorComponent,
     FormExampleComponent,
     OnRouteDirective,
+    TableFormBuilderDirective
   ],
   imports: [
     ...ALL_MODULES,

@@ -8,7 +8,7 @@ import {
   AfterViewInit,
   Inject,
 } from '@angular/core';
-import {Dialog } from '@angular/cdk/dialog';
+import { Dialog } from '@angular/cdk/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, map } from 'rxjs';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
@@ -43,6 +43,10 @@ export class TableWithNgModelComponent
   private portal!: TemplatePortal;
 
   Portals = 2;
+
+  isHighScreen = false;
+
+  dragPosition = { x: 50, y: 50 };
 
   colunmsCheckbox = new BehaviorSubject<
     {
@@ -128,6 +132,23 @@ export class TableWithNgModelComponent
         }
       });
     });
+  }
+
+  setCliente(element: HTMLDivElement) {
+    console.log(element.parentElement);
+    // this.dragPosition = {
+    //   x: 0,
+    //   y: window.innerHeight,
+    // };
+    element.parentElement!.style.transform = '';
+    element.parentElement!.style.position = 'absolute';
+    element.parentElement!.style.top = '0';
+    for (let i = 20; i < 101; i++) {
+      setTimeout(() => {
+        element.style.width = `${i}vw`;
+        element.style.height = `${i > 98 ? 98 : i}vh`;
+      }, 1);
+    }
   }
 
   ngAfterViewInit() {
@@ -320,8 +341,7 @@ export class TableWithNgModelComponent
           type: 'oneUser',
         },
       })
-      .closed
-      .subscribe((resp) => {
+      .closed.subscribe((resp) => {
         if (!resp) return;
 
         this.tableServiceService.deleteUser(User_Row.id).subscribe({
@@ -371,8 +391,7 @@ export class TableWithNgModelComponent
           type: 'manyUsers',
         },
       })
-      .closed
-      .subscribe((resp) => {
+      .closed.subscribe((resp) => {
         if (!resp) return;
 
         let ids: number[] = [];
