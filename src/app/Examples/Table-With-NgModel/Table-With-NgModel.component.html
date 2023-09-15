@@ -258,6 +258,7 @@
     [cdkDragFreeDragPosition]="dragPosition"
     cdkDragRootElement=".cdk-overlay-pane"
     (cdkDragEnded)="fixMoving(element)"
+    (cdkDragMoved)="onMove(element)"
     [ngStyle]="{
       'background-color': darkModeService.darkMode ? '#303030' : 'white'
     }"
@@ -266,6 +267,7 @@
     >
     <!-- (cdkDragStarted)="fixMoving(element)" -->
     <button (click)="setCliente(element)">Tela Cheia</button>
+    <mat-icon cdkDragHandle>close</mat-icon>
     <Form [formGroup]="Colunms">
       <app-colunas
         (Close)="closeElement(0)"

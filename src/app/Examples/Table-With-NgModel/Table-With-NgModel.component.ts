@@ -134,8 +134,9 @@ export class TableWithNgModelComponent
   }
 
   setCliente(element: HTMLDivElement) {
+    this.isHighScreen = true
     console.log(element.parentElement);
-    element.parentElement!.style.transform = '';
+    // element.parentElement!.style.transform = '';
     // element.parentElement!.style.position = 'absolute';
     // element.parentElement!.style.top = '0';
     for (let i = 20; i < 101; i++) {
@@ -146,14 +147,20 @@ export class TableWithNgModelComponent
   }
 
   fixMoving(element: HTMLDivElement) {
-
+    if (!this.isHighScreen) return;
     const modalHeight = window.innerHeight * 0.98
     const newY = (window.innerHeight - modalHeight).toFixed(0)
-    // this.dragPosition = { x: 0, y: -(+newY / 2) - 1 }
+    this.dragPosition = { x: 0, y: -(+newY / 2) - 1 }
     console.log(modalHeight, window.innerHeight, this.dragPosition);
-    element.parentElement!.style.transform = `translate3d(0px, ${-(+newY / 2) - 1}px, 0px)`
+    // element.parentElement!.style.transform = `translate3d(0px, ${-(+newY / 2) - 1}px, 0px)`
     // element.parentElement!.style.position = 'static';
     // element.parentElement!.style.top = '';
+  }
+
+  onMove(element: HTMLDivElement) {
+    console.log(element.parentElement!.style.transform);
+
+    // element.parentElement!.style.transform = ``
   }
 
   ngAfterViewInit() {
