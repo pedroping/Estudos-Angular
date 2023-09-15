@@ -142,15 +142,16 @@ export class TableWithNgModelComponent
       element.style.width = `${i}vw`;
       element.style.height = `${i > 98 ? 98 : i}vh`;
     }
-    this.fixMoving()
+    this.fixMoving(element)
   }
 
-  fixMoving() {
+  fixMoving(element: HTMLDivElement) {
+
     const modalHeight = window.innerHeight * 0.98
     const newY = (window.innerHeight - modalHeight).toFixed(0)
-    this.dragPosition = { x: 0, y: -(+newY - 5) }
-    console.log(modalHeight, this.dragPosition);
-
+    // this.dragPosition = { x: 0, y: -(+newY / 2) - 1 }
+    console.log(modalHeight, window.innerHeight, this.dragPosition);
+    element.parentElement!.style.transform = `translate3d(0px, ${-(+newY / 2) - 1}px, 0px)`
     // element.parentElement!.style.position = 'static';
     // element.parentElement!.style.top = '';
   }

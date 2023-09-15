@@ -257,10 +257,11 @@
     cdkDrag
     [cdkDragFreeDragPosition]="dragPosition"
     cdkDragRootElement=".cdk-overlay-pane"
-    (cdkDragEnded)="fixMoving()"
+    (cdkDragEnded)="fixMoving(element)"
     [ngStyle]="{
       'background-color': darkModeService.darkMode ? '#303030' : 'white'
     }"
+    style="padding: 5px;"
     #element
     >
     <!-- (cdkDragStarted)="fixMoving(element)" -->
