@@ -33,6 +33,7 @@ import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TableFormBuilderDirective } from './core/directives/table-form-builder.directive';
+import { OnRouteDirective } from './core/directives/onRoute.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,12 +62,15 @@ import { TableFormBuilderDirective } from './core/directives/table-form-builder.
     ExpandedRowDirective,
     IncrementorComponent,
     FormExampleComponent,
-    TableFormBuilderDirective
+    OnRouteDirective,
   ],
-  imports: [...ALL_MODULES, ServiceWorkerModule.register('ngsw-worker.js', {
-    enabled: !isDevMode(),
-    registrationStrategy: 'registerWhenStable:30000'
-  })],
+  imports: [
+    ...ALL_MODULES,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
+  ],
   providers: [
     AuthGuardService,
     AlreadyLoggedGuardService,

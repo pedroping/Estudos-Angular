@@ -38,7 +38,7 @@ export const DEFAULT_FORMS = {
   pageInput: PaginatorInputComponent,
 };
 
-export const DYNAMIC_FORMS = new InjectionToken<ComponentFields<DynamicControl<DynamicFormConfig>>>(
-  'DYNAMIC_FORMS',
-  { factory: () => DEFAULT_FORMS }
-);
+// export const DYNAMIC_FORMS = new InjectionToken<ComponentFields<DynamicControl<DynamicFormConfig>>>(
+//   'DYNAMIC_FORMS',
+//   { factory: () => DEFAULT_FORMS }
+// );
