@@ -1,31 +1,31 @@
+import { Dialog } from '@angular/cdk/dialog';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
+  AfterViewInit,
   Component,
+  Inject,
   OnChanges,
   OnInit,
-  ViewChild,
   TemplateRef,
+  ViewChild,
   ViewContainerRef,
-  AfterViewInit,
-  Inject,
 } from '@angular/core';
-import { Dialog } from '@angular/cdk/dialog';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { BehaviorSubject, Subject, fromEvent, map, takeUntil } from 'rxjs';
-import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
+import { BehaviorSubject, fromEvent, map } from 'rxjs';
 import {
+  COLUMNS,
   COLUMNS_SCHEMA,
   Table_User,
   User,
   UserForm,
-  COLUMNS,
 } from 'src/app/core/models';
-import { TableServiceService } from 'src/app/core/services/tableService.service';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSort } from '@angular/material/sort';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
 import { DarkModeService } from 'src/app/core/services/darkMode.service';
+import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
+import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
 @Component({
   selector: 'app-Table-With-NgModel',
   templateUrl: './Table-With-NgModel.component.html',
@@ -142,9 +142,7 @@ export class TableWithNgModelComponent
     });
 
     const config = { attributes: true, childList: true, subtree: true };
-    new MutationObserver((a) => {
-      console.log(a);
-    }).observe(element, config);
+    new MutationObserver((a) => {}).observe(element, config);
 
     if (
       this.isHighScreen ||
@@ -156,9 +154,9 @@ export class TableWithNgModelComponent
       return;
     }
 
+    // element.parentElement!.style.transition = 'all 0.5s ease 0.5s';
     element.style.width = `100vw`;
     element.style.height = `${window.innerHeight - 50}px`;
-
     this.isHighScreen = !this.isHighScreen;
     this.fixMoving(element);
   }
@@ -169,8 +167,7 @@ export class TableWithNgModelComponent
   }
 
   onMove(element: HTMLDivElement) {
-    // console.log(element.parentElement!.style.transform);
-    // element.parentElement!.style.transform = ``
+    console.log('moved');
   }
 
   log(label: string) {

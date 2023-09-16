@@ -255,6 +255,7 @@
   <div
     class="example-dialog-content"
     cdkDrag
+    [cdkDragBoundary]="isHighScreen ? '' : '.mat-typography'"
     [cdkDragFreeDragPosition]="dragPosition"
     cdkDragRootElement=".cdk-overlay-pane"
     (cdkDragEnded)="fixMoving(element)"
