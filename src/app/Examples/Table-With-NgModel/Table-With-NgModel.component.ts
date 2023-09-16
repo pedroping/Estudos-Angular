@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, fromEvent, map } from 'rxjs';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
 import {
   COLUMNS_SCHEMA,
@@ -33,7 +33,8 @@ import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
   providers: [{ provide: TABLESERVICE, useClass: TableServiceService }],
 })
 export class TableWithNgModelComponent
-  implements OnInit, OnChanges, AfterViewInit {
+  implements OnInit, OnChanges, AfterViewInit
+{
   @ViewChild(MatSort) sort!: MatSort;
 
   @ViewChild('ColunmsTemplate') dialogTemplate!: TemplateRef<any>;
@@ -108,7 +109,7 @@ export class TableWithNgModelComponent
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
     readonly darkModeService: DarkModeService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.createTableData();
@@ -134,7 +135,22 @@ export class TableWithNgModelComponent
   }
 
   setCliente(element: HTMLDivElement) {
-    this.isHighScreen = true
+
+    fromEvent(element, 'resize').subscribe(() => {
+      console.log('mudou');
+      
+    })
+
+    console.log('hahaha',element.style.width);
+    
+    if (this.isHighScreen || (element.style.width && element.style.width != 'auto')) {
+      element.style.width = `auto`;
+      element.style.height = `auto`;
+      this.isHighScreen = !this.isHighScreen;
+      return;
+    }
+    this.isHighScreen = !this.isHighScreen;
+
     console.log(element.parentElement);
     // element.parentElement!.style.transform = '';
     // element.parentElement!.style.position = 'absolute';
@@ -143,14 +159,16 @@ export class TableWithNgModelComponent
       element.style.width = `${i}vw`;
       element.style.height = `${i > 98 ? 98 : i}vh`;
     }
-    this.fixMoving(element)
+    this.fixMoving(element);
   }
 
   fixMoving(element: HTMLDivElement) {
-    if (!this.isHighScreen) return;
-    const modalHeight = window.innerHeight * 0.98
-    const newY = (window.innerHeight - modalHeight).toFixed(0)
-    this.dragPosition = { x: 0, y: -(+newY / 2) - 1 }
+    console.log('hahaha',element.style.width, element.style.height);
+    const hasNoMove = element.style.width == '100vw' && element.style.height == '98vh'
+    if (!this.isHighScreen || !hasNoMove) return;
+    const modalHeight = window.innerHeight * 0.98;
+    const newY = (window.innerHeight - modalHeight).toFixed(0);
+    this.dragPosition = { x: 0, y: -(+newY / 2) - 1 };
     console.log(modalHeight, window.innerHeight, this.dragPosition);
     // element.parentElement!.style.transform = `translate3d(0px, ${-(+newY / 2) - 1}px, 0px)`
     // element.parentElement!.style.position = 'static';
@@ -158,7 +176,7 @@ export class TableWithNgModelComponent
   }
 
   onMove(element: HTMLDivElement) {
-    console.log(element.parentElement!.style.transform);
+    // console.log(element.parentElement!.style.transform);
 
     // element.parentElement!.style.transform = ``
   }
