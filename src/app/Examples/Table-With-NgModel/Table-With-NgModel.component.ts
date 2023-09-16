@@ -135,53 +135,41 @@ export class TableWithNgModelComponent
   }
 
   setCliente(element: HTMLDivElement) {
+    // if (
+    //   this.isHighScreen ||
+    //   (element.style.width && element.style.width != 'auto')
+    // ) {
+    //   element.style.width = `auto`;
+    //   element.style.height = `auto`;
+    //   this.isHighScreen = !this.isHighScreen;
+    //   return;
+    // }
 
-    fromEvent(element, 'resize').subscribe(() => {
-      console.log('mudou');
-      
-    })
-
-    console.log('hahaha',element.style.width);
-    
-    if (this.isHighScreen || (element.style.width && element.style.width != 'auto')) {
-      element.style.width = `auto`;
-      element.style.height = `auto`;
-      this.isHighScreen = !this.isHighScreen;
-      return;
-    }
-    this.isHighScreen = !this.isHighScreen;
-
-    console.log(element.parentElement);
-    // element.parentElement!.style.transform = '';
-    // element.parentElement!.style.position = 'absolute';
-    // element.parentElement!.style.top = '0';
     for (let i = 20; i < 101; i++) {
       element.style.width = `${i}vw`;
       element.style.height = `${i > 98 ? 98 : i}vh`;
     }
     this.fixMoving(element);
+    this.isHighScreen = true;
   }
 
   fixMoving(element: HTMLDivElement) {
-    console.log('hahaha',element.style.width, element.style.height);
-    const hasNoMove = element.style.width == '100vw' && element.style.height == '98vh'
-    if (!this.isHighScreen || !hasNoMove) return;
+    console.log('hahaha', element.style.width, element.style.height);
+    const hasNoMove =
+      element.style.width == '100vw' && element.style.height == '98vh';
+    // if (!this.isHighScreen || !hasNoMove) return;
     const modalHeight = window.innerHeight * 0.98;
     const newY = (window.innerHeight - modalHeight).toFixed(0);
-    this.dragPosition = { x: 0, y: -(+newY / 2) - 1 };
-    console.log(modalHeight, window.innerHeight, this.dragPosition);
-    // element.parentElement!.style.transform = `translate3d(0px, ${-(+newY / 2) - 1}px, 0px)`
-    // element.parentElement!.style.position = 'static';
-    // element.parentElement!.style.top = '';
+    this.dragPosition = { x: 0, y: -newY };
   }
 
   onMove(element: HTMLDivElement) {
     // console.log(element.parentElement!.style.transform);
-
     // element.parentElement!.style.transform = ``
   }
 
   ngAfterViewInit() {
+    this.overlayRef = [];
     for (let i = 0; i < this.Portals; i++) {
       this.overlayRef.push(
         this.overlay.create({
@@ -216,6 +204,7 @@ export class TableWithNgModelComponent
 
   closeElement(id: number) {
     this.overlayRef[id].detach();
+    this.ngAfterViewInit();
   }
 
   ngOnChanges() {
