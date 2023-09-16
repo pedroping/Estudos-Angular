@@ -223,7 +223,7 @@
     class="example-menu"
     cdkMenu
     [ngClass]="{
-      'onDarkMode': darkModeService.darkMode
+      onDarkMode: darkModeService.darkMode
     }"
   >
     <button
@@ -259,22 +259,20 @@
     cdkDragRootElement=".cdk-overlay-pane"
     (cdkDragEnded)="fixMoving(element)"
     (cdkDragMoved)="onMove(element)"
-    [ngStyle]="{
-      'background-color': darkModeService.darkMode ? '#303030' : 'white'
-    }"
-    style="padding: 5px;"
+    (resized)="log('Resize')"
     #element
-    >
-    <!-- (cdkDragStarted)="fixMoving(element)" -->
-    <button (click)="setCliente(element)">Tela Cheia</button>
-    <mat-icon cdkDragHandle>close</mat-icon>
-    <Form [formGroup]="Colunms">
-      <app-colunas
-        (Close)="closeElement(0)"
-        (ChangeOrder)="handleOrder($event)"
-        [Checkboxs]="colunmsCheckbox"
-      ></app-colunas>
-    </Form>
+  >
+    <div class="header">
+      <div class="logo" cdkDragHandle (dblclick)="setCliente(element)">
+        Minha pagina
+      </div>
+      <div class="controls">
+        <mat-icon>minimize</mat-icon>
+        <mat-icon (click)="setCliente(element)">crop_square</mat-icon>
+        <mat-icon (click)="closeElement(0)">close</mat-icon>
+      </div>
+    </div>
+    <app-new-folder></app-new-folder>
   </div>
 </ng-template>
 

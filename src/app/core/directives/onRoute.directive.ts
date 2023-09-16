@@ -13,6 +13,6 @@ export class OnRouteDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.route.url, this.rota);
+    // console.log(this.route.url, this.rota);
   }
 }

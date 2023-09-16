@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { Dialog } from '@angular/cdk/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { BehaviorSubject, fromEvent, map } from 'rxjs';
+import { BehaviorSubject, Subject, fromEvent, map, takeUntil } from 'rxjs';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
 import {
   COLUMNS_SCHEMA,
@@ -135,32 +135,37 @@ export class TableWithNgModelComponent
   }
 
   setCliente(element: HTMLDivElement) {
-    // if (
-    //   this.isHighScreen ||
-    //   (element.style.width && element.style.width != 'auto')
-    // ) {
-    //   element.style.width = `auto`;
-    //   element.style.height = `auto`;
-    //   this.isHighScreen = !this.isHighScreen;
-    //   return;
-    // }
+    fromEvent(window, 'resize').subscribe(() => {
+      element.style.width = `100vw`;
+      element.style.height = `${window.innerHeight - 50}px`;
+      this.fixMoving(element);
+    });
 
-    for (let i = 20; i < 101; i++) {
-      element.style.width = `${i}vw`;
-      element.style.height = `${i > 98 ? 98 : i}vh`;
+    const config = { attributes: true, childList: true, subtree: true };
+    new MutationObserver((a) => {
+      console.log(a);
+    }).observe(element, config);
+
+    if (
+      this.isHighScreen ||
+      (element.style.width && element.style.width != 'auto')
+    ) {
+      element.style.width = `auto`;
+      element.style.height = `auto`;
+      this.isHighScreen = !this.isHighScreen;
+      return;
     }
+
+    element.style.width = `100vw`;
+    element.style.height = `${window.innerHeight - 50}px`;
+
+    this.isHighScreen = !this.isHighScreen;
     this.fixMoving(element);
-    this.isHighScreen = true;
   }
 
   fixMoving(element: HTMLDivElement) {
-    console.log('hahaha', element.style.width, element.style.height);
-    const hasNoMove =
-      element.style.width == '100vw' && element.style.height == '98vh';
-    // if (!this.isHighScreen || !hasNoMove) return;
-    const modalHeight = window.innerHeight * 0.98;
-    const newY = (window.innerHeight - modalHeight).toFixed(0);
-    this.dragPosition = { x: 0, y: -newY };
+    if (!this.isHighScreen) return;
+    this.dragPosition = { x: 0, y: -29 };
   }
 
   onMove(element: HTMLDivElement) {
@@ -168,25 +173,26 @@ export class TableWithNgModelComponent
     // element.parentElement!.style.transform = ``
   }
 
+  log(label: string) {
+    console.log('Esse evento aqui rolou:', label);
+  }
+
   ngAfterViewInit() {
     this.overlayRef = [];
-    for (let i = 0; i < this.Portals; i++) {
-      this.overlayRef.push(
-        this.overlay.create({
-          positionStrategy: this.overlay
-            .position()
-            .global()
-            .centerHorizontally()
-            .centerVertically(),
-          hasBackdrop: false,
-        })
-      );
-    }
   }
 
   selectTemplate(Template: TemplateRef<any>, id: number) {
+    this.overlayRef[id] = this.overlay.create({
+      positionStrategy: this.overlay
+        .position()
+        .global()
+        .centerHorizontally()
+        .centerVertically(),
+      hasBackdrop: false,
+    });
     this.portal = new TemplatePortal(Template, this.viewContainerRef);
     this.overlayRef[id].attach(this.portal);
+    this.isHighScreen = false;
   }
 
   handleOrder(order: string[]) {
@@ -204,7 +210,7 @@ export class TableWithNgModelComponent
 
   closeElement(id: number) {
     this.overlayRef[id].detach();
-    this.ngAfterViewInit();
+    this.overlayRef.splice(id);
   }
 
   ngOnChanges() {

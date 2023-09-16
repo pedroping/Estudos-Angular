@@ -34,6 +34,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TableFormBuilderDirective } from './core/directives/table-form-builder.directive';
 import { OnRouteDirective } from './core/directives/onRoute.directive';
+import { NewFolderComponent } from './core/componenets/new-folder/new-folder.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { OnRouteDirective } from './core/directives/onRoute.directive';
     IncrementorComponent,
     FormExampleComponent,
     OnRouteDirective,
-    TableFormBuilderDirective
+    TableFormBuilderDirective,
+    NewFolderComponent
   ],
   imports: [
     ...ALL_MODULES,
