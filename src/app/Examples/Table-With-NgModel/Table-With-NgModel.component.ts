@@ -4,6 +4,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   Inject,
   OnChanges,
   OnInit,
@@ -26,6 +27,7 @@ import { DarkModeService } from 'src/app/core/services/darkMode.service';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
+import { OpenedDialogsService } from 'src/app/core/services/opened-dialogs.service';
 @Component({
   selector: 'app-Table-With-NgModel',
   templateUrl: './Table-With-NgModel.component.html',
@@ -36,13 +38,8 @@ export class TableWithNgModelComponent
   implements OnInit, OnChanges, AfterViewInit
 {
   @ViewChild(MatSort) sort!: MatSort;
-
   @ViewChild('ColunmsTemplate') dialogTemplate!: TemplateRef<any>;
-
-  private overlayRef: OverlayRef[] = [];
-  private portal!: TemplatePortal;
-
-  Portals = 2;
+  @ViewChild('element') element?: TemplateRef<unknown>;
 
   isHighScreen = false;
 
@@ -102,13 +99,15 @@ export class TableWithNgModelComponent
     return this.TableForm.get('TableFromArray') as FormArray;
   }
   filter = new FormControl('');
+  lastPosition?: {x: number, y: number}
 
   constructor(
     public dialog: Dialog,
     @Inject(TABLESERVICE) private readonly tableServiceService: IToken,
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
-    readonly darkModeService: DarkModeService
+    readonly darkModeService: DarkModeService,
+    readonly openedDialogsService: OpenedDialogsService
   ) {}
 
   ngOnInit() {
@@ -134,6 +133,19 @@ export class TableWithNgModelComponent
     });
   }
 
+  ngAfterViewInit() {
+    this.openedDialogsService.setCreators(this.overlay, this.viewContainerRef);
+    if (!this.element) return;
+
+    const config = { attributes: true, childList: true, subtree: true };
+    const element = this.element.elementRef.nativeElement;
+    console.log('aaaaaaaaaa', this.element.elementRef.nativeElement.childList);
+
+    new MutationObserver((a) => {
+      console.log(element.style.width, element.style.height);
+    }).observe(element, config);
+  }
+
   setCliente(element: HTMLDivElement) {
     fromEvent(window, 'resize').subscribe(() => {
       element.style.width = `100vw`;
@@ -142,12 +154,11 @@ export class TableWithNgModelComponent
     });
 
     const config = { attributes: true, childList: true, subtree: true };
-    new MutationObserver((a) => {}).observe(element, config);
+    new MutationObserver((a) => {
+      console.log(element.style.width, element.style.height);
+    }).observe(element, config);
 
-    if (
-      this.isHighScreen ||
-      (element.style.width && element.style.width != 'auto')
-    ) {
+    if (this.isHighScreen) {
       element.style.width = `auto`;
       element.style.height = `auto`;
       this.isHighScreen = !this.isHighScreen;
@@ -155,10 +166,10 @@ export class TableWithNgModelComponent
     }
 
     // element.parentElement!.style.transition = 'all 0.5s ease 0.5s';
-    element.style.width = `100vw`;
-    element.style.height = `${window.innerHeight - 50}px`;
     this.isHighScreen = !this.isHighScreen;
     this.fixMoving(element);
+    element.style.width = `100vw`;
+    element.style.height = `${window.innerHeight - 50}px`;
   }
 
   fixMoving(element: HTMLDivElement) {
@@ -167,29 +178,44 @@ export class TableWithNgModelComponent
   }
 
   onMove(element: HTMLDivElement) {
-    console.log('moved');
+    // console.log('moved');
   }
 
   log(label: string) {
     console.log('Esse evento aqui rolou:', label);
   }
 
-  ngAfterViewInit() {
-    this.overlayRef = [];
+  selectTemplate(Template: TemplateRef<any>, id: number) {
+    this.openedDialogsService.openOverlay(Template, id);
+    const pane = this.openedDialogsService.overlayRef[id]['_pane'];
+
+    const config = { attributes: true, childList: true, subtree: true };
+    new MutationObserver((a) => {
+      const halfPagex = window.innerWidth / 2;
+      const halfPageY = window.innerHeight / 2;
+
+      const width = +pane.children[0]?.style.width.replace('px', '');
+      const height = +pane.children[0]?.style.height.replace('px', '');
+
+      const values = pane.style.transform
+        .split('(')[1]
+        .split(',')
+        .map(
+          (item: string) =>
+            +item.replace('px', '').replace(')', '').replace(' ', '')
+        );
+
+    }).observe(pane, config);
+
+    this.isHighScreen = false;
   }
 
-  selectTemplate(Template: TemplateRef<any>, id: number) {
-    this.overlayRef[id] = this.overlay.create({
-      positionStrategy: this.overlay
-        .position()
-        .global()
-        .centerHorizontally()
-        .centerVertically(),
-      hasBackdrop: false,
-    });
-    this.portal = new TemplatePortal(Template, this.viewContainerRef);
-    this.overlayRef[id].attach(this.portal);
-    this.isHighScreen = false;
+  closeElement(id: number) {
+    this.openedDialogsService.closeOverlay(id, false);
+  }
+
+  minimazeElement(id: number) {
+    this.openedDialogsService.closeOverlay(id, true);
   }
 
   handleOrder(order: string[]) {
@@ -203,11 +229,6 @@ export class TableWithNgModelComponent
       return;
     }
     this.filteredDisplayedColumns = ['isSelected', ...order, 'delete'];
-  }
-
-  closeElement(id: number) {
-    this.overlayRef[id].detach();
-    this.overlayRef.splice(id);
   }
 
   ngOnChanges() {

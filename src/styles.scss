@@ -1,11 +1,11 @@
-html,
-body {
+html {
   height: 100%;
 }
 body {
   margin: 0;
   background-color: black;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: calc(100vh - 50px)
 }
 
 /* Importing Bootstrap SCSS file. */

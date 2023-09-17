@@ -1,14 +1,18 @@
-
 <app-loader></app-loader>
-<mat-drawer-container class="example-container">
+<mat-drawer-container class="example-container mainContainer">
   <mat-drawer mode="over" #drawer class="sidenav">
     <mat-toolbar class="sidenavToolbar">
-      <h3>Minha Sidenav</h3><mat-icon (click)="drawer.close()">close</mat-icon> 
+      <h3>Minha Sidenav</h3>
+      <mat-icon (click)="drawer.close()">close</mat-icon>
     </mat-toolbar>
     <div class="accordions">
       <cdk-accordion class="example-accordion">
-        <app-accordion *ngFor="let item of Accordions" [Title]="item.Title" [Icon]="item.Icon"
-          [Rotas]="item.Rotas"></app-accordion>
+        <app-accordion
+          *ngFor="let item of Accordions"
+          [Title]="item.Title"
+          [Icon]="item.Icon"
+          [Rotas]="item.Rotas"
+        ></app-accordion>
       </cdk-accordion>
     </div>
   </mat-drawer>
@@ -17,15 +21,25 @@
       <mat-drawer mode="push" [opened]="true" class="mat-elevation-z2">
         <app-closed-sidenav></app-closed-sidenav>
       </mat-drawer>
-      <mat-drawer-content class='drawer-content'>
+      <mat-drawer-content class="drawer-content">
         <div>
           <mat-toolbar class="mainToolbar">
-            <mat-icon (click)="drawer.toggle()" class="toolbarIcon">menu</mat-icon>
+            <mat-icon (click)="drawer.toggle()" class="toolbarIcon"
+              >menu</mat-icon
+            >
             <span class="example-spacer"></span>
-            <mat-icon *ngIf="!darkModeService.darkMode" (click)="toggleDarkMode()"
-              style="cursor: pointer;">dark_mode</mat-icon>
-            <mat-icon *ngIf="darkModeService.darkMode" (click)="toggleDarkMode()"
-              style="cursor: pointer;">light_mode</mat-icon>
+            <mat-icon
+              *ngIf="!darkModeService.darkMode"
+              (click)="toggleDarkMode()"
+              style="cursor: pointer"
+              >dark_mode</mat-icon
+            >
+            <mat-icon
+              *ngIf="darkModeService.darkMode"
+              (click)="toggleDarkMode()"
+              style="cursor: pointer"
+              >light_mode</mat-icon
+            >
           </mat-toolbar>
           <router-outlet></router-outlet>
         </div>
@@ -33,32 +47,11 @@
     </mat-drawer-container>
   </mat-drawer-content>
 </mat-drawer-container>
-<!-- <mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav class="sidenav">
-    <mat-toolbar style="background-color: transparent">
-      <h3>Minha Sidenav</h3>
-    </mat-toolbar>
-    <div class="accordions">
-      <cdk-accordion class="example-accordion">
-        <app-accordion *ngFor="let item of Accordions" [Title]="item.Title" [Icon]="item.Icon"
-          [Rotas]="item.Rotas"></app-accordion>
-      </cdk-accordion>
-    </div>
-  </mat-sidenav>
-  <mat-sidenav-content class="content">
-    <app-closed-sidenav></app-closed-sidenav>
-    <div style="padding-left: 65px">
-      <mat-toolbar class="mainToolbar">
-        <mat-icon (click)="sidenav.open()" class="toolbarIcon">menu</mat-icon>
-        <span class="example-spacer"></span>
-        <mat-icon *ngIf="!darkModeService.darkMode" (click)="toggleDarkMode()" style="cursor: pointer;">dark_mode</mat-icon>
-        <mat-icon *ngIf="darkModeService.darkMode" (click)="toggleDarkMode()" style="cursor: pointer;">light_mode</mat-icon>
-      </mat-toolbar>
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
 
 <div class="footer">
-
+  <ng-container *ngFor="let item of openedOverlays$ | async">
+    <div class="opnendPage" (click)="openedDialogsService.reOpenElement(item)">
+      {{ item.id }} ta aberto
+    </div>
+  </ng-container>
 </div>
