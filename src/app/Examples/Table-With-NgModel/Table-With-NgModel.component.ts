@@ -174,7 +174,9 @@ export class TableWithNgModelComponent
 
   fixMoving(element: HTMLDivElement) {
     if (!this.isHighScreen) return;
-    this.dragPosition = { x: 0, y: -29 };
+    const openedOverlays = this.openedDialogsService.openedOverlays$.value
+    openedOverlays[0].lastPosition = { x: 0, y: -29 };
+    this.openedDialogsService.openedOverlays$.next(openedOverlays)
   }
 
   onMove(element: HTMLDivElement) {
