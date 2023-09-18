@@ -21,7 +21,7 @@ export class OpenedDialogsService {
     }[]
   >([]);
 
-  constructor() {}
+  constructor() { }
 
   setCreators(overlay: Overlay, viewContainerRef: ViewContainerRef) {
     this.overlay = overlay;
@@ -30,6 +30,10 @@ export class OpenedDialogsService {
 
   openOverlay(template: TemplateRef<unknown>, id: number) {
     if (!this.overlay || !this.viewContainerRef) return;
+
+    if (this.openedOverlays$.value[id])
+      return this.reOpenElement(this.openedOverlays$.value[id])
+
 
     this.overlayRef[id] = this.overlay.create({
       positionStrategy: this.overlay
