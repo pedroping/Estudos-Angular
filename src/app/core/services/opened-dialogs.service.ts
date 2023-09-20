@@ -21,7 +21,7 @@ export class OpenedDialogsService {
     }[]
   >([]);
 
-  constructor() { }
+  constructor() {}
 
   setCreators(overlay: Overlay, viewContainerRef: ViewContainerRef) {
     this.overlay = overlay;
@@ -32,8 +32,7 @@ export class OpenedDialogsService {
     if (!this.overlay || !this.viewContainerRef) return;
 
     if (this.openedOverlays$.value[id])
-      return this.reOpenElement(this.openedOverlays$.value[id])
-
+      return this.reOpenElement(this.openedOverlays$.value[id]);
 
     this.overlayRef[id] = this.overlay.create({
       positionStrategy: this.overlay
@@ -58,8 +57,8 @@ export class OpenedDialogsService {
   setPosition(id: number) {
     const pane = this.overlayRef[id]['_pane'];
 
-    const width = pane.children[0]?.style.width;
-    const height = pane.children[0]?.style.height;
+    const width = pane.children[0]?.style.width ?? 'auto';
+    const height = pane.children[0]?.style.height ?? 'auto';
 
     const values = pane.style.transform
       .split('(')[1]
@@ -115,8 +114,15 @@ export class OpenedDialogsService {
       openedOverlay.template,
       this.viewContainerRef
     );
-    console.log(this.openedOverlays$.value[0].lastPosition);
 
     this.overlayRef[openedOverlay.id].attach(this.portal);
+
+    const pane = this.overlayRef[openedOverlay.id]['_pane'];
+
+    pane.style.width = this.openedOverlays$.value[openedOverlay.id].lastStyles.width
+    pane.style.height = this.openedOverlays$.value[openedOverlay.id].lastStyles.height
+
+    pane.children[0].style.width = this.openedOverlays$.value[openedOverlay.id].lastStyles.width
+    pane.children[0].style.height = this.openedOverlays$.value[openedOverlay.id].lastStyles.height    
   }
 }
