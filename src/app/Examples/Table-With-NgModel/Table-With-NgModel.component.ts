@@ -153,10 +153,10 @@ export class TableWithNgModelComponent
       this.fixMoving(element);
     });
 
-    const config = { attributes: true, childList: true, subtree: true };
-    new MutationObserver((a) => {
-      console.log(element.style.width, element.style.height);
-    }).observe(element, config);
+    // const config = { attributes: true, childList: true, subtree: true };
+    // new MutationObserver((a) => {
+    //   console.log(element.style.width, element.style.height);
+    // }).observe(element, config);
 
     if (this.isHighScreen) {
       element.style.width = `auto`;

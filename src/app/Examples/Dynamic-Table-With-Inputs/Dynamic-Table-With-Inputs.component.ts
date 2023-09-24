@@ -7,12 +7,7 @@ import {
   inject,
   ChangeDetectorRef,
 } from '@angular/core';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
@@ -27,7 +22,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CustomValidators } from 'src/app/core/validators/customValidator';
 import { ExpandUserService } from 'src/app/core/services/expandUser.service';
-import { of, switchMap } from 'rxjs';
+import { map, of, switchMap } from 'rxjs';
 import { TABLESERVICE } from 'src/app/core/tokens/tokens';
 import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
 
@@ -75,11 +70,23 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     private activeRoute: ActivatedRoute,
     private readonly expandUserService: ExpandUserService,
     readonly cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   tableService = inject(TABLESERVICE);
 
-  tableData$ = this.tableService.getAll()
+  tableData$ = this.tableService.getAll().pipe(
+    map((data) => {
+      return data.users.map((user: any) => {
+        return {
+          id: user.id,
+          firstName: user.firstName,
+          age: user.age,
+          email: user.email,
+          onEdit: false,
+        };
+      });
+    })
+  );
 
   ngOnInit() {
     this.getAllUser();
@@ -227,6 +234,8 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   ) {
     event?.preventDefault();
     row.setValue(state, { emitEvent: false });
+    console.log(row.value);
+    
   }
 
   handleSave(row: FormGroup, index: number) {
@@ -274,10 +283,10 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
 
     this.tableService.deleteManyUsers(Ids).subscribe({
       next: () => {
-        Ids.forEach(id => {
+        Ids.forEach((id) => {
           const index = this.getIndex(id);
           this.FormArray.removeAt(index);
-        })
+        });
         this.setData();
         this.alerts
           .open(`Usuarios selecionados removidos com sucesso!`, {
@@ -286,7 +295,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
           })
           .subscribe();
       },
-      error: () => { },
+      error: () => {},
     });
     this.checkAll.setValue(false);
   }

@@ -254,9 +254,9 @@
 <ng-template #ColunmsTemplate>
   <div
     class="example-dialog-content"
-    cdkDrag
     id="meuTeste"
     *ngIf="openedDialogsService.openedOverlays$.value[0]"
+    cdkDrag
     [cdkDragBoundary]="isHighScreen ? '' : '.mat-typography'"
     [cdkDragFreeDragPosition]="
       openedDialogsService.openedOverlays$.value[0].lastPosition
