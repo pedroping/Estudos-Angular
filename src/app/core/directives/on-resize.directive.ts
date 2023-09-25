@@ -17,7 +17,7 @@ export class OnResizeDirective implements OnInit {
     const config = { attributes: true, childList: true, subtree: true };
     new MutationObserver((a) => {
       let newConfig = this.openedDialogsService.openedOverlays$.value[this.id]
-      const { x, y } = this.getTransformValues()
+      let { x, y } = this.getTransformValues()
       const { width, height } = this.getSize()
 
       let hasTochange = false
@@ -29,26 +29,18 @@ export class OnResizeDirective implements OnInit {
       newConfig.lastPosition.y = y
 
       if (Math.abs(x * 2) + width > window.innerWidth + 10) {
-        newConfig.lastPosition.x = ((window.innerWidth - width) / 2) * xMultiplier
+        x = ((window.innerWidth - width) / 2) * xMultiplier
         hasTochange = true
       }
 
-      if (Math.abs(y * 2) + height > window.innerHeight + 10) {
-        newConfig.lastPosition.y = ((window.innerHeight - height) / 2) * yMultiplier
-        hasTochange = true
+      if (Math.abs(y * 2) + height > window.innerHeight + 60) {
+        y = ((window.innerHeight - height) / 2) * yMultiplier
+        hasTochange = y < 0
       }
-
-
-      console.log(newConfig.lastPosition);
 
       if (!hasTochange) return;
-      this.elementRef.nativeElement.parentElement.style.transform = `translate3d(${newConfig.lastPosition.x}px, ${newConfig.lastPosition.y}px, 0px)`
+      newConfig.lastPosition = { x, y }
       this.setPosition.emit({ position: newConfig.lastPosition, id: this.id })
-
-
-      // const oldValue = this.openedDialogsService.openedOverlays$.value
-      // oldValue[this.id] = newConfig
-      // this.openedDialogsService.openedOverlays$.next(oldValue)
 
     }).observe(this.elementRef.nativeElement, config);
   }
