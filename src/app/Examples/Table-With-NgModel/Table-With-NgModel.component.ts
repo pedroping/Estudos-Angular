@@ -3,6 +3,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Inject,
@@ -35,8 +36,7 @@ import { OpenedDialogsService } from 'src/app/core/services/opened-dialogs.servi
   providers: [{ provide: TABLESERVICE, useClass: TableServiceService }],
 })
 export class TableWithNgModelComponent
-  implements OnInit, OnChanges, AfterViewInit
-{
+  implements OnInit, OnChanges, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('ColunmsTemplate') dialogTemplate!: TemplateRef<any>;
   @ViewChild('element') element?: TemplateRef<unknown>;
@@ -99,7 +99,7 @@ export class TableWithNgModelComponent
     return this.TableForm.get('TableFromArray') as FormArray;
   }
   filter = new FormControl('');
-  lastPosition?: {x: number, y: number}
+  lastPosition?: { x: number, y: number }
 
   constructor(
     public dialog: Dialog,
@@ -107,8 +107,9 @@ export class TableWithNgModelComponent
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,
     readonly darkModeService: DarkModeService,
-    readonly openedDialogsService: OpenedDialogsService
-  ) {}
+    readonly openedDialogsService: OpenedDialogsService,
+    private readonly cdr: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     this.createTableData();
@@ -134,16 +135,10 @@ export class TableWithNgModelComponent
   }
 
   ngAfterViewInit() {
-    this.openedDialogsService.setCreators(this.overlay, this.viewContainerRef);
-    if (!this.element) return;
+    this.openedDialogsService.setCreators(this.overlay, this.viewContainerRef, this.cdr);
+    this.openedDialogsService.openedOverlays$.subscribe(() => this.cdr.detectChanges())
 
-    const config = { attributes: true, childList: true, subtree: true };
-    const element = this.element.elementRef.nativeElement;
-    console.log('aaaaaaaaaa', this.element.elementRef.nativeElement.childList);
-
-    new MutationObserver((a) => {
-      console.log(element.style.width, element.style.height);
-    }).observe(element, config);
+    this.selectTemplate(this.dialogTemplate, 0)
   }
 
   setCliente(element: HTMLDivElement, id: number) {
@@ -179,6 +174,12 @@ export class TableWithNgModelComponent
     this.openedDialogsService.openedOverlays$.next(openedOverlays)
   }
 
+  setMoving(event: { position: { x: number, y: number }, id: number }) {
+    const openedOverlays = this.openedDialogsService.openedOverlays$.value
+    openedOverlays[event.id].lastPosition = event.position
+    this.openedDialogsService.openedOverlays$.next(openedOverlays)
+  }
+
   onMove(element: HTMLDivElement) {
     // console.log('moved');
   }
@@ -190,25 +191,6 @@ export class TableWithNgModelComponent
   selectTemplate(Template: TemplateRef<any>, id: number) {
     this.openedDialogsService.openOverlay(Template, id);
     const pane = this.openedDialogsService.overlayRef[id]['_pane'];
-
-    // const config = { attributes: true, childList: true, subtree: true };
-    // new MutationObserver((a) => {
-    //   const halfPagex = window.innerWidth / 2;
-    //   const halfPageY = window.innerHeight / 2;
-
-    //   const width = +pane.children[0]?.style.width.replace('px', '');
-    //   const height = +pane.children[0]?.style.height.replace('px', '');
-
-    //   const values = pane.style.transform
-    //     .split('(')[1]
-    //     .split(',')
-    //     .map(
-    //       (item: string) =>
-    //         +item.replace('px', '').replace(')', '').replace(' ', '')
-    //     );
-
-    // }).observe(pane, config);
-
     this.isHighScreen = false;
   }
 

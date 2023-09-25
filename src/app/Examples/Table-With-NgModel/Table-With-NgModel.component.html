@@ -160,23 +160,25 @@
 </ng-template>
 
 <ng-template #ColunmsTemplate>
-  <div class="example-dialog-content" id="meuTeste" *ngIf="openedDialogsService.openedOverlays$.value[0]" cdkDrag
-    [cdkDragBoundary]="isHighScreen ? '' : '.mat-typography'" [cdkDragFreeDragPosition]="
-      openedDialogsService.openedOverlays$.value[0].lastPosition
-    " cdkDragRootElement=".cdk-overlay-pane" (cdkDragEnded)="fixMoving(0)" (cdkDragMoved)="onMove(element)"
-    (resized)="log('Resize')" onResize #element>
-    <div class="header">
-      <div class="logo" cdkDragHandle (dblclick)="setCliente(element, 0)">
-        Minha pagina
+  <ng-container *ngIf="openedDialogsService.openedOverlays$ | async as penedOverlays">
+    <div class="example-dialog-content" [id]="0" cdkDrag [cdkDragBoundary]="isHighScreen ? '' : '.mat-typography'"
+      [cdkDragFreeDragPosition]="
+      penedOverlays[0] && penedOverlays[0].lastPosition ? penedOverlays[0].lastPosition  :  { x: 0, y: 0}
+      " cdkDragRootElement=".cdk-overlay-pane" (cdkDragEnded)="fixMoving(0)" (cdkDragMoved)="onMove(element)"
+      (resized)="log('Resize')" onResize (setPosition)="setMoving($event)" #element>
+      <div class="header">
+        <div class="logo" cdkDragHandle (dblclick)="setCliente(element, 0)">
+          Minha pagina
+        </div>
+        <div class="controls">
+          <mat-icon (click)="minimazeElement(0)">minimize</mat-icon>
+          <mat-icon (click)="setCliente(element, 0)">crop_square</mat-icon>
+          <mat-icon (click)="closeElement(0)">close</mat-icon>
+        </div>
       </div>
-      <div class="controls">
-        <mat-icon (click)="minimazeElement(0)">minimize</mat-icon>
-        <mat-icon (click)="setCliente(element, 0)">crop_square</mat-icon>
-        <mat-icon (click)="closeElement(0)">close</mat-icon>
-      </div>
+      <app-new-folder></app-new-folder>
     </div>
-    <app-new-folder></app-new-folder>
-  </div>
+  </ng-container>
 </ng-template>
 
 <ng-template #ColunmsTemplate2>
