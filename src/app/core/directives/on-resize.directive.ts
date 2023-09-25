@@ -28,12 +28,12 @@ export class OnResizeDirective implements OnInit {
       newConfig.lastPosition.x = x
       newConfig.lastPosition.y = y
 
-      if (Math.abs(x * 2) + width > window.innerWidth + 10) {
+      if (Math.abs(x * 2) + width > window.innerWidth + 20) {
         x = ((window.innerWidth - width) / 2) * xMultiplier
         hasTochange = true
       }
 
-      if (Math.abs(y * 2) + height > window.innerHeight + 60) {
+      if (Math.abs(y * 2) + height > window.innerHeight + 20) {
         y = ((window.innerHeight - height) / 2) * yMultiplier
         hasTochange = y < 0
       }
