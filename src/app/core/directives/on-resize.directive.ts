@@ -9,6 +9,9 @@ export class OnResizeDirective implements OnInit {
   @Input() id!: number
   @Output() setPosition = new EventEmitter<{ position: { x: number, y: number }, id: number }>()
 
+
+  lastWidth = 0
+  lastHeight = 0
   constructor(private elementRef: ElementRef, private readonly openedDialogsService: OpenedDialogsService,) { }
 
   ngOnInit(): void {
@@ -20,6 +23,11 @@ export class OnResizeDirective implements OnInit {
       let { x, y } = this.getTransformValues()
       const { width, height } = this.getSize()
 
+      if (width == this.lastWidth && height == this.lastHeight) return
+
+      this.lastWidth = width
+      this.lastHeight = height
+
       let hasTochange = false
 
       const xMultiplier = x > 0 ? 1 : -1
@@ -28,12 +36,12 @@ export class OnResizeDirective implements OnInit {
       newConfig.lastPosition.x = x
       newConfig.lastPosition.y = y
 
-      if (Math.abs(x * 2) + width > window.innerWidth + 20) {
+      if (Math.abs(x * 2) + width > window.innerWidth + 10) {
         x = ((window.innerWidth - width) / 2) * xMultiplier
         hasTochange = true
       }
 
-      if (Math.abs(y * 2) + height > window.innerHeight + 20) {
+      if (Math.abs(y * 2) + height > window.innerHeight + 10) {
         y = ((window.innerHeight - height) / 2) * yMultiplier
         hasTochange = y < 0
       }
