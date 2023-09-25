@@ -146,11 +146,11 @@ export class TableWithNgModelComponent
     }).observe(element, config);
   }
 
-  setCliente(element: HTMLDivElement) {
+  setCliente(element: HTMLDivElement, id: number) {
     fromEvent(window, 'resize').subscribe(() => {
       element.style.width = `100vw`;
       element.style.height = `${window.innerHeight - 50}px`;
-      this.fixMoving(element);
+      this.fixMoving(id);
     });
 
     // const config = { attributes: true, childList: true, subtree: true };
@@ -167,15 +167,15 @@ export class TableWithNgModelComponent
 
     // element.parentElement!.style.transition = 'all 0.5s ease 0.5s';
     this.isHighScreen = !this.isHighScreen;
-    this.fixMoving(element);
+    this.fixMoving(id);
     element.style.width = `100vw`;
     element.style.height = `${window.innerHeight - 50}px`;
   }
 
-  fixMoving(element: HTMLDivElement) {
+  fixMoving(id: number) {
     if (!this.isHighScreen) return;
     const openedOverlays = this.openedDialogsService.openedOverlays$.value
-    openedOverlays[0].lastPosition = { x: 0, y: -29 };
+    openedOverlays[id].lastPosition = { x: 0, y: -29 };
     this.openedDialogsService.openedOverlays$.next(openedOverlays)
   }
 
@@ -191,23 +191,23 @@ export class TableWithNgModelComponent
     this.openedDialogsService.openOverlay(Template, id);
     const pane = this.openedDialogsService.overlayRef[id]['_pane'];
 
-    const config = { attributes: true, childList: true, subtree: true };
-    new MutationObserver((a) => {
-      const halfPagex = window.innerWidth / 2;
-      const halfPageY = window.innerHeight / 2;
+    // const config = { attributes: true, childList: true, subtree: true };
+    // new MutationObserver((a) => {
+    //   const halfPagex = window.innerWidth / 2;
+    //   const halfPageY = window.innerHeight / 2;
 
-      const width = +pane.children[0]?.style.width.replace('px', '');
-      const height = +pane.children[0]?.style.height.replace('px', '');
+    //   const width = +pane.children[0]?.style.width.replace('px', '');
+    //   const height = +pane.children[0]?.style.height.replace('px', '');
 
-      const values = pane.style.transform
-        .split('(')[1]
-        .split(',')
-        .map(
-          (item: string) =>
-            +item.replace('px', '').replace(')', '').replace(' ', '')
-        );
+    //   const values = pane.style.transform
+    //     .split('(')[1]
+    //     .split(',')
+    //     .map(
+    //       (item: string) =>
+    //         +item.replace('px', '').replace(')', '').replace(' ', '')
+    //     );
 
-    }).observe(pane, config);
+    // }).observe(pane, config);
 
     this.isHighScreen = false;
   }

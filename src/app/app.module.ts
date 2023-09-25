@@ -35,6 +35,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { TableFormBuilderDirective } from './core/directives/table-form-builder.directive';
 import { OnRouteDirective } from './core/directives/onRoute.directive';
 import { NewFolderComponent } from './core/componenets/new-folder/new-folder.component';
+import { OnResizeDirective } from './core/directives/on-resize.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { NewFolderComponent } from './core/componenets/new-folder/new-folder.com
     FormExampleComponent,
     OnRouteDirective,
     TableFormBuilderDirective,
-    NewFolderComponent
+    NewFolderComponent,
+    OnResizeDirective
   ],
   imports: [
     ...ALL_MODULES,

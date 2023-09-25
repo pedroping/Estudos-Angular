@@ -21,7 +21,7 @@ export class OpenedDialogsService {
     }[]
   >([]);
 
-  constructor() {}
+  constructor() { }
 
   setCreators(overlay: Overlay, viewContainerRef: ViewContainerRef) {
     this.overlay = overlay;
@@ -119,10 +119,11 @@ export class OpenedDialogsService {
 
     const pane = this.overlayRef[openedOverlay.id]['_pane'];
 
-    pane.style.width = this.openedOverlays$.value[openedOverlay.id].lastStyles.width
-    pane.style.height = this.openedOverlays$.value[openedOverlay.id].lastStyles.height
-
-    pane.children[0].style.width = this.openedOverlays$.value[openedOverlay.id].lastStyles.width
-    pane.children[0].style.height = this.openedOverlays$.value[openedOverlay.id].lastStyles.height    
+    const oldOpenedOverlay = this.openedOverlays$.value[openedOverlay.id]
+    
+    pane.style.width = oldOpenedOverlay.lastStyles.width
+    pane.style.height = oldOpenedOverlay.lastStyles.height
+    pane.children[0].style.width = oldOpenedOverlay.lastStyles.width
+    pane.children[0].style.height = oldOpenedOverlay.lastStyles.height
   }
 }
