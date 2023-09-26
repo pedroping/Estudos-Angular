@@ -1,6 +1,11 @@
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { ChangeDetectorRef, Injectable, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Injectable,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -10,7 +15,7 @@ export class OpenedDialogsService {
   overlay?: Overlay;
   viewContainerRef?: ViewContainerRef;
   portal?: TemplatePortal;
-  cdr?: ChangeDetectorRef
+  cdr?: ChangeDetectorRef;
   overlayRef: OverlayRef[] = [];
   openedOverlays$ = new BehaviorSubject<
     {
@@ -21,17 +26,16 @@ export class OpenedDialogsService {
     }[]
   >([]);
 
-  constructor() {
-    this.openedOverlays$.subscribe((value) => {
-      console.log('Service', value)
-      this.cdr?.detectChanges()
-    })
-  }
+  constructor() { }
 
-  setCreators(overlay: Overlay, viewContainerRef: ViewContainerRef, cdr: ChangeDetectorRef) {
+  setCreators(
+    overlay: Overlay,
+    viewContainerRef: ViewContainerRef,
+    cdr: ChangeDetectorRef
+  ) {
     this.overlay = overlay;
     this.viewContainerRef = viewContainerRef;
-    this.cdr = cdr
+    this.cdr = cdr;
   }
 
   openOverlay(template: TemplateRef<unknown>, id: number) {
@@ -125,11 +129,11 @@ export class OpenedDialogsService {
 
     const pane = this.overlayRef[openedOverlay.id]['_pane'];
 
-    const oldOpenedOverlay = this.openedOverlays$.value[openedOverlay.id]
+    const oldOpenedOverlay = this.openedOverlays$.value[openedOverlay.id];
 
-    pane.style.width = oldOpenedOverlay.lastStyles.width
-    pane.style.height = oldOpenedOverlay.lastStyles.height
-    pane.children[0].style.width = oldOpenedOverlay.lastStyles.width
-    pane.children[0].style.height = oldOpenedOverlay.lastStyles.height
+    pane.style.width = oldOpenedOverlay.lastStyles.width;
+    pane.style.height = oldOpenedOverlay.lastStyles.height;
+    pane.children[0].style.width = oldOpenedOverlay.lastStyles.width;
+    pane.children[0].style.height = oldOpenedOverlay.lastStyles.height;
   }
 }
