@@ -168,7 +168,18 @@ export class TableWithNgModelComponent
   }
 
   fixMoving(id: number) {
-    if (!this.isHighScreen) return;
+    const pane = this.openedDialogsService.overlayRef[id]['_pane'].firstChild.style;
+
+
+    const width = +pane.width.replace('px', '');
+    const height = +pane.height.replace(
+      'px',
+      ''
+    );
+
+    const cantMove = width >= window.innerWidth && height >= window.innerHeight - 60
+
+    if (!this.isHighScreen && !cantMove) return;
     const openedOverlays = this.openedDialogsService.openedOverlays$.value
     openedOverlays[id].lastPosition = { x: 0, y: -29 };
     this.openedDialogsService.openedOverlays$.next(openedOverlays)
