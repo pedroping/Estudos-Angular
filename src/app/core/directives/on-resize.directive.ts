@@ -23,7 +23,7 @@ export class OnResizeDirective implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private readonly openedDialogsService: OpenedDialogsService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     console.log(this.elementRef);
@@ -34,7 +34,12 @@ export class OnResizeDirective implements OnInit {
       let { x, y } = this.getTransformValues();
       const { width, height } = this.getSize();
 
-      if (width == this.lastWidth && height == this.lastHeight || isNaN(width) || isNaN(height)) return;
+      if (
+        (width == this.lastWidth && height == this.lastHeight) ||
+        isNaN(width) ||
+        isNaN(height)
+      )
+        return;
 
       this.lastWidth = width;
       this.lastHeight = height;
@@ -60,20 +65,30 @@ export class OnResizeDirective implements OnInit {
         y = ((window.innerHeight - height) / 2) * yMultiplier;
         hasTochange = true;
 
+        if (y >= window.innerHeight / 2 - height) {
+          y = window.innerHeight / 2 - height;
+          hasTochange = true;
+        }
+
         if (height > window.innerHeight - 60) {
           y = -29;
           hasTochange = true;
         }
       }
 
-      console.log(
-        'Height',
-        height,
-        window.innerHeight,
-        'Width',
-        width,
-        window.innerWidth
-      );
+      // console.log(
+      //   'Height',
+      //   height,
+      //   window.innerHeight,
+      //   'Width',
+      //   width,
+      //   window.innerWidth,
+      //   'x',
+      //   x,
+      //   'y',
+      //   y,
+      //   window.innerHeight / 2.5
+      // );
 
       if (!hasTochange) return;
       newConfig.lastPosition = { x, y };
