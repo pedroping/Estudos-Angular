@@ -23,7 +23,7 @@ export class OnResizeDirective implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private readonly openedDialogsService: OpenedDialogsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log(this.elementRef);
@@ -32,8 +32,7 @@ export class OnResizeDirective implements OnInit {
     new MutationObserver((a) => {
       let newConfig = this.openedDialogsService.openedOverlays$.value[this.id];
       let { x, y } = this.getTransformValues();
-      const { width, height } = this.getSize();
-
+      let { width, height } = this.getSize();
       if (
         (width == this.lastWidth && height == this.lastHeight) ||
         isNaN(width) ||
@@ -43,6 +42,9 @@ export class OnResizeDirective implements OnInit {
 
       this.lastWidth = width;
       this.lastHeight = height;
+      height = height < 100 ? 100 : height
+
+
 
       let hasTochange = false;
 
@@ -65,30 +67,16 @@ export class OnResizeDirective implements OnInit {
         y = ((window.innerHeight - height) / 2) * yMultiplier;
         hasTochange = true;
 
-        if (y >= window.innerHeight / 2 - height) {
-          y = window.innerHeight / 2 - height;
+        if (y >= window.innerHeight / 2 - height && yMultiplier > 0) {
+          y = -25;
           hasTochange = true;
         }
 
-        if (height > window.innerHeight - 60) {
-          y = -29;
+        if (height >= window.innerHeight - 50) {
+          y = -25;
           hasTochange = true;
         }
       }
-
-      // console.log(
-      //   'Height',
-      //   height,
-      //   window.innerHeight,
-      //   'Width',
-      //   width,
-      //   window.innerWidth,
-      //   'x',
-      //   x,
-      //   'y',
-      //   y,
-      //   window.innerHeight / 2.5
-      // );
 
       if (!hasTochange) return;
       newConfig.lastPosition = { x, y };
