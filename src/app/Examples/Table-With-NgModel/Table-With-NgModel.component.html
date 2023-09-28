@@ -164,8 +164,8 @@
     <div class="example-dialog-content" [id]="0" cdkDrag [cdkDragBoundary]="isHighScreen ? '' : '.mat-typography'"
       [cdkDragFreeDragPosition]="
       penedOverlays[0] && penedOverlays[0].lastPosition ? penedOverlays[0].lastPosition  :  { x: 0, y: 0}
-      " cdkDragRootElement=".cdk-overlay-pane" (cdkDragEnded)="fixMoving(0)" (cdkDragMoved)="onMove(element)"
-      (resized)="log('Resize')" onResize (setPosition)="setMoving($event)" #element>
+      " cdkDragRootElement=".cdk-overlay-pane" (cdkDragEnded)="fixMoving(0)" (cdkDragMoved)="onMove(element)" onResize
+      (setPosition)="setMoving($event)" #element>
       <div class="header">
         <div class="logo" cdkDragHandle (dblclick)="setCliente(element, 0)">
           Minha pagina

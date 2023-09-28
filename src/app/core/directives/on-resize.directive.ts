@@ -44,8 +44,6 @@ export class OnResizeDirective implements OnInit {
       this.lastHeight = height;
       height = height < 100 ? 100 : height
 
-
-
       let hasTochange = false;
 
       const xMultiplier = x > 0 ? 1 : -1;
@@ -80,13 +78,15 @@ export class OnResizeDirective implements OnInit {
 
       if (!hasTochange) return;
       newConfig.lastPosition = { x, y };
+      console.log(newConfig.lastPosition);
+
       this.setPosition.emit({ position: newConfig.lastPosition, id: this.id });
     }).observe(this.elementRef.nativeElement, config);
   }
 
   getSize() {
-    const width = +this.elementRef.nativeElement.style.width.replace('px', '');
-    const height = +this.elementRef.nativeElement.style.height.replace(
+    const width = +this.elementRef.nativeElement?.style.width.replace('px', '');
+    const height = +this.elementRef.nativeElement?.style.height.replace(
       'px',
       ''
     );
@@ -95,7 +95,7 @@ export class OnResizeDirective implements OnInit {
   }
 
   getTransformValues() {
-    const transform = this.elementRef.nativeElement.parentElement.style
+    const transform = this.elementRef.nativeElement.parentElement?.style
       .transform as string;
     const splitedLabel = transform.split('(')[1].replace(')', '');
     const splitedValues = splitedLabel

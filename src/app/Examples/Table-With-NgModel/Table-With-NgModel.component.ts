@@ -145,6 +145,8 @@ export class TableWithNgModelComponent
     fromEvent(window, 'resize').subscribe(() => {
       element.style.width = `100vw`;
       element.style.height = `${window.innerHeight - 50}px`;
+      console.log('Resize');
+
       this.fixMoving(id);
     });
 
@@ -180,9 +182,9 @@ export class TableWithNgModelComponent
     const cantMove = width >= window.innerWidth && height >= window.innerHeight - 60
 
     if (!this.isHighScreen && !cantMove) return;
-    const openedOverlays = this.openedDialogsService.openedOverlays$.value
-    openedOverlays[id].lastPosition = { x: 0, y: -29 };
-    this.openedDialogsService.openedOverlays$.next(openedOverlays)
+    this.openedDialogsService.openedOverlays$.value[id].lastPosition = { x: 0, y: 0 };
+    this.openedDialogsService.openedOverlays$.value[id].lastPosition = { x: 0, y: -29 };
+    // this.openedDialogsService.openedOverlays$.next(openedOverlays)
   }
 
   setMoving(event: { position: { x: number, y: number }, id: number }) {
