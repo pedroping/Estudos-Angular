@@ -3,6 +3,7 @@ import {
   Directive,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
@@ -15,8 +16,8 @@ export type IFormArray = FormGroup<{}> | AbstractControl;
   selector: '[appTableFormBuilder]',
   exportAs: 'appTableFormBuilder',
 })
-export class TableFormBuilderDirective<T> implements OnInit, OnChanges {
-  @Input('appTableFormBuilder') data!: T[];
+export class TableFormBuilderDirective<T> implements OnInit, OnChanges, OnDestroy {
+  @Input('appTableFormBuilder') data!: T & { id: number }[];
   @Input('appTableFormBuilderCdr') cdr!: ChangeDetectorRef;
 
   form!: {
@@ -24,26 +25,26 @@ export class TableFormBuilderDirective<T> implements OnInit, OnChanges {
   };
   subscriptions$: Subscription[] = [];
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
-    this.form = {};
     this.buildForm();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['data']) this.ngOnInit();
+    if (changes['data']) this.buildForm();
   }
 
   buildForm() {
-    const mappedData = this.mapData();
+    this.form = {};
+    const mappedData = this.data;
     if (!mappedData) return;
     const keys = Object.keys(mappedData[0]);
 
     mappedData.forEach((item) => {
       const formGroup = new FormGroup({});
       keys.forEach((key) => {
-        const newControl = new FormControl(item[key as keyof T]);
+        const newControl = new FormControl(item[key as keyof typeof item]);
         formGroup.addControl(key, newControl);
       });
       if (this.form) this.form[item.id] = formGroup;
@@ -62,15 +63,6 @@ export class TableFormBuilderDirective<T> implements OnInit, OnChanges {
     });
   }
 
-  mapData() {
-    return this.data.map((item) => {
-      const typedItem = item as T & { id: number };
-      return {
-        ...typedItem,
-        id: typedItem.id,
-      };
-    });
-  }
 
   getControl(id: number, name: string) {
     const form = this.getForm(id);
@@ -81,5 +73,9 @@ export class TableFormBuilderDirective<T> implements OnInit, OnChanges {
 
   getForm(id: number) {
     return this.form[id];
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions$.forEach(subscription => subscription.unsubscribe())
   }
 }
