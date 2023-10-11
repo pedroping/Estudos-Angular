@@ -1,18 +1,18 @@
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AlreadyLoggedGuardService as AlreadyLogged } from '../core/guards/alreadyLoggedGuard.service';
+import { canActivate } from '../core/guards/secretGuard.service';
+import { DynamicTableWithInputsComponent } from './Dynamic-Table-With-Inputs/Dynamic-Table-With-Inputs.component';
+import { ExamplesComponent } from './Examples.component';
+import { TableWithNgModelComponent } from './Table-With-NgModel/Table-With-NgModel.component';
+import { CdkTableExampleComponent } from './cdk-Table-Example/cdk-Table-Example.component';
+import { CdkDragdropComponent } from './cdkDrag&Drop/cdkDrag&drop.component';
 import { DataBindingComponent } from './components/Data-binding/Data-binding.component';
 import { EventBidingComponent } from './components/EventBiding/EventBiding.component';
 import { StyleClassBidingComponent } from './components/StyleClassBiding/StyleClassBiding.component';
 import { TwoWayDataBidingComponent } from './components/TwoWayDataBiding/TwoWayDataBiding.component';
-import { DynamicTableWithInputsComponent } from './Dynamic-Table-With-Inputs/Dynamic-Table-With-Inputs.component';
-import { ExamplesComponent } from './Examples.component';
+import { FormExampleComponent } from './formExample/formExample.component';
 import { LoginPageComponent } from './loginPage/loginPage.component';
 import { PaginaProtegidaComponent } from './paginaProtegida/paginaProtegida.component';
-import { TableWithNgModelComponent } from './Table-With-NgModel/Table-With-NgModel.component';
-import { AuthGuardService as AuthGuard } from '../core/guards/secretGuard.service';
-import { AlreadyLoggedGuardService as AlreadyLogged } from '../core/guards/alreadyLoggedGuard.service';
-import { CdkTableExampleComponent } from './cdk-Table-Example/cdk-Table-Example.component';
-import { CdkDragdropComponent } from './cdkDrag&Drop/cdkDrag&drop.component';
-import { FormExampleComponent } from './formExample/formExample.component';
 const routes: Routes = [
   {
     path: '',
@@ -66,7 +66,7 @@ const routes: Routes = [
         title: 'Lugar Secreto',
         component: PaginaProtegidaComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard],
+        canActivate: [canActivate],
       },
       {
         path: 'CdkTable',
@@ -77,9 +77,9 @@ const routes: Routes = [
       {
         path: 'CdkDragDrop',
         title: 'Cdk Drag Drop',
-        loadChildren: () =>(import('../Examples/cdkDrag&Drop/cdkDrag&drop.module').then(m => m.CdkDragdropModule)),
+        loadChildren: () => (import('../Examples/cdkDrag&Drop/cdkDrag&drop.module').then(m => m.CdkDragdropModule)),
         component: CdkDragdropComponent
-            
+
       },
       {
         path: 'formExamples',
