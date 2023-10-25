@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
     readonly sendData: SendDataService,
     readonly darkModeService: DarkModeService,
     readonly openedDialogsService: OpenedDialogsService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.sendData.closeSideNav$.subscribe(() => {
@@ -38,18 +38,15 @@ export class AppComponent implements OnInit {
 
   toggleDarkMode(): void {
     this.darkModeService.darkMode = !this.darkModeService.darkMode;
-    if (this.darkModeService.darkMode) {
-      sessionStorage.setItem('darkMode', 'isDarkMode');
-      document
-        .querySelector('meta[name="theme-color"]')!
-        .setAttribute('content', DARK_COLORS);
-      document.body.classList.add('darkMode');
-      return;
-    }
-    sessionStorage.removeItem('darkMode');
+
+    const method = this.darkModeService.darkMode ? 'add' : 'remove';
+    const color = this.darkModeService.darkMode ? DARK_COLORS : LIGHT_COLORS;
+    const storageMethod = this.darkModeService.darkMode ? 'setItem' : 'removeItem'
+    
     document
       .querySelector('meta[name="theme-color"]')!
-      .setAttribute('content', LIGHT_COLORS);
-    document.body.classList.remove('darkMode');
+      .setAttribute('content', color);
+    sessionStorage[storageMethod]('darkMode', 'isDarkMode');
+    document.body.classList[method]('darkMode');
   }
 }
