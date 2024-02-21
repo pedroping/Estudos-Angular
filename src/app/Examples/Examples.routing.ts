@@ -13,6 +13,7 @@ import { TwoWayDataBidingComponent } from './components/TwoWayDataBiding/TwoWayD
 import { FormExampleComponent } from './formExample/formExample.component';
 import { LoginPageComponent } from './loginPage/loginPage.component';
 import { PaginaProtegidaComponent } from './paginaProtegida/paginaProtegida.component';
+import { ZoomImageComponent } from './zoom-image/zoom-image.component';
 const routes: Routes = [
   {
     path: '',
@@ -77,15 +78,22 @@ const routes: Routes = [
       {
         path: 'CdkDragDrop',
         title: 'Cdk Drag Drop',
-        loadChildren: () => (import('../Examples/cdkDrag&Drop/cdkDrag&drop.module').then(m => m.CdkDragdropModule)),
-        component: CdkDragdropComponent
-
+        loadChildren: () =>
+          import('../Examples/cdkDrag&Drop/cdkDrag&drop.module').then(
+            (m) => m.CdkDragdropModule
+          ),
+        component: CdkDragdropComponent,
       },
       {
         path: 'formExamples',
         title: 'Form Examples',
         component: FormExampleComponent,
         pathMatch: 'full',
+      },
+      {
+        path: 'zoomImage',
+        title: 'Zoom Imagens',
+        component: ZoomImageComponent,
       },
     ],
   },

@@ -56,4 +56,9 @@ export const ACCORDIONS = [
     Icon: 'input',
     Rotas: [{ rota: '/Examples/formExamples', label: 'Formulario Dinamicos' }],
   },
+  {
+    Title: 'Zoom Imagens',
+    Icon: 'zoom_in',
+    Rotas: [{ rota: '/Examples/zoomImage', label: 'Zoom Imagens' }],
+  },
 ];
