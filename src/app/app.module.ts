@@ -30,7 +30,7 @@ import { IncrementorComponent } from './core/componenets/incrementor/incrementor
 import { FormExampleComponent } from './Examples/formExample/formExample.component';
 import { ALL_MODULES } from './helpers/all-module-imports';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { TableFormBuilderDirective } from './core/directives/table-form-builder.directive';
 import { OnRouteDirective } from './core/directives/onRoute.directive';
@@ -77,6 +77,7 @@ import { OnResizeDirective } from './core/directives/on-resize.directive';
     }),
   ],
   providers: [
+    provideHttpClient(),
     AuthGuardService,
     AlreadyLoggedGuardService,
     CookieService,
