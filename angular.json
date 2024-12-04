@@ -15,14 +15,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "allowedCommonJsDependencies": [
               "text-mask-core"
             ],
-            "outputPath": "dist/estudo-angular",
+            "outputPath": {
+              "base": "dist/estudo-angular"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -45,8 +46,13 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "serviceWorker": "ngsw-config.json",
+            "browser": "src/main.ts",
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "."
+              ]
+            }
           },
           "configurations": {
             "production": {
@@ -65,9 +71,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true

@@ -1,5 +1,4 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -203,7 +202,6 @@ import {
 export const ALL_MODULES = [
   BrowserModule,
   BrowserAnimationsModule,
-  HttpClientModule,
   FormsModule,
   ReactiveFormsModule,
   ScrollingModule,
@@ -383,7 +381,6 @@ export const ALL_MODULES = [
   MatMenuModule,
   MatDialogModule,
   MatTableModule,
-  HttpClientModule,
   MatInputModule,
   MatCheckboxModule,
   MatFormFieldModule,
