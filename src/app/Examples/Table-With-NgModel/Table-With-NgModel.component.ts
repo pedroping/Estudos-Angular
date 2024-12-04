@@ -1,17 +1,13 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  ElementRef,
   Inject,
   OnChanges,
   OnInit,
   TemplateRef,
   ViewChild,
-  ViewContainerRef,
+  ViewContainerRef
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
@@ -25,10 +21,11 @@ import {
   UserForm,
 } from 'src/app/core/models';
 import { DarkModeService } from 'src/app/core/services/darkMode.service';
+import { OpenedDialogsService } from 'src/app/core/services/opened-dialogs.service';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
-import { OpenedDialogsService } from 'src/app/core/services/opened-dialogs.service';
+import { Overlay } from '@angular/cdk/overlay';
 @Component({
   selector: 'app-Table-With-NgModel',
   templateUrl: './Table-With-NgModel.component.html',
@@ -103,7 +100,6 @@ export class TableWithNgModelComponent
   lastPosition?: { x: number, y: number }
 
   constructor(
-    public dialog: Dialog,
     @Inject(TABLESERVICE) private readonly tableServiceService: IToken,
     private overlay: Overlay,
     private viewContainerRef: ViewContainerRef,

@@ -24,7 +24,7 @@ import { CustomValidators } from 'src/app/core/validators/customValidator';
 import { ExpandUserService } from 'src/app/core/services/expandUser.service';
 import { map, of, switchMap } from 'rxjs';
 import { TABLESERVICE } from 'src/app/core/tokens/tokens';
-import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
+import { TuiAlertService } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-Dynamic-Table-With-Inputs',
@@ -215,8 +215,8 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
         this.setData();
         this.alerts
           .open(`Usuario <strong>${name}</strong> removido com sucesso!`, {
-            status: TuiNotification.Success,
-            hasCloseButton: true,
+            appearance: 'success',
+            closeable: true,
           })
           .subscribe();
       },
@@ -291,8 +291,8 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
         this.setData();
         this.alerts
           .open(`Usuarios selecionados removidos com sucesso!`, {
-            status: TuiNotification.Success,
-            hasCloseButton: true,
+            appearance: 'success',
+            closeable: true,
           })
           .subscribe();
       },

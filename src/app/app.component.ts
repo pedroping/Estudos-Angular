@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit, ViewChild } from '@angular/core';]
 import { MatSidenav } from '@angular/material/sidenav';
 import { SendDataService } from './core/services/sendData.service';
 import { ACCORDIONS } from './helpers/accordions';
@@ -7,6 +6,7 @@ import { DarkModeService } from './core/services/darkMode.service';
 import { DARK_COLORS, LIGHT_COLORS } from './helpers/colors';
 import { OpenedDialogsService } from './core/services/opened-dialogs.service';
 import { filter } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

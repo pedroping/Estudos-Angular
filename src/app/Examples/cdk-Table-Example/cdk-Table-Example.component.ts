@@ -30,7 +30,7 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
-import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
+import { TuiAlertService } from '@taiga-ui/core';
 
 export interface UserData {
   id: string;
@@ -132,8 +132,8 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
 
     this.alerts
       .open(`Usuario <strong>${nome}</strong> removido com sucesso!`, {
-        status: TuiNotification.Success,
-        hasCloseButton: true,
+        appearance: 'success',
+        closeable: true,
       })
       .subscribe();
   }
