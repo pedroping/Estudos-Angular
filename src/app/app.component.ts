@@ -11,6 +11,7 @@ import { filter } from 'rxjs';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   darkMode = false;
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit {
     readonly sendData: SendDataService,
     readonly darkModeService: DarkModeService,
     readonly openedDialogsService: OpenedDialogsService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.sendData.closeSideNav$.subscribe(() => {
@@ -41,8 +42,10 @@ export class AppComponent implements OnInit {
 
     const method = this.darkModeService.darkMode ? 'add' : 'remove';
     const color = this.darkModeService.darkMode ? DARK_COLORS : LIGHT_COLORS;
-    const storageMethod = this.darkModeService.darkMode ? 'setItem' : 'removeItem'
-    
+    const storageMethod = this.darkModeService.darkMode
+      ? 'setItem'
+      : 'removeItem';
+
     document
       .querySelector('meta[name="theme-color"]')!
       .setAttribute('content', color);

@@ -1,21 +1,20 @@
-import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   Component,
-  OnInit,
-  Inject,
-  Output,
   EventEmitter,
   Input,
+  OnInit,
+  Output
 } from '@angular/core';
 import { ControlContainer, FormGroup } from '@angular/forms';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { DarkModeService } from '../../services/darkMode.service';
 import { BehaviorSubject } from 'rxjs';
+import { DarkModeService } from '../../services/darkMode.service';
 
 @Component({
   selector: 'app-colunas',
   templateUrl: './colunas.component.html',
   styleUrls: ['./colunas.component.scss'],
+  standalone: false,
 })
 export class ColunasComponent implements OnInit {
 

@@ -9,6 +9,7 @@ import { DarkModeService } from '../services/darkMode.service';
   selector: 'app-cofirme-modal',
   templateUrl: './cofirme-modal.component.html',
   styleUrls: ['./cofirme-modal.component.scss'],
+  standalone: false,
 })
 export class CofirmeModalComponent implements OnInit {
   constructor(

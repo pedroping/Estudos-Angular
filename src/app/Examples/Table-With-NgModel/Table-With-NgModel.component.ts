@@ -34,6 +34,7 @@ import { OpenedDialogsService } from 'src/app/core/services/opened-dialogs.servi
   templateUrl: './Table-With-NgModel.component.html',
   styleUrls: ['./Table-With-NgModel.component.scss'],
   providers: [{ provide: TABLESERVICE, useClass: TableServiceService }],
+  standalone: false,
 })
 export class TableWithNgModelComponent
   implements OnInit, OnChanges, AfterViewInit {

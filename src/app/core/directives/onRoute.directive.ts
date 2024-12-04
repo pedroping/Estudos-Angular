@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Directive({
   selector: '[onRoute]',
+  standalone: false,
 })
 export class OnRouteDirective implements OnInit {
   @Input('onRoute') rota!: string;

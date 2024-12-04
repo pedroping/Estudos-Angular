@@ -42,6 +42,7 @@ export const ERRORS: { [key: string]: any } = {
 
 @Directive({
   selector: '[FormError]',
+  standalone: false,
 })
 
 export class FormErrorDirective implements OnInit {

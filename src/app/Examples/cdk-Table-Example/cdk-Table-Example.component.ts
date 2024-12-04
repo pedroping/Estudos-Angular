@@ -45,6 +45,7 @@ export interface UserData {
   templateUrl: './cdk-Table-Example.component.html',
   styleUrls: ['./cdk-Table-Example.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class CdkTableExampleComponent implements OnInit, AfterViewInit {
   @ViewChildren('row', { read: ViewContainerRef })

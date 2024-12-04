@@ -18,6 +18,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   templateUrl: './userDetails.component.html',
   styleUrls: ['./userDetails.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class UserDetailsComponent implements OnInit {
   user$!: Observable<User>;

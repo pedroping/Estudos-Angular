@@ -10,6 +10,7 @@ import { OpenedDialogsService } from '../services/opened-dialogs.service';
 
 @Directive({
   selector: '[onResize]',
+  standalone: false,
 })
 export class OnResizeDirective implements OnInit {
   @Input() id!: number;

@@ -4,7 +4,8 @@ import { SendDataService } from '../../services/sendData.service';
 @Component({
   selector: 'app-accordion',
   templateUrl: './accordion.component.html',
-  styleUrls: ['./accordion.component.scss']
+  styleUrls: ['./accordion.component.scss'],
+  standalone: false,
 })
 export class AccordionComponent implements OnInit {
 

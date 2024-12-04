@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-photosSideBar',
   templateUrl: './photosSideBar.component.html',
   styleUrls: ['./photosSideBar.component.scss'],
+  standalone: false,
 })
 export class PhotosSideBarComponent implements OnInit {
   photos$!: Observable<Photo[]>;

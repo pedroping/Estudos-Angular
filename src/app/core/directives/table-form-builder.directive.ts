@@ -15,6 +15,7 @@ export type IFormArray = FormGroup<{}> | AbstractControl;
 @Directive({
   selector: '[appTableFormBuilder]',
   exportAs: 'appTableFormBuilder',
+  standalone: false,
 })
 export class TableFormBuilderDirective<T> implements OnInit, OnChanges, OnDestroy {
   @Input('appTableFormBuilder') data!: T & { id: number }[];

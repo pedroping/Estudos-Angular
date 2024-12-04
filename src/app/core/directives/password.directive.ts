@@ -2,6 +2,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[appPassword]',
+  standalone: false,
 })
 export class PasswordDirective {
 

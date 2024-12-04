@@ -4,7 +4,8 @@ import { map } from 'rxjs'
 @Component({
   selector: 'app-StyleClassBiding',
   templateUrl: './StyleClassBiding.component.html',
-  styleUrls: ['./StyleClassBiding.component.css']
+  styleUrls: ['./StyleClassBiding.component.css'],
+  standalone: false,
 })
 export class StyleClassBidingComponent implements OnInit {
 

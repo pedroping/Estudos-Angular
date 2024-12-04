@@ -8,6 +8,7 @@ import { LoginService } from 'src/app/core/services/login.service';
   selector: 'app-loginPage',
   templateUrl: './loginPage.component.html',
   styleUrls: ['./loginPage.component.scss'],
+  standalone: false,
 })
 export class LoginPageComponent implements OnInit {
   constructor(

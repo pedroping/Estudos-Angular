@@ -12,6 +12,7 @@ import { ExpandUserService } from '../services/expandUser.service';
 @Directive({
   selector: '[ExpandedRow]',
   exportAs: 'expandedRow',
+  standalone: false,
 })
 export class ExpandedRowDirective<T> {
   expandedElement!: T | null;

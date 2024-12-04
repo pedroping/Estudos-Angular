@@ -14,6 +14,7 @@ interface PhotoDetails {
   selector: 'app-photosDetails',
   templateUrl: './photosDetails.component.html',
   styleUrls: ['./photosDetails.component.scss'],
+  standalone: false,
 })
 export class PhotosDetailsComponent implements OnInit {
   photo$ = new BehaviorSubject<PhotoDetails>(null as any);

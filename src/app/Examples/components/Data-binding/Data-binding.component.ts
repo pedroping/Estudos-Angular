@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-Data-binding',
   templateUrl: './Data-binding.component.html',
   styleUrls: ['./Data-binding.component.scss'],
-  
+  standalone: false,
 })
 export class DataBindingComponent implements OnInit {
 

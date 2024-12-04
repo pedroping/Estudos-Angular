@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
-import { startWith } from 'rxjs';
 import { COLORS } from 'src/app/core/models';
 @Component({
   selector: 'app-table-inline',
   templateUrl: './table-inline.component.html',
   styleUrls: ['./table-inline.component.scss'],
+  standalone: false,
 })
 export class TableInlineComponent<T> implements OnInit {
   @Input() userForm!: FormGroup;

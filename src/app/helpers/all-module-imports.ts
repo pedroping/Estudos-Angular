@@ -1,35 +1,30 @@
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { DialogModule } from '@angular/cdk/dialog';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkMenuModule } from '@angular/cdk/menu';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CdkTableModule } from '@angular/cdk/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from '../app-routing.module';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { MatSelectModule } from '@angular/material/select';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSortModule } from '@angular/material/sort';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { CdkMenuModule } from '@angular/cdk/menu';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { CdkTableModule } from '@angular/cdk/table';
-import { CdkDragdropModule } from '../Examples/cdkDrag&Drop/cdkDrag&drop.module';
-import { MatTabsModule } from '@angular/material/tabs';
-import { DFormsModule } from '../core/dynamic-forms/dForms.module';
-import { DialogModule } from '@angular/cdk/dialog';
 import {
   TuiActiveZoneModule,
   TuiAlertHostModule,
@@ -47,7 +42,6 @@ import {
   TuiFocusVisibleModule,
   TuiFocusableModule,
   TuiFocusedModule,
-  TuiForAsyncModule,
   TuiForModule,
   TuiHighDpiModule,
   TuiHoveredModule,
@@ -103,7 +97,6 @@ import {
   TuiPrimitiveYearMonthPaginationModule,
   TuiPrimitiveYearPickerModule,
   TuiRootModule,
-  TuiScrollControlsModule,
   TuiScrollIntoViewModule,
   TuiScrollbarModule,
   TuiSvgDefsHostModule,
@@ -114,7 +107,6 @@ import {
   TuiWrapperModule,
 } from '@taiga-ui/core';
 import {
-  TextMaskModule,
   TuiAccordionModule,
   TuiActionModule,
   TuiArrowModule,
@@ -189,14 +181,18 @@ import {
   TuiStringifyPipeModule,
   TuiTabsModule,
   TuiTagModule,
-  TuiTextAreaModule,
   TuiTilesModule,
   TuiToYearPipeModule,
   TuiToggleModule,
   TuiTreeModule,
   TuiUnfinishedValidatorModule,
-  TuiValueAccessorModule,
+  TuiValueAccessorModule
 } from '@taiga-ui/kit';
+import { PolymorpheusModule } from '@tinkoff/ng-polymorpheus';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { AppRoutingModule } from '../app-routing.module';
+import { DFormsModule } from '../core/dynamic-forms/dForms.module';
+import { CdkDragdropModule } from '../Examples/cdkDrag&Drop/cdkDrag&drop.module';
 
 
 export const ALL_MODULES = [
@@ -223,7 +219,6 @@ export const ALL_MODULES = [
   TuiFocusVisibleModule,
   TuiFocusableModule,
   TuiFocusedModule,
-  TuiForAsyncModule,
   TuiForModule,
   TuiHighDpiModule,
   TuiHoveredModule,
@@ -277,7 +272,6 @@ export const ALL_MODULES = [
   TuiPrimitiveYearMonthPaginationModule,
   TuiPrimitiveYearPickerModule,
   TuiRootModule,
-  TuiScrollControlsModule,
   TuiScrollIntoViewModule,
   TuiScrollbarModule,
   TuiSvgDefsHostModule,
@@ -360,7 +354,6 @@ export const ALL_MODULES = [
   TuiStringifyPipeModule,
   TuiTabsModule,
   TuiTagModule,
-  TuiTextAreaModule,
   TuiTilesModule,
   TuiToYearPipeModule,
   TuiToggleModule,

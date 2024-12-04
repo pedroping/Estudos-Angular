@@ -29,6 +29,7 @@ import { Observable, fromEvent, merge, takeUntil, tap, timer } from 'rxjs';
       multi: true,
     },
   ],
+  standalone: false,
 })
 export class IncrementorComponent
   implements ControlValueAccessor, OnInit, AfterViewInit

@@ -6,6 +6,7 @@ import { DynamicFormConfig } from 'src/app/core/dynamic-forms/dForms-tokens';
   selector: 'app-formExample',
   templateUrl: './formExample.component.html',
   styleUrls: ['./formExample.component.scss'],
+  standalone: false,
 })
 export class FormExampleComponent implements OnInit {
   constructor() {}

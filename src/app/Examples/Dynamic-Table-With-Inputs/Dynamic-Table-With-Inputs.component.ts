@@ -41,6 +41,7 @@ import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
     ]),
   ],
   providers: [{ provide: TABLESERVICE, useClass: TableServiceService }],
+  standalone: false,
 })
 export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort?: MatSort;
