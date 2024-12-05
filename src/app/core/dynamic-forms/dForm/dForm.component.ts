@@ -1,17 +1,16 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DynamicFormConfig } from '../dForms-tokens';
 
 @Component({
   selector: 'app-dForm',
   templateUrl: './dForm.component.html',
-  styleUrls: ['./dForm.component.scss']
+  styleUrls: ['./dForm.component.scss'],
+  standalone: false,
 })
 export class DFormComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  @Input() FormConfig!: DynamicFormConfig[][];
 
-  @Input() FormConfig!: DynamicFormConfig[][]
-
-  ngOnInit() { }
-
+  ngOnInit() {}
 }

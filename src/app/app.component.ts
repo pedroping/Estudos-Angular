@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';]
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SendDataService } from './core/services/sendData.service';
 import { ACCORDIONS } from './helpers/accordions';

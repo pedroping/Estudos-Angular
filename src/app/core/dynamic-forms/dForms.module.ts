@@ -8,7 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-
+import { CreateFormDirective } from './createForm.directive';
 import { CheckboxInputComponent } from './default-inputs/checkbox-input/checkbox-input.component';
 import { DateInputComponent } from './default-inputs/date-input/date-input.component';
 import { PaginatorInputComponent } from './default-inputs/paginator-input/paginator-input.component';
@@ -16,7 +16,6 @@ import { SelectInputComponent } from './default-inputs/select-input/select-input
 import { TextInputComponent } from './default-inputs/text-input/text-input.component';
 import { TextareaInputComponent } from './default-inputs/textarea-input/textarea-input.component';
 import { DFormComponent } from './dForm/dForm.component';
-import { CreateFormDirective } from './createForm.directive';
 
 @NgModule({
   imports: [
@@ -28,8 +27,8 @@ import { CreateFormDirective } from './createForm.directive';
     MatIconModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatDatepickerModule,
     MatNativeDateModule,
+    MatDatepickerModule,
   ],
   declarations: [
     CheckboxInputComponent,

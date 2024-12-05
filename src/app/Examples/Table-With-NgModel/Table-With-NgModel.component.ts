@@ -1,3 +1,4 @@
+import { Overlay } from '@angular/cdk/overlay';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -7,9 +8,10 @@ import {
   OnInit,
   TemplateRef,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, fromEvent, map } from 'rxjs';
@@ -25,7 +27,6 @@ import { OpenedDialogsService } from 'src/app/core/services/opened-dialogs.servi
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { IToken, TABLESERVICE } from 'src/app/core/tokens/tokens';
 import { CofirmeModalComponent } from '../../core/cofirme-modal/cofirme-modal.component';
-import { Overlay } from '@angular/cdk/overlay';
 @Component({
   selector: 'app-Table-With-NgModel',
   templateUrl: './Table-With-NgModel.component.html',
@@ -34,7 +35,8 @@ import { Overlay } from '@angular/cdk/overlay';
   standalone: false,
 })
 export class TableWithNgModelComponent
-  implements OnInit, OnChanges, AfterViewInit {
+  implements OnInit, OnChanges, AfterViewInit
+{
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('ColunmsTemplate') dialogTemplate!: TemplateRef<any>;
   @ViewChild('element') element?: TemplateRef<unknown>;
@@ -97,7 +99,7 @@ export class TableWithNgModelComponent
     return this.TableForm.get('TableFromArray') as FormArray;
   }
   filter = new FormControl('');
-  lastPosition?: { x: number, y: number }
+  lastPosition?: { x: number; y: number };
 
   constructor(
     @Inject(TABLESERVICE) private readonly tableServiceService: IToken,
@@ -105,8 +107,9 @@ export class TableWithNgModelComponent
     private viewContainerRef: ViewContainerRef,
     readonly darkModeService: DarkModeService,
     readonly openedDialogsService: OpenedDialogsService,
-    private readonly cdr: ChangeDetectorRef
-  ) { }
+    private readonly cdr: ChangeDetectorRef,
+    private readonly dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.createTableData();
@@ -132,10 +135,16 @@ export class TableWithNgModelComponent
   }
 
   ngAfterViewInit() {
-    this.openedDialogsService.setCreators(this.overlay, this.viewContainerRef, this.cdr);
-    this.openedDialogsService.openedOverlays$.subscribe(() => this.cdr.detectChanges())
+    this.openedDialogsService.setCreators(
+      this.overlay,
+      this.viewContainerRef,
+      this.cdr
+    );
+    this.openedDialogsService.openedOverlays$.subscribe(() =>
+      this.cdr.detectChanges()
+    );
 
-    this.selectTemplate(this.dialogTemplate, 0)
+    this.selectTemplate(this.dialogTemplate, 0);
   }
 
   setCliente(element: HTMLDivElement, id: number) {
@@ -167,27 +176,31 @@ export class TableWithNgModelComponent
   }
 
   fixMoving(id: number) {
-    const pane = this.openedDialogsService.overlayRef[id]['_pane'].firstChild.style;
-
+    const pane =
+      this.openedDialogsService.overlayRef[id]['_pane'].firstChild.style;
 
     const width = +pane.width.replace('px', '');
-    const height = +pane.height.replace(
-      'px',
-      ''
-    );
+    const height = +pane.height.replace('px', '');
 
-    const cantMove = width >= window.innerWidth && height >= window.innerHeight - 60
+    const cantMove =
+      width >= window.innerWidth && height >= window.innerHeight - 60;
 
     if (!this.isHighScreen && !cantMove) return;
-    this.openedDialogsService.openedOverlays$.value[id].lastPosition = { x: 0, y: 0 };
-    this.openedDialogsService.openedOverlays$.value[id].lastPosition = { x: 0, y: -29 };
+    this.openedDialogsService.openedOverlays$.value[id].lastPosition = {
+      x: 0,
+      y: 0,
+    };
+    this.openedDialogsService.openedOverlays$.value[id].lastPosition = {
+      x: 0,
+      y: -29,
+    };
     // this.openedDialogsService.openedOverlays$.next(openedOverlays)
   }
 
-  setMoving(event: { position: { x: number, y: number }, id: number }) {
-    const openedOverlays = this.openedDialogsService.openedOverlays$.value
-    openedOverlays[event.id].lastPosition = event.position
-    this.openedDialogsService.openedOverlays$.next(openedOverlays)
+  setMoving(event: { position: { x: number; y: number }; id: number }) {
+    const openedOverlays = this.openedDialogsService.openedOverlays$.value;
+    openedOverlays[event.id].lastPosition = event.position;
+    this.openedDialogsService.openedOverlays$.next(openedOverlays);
   }
 
   onMove(element: HTMLDivElement) {
@@ -378,7 +391,8 @@ export class TableWithNgModelComponent
           type: 'oneUser',
         },
       })
-      .closed.subscribe((resp) => {
+      .afterClosed()
+      .subscribe((resp) => {
         if (!resp) return;
 
         this.tableServiceService.deleteUser(User_Row.id).subscribe({
@@ -428,7 +442,8 @@ export class TableWithNgModelComponent
           type: 'manyUsers',
         },
       })
-      .closed.subscribe((resp) => {
+      .afterClosed()
+      .subscribe((resp) => {
         if (!resp) return;
 
         let ids: number[] = [];

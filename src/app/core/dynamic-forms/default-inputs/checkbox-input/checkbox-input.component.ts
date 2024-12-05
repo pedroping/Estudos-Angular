@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ControlContainer, FormGroupDirective } from '@angular/forms';
-import { DynamicFormConfig } from '../../dForms-tokens';
 import { DefaultFormInput } from '../../defaultFormInput';
+import { DynamicFormConfig } from '../../dForms-tokens';
 
 @Component({
   selector: 'brunsker-checkbox-input',
@@ -14,5 +14,6 @@ import { DefaultFormInput } from '../../defaultFormInput';
       useExisting: FormGroupDirective,
     },
   ],
+  standalone: false,
 })
 export class CheckboxInputComponent extends DefaultFormInput<DynamicFormConfig> {}

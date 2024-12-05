@@ -1,3 +1,7 @@
+@use "dakrMode";
+@use "node_modules/bootstrap/scss/bootstrap";
+@use "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
 html {
   height: 100%;
 }
@@ -5,16 +9,8 @@ body {
   margin: 0;
   background-color: black;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  height: calc(100vh - 50px)
+  height: calc(100vh - 50px);
 }
-
-/* Importing Bootstrap SCSS file. */
-@import "./node_modules/bootstrap/scss/bootstrap";
-
-/* Importing Datepicker SCSS file. */
-@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
-
-@import "./dakrMode.scss";
 
 .container {
   padding-top: 10px;
