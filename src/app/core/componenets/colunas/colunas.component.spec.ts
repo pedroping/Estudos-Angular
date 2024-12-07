@@ -11,9 +11,8 @@ describe('ColunasComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ColunasComponent ]
-    })
-    .compileComponents();
+      imports: [ColunasComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

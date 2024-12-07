@@ -8,7 +8,11 @@ import {
   ElementRef,
   AfterViewInit,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  NG_VALUE_ACCESSOR,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import {
   ControlContainer,
   ControlValueAccessor,
@@ -17,6 +21,10 @@ import {
   NgControl,
 } from '@angular/forms';
 import { Observable, fromEvent, merge, takeUntil, tap, timer } from 'rxjs';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { NgIf } from '@angular/common';
+import { FormErrorDirective } from '../../directives/FormError.directive';
 
 @Component({
   selector: 'app-incrementor',
@@ -29,7 +37,14 @@ import { Observable, fromEvent, merge, takeUntil, tap, timer } from 'rxjs';
       multi: true,
     },
   ],
-  standalone: false,
+  imports: [
+    MatIcon,
+    FormsModule,
+    MatInput,
+    ReactiveFormsModule,
+    NgIf,
+    FormErrorDirective,
+  ],
 })
 export class IncrementorComponent
   implements ControlValueAccessor, OnInit, AfterViewInit
@@ -54,7 +69,7 @@ export class IncrementorComponent
 
   constructor(
     @Optional() private controlContainer: ControlContainer,
-    private injector: Injector
+    private injector: Injector,
   ) {}
 
   ngOnInit() {
@@ -87,7 +102,7 @@ export class IncrementorComponent
     this.PlusIconLeave$ = fromEvent(this.PlusIcon.nativeElement, 'mouseleave');
     this.MinusIconLeave$ = fromEvent(
       this.MinusIcon.nativeElement,
-      'mouseleave'
+      'mouseleave',
     );
   }
 
@@ -112,13 +127,15 @@ export class IncrementorComponent
       .pipe(
         takeUntil(
           merge(this.PlusIconUp$, this.PlusIconLeave$).pipe(
-            tap(() => (this.tick = 0))
-          )
-        )
+            tap(() => (this.tick = 0)),
+          ),
+        ),
       )
       .subscribe(() => {
         this.tick++;
-        this.caclValue(1 * (this.tick / 5 > 1 ? +((this.tick / 3).toFixed(0)) : 1));
+        this.caclValue(
+          1 * (this.tick / 5 > 1 ? +(this.tick / 3).toFixed(0) : 1),
+        );
       });
   }
 
@@ -127,13 +144,15 @@ export class IncrementorComponent
       .pipe(
         takeUntil(
           merge(this.MinusIconUp$, this.MinusIconLeave$).pipe(
-            tap(() => (this.tick = 0))
-          )
-        )
+            tap(() => (this.tick = 0)),
+          ),
+        ),
       )
       .subscribe(() => {
         this.tick++;
-        this.caclValue(-1 * (this.tick / 5 > 1 ? +((this.tick / 3).toFixed(0)) : 1));
+        this.caclValue(
+          -1 * (this.tick / 5 > 1 ? +(this.tick / 3).toFixed(0) : 1),
+        );
       });
   }
 

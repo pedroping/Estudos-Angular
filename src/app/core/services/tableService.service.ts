@@ -35,7 +35,7 @@ export class TableServiceService implements IToken {
     return forkJoin(
       Ids.map((id) => {
         return this.deleteUser(id);
-      })
+      }),
     );
   }
 }

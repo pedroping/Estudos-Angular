@@ -1,4 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AlreadyLoggedGuardService as AlreadyLogged } from '../core/guards/alreadyLoggedGuard.service';
 import { canActivate } from '../core/guards/secretGuard.service';
 import { DynamicTableWithInputsComponent } from './Dynamic-Table-With-Inputs/Dynamic-Table-With-Inputs.component';
@@ -13,7 +13,8 @@ import { TwoWayDataBidingComponent } from './components/TwoWayDataBiding/TwoWayD
 import { FormExampleComponent } from './formExample/formExample.component';
 import { LoginPageComponent } from './loginPage/loginPage.component';
 import { PaginaProtegidaComponent } from './paginaProtegida/paginaProtegida.component';
-const routes: Routes = [
+
+export default [
   {
     path: '',
     component: ExamplesComponent,
@@ -77,9 +78,11 @@ const routes: Routes = [
       {
         path: 'CdkDragDrop',
         title: 'Cdk Drag Drop',
-        loadChildren: () => (import('../Examples/cdkDrag&Drop/cdkDrag&drop.module').then(m => m.CdkDragdropModule)),
-        component: CdkDragdropComponent
-
+        loadChildren: () =>
+          import('../Examples/cdkDrag&Drop/cdkDrag&drop.module').then(
+            (m) => m.CdkDragdropModule,
+          ),
+        component: CdkDragdropComponent,
       },
       {
         path: 'formExamples',
@@ -89,6 +92,4 @@ const routes: Routes = [
       },
     ],
   },
-];
-
-export const Example_routes = RouterModule.forChild(routes);
+] as Routes;

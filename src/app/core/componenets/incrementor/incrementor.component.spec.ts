@@ -11,9 +11,8 @@ describe('IncrementorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IncrementorComponent ]
-    })
-    .compileComponents();
+      imports: [IncrementorComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

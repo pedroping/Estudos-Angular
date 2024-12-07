@@ -11,9 +11,8 @@ describe('DataBindingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataBindingComponent ]
-    })
-    .compileComponents();
+      imports: [DataBindingComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

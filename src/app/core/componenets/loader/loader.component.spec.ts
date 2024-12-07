@@ -11,9 +11,8 @@ describe('LoaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoaderComponent ]
-    })
-    .compileComponents();
+      imports: [LoaderComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

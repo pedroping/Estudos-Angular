@@ -11,9 +11,8 @@ describe('UserSideBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserSideBarComponent ]
-    })
-    .compileComponents();
+      imports: [UserSideBarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

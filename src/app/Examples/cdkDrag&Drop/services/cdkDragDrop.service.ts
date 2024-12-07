@@ -20,7 +20,7 @@ export interface User {
 })
 export class CdkDragDropService {
   users$ = new BehaviorSubject<User[]>([]);
-  selectedUser!: User
+  selectedUser!: User;
 
   constructor(private http: HttpClient) {
     this.http
@@ -35,7 +35,7 @@ export class CdkDragDropService {
               photos: [],
             };
           });
-        })
+        }),
       )
       .subscribe((resp) => this.users$.next(resp));
   }

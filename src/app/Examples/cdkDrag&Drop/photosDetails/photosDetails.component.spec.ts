@@ -11,9 +11,8 @@ describe('PhotosDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhotosDetailsComponent ]
-    })
-    .compileComponents();
+      imports: [PhotosDetailsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

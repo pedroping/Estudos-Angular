@@ -9,10 +9,17 @@
       {{ data.text }}
     </div>
     <div class="actions">
-      <button mat-flat-button mat-dialog-close color="accent" style="margin-right: 5px; color: white;">
+      <button
+        mat-flat-button
+        mat-dialog-close
+        color="accent"
+        style="margin-right: 5px; color: white"
+      >
         No
       </button>
-      <button mat-flat-button (click)="dialogRef.close(true)" color="warn">Ok</button>
+      <button mat-flat-button (click)="dialogRef.close(true)" color="warn">
+        Ok
+      </button>
     </div>
   </div>
 </div>

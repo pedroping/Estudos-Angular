@@ -15,9 +15,10 @@ export type IFormArray = FormGroup<{}> | AbstractControl;
 @Directive({
   selector: '[appTableFormBuilder]',
   exportAs: 'appTableFormBuilder',
-  standalone: false,
 })
-export class TableFormBuilderDirective<T> implements OnInit, OnChanges, OnDestroy {
+export class TableFormBuilderDirective<T>
+  implements OnInit, OnChanges, OnDestroy
+{
   @Input('appTableFormBuilder') data!: T & { id: number }[];
   @Input('appTableFormBuilderCdr') cdr!: ChangeDetectorRef;
 
@@ -26,7 +27,7 @@ export class TableFormBuilderDirective<T> implements OnInit, OnChanges, OnDestro
   };
   subscriptions$: Subscription[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -64,7 +65,6 @@ export class TableFormBuilderDirective<T> implements OnInit, OnChanges, OnDestro
     });
   }
 
-
   getControl(id: number, name: string) {
     const form = this.getForm(id);
     if (!form || !form.get(name)) return new FormControl();
@@ -77,6 +77,6 @@ export class TableFormBuilderDirective<T> implements OnInit, OnChanges, OnDestro
   }
 
   ngOnDestroy(): void {
-    this.subscriptions$.forEach(subscription => subscription.unsubscribe())
+    this.subscriptions$.forEach((subscription) => subscription.unsubscribe());
   }
 }

@@ -11,9 +11,8 @@ describe('EventBidingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventBidingComponent ]
-    })
-    .compileComponents();
+      imports: [EventBidingComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

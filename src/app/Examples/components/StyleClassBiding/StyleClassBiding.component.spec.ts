@@ -11,9 +11,8 @@ describe('StyleClassBidingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StyleClassBidingComponent ]
-    })
-    .compileComponents();
+      imports: [StyleClassBidingComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

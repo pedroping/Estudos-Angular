@@ -8,10 +8,7 @@ import {
 } from '@angular/core';
 import { OpenedDialogsService } from '../services/opened-dialogs.service';
 
-@Directive({
-  selector: '[onResize]',
-  standalone: false,
-})
+@Directive({ selector: '[onResize]' })
 export class OnResizeDirective implements OnInit {
   @Input() id!: number;
   @Output() setPosition = new EventEmitter<{
@@ -23,8 +20,8 @@ export class OnResizeDirective implements OnInit {
   lastHeight = 0;
   constructor(
     private elementRef: ElementRef,
-    private readonly openedDialogsService: OpenedDialogsService
-  ) { }
+    private readonly openedDialogsService: OpenedDialogsService,
+  ) {}
 
   ngOnInit(): void {
     console.log(this.elementRef);
@@ -43,7 +40,7 @@ export class OnResizeDirective implements OnInit {
 
       this.lastWidth = width;
       this.lastHeight = height;
-      height = height < 100 ? 100 : height
+      height = height < 100 ? 100 : height;
 
       let hasTochange = false;
 
@@ -89,7 +86,7 @@ export class OnResizeDirective implements OnInit {
     const width = +this.elementRef.nativeElement?.style.width.replace('px', '');
     const height = +this.elementRef.nativeElement?.style.height.replace(
       'px',
-      ''
+      '',
     );
 
     return { width, height };

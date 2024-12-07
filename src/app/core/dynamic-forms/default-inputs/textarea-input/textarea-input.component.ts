@@ -1,5 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import {
+  ControlContainer,
+  FormGroupDirective,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { DefaultFormInput } from '../../defaultFormInput';
 import { DynamicFormConfig } from '../../dForms-tokens';
 
@@ -14,6 +19,6 @@ import { DynamicFormConfig } from '../../dForms-tokens';
       useExisting: FormGroupDirective,
     },
   ],
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule],
 })
 export class TextareaInputComponent extends DefaultFormInput<DynamicFormConfig> {}

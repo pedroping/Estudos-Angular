@@ -11,9 +11,8 @@ describe('PhotosSideBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PhotosSideBarComponent ]
-    })
-    .compileComponents();
+      imports: [PhotosSideBarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -11,9 +11,8 @@ describe('LoginPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginPageComponent ]
-    })
-    .compileComponents();
+      imports: [LoginPageComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

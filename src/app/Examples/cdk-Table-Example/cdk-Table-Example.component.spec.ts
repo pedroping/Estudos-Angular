@@ -11,9 +11,8 @@ describe('CdkTableExampleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CdkTableExampleComponent ]
-    })
-    .compileComponents();
+      imports: [CdkTableExampleComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

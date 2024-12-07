@@ -5,7 +5,10 @@ import { LoginService } from '../services/login.service';
 
 @Injectable()
 export class AuthGuardService {
-  constructor(private router: Router, private loginService: LoginService) { }
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+  ) {}
   teste: boolean = false;
 
   async canActivate(): Promise<
@@ -22,8 +25,8 @@ export class AuthGuardService {
 }
 
 export const canActivate = async () => {
-  const loginService = inject(LoginService)
-  const route = inject(Router)
+  const loginService = inject(LoginService);
+  const route = inject(Router);
 
   const isLoggedin = await firstValueFrom(loginService.isLoggedin);
 
@@ -32,4 +35,4 @@ export const canActivate = async () => {
     return false;
   }
   return true;
-}
+};

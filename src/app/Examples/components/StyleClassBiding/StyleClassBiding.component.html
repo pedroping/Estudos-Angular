@@ -1,11 +1,14 @@
 <div>
-  <h4>Selecione uma clase:</h4> 
-  <mat-form-field appearance="outline" style="max-width: 200px; border-radius: 15px;">
+  <h4>Selecione uma clase:</h4>
+  <mat-form-field
+    appearance="outline"
+    style="max-width: 200px; border-radius: 15px"
+  >
     <mat-select placeholder="Selecione uma Clase" [formControl]="classControl">
-        <mat-option value="alert-success">Success</mat-option>
-        <mat-option value="alert-info">Info</mat-option>
-        <mat-option value="alert-warning">Warning</mat-option>
-        <mat-option value="alert-danger">Danger</mat-option>
+      <mat-option value="alert-success">Success</mat-option>
+      <mat-option value="alert-info">Info</mat-option>
+      <mat-option value="alert-warning">Warning</mat-option>
+      <mat-option value="alert-danger">Danger</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
@@ -14,23 +17,42 @@
   Um alerta de Dinamico!
 </div>
 
-<div class="alert" [class.alert-success]="classControl.value == 'alert-success'" role="alert">
+<div
+  class="alert"
+  [class.alert-success]="classControl.value == 'alert-success'"
+  role="alert"
+>
   Um alerta de Suceso!
 </div>
 
-<div class="alert" [class.alert-info]="classControl.value == 'alert-info'" role="alert">
+<div
+  class="alert"
+  [class.alert-info]="classControl.value == 'alert-info'"
+  role="alert"
+>
   Um alerta de Informação!
 </div>
 
-<div class="alert" [class.alert-warning]="classControl.value == 'alert-warning'" role="alert">
+<div
+  class="alert"
+  [class.alert-warning]="classControl.value == 'alert-warning'"
+  role="alert"
+>
   Um alerta de Alerta!
 </div>
 
-<div class="alert" [class.alert-danger]="classControl.value == 'alert-danger'" role="alert">
+<div
+  class="alert"
+  [class.alert-danger]="classControl.value == 'alert-danger'"
+  role="alert"
+>
   Um alerta de Perigo!
 </div>
 
-
-<div class="alert alert-danger" role="alert" [style.display]="classControl.value == 'alert-danger' ? 'block' : 'none'">
+<div
+  class="alert alert-danger"
+  role="alert"
+  [style.display]="classControl.value == 'alert-danger' ? 'block' : 'none'"
+>
   Um alerta de Perigo que so aparece em casso de erro!
 </div>

@@ -1,15 +1,11 @@
 import { Directive, Input, OnInit } from '@angular/core';
 import { DEFAULT_FORMS } from './dForms-tokens';
 
-@Directive({
-  selector: '[appCreateForm]',
-  standalone: false,
-})
+@Directive({ selector: '[appCreateForm]' })
 export class CreateFormDirective<T> implements OnInit {
   @Input() FormConfig!: T;
 
-  constructor() // @Inject(DYNAMIC_FORMS) private forms: ComponentFields<DynamicControl<T>>,
-  {}
+  constructor() {} // @Inject(DYNAMIC_FORMS) private forms: ComponentFields<DynamicControl<T>>,
 
   ngOnInit(): void {
     const FormConfigType = this.FormConfig as T & {

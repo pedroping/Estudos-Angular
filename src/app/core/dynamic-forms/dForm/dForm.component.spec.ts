@@ -11,9 +11,8 @@ describe('DFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DFormComponent ]
-    })
-    .compileComponents();
+      imports: [DFormComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

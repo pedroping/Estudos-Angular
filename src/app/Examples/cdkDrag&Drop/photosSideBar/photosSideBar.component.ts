@@ -2,14 +2,29 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { CdkDragDropService, Photo } from '../services/cdkDragDrop.service';
-import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ActivatedRoute } from '@angular/router';
+import {
+  CdkDragDrop,
+  transferArrayItem,
+  CdkDropList,
+  CdkDrag,
+  CdkDragPreview,
+} from '@angular/cdk/drag-drop';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-photosSideBar',
   templateUrl: './photosSideBar.component.html',
   styleUrls: ['./photosSideBar.component.scss'],
-  standalone: false,
+  imports: [
+    NgIf,
+    CdkDropList,
+    NgFor,
+    CdkDrag,
+    RouterLink,
+    CdkDragPreview,
+    AsyncPipe,
+  ],
 })
 export class PhotosSideBarComponent implements OnInit {
   photos$!: Observable<Photo[]>;
@@ -17,7 +32,7 @@ export class PhotosSideBarComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    public cdkDragDropService: CdkDragDropService
+    public cdkDragDropService: CdkDragDropService,
   ) {}
 
   ngOnInit() {
@@ -29,13 +44,13 @@ export class PhotosSideBarComponent implements OnInit {
           resp.forEach((item) => {
             if (
               !this.cdkDragDropService.selectedUser?.photos.find(
-                (photo) => photo.thumbnailUrl == item.thumbnailUrl
+                (photo) => photo.thumbnailUrl == item.thumbnailUrl,
               )
             )
               Filteres_Resp.push(item);
           });
           return Filteres_Resp;
-        })
+        }),
       );
   }
 
@@ -44,7 +59,7 @@ export class PhotosSideBarComponent implements OnInit {
       event.previousContainer.data,
       event.container.data,
       event.previousIndex,
-      event.currentIndex
+      event.currentIndex,
     );
   }
 }

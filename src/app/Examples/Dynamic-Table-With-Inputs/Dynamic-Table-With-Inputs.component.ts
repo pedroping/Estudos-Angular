@@ -7,9 +7,28 @@ import {
   inject,
   ChangeDetectorRef,
 } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatSort, MatSortHeader } from '@angular/material/sort';
+import {
+  MatTableDataSource,
+  MatTable,
+  MatColumnDef,
+  MatHeaderCellDef,
+  MatHeaderCell,
+  MatCellDef,
+  MatCell,
+  MatHeaderRowDef,
+  MatHeaderRow,
+  MatRowDef,
+  MatRow,
+} from '@angular/material/table';
 import { TableServiceService } from 'src/app/core/services/tableService.service';
 import { FormValue, User } from 'src/app/core/models';
 import {
@@ -25,6 +44,15 @@ import { ExpandUserService } from 'src/app/core/services/expandUser.service';
 import { map, of, switchMap } from 'rxjs';
 import { TABLESERVICE } from 'src/app/core/tokens/tokens';
 import { TuiAlertService } from '@taiga-ui/core';
+import { NgIf, AsyncPipe, JsonPipe } from '@angular/common';
+import { TableFormBuilderDirective } from '../../core/directives/table-form-builder.directive';
+import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormErrorDirective } from '../../core/directives/FormError.directive';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatIconButton, MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { ExpandedRowDirective } from '../../core/directives/expand-row.directive';
 
 @Component({
   selector: 'app-Dynamic-Table-With-Inputs',
@@ -36,12 +64,41 @@ import { TuiAlertService } from '@taiga-ui/core';
       state('expanded', style({ height: '*' })),
       transition(
         'expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'),
       ),
     ]),
   ],
   providers: [{ provide: TABLESERVICE, useClass: TableServiceService }],
-  standalone: false,
+  imports: [
+    NgIf,
+    MatTable,
+    MatSort,
+    TableFormBuilderDirective,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatSortHeader,
+    MatCellDef,
+    MatCell,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    FormsModule,
+    ReactiveFormsModule,
+    MatError,
+    FormErrorDirective,
+    MatCheckbox,
+    MatIconButton,
+    MatIcon,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    ExpandedRowDirective,
+    MatButton,
+    AsyncPipe,
+    JsonPipe,
+  ],
 })
 export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
   @ViewChild(MatSort) sort?: MatSort;
@@ -70,7 +127,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
     private activeRoute: ActivatedRoute,
     private readonly expandUserService: ExpandUserService,
-    readonly cdr: ChangeDetectorRef
+    readonly cdr: ChangeDetectorRef,
   ) {}
 
   tableService = inject(TABLESERVICE);
@@ -86,7 +143,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
           onEdit: false,
         };
       });
-    })
+    }),
   );
 
   ngOnInit() {
@@ -148,7 +205,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
 
   checkSomeField() {
     const All_Select = this.FormArray.controls.every(
-      (control) => control.get('checked')?.value
+      (control) => control.get('checked')?.value,
     );
     this.checkAll.setValue(All_Select);
   }
@@ -166,7 +223,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
 
   getControl(row: any) {
     const Control = this.FormArray.controls.find(
-      (item) => item.value.id == row.id
+      (item) => item.value.id == row.id,
     );
     return Control as FormGroup;
   }
@@ -231,12 +288,11 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
     row: FormControl,
     state: boolean,
     element?: any,
-    event?: Event
+    event?: Event,
   ) {
     event?.preventDefault();
     row.setValue(state, { emitEvent: false });
     console.log(row.value);
-    
   }
 
   handleSave(row: FormGroup, index: number) {
@@ -310,7 +366,7 @@ export class DynamicTableWithInputsComponent implements OnInit, OnChanges {
 
         if (!User) return of(null);
         return of(User);
-      })
+      }),
     );
   }
 

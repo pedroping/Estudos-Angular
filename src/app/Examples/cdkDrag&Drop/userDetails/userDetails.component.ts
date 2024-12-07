@@ -9,16 +9,31 @@ import {
   Photo,
   User,
 } from '../services/cdkDragDrop.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, map, of } from 'rxjs';
-import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  transferArrayItem,
+  CdkDropList,
+  CdkDrag,
+  CdkDragPreview,
+} from '@angular/cdk/drag-drop';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 @Component({
   selector: 'app-userDetails',
   templateUrl: './userDetails.component.html',
   styleUrls: ['./userDetails.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    NgIf,
+    CdkDropList,
+    NgFor,
+    CdkDrag,
+    RouterLink,
+    CdkDragPreview,
+    AsyncPipe,
+  ],
 })
 export class UserDetailsComponent implements OnInit {
   user$!: Observable<User>;
@@ -28,7 +43,7 @@ export class UserDetailsComponent implements OnInit {
     public cdkDragDropService: CdkDragDropService,
     private activatedRoute: ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
   ) {}
 
   ngOnInit() {
@@ -44,7 +59,7 @@ export class UserDetailsComponent implements OnInit {
       .pipe(
         map((result) => {
           return result.matches;
-        })
+        }),
       );
   }
 
@@ -53,7 +68,7 @@ export class UserDetailsComponent implements OnInit {
       event.previousContainer.data,
       event.container.data,
       event.previousIndex,
-      event.currentIndex
+      event.currentIndex,
     );
   }
 }

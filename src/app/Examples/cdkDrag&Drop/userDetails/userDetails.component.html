@@ -19,13 +19,10 @@
         <a
           [routerLink]="[
             '/Examples/CdkDragDrop',
-            { outlets: { details: ['photo', photo.id] } }
+            { outlets: { details: ['photo', photo.id] } },
           ]"
         >
-          <img
-            [src]="photo.thumbnailUrl"
-            width="60"
-          />
+          <img [src]="photo.thumbnailUrl" width="60" />
           <img
             previewImage
             *cdkDragPreview

@@ -1,7 +1,14 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import {
+  ControlContainer,
+  FormGroupDirective,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { DefaultFormInput } from '../../defaultFormInput';
 import { DynamicFormConfig } from '../../dForms-tokens';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'pa-text-input',
@@ -14,6 +21,6 @@ import { DynamicFormConfig } from '../../dForms-tokens';
       useExisting: FormGroupDirective,
     },
   ],
-  standalone: false,
+  imports: [MatFormField, MatLabel, MatInput, FormsModule, ReactiveFormsModule],
 })
 export class TextInputComponent extends DefaultFormInput<DynamicFormConfig> {}

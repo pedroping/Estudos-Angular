@@ -11,9 +11,8 @@ describe('TwoWayDataBidingComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TwoWayDataBidingComponent ]
-    })
-    .compileComponents();
+      imports: [TwoWayDataBidingComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

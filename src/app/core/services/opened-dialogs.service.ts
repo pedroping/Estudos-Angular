@@ -26,12 +26,12 @@ export class OpenedDialogsService {
     }[]
   >([]);
 
-  constructor() { }
+  constructor() {}
 
   setCreators(
     overlay: Overlay,
     viewContainerRef: ViewContainerRef,
-    cdr: ChangeDetectorRef
+    cdr: ChangeDetectorRef,
   ) {
     this.overlay = overlay;
     this.viewContainerRef = viewContainerRef;
@@ -75,7 +75,7 @@ export class OpenedDialogsService {
       .split(',')
       .map(
         (item: string) =>
-          +item.replace('px', '').replace(')', '').replace(' ', '')
+          +item.replace('px', '').replace(')', '').replace(' ', ''),
       );
     const openedOverlays = this.openedOverlays$.value;
 
@@ -98,7 +98,7 @@ export class OpenedDialogsService {
     this.overlayRef.splice(id);
     if (!minimize) {
       const splitedOverlays = this.openedOverlays$.value.filter(
-        (item) => item.id != id
+        (item) => item.id != id,
       );
       this.openedOverlays$.next(splitedOverlays);
     }
@@ -122,7 +122,7 @@ export class OpenedDialogsService {
 
     this.portal = new TemplatePortal(
       openedOverlay.template,
-      this.viewContainerRef
+      this.viewContainerRef,
     );
 
     this.overlayRef[openedOverlay.id].attach(this.portal);

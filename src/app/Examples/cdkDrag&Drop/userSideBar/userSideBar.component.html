@@ -4,7 +4,7 @@
     <a
       [routerLink]="[
         '/Examples/CdkDragDrop',
-        { outlets: { details: ['user', user.id] } }
+        { outlets: { details: ['user', user.id] } },
       ]"
       (click)="cdkDragDropService.selectedUser = user"
       class="link primary"
@@ -14,4 +14,3 @@
     <p class="mat-caption">{{ user.email }}</p>
   </li>
 </ul>
-

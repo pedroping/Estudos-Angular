@@ -12,7 +12,6 @@ import { ExpandUserService } from '../services/expandUser.service';
 @Directive({
   selector: '[ExpandedRow]',
   exportAs: 'expandedRow',
-  standalone: false,
 })
 export class ExpandedRowDirective<T> {
   expandedElement!: T | null;
@@ -23,7 +22,7 @@ export class ExpandedRowDirective<T> {
     this.elementRef.nativeElement.style.cursor = 'pointer';
 
     const isActive = this.expandedStatusService.activedExapandedRow.find(
-      (element: any) => element === this.tableElement
+      (element: any) => element === this.tableElement,
     );
 
     this.changeDetectorRef.detectChanges();
@@ -44,7 +43,7 @@ export class ExpandedRowDirective<T> {
     event.preventDefault();
 
     const hasOpen = this.expandedStatusService.activedExapandedRow.find(
-      (element: any) => element === this.tableElement
+      (element: any) => element === this.tableElement,
     );
 
     this.expandedElement =
@@ -57,7 +56,7 @@ export class ExpandedRowDirective<T> {
     if (hasOpen) {
       this.expandedStatusService.activedExapandedRow =
         this.expandedStatusService.activedExapandedRow.filter(
-          (element: any) => element !== this.tableElement
+          (element: any) => element !== this.tableElement,
         );
       return;
     }
@@ -74,6 +73,6 @@ export class ExpandedRowDirective<T> {
     private readonly elementRef: ElementRef<HTMLElement>,
     private expandedStatusService: ExpandedStatusService<T>,
     private readonly changeDetectorRef: ChangeDetectorRef,
-    private readonly expandUserService: ExpandUserService
+    private readonly expandUserService: ExpandUserService,
   ) {}
 }

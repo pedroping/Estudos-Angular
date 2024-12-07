@@ -11,9 +11,8 @@ describe('ClosedSidenavComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClosedSidenavComponent ]
-    })
-    .compileComponents();
+      imports: [ClosedSidenavComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

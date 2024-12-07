@@ -3,9 +3,11 @@
     <mat-label>{{ formConfig.label }}</mat-label>
     <mat-select [formControlName]="formConfig.controlName">
       <mat-option>Limpar filtros</mat-option>
-      <mat-option [value]="option.key" *ngFor="let option of formConfig.options">{{
-        option.label
-      }}</mat-option>
+      <mat-option
+        [value]="option.key"
+        *ngFor="let option of formConfig.options"
+        >{{ option.label }}</mat-option
+      >
     </mat-select>
   </mat-form-field>
 </div>

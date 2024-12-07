@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { DynamicFormConfig } from 'src/app/core/dynamic-forms/dForms-tokens';
+import { DFormComponent } from '../../core/dynamic-forms/dForm/dForm.component';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-formExample',
   templateUrl: './formExample.component.html',
   styleUrls: ['./formExample.component.scss'],
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule, DFormComponent, JsonPipe],
 })
 export class FormExampleComponent implements OnInit {
   constructor() {}
@@ -15,9 +22,9 @@ export class FormExampleComponent implements OnInit {
     testeInput1: new FormControl(''),
     testeInput2: new FormControl(''),
     testeInput3: new FormControl(''),
-    testeSelect1: new FormControl(2)
-  })
-  
+    testeSelect1: new FormControl(2),
+  });
+
   formConfig: DynamicFormConfig[][] = [
     [
       {
@@ -41,8 +48,8 @@ export class FormExampleComponent implements OnInit {
           {
             key: 3,
             label: '3',
-          }
-        ]
+          },
+        ],
       },
     ],
     [
@@ -56,7 +63,7 @@ export class FormExampleComponent implements OnInit {
         label: 'Teste',
         controlName: 'testeInput3',
       },
-    ]
+    ],
   ];
 
   ngOnInit() {}

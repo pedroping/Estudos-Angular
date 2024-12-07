@@ -10,7 +10,7 @@
     cdkDropList
     (cdkDropListDropped)="drop($event)"
     [ngClass]="{
-      onDarkMode: darkModeService.darkMode
+      onDarkMode: darkModeService.darkMode,
     }"
   >
     <div class="example-box" *ngFor="let item of Checkboxs.value" cdkDrag>
@@ -26,7 +26,7 @@
           <mat-checkbox [formControlName]="item.formName">
             <span
               [ngStyle]="{
-                color: darkModeService.darkMode ? 'white' : 'black'
+                color: darkModeService.darkMode ? 'white' : 'black',
               }"
               >{{ item.label }}</span
             >

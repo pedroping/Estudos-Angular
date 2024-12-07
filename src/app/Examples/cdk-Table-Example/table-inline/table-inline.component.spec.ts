@@ -11,9 +11,8 @@ describe('TableInlineComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableInlineComponent ]
-    })
-    .compileComponents();
+      imports: [TableInlineComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

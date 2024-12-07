@@ -7,21 +7,20 @@ const routes: Routes = [
     path: '',
     title: 'Home',
     component: HomeComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'Examples',
-    loadChildren: async() => 
-      (await import('./Examples/Examples.module')).ExamplesModule
+    loadChildren: async () => await import('./Examples/Examples.routing'),
   },
   {
     path: '**',
     redirectTo: '',
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -11,9 +11,8 @@ describe('PaginaProtegidaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PaginaProtegidaComponent ]
-    })
-    .compileComponents();
+      imports: [PaginaProtegidaComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

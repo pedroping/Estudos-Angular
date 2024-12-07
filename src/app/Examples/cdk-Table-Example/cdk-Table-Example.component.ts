@@ -31,6 +31,23 @@ import {
 } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { TuiAlertService } from '@taiga-ui/core';
+import {
+  CdkTable,
+  CdkColumnDef,
+  CdkHeaderCellDef,
+  CdkHeaderCell,
+  CdkCellDef,
+  CdkCell,
+  CdkFooterCellDef,
+  CdkHeaderRowDef,
+  CdkHeaderRow,
+  CdkRowDef,
+  CdkRow,
+  CdkFooterRowDef,
+  CdkFooterRow,
+} from '@angular/cdk/table';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 export interface UserData {
   id: string;
@@ -45,7 +62,24 @@ export interface UserData {
   templateUrl: './cdk-Table-Example.component.html',
   styleUrls: ['./cdk-Table-Example.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    CdkTable,
+    CdkColumnDef,
+    CdkHeaderCellDef,
+    CdkHeaderCell,
+    CdkCellDef,
+    CdkCell,
+    CdkFooterCellDef,
+    MatIconButton,
+    MatIcon,
+    CdkHeaderRowDef,
+    CdkHeaderRow,
+    CdkRowDef,
+    CdkRow,
+    CdkFooterRowDef,
+    CdkFooterRow,
+    MatPaginator,
+  ],
 })
 export class CdkTableExampleComponent implements OnInit, AfterViewInit {
   @ViewChildren('row', { read: ViewContainerRef })
@@ -70,12 +104,12 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
     progress: [],
     color: [],
     valor: [],
-    newIncrementor: []
-  }
+    newIncrementor: [],
+  };
 
   constructor(
     @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
   ) {
     this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
   }
@@ -106,14 +140,14 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
     this.expandedRow.push(index);
     const messageComponent = this.containers
       .toArray()
-    [index]?.createComponent(TableInlineComponent);
+      [index]?.createComponent(TableInlineComponent);
 
     const Control = this.exampleDatabase.dataChange.value;
 
     messageComponent.instance.userForm = Control[controlIndex] as FormGroup;
     messageComponent.instance.sideEffectFunction =
       this.sideEffectFunction.bind(this);
-    messageComponent.instance.controls = this.controls
+    messageComponent.instance.controls = this.controls;
   }
 
   removeElement(index: number) {
@@ -126,7 +160,7 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
         .value.name;
     this.exampleDatabase.TableFromArray.removeAt(this.getActualIndex(index));
     this.exampleDatabase.dataChange.next(
-      this.exampleDatabase.TableFromArray.controls
+      this.exampleDatabase.TableFromArray.controls,
     );
     this.DataSource.data = this.exampleDatabase.TableFromArray.controls;
 
@@ -141,14 +175,17 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
   sideEffectFunction(
     formValueChanges$: Observable<unknown>,
     key: string,
-    element: unknown & { id: number }
+    element: unknown & { id: number },
   ) {
     return formValueChanges$.pipe(
       startWith(element[key as keyof typeof element]),
       tap(() => {
-        console.log(key + ' Form Has Changed', this.getControl(element.id, key));
+        console.log(
+          key + ' Form Has Changed',
+          this.getControl(element.id, key),
+        );
       }),
-      this.changeCount(key, element.id)
+      this.changeCount(key, element.id),
     );
   }
 
@@ -168,7 +205,7 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
           this.constValue = this.constValue + curr - +prev;
           this.cdr.detectChanges();
         }
-      })
+      }),
     );
   }
 
@@ -179,7 +216,7 @@ export class CdkTableExampleComponent implements OnInit, AfterViewInit {
   }
 
   getControl(id: number, key: string) {
-    return this.controls[key] ? this.controls[key][id] : null
+    return this.controls[key] ? this.controls[key][id] : null;
   }
 }
 

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from 'src/app/core/services/login.service';
@@ -8,13 +14,13 @@ import { LoginService } from 'src/app/core/services/login.service';
   selector: 'app-loginPage',
   templateUrl: './loginPage.component.html',
   styleUrls: ['./loginPage.component.scss'],
-  standalone: false,
+  imports: [FormsModule, ReactiveFormsModule],
 })
 export class LoginPageComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
   ) {}
 
   InputType: 'password' | 'text' = 'password';
@@ -42,7 +48,7 @@ export class LoginPageComponent implements OnInit {
           JSON.stringify({
             Email: this.LoginForm.value.Email,
             Senha: this.LoginForm.value.Senha,
-          })
+          }),
         );
       }
       this.loginService.isLoggedin.next(true);

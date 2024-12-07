@@ -9,7 +9,7 @@ export class AlreadyLoggedGuardService {
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
   ) {}
   teste: boolean = false;
 

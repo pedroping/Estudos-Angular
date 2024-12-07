@@ -7,18 +7,17 @@ import { User } from '../models';
   providedIn: 'root',
 })
 export class ExpandUserService {
-
-  Users$$ = new BehaviorSubject<any[]>([])
+  Users$$ = new BehaviorSubject<any[]>([]);
 
   constructor(private readonly tableServiceService: TableServiceService) {}
 
-  changeUser(id: number){
-    const FindUser = this.Users$$.value.find((element) => element.id == id)
-    if(FindUser) return;
-    
-    this.tableServiceService.getUser(id).subscribe(user => {
-        this.Users$$.value.push(user)
-        this.Users$$.next(this.Users$$.value)
-    })
+  changeUser(id: number) {
+    const FindUser = this.Users$$.value.find((element) => element.id == id);
+    if (FindUser) return;
+
+    this.tableServiceService.getUser(id).subscribe((user) => {
+      this.Users$$.value.push(user);
+      this.Users$$.next(this.Users$$.value);
+    });
   }
 }
